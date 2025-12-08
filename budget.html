@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Budget | SmartCool Pro</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .pie-chart {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: conic-gradient(
+                var(--accent) 0% 66%, 
+                #10b981 66% 100%
+            );
+            margin: 0 auto 20px auto;
+            position: relative;
+        }
+        .pie-chart::after {
+            content: "";
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 50%;
+            top: 20px;
+            left: 20px;
+        }
+    </style>
+  </head>
+  <body>
+    <nav class="sidebar">
+      <div class="brand">Smart<span>Cool</span></div>
+      <div class="nav-links">
+        <a href="index.html"><span>Dashboard</span></a>
+        <a href="planning.html"><span>Planning & Gantt</span></a>
+        <a href="team.html"><span>Team & Skills</span></a>
+        <a href="budget.html" class="active"><span>Budget & Resources</span></a>
+        <a href="risks.html"><span>Risk Management</span></a>
+        <a href="comm.html"><span>Communications</span></a>
+        <a href="defense.html"><span>Delivery & Defense</span></a>
+      </div>
+      <div class="footer">v2.1 | 2025-12-08</div>
+    </nav>
+    <main class="main-content">
+      <header>
+        <h1><i class="fas fa-coins" style="color: var(--accent); margin-right: 10px;"></i>Budget & Resources</h1>
+        <p>Financial planning for Prototype and Industrialization phases.</p>
+      </header>
+
+      <div style="display: grid; grid-template-columns: 3fr 1fr; gap: 24px; margin-bottom: 32px;">
+          <div class="card-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));" id="budget-cards">
+            <!-- Cards injected by JS -->
+          </div>
+          
+          <!-- Visual Chart -->
+          <div class="card" style="text-align: center; display: flex; flex-direction: column; justify-content: center;">
+              <div class="pie-chart"></div>
+              <div style="font-size: 0.8rem; color: var(--text-muted);">
+                  <span style="color: var(--accent);">●</span> CAPEX (66%) <br>
+                  <span style="color: #10b981;">●</span> OPEX (33%)
+              </div>
+          </div>
+      </div>
+
+      <h2><i class="fas fa-list-ul"></i> Bill of Materials (BOM) - Key Components</h2>
+      <div class="table-container" style="margin-bottom: 40px;">
+        <table>
+            <thead>
+                <tr>
+                    <th>Component</th>
+                    <th>Description</th>
+                    <th>Unit Cost (Est.)</th>
+                    <th>Supplier</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="bom-body">
+                <!-- BOM injected by JS -->
+            </tbody>
+        </table>
+      </div>
+
+      <h2>Detailed Budget Breakdown</h2>
+      <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Item</th>
+                    <th>Type</th>
+                    <th>Cost</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Hardware</strong></td>
+                    <td>Prototype Components (x5 units)</td>
+                    <td>OPEX</td>
+                    <td>$2,500</td>
+                </tr>
+                <tr>
+                    <td><strong>Hardware</strong></td>
+                    <td>Injection Molds (Steel)</td>
+                    <td>CAPEX</td>
+                    <td>$35,000</td>
+                </tr>
+                <tr>
+                    <td><strong>Software</strong></td>
+                    <td>AWS Cloud Credits (Training YOLOv8)</td>
+                    <td>OPEX</td>
+                    <td>$5,000</td>
+                </tr>
+                <tr>
+                    <td><strong>Labor</strong></td>
+                    <td>External Industrial Designer (Contract)</td>
+                    <td>OPEX</td>
+                    <td>$12,500</td>
+                </tr>
+                <tr>
+                    <td><strong>Testing</strong></td>
+                    <td>Certification (CE/FCC)</td>
+                    <td>CAPEX</td>
+                    <td>$5,000</td>
+                </tr>
+            </tbody>
+        </table>
+      </div>
+
+    </main>
+    <script>
+        fetch('/api/budget')
+            .then(res => res.json())
+            .then(data => {
+                // Render Budget Cards
+                const cardsContainer = document.getElementById('budget-cards');
+                const total = data.summary.find(s => s.category === 'Total').amount;
+                const capex = data.summary.find(s => s.category === 'CAPEX').amount;
+                const opex = data.summary.find(s => s.category === 'OPEX').amount;
+
+                cardsContainer.innerHTML = `
+                    <div class="card">
+                        <h3>Total Budget</h3>
+                        <p class="counter" data-target="${total}" style="font-size: 2rem; font-weight: 700; color: var(--primary); margin: 10px 0;">$0</p>
+                        <p style="color: var(--text-muted);"><i class="fas fa-check-circle"></i> Approved by Board</p>
+                    </div>
+                    <div class="card">
+                        <h3>CAPEX (One-time)</h3>
+                        <p class="counter" data-target="${capex}" style="font-size: 2rem; font-weight: 700; color: var(--accent); margin: 10px 0;">$0</p>
+                        <p style="color: var(--text-muted);">Tooling, Molds</p>
+                    </div>
+                    <div class="card">
+                        <h3>OPEX (Recurring)</h3>
+                        <p class="counter" data-target="${opex}" style="font-size: 2rem; font-weight: 700; color: #10b981; margin: 10px 0;">$0</p>
+                        <p style="color: var(--text-muted);">Labor, Cloud</p>
+                    </div>
+                `;
+
+                // Render BOM
+                const bomBody = document.getElementById('bom-body');
+                bomBody.innerHTML = data.bom.map(item => `
+                    <tr>
+                        <td><i class="fas ${item.icon}"></i> ${item.component}</td>
+                        <td>${item.description}</td>
+                        <td>$${item.cost.toFixed(2)}</td>
+                        <td>${item.supplier}</td>
+                        <td><span class="status-badge ${item.status === 'Sourced' ? 'status-done' : 'status-wip'}">${item.status}</span></td>
+                    </tr>
+                `).join('');
+
+                // Initialize Counters
+                initCounters();
+            });
+
+        function initCounters() {
+            const counters = document.querySelectorAll('.counter');
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                const duration = 1500; 
+                const increment = target / (duration / 16);
+                let current = 0;
+                const updateCounter = () => {
+                    current += increment;
+                    if (current < target) {
+                        counter.innerText = '$' + Math.ceil(current).toLocaleString();
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        counter.innerText = '$' + target.toLocaleString();
+                    }
+                };
+                updateCounter();
+            });
+        }
+    </script>
+  </body>
+</html>

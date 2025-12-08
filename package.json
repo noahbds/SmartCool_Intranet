@@ -1,0 +1,14 @@
+{
+  "name": "smartcool-intranet",
+  "version": "1.0.0",
+  "description": "SmartCool Pro Intranet with SQLite Backend",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "clean-start": "rm -f smartcool.db && node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "sqlite3": "^5.1.6"
+  }
+}

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard | SmartCool Pro</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .circular-chart {
+            display: block;
+            margin: 0 auto;
+            max-width: 80%;
+            max-height: 250px;
+        }
+        .circle-bg {
+            fill: none;
+            stroke: #eee;
+            stroke-width: 3.8;
+        }
+        .circle {
+            fill: none;
+            stroke-width: 2.8;
+            stroke-linecap: round;
+            animation: progress 1s ease-out forwards;
+        }
+        @keyframes progress {
+            0% { stroke-dasharray: 0 100; }
+        }
+        .percentage {
+            fill: #666;
+            font-family: sans-serif;
+            font-weight: bold;
+            font-size: 0.5em;
+            text-anchor: middle;
+        }
+    </style>
+  </head>
+  <body>
+    <nav class="sidebar">
+      <div class="brand">Smart<span>Cool</span></div>
+      <div class="nav-links">
+        <a href="index.html" class="active"><span>Dashboard</span></a>
+        <a href="planning.html"><span>Planning & Gantt</span></a>
+        <a href="team.html"><span>Team & Skills</span></a>
+        <a href="budget.html"><span>Budget & Resources</span></a>
+        <a href="risks.html"><span>Risk Management</span></a>
+        <a href="comm.html"><span>Communications</span></a>
+        <a href="defense.html"><span>Delivery & Defense</span></a>
+      </div>
+      <div class="footer">v2.1 | 2025-12-08</div>
+    </nav>
+    <main class="main-content">
+      <header>
+        <h1><i class="fas fa-tachometer-alt" style="color: var(--accent); margin-right: 10px;"></i>Dashboard</h1>
+        <p>SmartCool Pro: The Zero-Waste Fridge - Group: SmartInnovators</p>
+      </header>
+
+      <div class="card-grid">
+        <!-- Project Status Card -->
+        <div class="card">
+          <h3><i class="fas fa-project-diagram"></i> Project Status</h3>
+          <div style="margin-top: 16px; display: flex; flex-direction: column; gap: 8px;">
+            <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border); padding-bottom: 8px;">
+                <span style="color: var(--text-muted);">Phase</span>
+                <span style="font-weight: 600;">Proof of Concept (PoC)</span>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 10px;">
+                <!-- SVG Circular Progress -->
+                <div style="width: 60px;">
+                    <svg viewBox="0 0 36 36" class="circular-chart orange">
+                        <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                        <path id="progress-circle" class="circle" stroke="#3b82f6" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                    </svg>
+                </div>
+                <div style="text-align: right;">
+                    <span id="week-display" style="color: var(--text-muted); font-size: 0.8rem;">Week -- of 24</span><br>
+                    <span id="percent-display" style="font-weight: 700; font-size: 1.2rem;">0%</span>
+                </div>
+            </div>
+          </div>
+          <div style="margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px;">
+            <span class="status-badge status-done"><i class="fas fa-check"></i> Initiation</span>
+            <span class="status-badge status-wip"><i class="fas fa-spinner fa-spin"></i> AI Dev</span>
+          </div>
+        </div>
+
+        <!-- Budget Card -->
+        <div class="card">
+          <h3><i class="fas fa-wallet"></i> Budget Snapshot</h3>
+          <div style="margin-top: 16px;">
+              <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                  <span style="color: var(--text-muted); font-size: 0.9rem;">Spent</span>
+                  <span style="font-weight: 600;">$3,450</span>
+              </div>
+              <div style="width: 100%; background: #e2e8f0; height: 8px; border-radius: 4px; overflow: hidden;">
+                  <div id="budget-bar" style="width: 0%; background: var(--accent); height: 100%; transition: width 1.5s ease-out;"></div>
+              </div>
+              <div style="display: flex; justify-content: space-between; margin-top: 4px;">
+                  <span style="color: var(--text-muted); font-size: 0.8rem;">Total: $60,000</span>
+                  <span style="color: var(--text-muted); font-size: 0.8rem;">5.8% Used</span>
+              </div>
+          </div>
+        </div>
+
+        <!-- Recent Activity / Risks -->
+        <div class="card">
+            <h3><i class="fas fa-exclamation-triangle"></i> Top Risks</h3>
+            <ul id="top-risks-list" style="list-style: none; margin-top: 16px; padding: 0;">
+                <!-- Risks populated by JS -->
+                <li style="color: var(--text-muted); font-size: 0.9rem;">Loading risks...</li>
+            </ul>
+        </div>
+      </div>
+
+      <!-- Quick Links or Mini Gantt -->
+      <h2 style="font-size: 1.25rem; margin-top: 40px;"><i class="fas fa-flag-checkered"></i> Upcoming Milestones</h2>
+      <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Milestone</th>
+                    <th>Due Date</th>
+                    <th>Owner</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="milestones-body">
+                <!-- Data populated by JS -->
+            </tbody>
+        </table>
+      </div>
+
+    </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Fetch Dashboard Data
+            fetch('/api/dashboard')
+                .then(response => response.json())
+                .then(data => {
+                    // 1. Update Project Status (Timeline)
+                    const startDate = new Date(data.projectStart);
+                    const today = new Date(); // Or fixed date for demo: new Date('2025-12-08')
+                    const diffTime = Math.abs(today - startDate);
+                    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+                    const currentWeek = Math.ceil(diffDays / 7);
+                    const totalWeeks = 24;
+                    const progressPercent = Math.min(100, Math.max(0, (currentWeek / totalWeeks) * 100)).toFixed(0);
+
+                    document.getElementById('week-display').innerText = `Week ${currentWeek} of ${totalWeeks}`;
+                    document.getElementById('percent-display').innerText = `${progressPercent}%`;
+                    
+                    // Animate Circle
+                    setTimeout(() => {
+                        document.getElementById('progress-circle').setAttribute('stroke-dasharray', `${progressPercent}, 100`);
+                    }, 100);
+
+                    // 2. Update Budget Bar
+                    const total = data.totalBudget;
+                    const spent = 3450; // Hardcoded current spend for demo logic
+                    const percent = ((spent / total) * 100).toFixed(1);
+                    
+                    const bar = document.getElementById('budget-bar');
+                    if(bar) bar.style.width = percent + '%';
+
+                    // 3. Populate Top Risks
+                    const risksList = document.getElementById('top-risks-list');
+                    if (data.risks && data.risks.length > 0) {
+                        risksList.innerHTML = data.risks.map(r => `
+                            <li style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
+                                <i class="fas fa-circle" style="color: ${r.color}; font-size: 0.5rem;"></i>
+                                <span style="font-size: 0.9rem;">${r.title}</span>
+                            </li>
+                        `).join('');
+                    } else {
+                        risksList.innerHTML = '<li style="color: #10b981;">No critical risks identified.</li>';
+                    }
+
+                    // 4. Populate Milestones
+                    const tbody = document.getElementById('milestones-body');
+                    tbody.innerHTML = data.milestones.map(m => `
+                        <tr>
+                            <td>${m.name}</td>
+                            <td>${m.date}</td>
+                            <td>${m.owner}</td>
+                            <td><span class="status-badge ${m.status === 'In Progress' ? 'status-wip' : 'status-done'}">${m.status}</span></td>
+                        </tr>
+                    `).join('');
+                });
+        });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Risks | SmartCool Pro</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  </head>
+  <body>
+    <nav class="sidebar">
+      <div class="brand">Smart<span>Cool</span></div>
+      <div class="nav-links">
+        <a href="index.html"><span>Dashboard</span></a>
+        <a href="planning.html"><span>Planning & Gantt</span></a>
+        <a href="team.html"><span>Team & Skills</span></a>
+        <a href="budget.html"><span>Budget & Resources</span></a>
+        <a href="risks.html" class="active"><span>Risk Management</span></a>
+        <a href="comm.html"><span>Communications</span></a>
+        <a href="defense.html"><span>Delivery & Defense</span></a>
+      </div>
+      <div class="footer">v2.1 | 2025-12-08</div>
+    </nav>
+    <main class="main-content">
+      <header>
+        <h1><i class="fas fa-shield-alt" style="color: var(--accent); margin-right: 10px;"></i>Risk Management</h1>
+        <p>Identification, assessment, and mitigation of critical project risks.</p>
+      </header>
+
+      <div class="card-grid" style="grid-template-columns: 1fr;" id="risks-container">
+        <!-- Risks injected by JS -->
+      </div>
+    </main>
+    <script>
+        fetch('/api/risks')
+            .then(res => res.json())
+            .then(risks => {
+                const container = document.getElementById('risks-container');
+                container.innerHTML = risks.map((risk, index) => `
+                    <div class="card risk-card" id="risk-${risk.id}">
+                        <div style="display: flex; gap: 20px;">
+                            <div style="font-size: 2rem; color: ${risk.color}; padding-top: 5px;">
+                                <i class="fas ${risk.icon}"></i>
+                            </div>
+                            <div style="flex: 1;">
+                                <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                                    <h3 style="color: ${risk.color};">${index + 1}. ${risk.title}</h3>
+                                    <div style="text-align: right;">
+                                        <span class="status-badge status-risk">${risk.prob} Probability</span>
+                                        <span class="status-badge status-risk">${risk.impact} Impact</span>
+                                    </div>
+                                </div>
+                                <p style="margin-top: 8px;"><strong>Context:</strong> ${risk.context}</p>
+                                <div style="margin-top: 16px; background: #fef2f2; padding: 16px; border-radius: 8px;">
+                                    <strong><i class="fas fa-tools"></i> Mitigation Strategy:</strong>
+                                    <p style="margin-top: 8px; color: #7f1d1d;">${risk.mitigation}</p>
+                                </div>
+                                <button onclick="resolveRisk('risk-${risk.id}')" style="margin-top: 15px; padding: 8px 16px; background: white; border: 1px solid #cbd5e1; border-radius: 6px; cursor: pointer; font-size: 0.85rem;">
+                                    <i class="fas fa-check"></i> Mark as Resolved
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            });
+
+        function resolveRisk(id) {
+            const card = document.getElementById(id);
+            card.style.opacity = '0.6';
+            card.style.filter = 'grayscale(100%)';
+            const btn = card.querySelector('button');
+            btn.innerHTML = '<i class="fas fa-check-double"></i> Resolved';
+            btn.disabled = true;
+            btn.style.background = '#dcfce7';
+            btn.style.color = '#166534';
+            btn.style.borderColor = 'transparent';
+        }
+    </script>
+  </body>
+</html>
