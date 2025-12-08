@@ -312,6 +312,11 @@ app.post('/api/reset', (req, res) => {
     }, 1000);
 });
 
+// Serve index.html for root route
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
+
 app.listen(port, () => {
     console.log(`SmartCool Intranet running at http://localhost:${port}`);
 });
