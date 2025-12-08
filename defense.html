@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Defense | SmartCool Pro</title>
     <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
   </head>
   <body>
     <nav class="sidebar">
@@ -17,61 +20,196 @@
         <a href="budget.html"><span>Budget & Resources</span></a>
         <a href="risks.html"><span>Risk Management</span></a>
         <a href="comm.html"><span>Communications</span></a>
-        <a href="defense.html" class="active"><span>Delivery & Defense</span></a>
+        <a href="defense.html" class="active"
+          ><span>Delivery & Defense</span></a
+        >
       </div>
       <div class="footer">v2.1 | 2025-12-08</div>
     </nav>
     <main class="main-content">
       <header>
-        <h1><i class="fas fa-graduation-cap" style="color: var(--accent); margin-right: 10px;"></i>Delivery & Defense</h1>
+        <h1>
+          <i
+            class="fas fa-graduation-cap"
+            style="color: var(--accent); margin-right: 10px"
+          ></i
+          >Delivery & Defense
+        </h1>
         <p>Project validation, strategic justification, and lessons learned.</p>
       </header>
 
       <div class="card">
-        <h2><i class="fas fa-check-double"></i> 1. Technical Feasibility Validation</h2>
-        <p style="margin-bottom: 16px;">Our Proof of Concept (PoC) successfully demonstrated the core value proposition:</p>
-        <ul style="margin-left: 20px; color: var(--text-main); list-style: none;">
-            <li style="margin-bottom: 8px;"><i class="fas fa-camera" style="color: var(--accent); width: 20px;"></i> <strong>Sensor Integration:</strong> The Raspberry Pi 4 + IMX219 setup successfully captured clear images inside a test fridge environment (4°C).</li>
-            <li style="margin-bottom: 8px;"><i class="fas fa-brain" style="color: var(--accent); width: 20px;"></i> <strong>AI Performance:</strong> The YOLOv8 model achieved an <strong>88% mAP (mean Average Precision)</strong> on our custom dataset of 50 common grocery items.</li>
-            <li><i class="fas fa-wifi" style="color: var(--accent); width: 20px;"></i> <strong>Connectivity:</strong> Real-time inventory updates were pushed to the mobile app via MQTT with < 2 seconds latency.</li>
+        <h2>
+          <i class="fas fa-check-double"></i> 1. Technical Feasibility
+          Validation
+        </h2>
+        <p style="margin-bottom: 16px">
+          Our Proof of Concept (PoC) successfully demonstrated the core value
+          proposition:
+        </p>
+        <ul
+          style="margin-left: 20px; color: var(--text-main); list-style: none"
+        >
+          <li style="margin-bottom: 8px">
+            <i
+              class="fas fa-camera"
+              style="color: var(--accent); width: 20px"
+            ></i>
+            <strong>Sensor Integration:</strong> The Raspberry Pi 4 + IMX219
+            setup successfully captured clear images inside a test fridge
+            environment (4°C).
+          </li>
+          <li style="margin-bottom: 8px">
+            <i
+              class="fas fa-brain"
+              style="color: var(--accent); width: 20px"
+            ></i>
+            <strong>AI Performance:</strong> The YOLOv8 model achieved an
+            <strong>88% mAP (mean Average Precision)</strong> on our custom
+            dataset of 50 common grocery items.
+          </li>
+          <li>
+            <i
+              class="fas fa-wifi"
+              style="color: var(--accent); width: 20px"
+            ></i>
+            <strong>Connectivity:</strong> Real-time inventory updates were
+            pushed to the mobile app via MQTT with < 2 seconds latency.
+          </li>
         </ul>
-        <div style="margin-top: 16px; padding: 12px; background: #dcfce7; border-radius: 8px; color: #166534; font-weight: 600; display: flex; align-items: center; gap: 10px;">
-            <i class="fas fa-check-circle"></i> Conclusion: The technology is ready for industrial refinement.
+        <div
+          style="
+            margin-top: 16px;
+            padding: 12px;
+            background: #dcfce7;
+            border-radius: 8px;
+            color: #166534;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+          "
+        >
+          <i class="fas fa-check-circle"></i> Conclusion: The technology is
+          ready for industrial refinement.
         </div>
       </div>
 
-      <div class="card" style="margin-top: 24px;">
-        <h2><i class="fas fa-chart-pie"></i> 2. Budget Strategy Justification</h2>
-        <p style="margin-bottom: 16px;">We prioritized <strong>CAPEX on Tooling</strong> ($40k) early in the process. Why?</p>
-        <p>While 3D printing is cheaper for prototypes, it does not simulate the structural integrity of the final product. Investing in soft-steel molds allows us to produce 100+ units for beta testing that are physically identical to the mass-produced version. This reduces the risk of "design-for-manufacturing" failures later.</p>
-        <p style="margin-top: 12px;"><strong>OPEX Efficiency:</strong> We utilized contract workers for specialized tasks (Industrial Design) rather than full-time hires, saving approximately $15,000 in annual overhead.</p>
+      <div class="card" style="margin-top: 24px">
+        <h2>
+          <i class="fas fa-chart-pie"></i> 2. Budget Strategy Justification
+        </h2>
+        <p style="margin-bottom: 16px">
+          We prioritized <strong>CAPEX on Tooling</strong> ($40k) early in the
+          process. Why?
+        </p>
+        <p>
+          While 3D printing is cheaper for prototypes, it does not simulate the
+          structural integrity of the final product. Investing in soft-steel
+          molds allows us to produce 100+ units for beta testing that are
+          physically identical to the mass-produced version. This reduces the
+          risk of "design-for-manufacturing" failures later.
+        </p>
+        <p style="margin-top: 12px">
+          <strong>OPEX Efficiency:</strong> We utilized contract workers for
+          specialized tasks (Industrial Design) rather than full-time hires,
+          saving approximately $15,000 in annual overhead.
+        </p>
       </div>
 
-      <div class="card" style="margin-top: 24px;">
-        <h2><i class="fas fa-exclamation-triangle"></i> 3. Handling Pitfalls & Unforeseen Events</h2>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 16px;">
-            <div style="background: #fef2f2; padding: 20px; border-radius: 8px; border: 1px solid #fee2e2;">
-                <h3 style="font-size: 1rem; color: #ef4444;"><i class="fas fa-bolt"></i> Pitfall: Sensor Fogging</h3>
-                <p style="font-size: 0.9rem;"><strong>Issue:</strong> During Week 6 testing, opening the fridge door caused immediate condensation on the camera lens, rendering the AI blind.</p>
-                <p style="font-size: 0.9rem; margin-top: 8px;"><strong><i class="fas fa-wrench"></i> Resolution:</strong> We pivoted the design to include a small heating element ring around the lens (borrowed from automotive camera designs) and applied a hydrophobic coating.</p>
-            </div>
-            <div style="background: #fffbeb; padding: 20px; border-radius: 8px; border: 1px solid #fef3c7;">
-                <h3 style="font-size: 1rem; color: #f59e0b;"><i class="fas fa-shipping-fast"></i> Pitfall: Supply Chain Delay</h3>
-                <p style="font-size: 0.9rem;"><strong>Issue:</strong> Raspberry Pi modules went out of stock globally in Week 3.</p>
-                <p style="font-size: 0.9rem; margin-top: 8px;"><strong><i class="fas fa-money-bill-wave"></i> Resolution:</strong> We activated our risk contingency budget to purchase units from a secondary market at a premium (+30% cost) to keep the timeline on track, proving the value of our risk management fund.</p>
-            </div>
+      <div class="card" style="margin-top: 24px">
+        <h2>
+          <i class="fas fa-exclamation-triangle"></i> 3. Handling Pitfalls &
+          Unforeseen Events
+        </h2>
+        <div
+          style="
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-top: 16px;
+          "
+        >
+          <div
+            style="
+              background: #fef2f2;
+              padding: 20px;
+              border-radius: 8px;
+              border: 1px solid #fee2e2;
+            "
+          >
+            <h3 style="font-size: 1rem; color: #ef4444">
+              <i class="fas fa-bolt"></i> Pitfall: Sensor Fogging
+            </h3>
+            <p style="font-size: 0.9rem">
+              <strong>Issue:</strong> During Week 6 testing, opening the fridge
+              door caused immediate condensation on the camera lens, rendering
+              the AI blind.
+            </p>
+            <p style="font-size: 0.9rem; margin-top: 8px">
+              <strong><i class="fas fa-wrench"></i> Resolution:</strong> We
+              pivoted the design to include a small heating element ring around
+              the lens (borrowed from automotive camera designs) and applied a
+              hydrophobic coating.
+            </p>
+          </div>
+          <div
+            style="
+              background: #fffbeb;
+              padding: 20px;
+              border-radius: 8px;
+              border: 1px solid #fef3c7;
+            "
+          >
+            <h3 style="font-size: 1rem; color: #f59e0b">
+              <i class="fas fa-shipping-fast"></i> Pitfall: Supply Chain Delay
+            </h3>
+            <p style="font-size: 0.9rem">
+              <strong>Issue:</strong> Raspberry Pi modules went out of stock
+              globally in Week 3.
+            </p>
+            <p style="font-size: 0.9rem; margin-top: 8px">
+              <strong
+                ><i class="fas fa-money-bill-wave"></i> Resolution:</strong
+              >
+              We activated our risk contingency budget to purchase units from a
+              secondary market at a premium (+30% cost) to keep the timeline on
+              track, proving the value of our risk management fund.
+            </p>
+          </div>
         </div>
       </div>
 
-      <div class="card" style="margin-top: 24px;">
+      <div class="card" style="margin-top: 24px">
         <h2><i class="fas fa-sync-alt"></i> 4. Agile Hardware Methodology</h2>
-        <p style="margin-bottom: 16px;">We adopted an <strong>Agile Hardware</strong> approach, synchronizing hardware and software development in <strong>2-week sprints</strong>.</p>
-        <ul style="margin-left: 20px; color: var(--text-main); list-style: none;">
-            <li style="margin-bottom: 8px;"><i class="fas fa-check" style="color: var(--accent); width: 20px;"></i> <strong>Recursive Planning:</strong> Our Gantt chart was a "living document". For example, when the sensor fogging issue arose in Sprint 3, we immediately inserted a "Hardware Revision" sprint without derailing the software team.</li>
-            <li><i class="fas fa-check" style="color: var(--accent); width: 20px;"></i> <strong>Cross-Functional Sync:</strong> Hardware schematics and AI model updates were reviewed together every sprint review, ensuring the camera placement matched the AI's field-of-view requirements.</li>
+        <p style="margin-bottom: 16px">
+          We adopted an <strong>Agile Hardware</strong> approach, synchronizing
+          hardware and software development in <strong>2-week sprints</strong>.
+        </p>
+        <ul
+          style="margin-left: 20px; color: var(--text-main); list-style: none"
+        >
+          <li style="margin-bottom: 8px">
+            <i
+              class="fas fa-check"
+              style="color: var(--accent); width: 20px"
+            ></i>
+            <strong>Recursive Planning:</strong> Our Gantt chart was a "living
+            document". For example, when the sensor fogging issue arose in
+            Sprint 3, we immediately inserted a "Hardware Revision" sprint
+            without derailing the software team.
+          </li>
+          <li>
+            <i
+              class="fas fa-check"
+              style="color: var(--accent); width: 20px"
+            ></i>
+            <strong>Cross-Functional Sync:</strong> Hardware schematics and AI
+            model updates were reviewed together every sprint review, ensuring
+            the camera placement matched the AI's field-of-view requirements.
+          </li>
         </ul>
       </div>
-
     </main>
   </body>
 </html>
