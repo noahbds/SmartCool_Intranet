@@ -225,7 +225,7 @@
           const grid = document.getElementById("team-grid");
           grid.innerHTML = members
             .map((member) => {
-              const skills = JSON.parse(member.skills);
+              const skills = typeof member.skills === 'string' ? JSON.parse(member.skills) : member.skills;
               const skillsHtml = skills
                 .map(
                   (skill) => `
