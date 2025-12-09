@@ -2,7 +2,8 @@ const sidebarContent = `
 <nav class="sidebar">
   <div class="brand">Smart<span>Cool</span></div>
   <div class="nav-links">
-    <a href="index.html"><i class="fas fa-chart-line"></i> <span>Dashboard</span></a>
+    <a href="index.html"><i class="fas fa-chart-line"></i> <span>Overview</span></a>
+    <a href="dashboard.html"><i class="fas fa-bullseye"></i> <span>Dashboard</span></a>
     <a href="planning.html"><i class="fas fa-calendar-alt"></i> <span>Planning & Gantt</span></a>
     <a href="team.html"><i class="fas fa-users"></i> <span>Team & Skills</span></a>
     <a href="budget.html"><i class="fas fa-coins"></i> <span>Budget & Resources</span></a>
@@ -10,7 +11,7 @@ const sidebarContent = `
     <a href="comm.html"><i class="fas fa-comments"></i> <span>Communications</span></a>
     <a href="defense.html"><i class="fas fa-flag-checkered"></i> <span>Delivery & Defense</span></a>
   </div>
-  <div class="footer">v1.2</div>
+  <div class="footer">v1.3</div>
 </nav>
 `;
 

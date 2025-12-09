@@ -469,3 +469,84 @@ tr:hover td {
   width: 20px;
   text-align: center;
 }
+
+/* ===========================
+   PRESENTATION PAGE STYLES
+   =========================== */
+
+/* Feature Cards */
+.feature-card {
+    text-align: center;
+    transition: transform 0.2s ease;
+}
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+.feature-icon {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    background: #f0f4f8;
+    width: 70px;
+    height: 70px;
+    line-height: 70px;
+    border-radius: 50%;
+    margin: 0 auto 15px auto;
+}
+
+/* Architecture Flow Diagram */
+.flow-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    padding: 20px 0;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.flow-step {
+    flex: 1;
+    text-align: center;
+    min-width: 120px;
+}
+
+.flow-box {
+    padding: 15px;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.flow-box.hardware { background: #e67e22; }
+.flow-box.processing { background: #3498db; }
+.flow-box.cloud { background: #9b59b6; }
+.flow-box.app { background: #2ecc71; }
+
+.flow-desc {
+    font-size: 0.8rem;
+    color: #7f8c8d;
+    background: #f9f9f9;
+    padding: 5px;
+    border-radius: 4px;
+    border: 1px dashed #ddd;
+}
+
+.arrow {
+    font-size: 1.5rem;
+    color: #bdc3c7;
+    font-weight: bold;
+}
+
+/* Responsive adjustment for diagram */
+@media (max-width: 768px) {
+    .flow-container {
+        flex-direction: column;
+    }
+    .arrow {
+        transform: rotate(90deg);
+        margin: 10px 0;
+    }
+}
