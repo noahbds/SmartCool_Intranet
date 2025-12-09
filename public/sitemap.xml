@@ -2,6 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://smart-cool-intranet.vercel.app/</loc></url>
   <url><loc>https://smart-cool-intranet.vercel.app/index.html</loc></url>
+  <url><loc>https://smart-cool-intranet.vercel.app/dashboard.html</loc></url>
   <url><loc>https://smart-cool-intranet.vercel.app/planning.html</loc></url>
   <url><loc>https://smart-cool-intranet.vercel.app/team.html</loc></url>
   <url><loc>https://smart-cool-intranet.vercel.app/budget.html</loc></url>
