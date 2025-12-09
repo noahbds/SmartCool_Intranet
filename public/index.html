@@ -15,6 +15,13 @@
   </head>
   <body>
     <script src="js/sidebar.js"></script>
+    <script>
+      window.si =
+        window.si ||
+        function () {
+          (window.siq = window.siq || []).push(arguments);
+        };
+    </script>
     <script defer src="/_vercel/speed-insights/script.js"></script>
 
     <main class="main-content">
@@ -87,27 +94,21 @@
 
         <div class="flow-step-card">
           <div class="flow-title">2. Edge Inference</div>
-          <p class="text-sm">
-            Images processed locally on the fridge NPU.
-          </p>
+          <p class="text-sm">Images processed locally on the fridge NPU.</p>
           <div class="flow-tech">Compute: Raspberry Pi 5</div>
           <div class="flow-tech">Model: YOLOv8 (Custom)</div>
         </div>
 
         <div class="flow-step-card">
           <div class="flow-title">3. Cloud Sync</div>
-          <p class="text-sm">
-            Only JSON metadata is sent (Privacy First).
-          </p>
+          <p class="text-sm">Only JSON metadata is sent (Privacy First).</p>
           <div class="flow-tech">Protocol: MQTT / TLS 1.2</div>
           <div class="flow-tech">Cloud: AWS IoT Core</div>
         </div>
 
         <div class="flow-step-card">
           <div class="flow-title">4. User Action</div>
-          <p class="text-sm">
-            User receives alert or recipe suggestion.
-          </p>
+          <p class="text-sm">User receives alert or recipe suggestion.</p>
           <div class="flow-tech">App: React Native</div>
           <div class="flow-tech">API: Recipe Database</div>
         </div>
@@ -198,14 +199,10 @@
         <div class="card">
           <h3>Target Market Persona</h3>
           <div class="persona-header">
-            <div class="persona-icon">
-              👩‍💻
-            </div>
+            <div class="persona-icon">👩‍💻</div>
             <div>
               <strong>"Sarah, the Eco-Professional"</strong><br />
-              <span class="persona-sub"
-                >Age 34 | Urban | Tech-Savvy</span
-              >
+              <span class="persona-sub">Age 34 | Urban | Tech-Savvy</span>
             </div>
           </div>
           <p class="text-sm">
