@@ -4,7 +4,7 @@
   "private": true,
   "description": "SmartCool Pro Intranet - static site with serverless JSON APIs",
   "scripts": {
-    "dev": "vercel dev"
+    "vercel": "vercel dev"
   },
   "dependencies": {}
 }
