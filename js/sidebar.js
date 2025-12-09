@@ -2,15 +2,15 @@ const sidebarContent = `
 <nav class="sidebar">
   <div class="brand">Smart<span>Cool</span></div>
   <div class="nav-links">
-    <a href="index.html"><span>Dashboard</span></a>
-    <a href="planning.html"><span>Planning & Gantt</span></a>
-    <a href="team.html"><span>Team & Skills</span></a>
-    <a href="budget.html"><span>Budget & Resources</span></a>
-    <a href="risks.html"><span>Risk Management</span></a>
-    <a href="comm.html"><span>Communications</span></a>
-    <a href="defense.html"><span>Delivery & Defense</span></a>
+    <a href="index.html"><i class="fas fa-chart-line"></i> <span>Dashboard</span></a>
+    <a href="planning.html"><i class="fas fa-calendar-alt"></i> <span>Planning & Gantt</span></a>
+    <a href="team.html"><i class="fas fa-users"></i> <span>Team & Skills</span></a>
+    <a href="budget.html"><i class="fas fa-coins"></i> <span>Budget & Resources</span></a>
+    <a href="risks.html"><i class="fas fa-exclamation-triangle"></i> <span>Risk Management</span></a>
+    <a href="comm.html"><i class="fas fa-comments"></i> <span>Communications</span></a>
+    <a href="defense.html"><i class="fas fa-flag-checkered"></i> <span>Delivery & Defense</span></a>
   </div>
-  <div class="footer">v2.1 | 2025-12-08</div>
+  <div class="footer">v1.2</div>
 </nav>
 `;
 
