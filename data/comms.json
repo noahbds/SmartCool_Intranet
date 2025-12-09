@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "type": "Internal",
+    "sender": "Noah (Project Lead)",
+    "recipient": "SmartCool Team",
+    "subject": "🚀 Project Kickoff: SmartCool Pro",
+    "content": "<p>Team,</p><p>I am thrilled to officially launch the <strong>SmartCool Pro</strong> project. Our mission is to revolutionize the kitchen with a \"Zero Waste\" smart fridge powered by embedded AI.</p><p><strong>Key Objectives:</strong></p><ul><li>Integrate Raspberry Pi & YOLOv8 for real-time inventory tracking.</li><li>Develop a user-friendly mobile app for recipe suggestions.</li><li>Validate our \"Agile Hardware\" approach with 2-week sprints.</li></ul><p>Let&#39;s make this a reality!</p><p>Best,<br>Noah</p>",
+    "icon": "fa-paper-plane"
+  },
+  {
+    "id": 2,
+    "type": "External",
+    "sender": "Noah (Project Manager)",
+    "recipient": "Board of Directors",
+    "subject": "Budget Approval Request",
+    "content": "<p>Dear Board Members,</p><p>Following the successful completion of our initial feasibility study, I am submitting the formal budget request for the T-CEN-500 Industrialization Phase.</p><p><strong>Request Summary:</strong></p><ul><li><strong>Total Budget:</strong> $60,000</li><li><strong>CAPEX ($40k):</strong> Allocated for soft-steel tooling and molds to ensure production quality.</li><li><strong>OPEX ($20k):</strong> Dedicated to specialized labor and cloud infrastructure for AI training.</li></ul><p>We are confident this investment will yield a market-ready prototype by Q2.</p><p>Sincerely,<br>Noah</p>",
+    "icon": "fa-file-invoice-dollar"
+  }
+]

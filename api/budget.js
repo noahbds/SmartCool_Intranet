@@ -1,99 +1,12 @@
-const sqlite3 = require('sqlite3').verbose()
+const fs = require('fs')
+const path = require('path')
 
-let db
-
-function getDb () {
-  if (!db) {
-    db = new sqlite3.Database(':memory:')
-    initDatabase()
+module.exports = (_req, res) => {
+  try {
+    const p = path.join(process.cwd(), 'data', 'budget.json')
+    const data = JSON.parse(fs.readFileSync(p, 'utf-8'))
+    res.json(data)
+  } catch (e) {
+    res.status(500).json({ error: 'Failed to load budget', details: String(e) })
   }
-  return db
-}
-
-function initDatabase () {
-  const database = getDb()
-  database.serialize(() => {
-    database.run(
-      'CREATE TABLE IF NOT EXISTS budget_summary (category TEXT, amount INTEGER)'
-    )
-    database.run(
-      "INSERT INTO budget_summary VALUES ('Total', 60000), ('CAPEX', 40000), ('OPEX', 20000)"
-    )
-
-    database.run(`CREATE TABLE IF NOT EXISTS bom (
-            component TEXT,
-            description TEXT,
-            cost REAL,
-            supplier TEXT,
-            status TEXT,
-            icon TEXT
-        )`)
-
-    const bomStmt = database.prepare(
-      'INSERT INTO bom VALUES (?, ?, ?, ?, ?, ?)'
-    )
-    const bomData = [
-      [
-        'Compute Module',
-        'Raspberry Pi 4 Model B (4GB)',
-        55.0,
-        'Element14',
-        'Sourced',
-        'fa-microchip'
-      ],
-      [
-        'Vision Sensor',
-        'Sony IMX219 8MP Camera Module',
-        25.0,
-        'Arducam',
-        'Ordering',
-        'fa-camera'
-      ],
-      [
-        'Custom PCB',
-        'Power Mgmt & Sensor Interface',
-        10.0,
-        'JLCPCB',
-        'Design Phase',
-        'fa-print'
-      ],
-      [
-        'Housing',
-        'Injection Molded ABS (Prototype)',
-        15.0,
-        'Local Fab',
-        'Pending',
-        'fa-cube'
-      ],
-      [
-        'Power Supply',
-        '5V 3A USB-C Power Supply',
-        8.0,
-        'DigiKey',
-        'Sourced',
-        'fa-plug'
-      ],
-      [
-        'Display',
-        '7-inch Touchscreen LCD',
-        45.0,
-        'Waveshare',
-        'Pending',
-        'fa-tv'
-      ]
-    ]
-    bomData.forEach(item => bomStmt.run(item))
-    bomStmt.finalize()
-  })
-}
-
-module.exports = (req, res) => {
-  const database = getDb()
-  database.all('SELECT * FROM budget_summary', [], (err, summary) => {
-    if (err) return res.status(500).json({ error: err.message })
-    database.all('SELECT * FROM bom', [], (err, bom) => {
-      if (err) return res.status(500).json({ error: err.message })
-      res.json({ summary, bom })
-    })
-  })
 }

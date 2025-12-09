@@ -1,0 +1,46 @@
+[
+  {
+    "name": "Sarah Chen",
+    "role": "HW Architect",
+    "category": "hardware",
+    "description": "Lead engineer for PCB design and sensor integration. Expert in low-power IoT devices.",
+    "icon": "fa-microchip",
+    "skills": [
+      { "name": "PCB Design", "val": "95%" },
+      { "name": "Sensors", "val": "85%" }
+    ]
+  },
+  {
+    "name": "Marcus Johnson",
+    "role": "AI Scientist",
+    "category": "software",
+    "description": "Specializes in Computer Vision and Edge AI. Developing the food recognition model.",
+    "icon": "fa-brain",
+    "skills": [
+      { "name": "YOLOv8", "val": "98%" },
+      { "name": "Edge AI", "val": "90%" }
+    ]
+  },
+  {
+    "name": "Elena Rodriguez",
+    "role": "Project Manager",
+    "category": "management",
+    "description": "Ensures timeline adherence and budget management. Scrum Master certified.",
+    "icon": "fa-tasks",
+    "skills": [
+      { "name": "Agile", "val": "100%" },
+      { "name": "Budget", "val": "85%" }
+    ]
+  },
+  {
+    "name": "David Kim",
+    "role": "UX/UI Designer",
+    "category": "design",
+    "description": "Designing the mobile app interface and physical fridge interaction points.",
+    "icon": "fa-pen-nib",
+    "skills": [
+      { "name": "Figma", "val": "95%" },
+      { "name": "User Research", "val": "80%" }
+    ]
+  }
+]

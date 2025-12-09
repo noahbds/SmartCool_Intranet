@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://smart-cool-intranet.vercel.app/sitemap.xml

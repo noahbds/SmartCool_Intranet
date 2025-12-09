@@ -1,0 +1,5 @@
+[
+  { "name": "PCB Design Review", "date": "Dec 15, 2025", "owner": "Sarah Chen", "status": "In Progress" },
+  { "name": "Dataset Collection", "date": "Dec 20, 2025", "owner": "Marcus Johnson", "status": "In Progress" },
+  { "name": "Initial Prototype", "date": "Jan 10, 2026", "owner": "Team", "status": "Pending" }
+]

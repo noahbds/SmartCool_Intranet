@@ -1,0 +1,15 @@
+{
+  "summary": [
+    { "category": "Total", "amount": 60000 },
+    { "category": "CAPEX", "amount": 40000 },
+    { "category": "OPEX", "amount": 20000 }
+  ],
+  "bom": [
+    { "component": "Compute Module", "description": "Raspberry Pi 4 Model B (4GB)", "cost": 55.0, "supplier": "Element14", "status": "Sourced", "icon": "fa-microchip" },
+    { "component": "Vision Sensor", "description": "Sony IMX219 8MP Camera Module", "cost": 25.0, "supplier": "Arducam", "status": "Ordering", "icon": "fa-camera" },
+    { "component": "Custom PCB", "description": "Power Mgmt & Sensor Interface", "cost": 10.0, "supplier": "JLCPCB", "status": "Design Phase", "icon": "fa-print" },
+    { "component": "Housing", "description": "Injection Molded ABS (Prototype)", "cost": 15.0, "supplier": "Local Fab", "status": "Pending", "icon": "fa-cube" },
+    { "component": "Power Supply", "description": "5V 3A USB-C Power Supply", "cost": 8.0, "supplier": "DigiKey", "status": "Sourced", "icon": "fa-plug" },
+    { "component": "Display", "description": "7-inch Touchscreen LCD", "cost": 45.0, "supplier": "Waveshare", "status": "Pending", "icon": "fa-tv" }
+  ]
+}

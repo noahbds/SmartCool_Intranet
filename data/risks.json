@@ -1,0 +1,29 @@
+[
+  {
+    "title": "Global Chip Shortage",
+    "context": "High demand for ARM-based processors (Raspberry Pi) may lead to 12+ week lead times.",
+    "mitigation": "Pre-order critical compute modules immediately (Week 2). Validate alternative hardware.",
+    "prob": "High",
+    "impact": "High",
+    "color": "#ef4444",
+    "icon": "fa-exclamation-circle"
+  },
+  {
+    "title": "Camera Fogging",
+    "context": "The fridge interior is cold and humid. Opening the door causes condensation.",
+    "mitigation": "Integrate hydrophobic coating on lens glass. Design placement away from vents.",
+    "prob": "Medium",
+    "impact": "High",
+    "color": "#f59e0b",
+    "icon": "fa-temperature-low"
+  },
+  {
+    "title": "AI Model Accuracy < 90%",
+    "context": "YOLOv8 may struggle with occluded items or poor lighting.",
+    "mitigation": "Collect a custom dataset with 'messy fridge' scenarios. Implement multi-frame tracking.",
+    "prob": "Medium",
+    "impact": "Medium",
+    "color": "#3b82f6",
+    "icon": "fa-eye-slash"
+  }
+]
