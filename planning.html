@@ -16,8 +16,9 @@
       :root {
         --header-height: 64px;
         --toolbar-height: 56px;
+        --footer-height: 32px;
         --row-height: 44px;
-        --task-col-width: 340px;
+        --task-col-width: 400px; /* Wider for Cost column */
         --grid-line-color: #f1f5f9;
         --weekend-color: #f8fafc;
       }
@@ -237,12 +238,9 @@
         position: absolute; left: 0; top: 0; bottom: 0;
         background: rgba(255,255,255,0.3);
       }
+      /* Hidden by default as requested */
       .gantt-bar-label {
-        position: sticky; left: 5px;
-        color: white; font-size: 0.75rem; font-weight: 600;
-        white-space: nowrap; padding: 0 8px;
-        text-shadow: 0 1px 2px rgba(0,0,0,0.2);
-        z-index: 2;
+        display: none;
       }
 
       /* Empty State */
@@ -280,6 +278,79 @@
         transition: background 0.2s;
       }
       .resizer:hover, .task-panel:hover .resizer { background: var(--accent); }
+
+      /* Footer */
+      .app-footer {
+        height: var(--footer-height);
+        border-top: 1px solid var(--border);
+        background: #f8fafc;
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 0 16px;
+        font-size: 0.75rem; color: var(--text-muted);
+        flex-shrink: 0;
+      }
+
+      /* Modal */
+      .modal-overlay {
+        position: fixed; inset: 0;
+        background: rgba(0,0,0,0.5);
+        display: flex; align-items: center; justify-content: center;
+        z-index: 2000;
+        backdrop-filter: blur(2px);
+      }
+      .modal {
+        background: white;
+        border-radius: 12px;
+        width: 500px;
+        max-width: 90%;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        display: flex; flex-direction: column;
+        max-height: 90vh;
+      }
+      .modal-header {
+        padding: 16px 24px;
+        border-bottom: 1px solid var(--border);
+        display: flex; justify-content: space-between; align-items: center;
+      }
+      .modal-header h3 { margin: 0; font-size: 1.1rem; }
+      .modal-body {
+        padding: 24px;
+        overflow-y: auto;
+      }
+      .modal-footer {
+        padding: 16px 24px;
+        border-top: 1px solid var(--border);
+        display: flex; justify-content: flex-end; gap: 12px;
+        background: #f8fafc;
+        border-radius: 0 0 12px 12px;
+      }
+      .form-group { margin-bottom: 16px; }
+      .form-group label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--secondary); margin-bottom: 6px; }
+      .form-input {
+        width: 100%; padding: 8px 12px;
+        border: 1px solid var(--border); border-radius: 6px;
+        font-size: 0.9rem;
+      }
+      .form-input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 2px rgba(59,130,246,0.1); }
+      .form-row { display: flex; gap: 16px; }
+      .form-row .form-group { flex: 1; }
+      
+      .btn-icon { background: none; border: none; cursor: pointer; font-size: 1.1rem; color: var(--text-muted); }
+      .btn-icon:hover { color: var(--danger); }
+
+      .resources-list {
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        max-height: 150px; overflow-y: auto;
+      }
+      .resource-row {
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 8px 12px; border-bottom: 1px solid var(--border);
+      }
+      .resource-row:last-child { border-bottom: none; }
+      .resource-name { font-size: 0.9rem; }
+      .resource-load { width: 80px; display: flex; align-items: center; gap: 4px; }
+      .resource-load input { width: 50px; padding: 4px; font-size: 0.85rem; text-align: right; }
     </style>
   </head>
   <body>
@@ -293,7 +364,7 @@
         <a href="risks.html" class="nav-link"><i class="fa-solid fa-shield-halved"></i> Risques</a>
         <a href="comm.html" class="nav-link"><i class="fa-solid fa-comments"></i> Comms</a>
       </div>
-      <div class="footer">v3.0 | 2025</div>
+      <div class="footer">v3.1 | 2025</div>
     </nav>
 
     <main class="main-content">
@@ -305,6 +376,7 @@
         <div style="display: flex; gap: 12px;">
           <div class="btn-tool" id="kpi-tasks"><i class="fa-solid fa-list-check"></i> <span id="val-tasks">0</span></div>
           <div class="btn-tool" id="kpi-progress"><i class="fa-solid fa-bars-progress"></i> <span id="val-progress">0%</span></div>
+          <div class="btn-tool" id="kpi-cost"><i class="fa-solid fa-euro-sign"></i> <span id="val-cost">0</span></div>
         </div>
       </header>
 
@@ -359,6 +431,7 @@
           <div class="task-header">
             <div style="flex:1">Nom de la tâche</div>
             <div style="width: 60px; text-align: right;">Durée</div>
+            <div style="width: 80px; text-align: right;">Coût</div>
           </div>
           <div class="task-list" id="task-list">
             <!-- Tasks injected here -->
@@ -384,16 +457,69 @@
           </div>
         </div>
       </div>
+
+      <!-- Footer -->
+      <footer class="app-footer">
+        <div>SmartCool Intranet - Module Planning</div>
+        <div>© 2025 SmartCool Inc.</div>
+      </footer>
     </main>
 
     <div class="gantt-tooltip" id="tooltip"></div>
+
+    <!-- Edit Modal -->
+    <div class="modal-overlay" id="edit-modal" style="display:none;">
+      <div class="modal">
+        <div class="modal-header">
+          <h3>Modifier la tâche</h3>
+          <button class="btn-icon" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" id="edit-id">
+          <div class="form-group">
+            <label>Nom</label>
+            <input type="text" id="edit-name" class="form-input">
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Début</label>
+              <input type="date" id="edit-start" class="form-input">
+            </div>
+            <div class="form-group">
+              <label>Durée (jours)</label>
+              <input type="number" id="edit-duration" class="form-input">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Avancement (%)</label>
+              <input type="number" id="edit-progress" min="0" max="100" class="form-input">
+            </div>
+            <div class="form-group">
+              <label>Coût (€)</label>
+              <input type="number" id="edit-cost" class="form-input">
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label>Ressources & Occupation (%)</label>
+            <div id="edit-resources-list" class="resources-list">
+              <!-- JS injected -->
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-tool" onclick="closeModal()">Annuler</button>
+          <button class="btn-tool primary" onclick="saveTask()">Enregistrer</button>
+        </div>
+      </div>
+    </div>
 
     <script>
       // --- Configuration & State ---
       const state = {
         tasks: [],
-        resources: [],
-        allocations: [],
+        resources: [], // {id, name}
         scale: 'day', // day, week, month
         pxPerUnit: 40, // pixels per day (base)
         zoomLevel: 1,
@@ -421,11 +547,21 @@
         search: document.getElementById('search'),
         valTasks: document.getElementById('val-tasks'),
         valProgress: document.getElementById('val-progress'),
+        valCost: document.getElementById('val-cost'),
         btnFit: document.getElementById('btn-fit'),
         btnZoomIn: document.getElementById('btn-zoom-in'),
         btnZoomOut: document.getElementById('btn-zoom-out'),
         btnToggleWeekend: document.getElementById('btn-toggle-weekend'),
-        scaleBtns: document.querySelectorAll('[data-scale]')
+        scaleBtns: document.querySelectorAll('[data-scale]'),
+        // Modal
+        modal: document.getElementById('edit-modal'),
+        editId: document.getElementById('edit-id'),
+        editName: document.getElementById('edit-name'),
+        editStart: document.getElementById('edit-start'),
+        editDuration: document.getElementById('edit-duration'),
+        editProgress: document.getElementById('edit-progress'),
+        editCost: document.getElementById('edit-cost'),
+        editResList: document.getElementById('edit-resources-list')
       };
 
       // --- Utils ---
@@ -439,6 +575,7 @@
         const week1 = new Date(date.getFullYear(), 0, 4);
         return 1 + Math.round(((date.getTime() - week1.getTime()) / 86400000 - 3 + (week1.getDay() + 6) % 7) / 7);
       }
+      function fmtDateInput(d) { return d.toISOString().split('T')[0]; }
 
       // --- Core Logic ---
 
@@ -450,16 +587,22 @@
 
           // Parse Resources
           const resMap = new Map();
+          const resources = [];
           xml.querySelectorAll("resources > resource").forEach(r => {
-            resMap.set(r.getAttribute("id"), r.getAttribute("name"));
+            const id = r.getAttribute("id");
+            const name = r.getAttribute("name");
+            resMap.set(id, name);
+            resources.push({ id, name });
           });
+          state.resources = resources;
 
           // Parse Allocations
           const allocs = [];
           xml.querySelectorAll("allocations > allocation").forEach(a => {
             allocs.push({
               taskId: a.getAttribute("task-id"),
-              resourceId: a.getAttribute("resource-id")
+              resourceId: a.getAttribute("resource-id"),
+              load: parseFloat(a.getAttribute("load") || "100")
             });
           });
 
@@ -480,21 +623,23 @@
             if (!startStr) return; // Skip tasks without start date
 
             const start = startOfDay(new Date(startStr));
-            // GanttProject duration is usually workdays, but for viz we'll just add days for now
-            // A better implementation would skip weekends if needed, but simple add is safer for viz
             const end = addDays(start, duration);
 
             if (!minDate || start < minDate) minDate = start;
             if (!maxDate || end > maxDate) maxDate = end;
 
             // Find resources
-            const taskRes = allocs
-              .filter(a => a.taskId === id)
-              .map(a => resMap.get(a.resourceId))
-              .filter(Boolean);
+            const taskAllocs = allocs.filter(a => a.taskId === id);
+            const taskResources = taskAllocs.map(a => ({
+                id: a.resourceId,
+                name: resMap.get(a.resourceId),
+                load: a.load
+            }));
 
             tasks.push({
-              id, name, start, end, duration, complete, color, resources: taskRes
+              id, name, start, end, duration, complete, color, 
+              resources: taskResources,
+              cost: 0 // Default cost
             });
           });
 
@@ -532,6 +677,8 @@
         const totalProgress = state.tasks.reduce((acc, t) => acc + t.complete, 0);
         const avg = state.tasks.length ? Math.round(totalProgress / state.tasks.length) : 0;
         DOM.valProgress.textContent = avg + "%";
+        const totalCost = state.tasks.reduce((acc, t) => acc + (t.cost || 0), 0);
+        DOM.valCost.textContent = totalCost.toLocaleString('fr-FR');
       }
 
       function renderTaskList() {
@@ -548,8 +695,9 @@
             <span class="id-badge">${index + 1}</span>
             <span style="flex:1; overflow:hidden; text-overflow:ellipsis;">${t.name}</span>
             <span style="width:60px; text-align:right; font-size:0.8rem; color:var(--text-muted);">${t.duration}j</span>
+            <span style="width:80px; text-align:right; font-size:0.8rem; font-weight:500;">${(t.cost||0).toLocaleString()} €</span>
           `;
-          el.addEventListener('click', () => scrollToTask(t));
+          el.addEventListener('click', () => openEditModal(t));
           el.addEventListener('mouseenter', () => highlightTask(t.id, true));
           el.addEventListener('mouseleave', () => highlightTask(t.id, false));
           DOM.taskList.appendChild(el);
@@ -602,19 +750,11 @@
         DOM.timelineHeaderContent.appendChild(primaryRow);
         DOM.timelineHeaderContent.appendChild(secondaryRow);
 
-        // We iterate day by day or by chunks depending on scale to build the DOM
-        // Optimization: For large ranges, we should only render visible area, but for now we render all (simpler)
-        
         let currentMonth = -1;
-        let currentWeek = -1;
         
-        // To avoid too many DOM elements, we group
         if (state.scale === 'day') {
-          // Primary: Month, Secondary: Day
           for (let i = 0; i < state.totalDays; i++) {
             const d = addDays(state.startDate, i);
-            
-            // Secondary (Days)
             const dayCell = document.createElement('div');
             dayCell.className = 'scale-cell';
             dayCell.style.left = (i * pxPerDay) + 'px';
@@ -623,7 +763,6 @@
             if (d.getDay() === 0 || d.getDay() === 6) dayCell.style.background = 'var(--weekend-color)';
             secondaryRow.appendChild(dayCell);
 
-            // Primary (Months) - simplified logic
             if (d.getMonth() !== currentMonth) {
               currentMonth = d.getMonth();
               const monthLabel = d.toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' });
@@ -638,12 +777,10 @@
             }
           }
         } else if (state.scale === 'week') {
-           // Primary: Month, Secondary: Week
            const weekWidth = pxPerDay * 7;
            for (let i = 0; i < state.totalDays; i+=7) {
              const d = addDays(state.startDate, i);
              const wNum = getWeekNumber(d);
-             
              const wCell = document.createElement('div');
              wCell.className = 'scale-cell';
              wCell.style.left = (i * pxPerDay) + 'px';
@@ -665,11 +802,7 @@
              }
            }
         } else {
-          // Month scale
-          // Primary: Year, Secondary: Month
-          // This is tricky with fixed pxPerDay, let's approximate
           const monthWidth = pxPerDay * 30; 
-          // ... simplified for this demo to just show months
           for (let i = 0; i < state.totalDays; i+=30) {
              const d = addDays(state.startDate, i);
              const mCell = document.createElement('div');
@@ -692,9 +825,6 @@
 
       function renderGridBackground(pxPerDay, totalWidth) {
         DOM.gridBg.innerHTML = '';
-        
-        // Vertical Lines
-        // If scale is day, line every day. If week, line every week.
         let step = 1;
         if (state.scale === 'week') step = 7;
         if (state.scale === 'month') step = 30;
@@ -704,35 +834,27 @@
           line.className = 'grid-col';
           line.style.left = (i * pxPerDay) + 'px';
           line.style.width = (step * pxPerDay) + 'px';
-          
-          // Weekend highlighting (only visible in day scale usually)
           if (state.scale === 'day' && state.showWeekends) {
              const d = addDays(state.startDate, i);
-             if (d.getDay() === 0 || d.getDay() === 6) {
-               line.classList.add('weekend');
-             }
+             if (d.getDay() === 0 || d.getDay() === 6) line.classList.add('weekend');
           }
           DOM.gridBg.appendChild(line);
         }
 
-        // Horizontal Lines
         state.tasks.forEach((_, idx) => {
           const hLine = document.createElement('div');
           hLine.className = 'grid-row-line';
-          hLine.style.top = ((idx + 1) * 44) + 'px'; // bottom of row
+          hLine.style.top = ((idx + 1) * 44) + 'px';
           DOM.gridBg.appendChild(hLine);
         });
       }
 
       function renderBars(pxPerDay, rowHeight) {
-        // Clear existing bars (keep bg and marker)
         const existingBars = DOM.timelineGrid.querySelectorAll('.gantt-bar');
         existingBars.forEach(b => b.remove());
-
         const filter = DOM.search.value.toLowerCase();
 
         state.tasks.forEach((t, idx) => {
-          // Filter logic
           if (filter && !t.name.toLowerCase().includes(filter)) return;
 
           const daysFromStart = diffDays(state.startDate, t.start);
@@ -744,14 +866,13 @@
           
           const x = daysFromStart * pxPerDay;
           const w = durationDays * pxPerDay;
-          const y = (idx * rowHeight) + 10; // Center vertically in 44px row
+          const y = (idx * rowHeight) + 10;
 
           bar.style.left = x + 'px';
           bar.style.top = y + 'px';
-          bar.style.width = Math.max(w, 4) + 'px'; // Min width
+          bar.style.width = Math.max(w, 4) + 'px';
           bar.style.backgroundColor = t.color;
 
-          // Progress
           if (t.complete > 0) {
             const prog = document.createElement('div');
             prog.className = 'gantt-bar-progress';
@@ -759,13 +880,13 @@
             bar.appendChild(prog);
           }
 
-          // Label
+          // Label hidden by CSS, but structure kept if needed later
           const label = document.createElement('div');
           label.className = 'gantt-bar-label';
           label.textContent = t.complete + '%';
           bar.appendChild(label);
 
-          // Events
+          bar.addEventListener('click', () => openEditModal(t));
           bar.addEventListener('mouseenter', (e) => {
             showTooltip(e, t);
             highlightTask(t.id, true);
@@ -784,7 +905,6 @@
       function highlightTask(id, active) {
         const row = DOM.taskList.querySelector(`.task-item[data-id="${id}"]`);
         const bar = DOM.timelineGrid.querySelector(`.gantt-bar[data-id="${id}"]`);
-        
         if (row) active ? row.classList.add('selected') : row.classList.remove('selected');
         if (bar) {
           bar.style.filter = active ? 'brightness(1.1)' : 'none';
@@ -792,21 +912,16 @@
         }
       }
 
-      function scrollToTask(t) {
-        const daysFromStart = diffDays(state.startDate, t.start);
-        const pxPerDay = getPxPerDay();
-        const x = daysFromStart * pxPerDay;
-        DOM.timelineBody.scrollTo({ left: x - 100, behavior: 'smooth' });
-      }
-
       function showTooltip(e, t) {
+        const resList = t.resources.map(r => `${r.name} (${r.load}%)`).join(', ') || '-';
         DOM.tooltip.innerHTML = `
           <div style="font-weight:700; margin-bottom:8px; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:4px;">${t.name}</div>
           <div class="tooltip-row"><span class="tooltip-label">Début</span> <span class="tooltip-val">${t.start.toLocaleDateString()}</span></div>
           <div class="tooltip-row"><span class="tooltip-label">Fin</span> <span class="tooltip-val">${t.end.toLocaleDateString()}</span></div>
           <div class="tooltip-row"><span class="tooltip-label">Durée</span> <span class="tooltip-val">${t.duration} jours</span></div>
           <div class="tooltip-row"><span class="tooltip-label">Avancement</span> <span class="tooltip-val">${t.complete}%</span></div>
-          <div class="tooltip-row"><span class="tooltip-label">Ressources</span> <span class="tooltip-val">${t.resources.join(', ') || '-'}</span></div>
+          <div class="tooltip-row"><span class="tooltip-label">Coût</span> <span class="tooltip-val">${(t.cost||0).toLocaleString()} €</span></div>
+          <div class="tooltip-row"><span class="tooltip-label">Ressources</span> <span class="tooltip-val">${resList}</span></div>
         `;
         DOM.tooltip.style.opacity = '1';
         moveTooltip(e);
@@ -815,7 +930,6 @@
       function moveTooltip(e) {
         const x = e.clientX + 15;
         const y = e.clientY + 15;
-        // Boundary check could be added here
         DOM.tooltip.style.left = x + 'px';
         DOM.tooltip.style.top = y + 'px';
       }
@@ -825,7 +939,6 @@
         if (DOM.tooltip.style.opacity === '1') moveTooltip(e);
       });
 
-      // Sync Scrolling
       DOM.timelineBody.addEventListener('scroll', () => {
         DOM.timelineHeader.scrollLeft = DOM.timelineBody.scrollLeft;
         DOM.taskList.scrollTop = DOM.timelineBody.scrollTop;
@@ -849,7 +962,6 @@
         } else {
            state.scale = 'day';
         }
-        // Clamp
         state.pxPerUnit = Math.max(10, Math.min(100, state.pxPerUnit));
         updateScaleBtns();
         renderTimeline();
@@ -860,6 +972,72 @@
           if (b.dataset.scale === state.scale) b.classList.add('active');
           else b.classList.remove('active');
         });
+      }
+
+      // --- Modal Logic ---
+      function openEditModal(task) {
+        DOM.editId.value = task.id;
+        DOM.editName.value = task.name;
+        DOM.editStart.value = fmtDateInput(task.start);
+        DOM.editDuration.value = task.duration;
+        DOM.editProgress.value = task.complete;
+        DOM.editCost.value = task.cost || 0;
+
+        // Resources
+        DOM.editResList.innerHTML = '';
+        // Combine existing task resources with all available resources to allow adding
+        // For simplicity, we just list all resources and show their load if assigned, 0 if not
+        state.resources.forEach(r => {
+          const assigned = task.resources.find(tr => tr.id === r.id);
+          const load = assigned ? assigned.load : 0;
+          
+          const row = document.createElement('div');
+          row.className = 'resource-row';
+          row.innerHTML = `
+            <div class="resource-name">${r.name}</div>
+            <div class="resource-load">
+              <input type="number" min="0" max="100" value="${load}" data-resid="${r.id}"> %
+            </div>
+          `;
+          DOM.editResList.appendChild(row);
+        });
+
+        DOM.modal.style.display = 'flex';
+      }
+
+      function closeModal() {
+        DOM.modal.style.display = 'none';
+      }
+
+      function saveTask() {
+        const id = DOM.editId.value;
+        const task = state.tasks.find(t => t.id === id);
+        if (!task) return;
+
+        task.name = DOM.editName.value;
+        task.start = startOfDay(new Date(DOM.editStart.value));
+        task.duration = parseInt(DOM.editDuration.value, 10);
+        task.end = addDays(task.start, task.duration);
+        task.complete = parseInt(DOM.editProgress.value, 10);
+        task.cost = parseFloat(DOM.editCost.value) || 0;
+
+        // Update Resources
+        const newResources = [];
+        const inputs = DOM.editResList.querySelectorAll('input');
+        inputs.forEach(inp => {
+          const load = parseFloat(inp.value);
+          if (load > 0) {
+            const rId = inp.dataset.resid;
+            const rName = state.resources.find(r => r.id === rId).name;
+            newResources.push({ id: rId, name: rName, load: load });
+          }
+        });
+        task.resources = newResources;
+
+        // Re-calc bounds if dates changed
+        // For simplicity, we just re-render. In a real app, we'd check bounds.
+        renderApp();
+        closeModal();
       }
 
       // --- Event Listeners ---
@@ -910,7 +1088,7 @@
         renderTimeline();
       });
 
-      // Resizer Logic (Simple)
+      // Resizer Logic
       let isResizing = false;
       const resizer = document.getElementById('resizer');
       resizer.addEventListener('mousedown', () => { isResizing = true; document.body.style.cursor = 'col-resize'; });
@@ -918,7 +1096,7 @@
       window.addEventListener('mousemove', (e) => {
         if (!isResizing) return;
         const w = e.clientX - 260; // Sidebar width offset
-        if (w > 200 && w < 600) {
+        if (w > 200 && w < 800) {
           document.documentElement.style.setProperty('--task-col-width', w + 'px');
         }
       });
