@@ -379,7 +379,7 @@ function initDatabase () {
 }
 
 // Middleware
-app.use(express.static(__dirname)) // Serve static files from root
+app.use(express.static(path.join(__dirname, 'public'))) // Serve static files from public folder
 
 // API Routes
 app.get('/api/team', (req, res) => {
@@ -569,7 +569,7 @@ app.post('/api/reset', (req, res) => {
 
 // Serve index.html for root route
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'))
+  res.sendFile(path.join(__dirname, 'public', 'index.html'))
 })
 
 app.listen(port, () => {

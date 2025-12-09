@@ -26,13 +26,24 @@ document.addEventListener('DOMContentLoaded', () => {
   document.body.insertAdjacentHTML('afterbegin', sidebarContent);
 
   // Highlight active link
-  const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+  const normalizePath = (path) => {
+    // Handle full URLs or relative paths by taking the last segment
+    // Also strip query params or hashes if present
+    let p = path.split('/').pop().split('?')[0].split('#')[0]; 
+    if (p.endsWith('.html')) {
+      p = p.slice(0, -5);
+    }
+    // Treat empty path (root) or 'index' as the same
+    if (p === '' || p === 'index') return 'index';
+    return p;
+  };
+
+  const currentPath = normalizePath(window.location.pathname);
   const links = document.querySelectorAll('.nav-links a');
   
   links.forEach(link => {
     const href = link.getAttribute('href');
-    // Handle exact match or root
-    if (href === currentPath || (currentPath === '' && href === 'index.html')) {
+    if (normalizePath(href) === currentPath) {
       link.classList.add('active');
     } else {
       link.classList.remove('active');
