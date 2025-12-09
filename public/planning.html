@@ -3,7 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Visionneur de Planning Gantt — SmartCool Pro" />
+    <meta
+      name="description"
+      content="Visionneur de Planning Gantt — SmartCool Pro"
+    />
     <title>Planning | SmartCool Pro</title>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="css/style.css" />
@@ -47,8 +50,18 @@
         background: #fff;
         flex-shrink: 0;
       }
-      .app-title h1 { font-size: 1.25rem; font-weight: 700; color: var(--text-main); margin: 0; }
-      .app-title span { color: var(--text-muted); font-weight: 400; font-size: 0.9rem; margin-left: 8px; }
+      .app-title h1 {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--text-main);
+        margin: 0;
+      }
+      .app-title span {
+        color: var(--text-muted);
+        font-weight: 400;
+        font-size: 0.9rem;
+        margin-left: 8px;
+      }
 
       /* Toolbar */
       .toolbar {
@@ -61,32 +74,63 @@
         background: #f8fafc;
         flex-shrink: 0;
       }
-      .toolbar-group { display: flex; gap: 8px; align-items: center; }
-      
+      .toolbar-group {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+
       .btn-tool {
-        display: inline-flex; align-items: center; gap: 6px;
-        height: 32px; padding: 0 12px;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        height: 32px;
+        padding: 0 12px;
         border-radius: 6px;
-        font-size: 0.85rem; font-weight: 500;
+        font-size: 0.85rem;
+        font-weight: 500;
         color: var(--secondary);
         background: white;
         border: 1px solid var(--border);
         cursor: pointer;
         transition: all 0.15s;
-        box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
       }
-      .btn-tool:hover { background: #f1f5f9; border-color: #cbd5e1; color: var(--primary); }
-      .btn-tool.primary { background: var(--accent); color: white; border-color: var(--accent); }
-      .btn-tool.primary:hover { background: var(--accent-hover); }
-      .btn-tool.active { background: #e2e8f0; color: var(--primary); border-color: #cbd5e1; box-shadow: inset 0 1px 2px rgba(0,0,0,0.05); }
-      
+      .btn-tool:hover {
+        background: #f1f5f9;
+        border-color: #cbd5e1;
+        color: var(--primary);
+      }
+      .btn-tool.primary {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+      }
+      .btn-tool.primary:hover {
+        background: var(--accent-hover);
+      }
+      .btn-tool.active {
+        background: #e2e8f0;
+        color: var(--primary);
+        border-color: #cbd5e1;
+        box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+      }
+
       .search-input {
-        height: 32px; padding: 0 10px 0 32px;
-        border-radius: 6px; border: 1px solid var(--border);
-        font-size: 0.85rem; width: 200px;
-        background: white url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="%2394a3b8" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>') no-repeat 8px center / 14px;
+        height: 32px;
+        padding: 0 10px 0 32px;
+        border-radius: 6px;
+        border: 1px solid var(--border);
+        font-size: 0.85rem;
+        width: 200px;
+        background: white
+          url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="%2394a3b8" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>')
+          no-repeat 8px center / 14px;
       }
-      .search-input:focus { outline: none; border-color: var(--accent); }
+      .search-input:focus {
+        outline: none;
+        border-color: var(--accent);
+      }
 
       /* Gantt Container */
       .gantt-container {
@@ -105,14 +149,19 @@
         background: #fff;
         flex-shrink: 0;
         z-index: 20;
-        box-shadow: 2px 0 10px rgba(0,0,0,0.03);
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.03);
       }
       .task-header {
         height: 48px;
         border-bottom: 1px solid var(--border);
-        display: flex; align-items: center;
+        display: flex;
+        align-items: center;
         padding: 0 16px;
-        font-weight: 600; color: var(--secondary); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em;
+        font-weight: 600;
+        color: var(--secondary);
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
         background: #f8fafc;
       }
       .task-list {
@@ -122,19 +171,34 @@
       .task-item {
         height: var(--row-height);
         border-bottom: 1px solid var(--grid-line-color);
-        display: flex; align-items: center;
+        display: flex;
+        align-items: center;
         padding: 0 16px;
-        font-size: 0.9rem; color: var(--text-main);
-        white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        font-size: 0.9rem;
+        color: var(--text-main);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
         cursor: pointer;
         transition: background 0.1s;
       }
-      .task-item:hover { background: #f8fafc; }
-      .task-item.selected { background: #eff6ff; color: var(--accent); font-weight: 500; }
+      .task-item:hover {
+        background: #f8fafc;
+      }
+      .task-item.selected {
+        background: #eff6ff;
+        color: var(--accent);
+        font-weight: 500;
+      }
       .task-item .id-badge {
-        font-size: 0.7rem; color: var(--text-muted);
-        background: #f1f5f9; padding: 2px 6px; border-radius: 4px;
-        margin-right: 10px; min-width: 24px; text-align: center;
+        font-size: 0.7rem;
+        color: var(--text-muted);
+        background: #f1f5f9;
+        padding: 2px 6px;
+        border-radius: 4px;
+        margin-right: 10px;
+        min-width: 24px;
+        text-align: center;
       }
 
       /* Right Panel: Timeline */
@@ -158,20 +222,32 @@
         height: 100%;
       }
       .time-scale-primary {
-        position: absolute; top: 0; height: 24px;
-        display: flex; align-items: center;
-        font-size: 0.75rem; font-weight: 700; color: var(--secondary);
+        position: absolute;
+        top: 0;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: var(--secondary);
         border-bottom: 1px solid var(--border);
       }
       .time-scale-secondary {
-        position: absolute; top: 24px; height: 24px;
-        display: flex; align-items: center;
-        font-size: 0.7rem; color: var(--text-muted);
+        position: absolute;
+        top: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        font-size: 0.7rem;
+        color: var(--text-muted);
       }
       .scale-cell {
         position: absolute;
         border-right: 1px solid var(--border);
-        height: 100%; display: flex; align-items: center; justify-content: center;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         box-sizing: border-box;
       }
 
@@ -183,36 +259,64 @@
         scrollbar-width: thin;
         scrollbar-color: #cbd5e1 transparent;
       }
-      .timeline-body-scroll::-webkit-scrollbar { width: 8px; height: 8px; }
-      .timeline-body-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
-      .timeline-body-scroll::-webkit-scrollbar-track { background: transparent; }
+      .timeline-body-scroll::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      .timeline-body-scroll::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 4px;
+      }
+      .timeline-body-scroll::-webkit-scrollbar-track {
+        background: transparent;
+      }
 
       .timeline-grid {
         position: relative;
         /* Height set by JS */
       }
       .grid-bg {
-        position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
         pointer-events: none;
       }
       .grid-col {
-        position: absolute; top: 0; bottom: 0;
+        position: absolute;
+        top: 0;
+        bottom: 0;
         border-right: 1px solid var(--grid-line-color);
       }
-      .grid-col.weekend { background: var(--weekend-color); }
+      .grid-col.weekend {
+        background: var(--weekend-color);
+      }
       .grid-row-line {
-        position: absolute; left: 0; right: 0;
-        height: 1px; background: var(--grid-line-color);
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: var(--grid-line-color);
       }
       .today-marker {
-        position: absolute; top: 0; bottom: 0; width: 2px;
-        background: var(--danger); z-index: 10;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: var(--danger);
+        z-index: 10;
         pointer-events: none;
       }
       .today-label {
-        position: absolute; top: 0; transform: translateX(-50%);
-        background: var(--danger); color: white;
-        font-size: 0.65rem; padding: 2px 6px; border-radius: 0 0 4px 4px;
+        position: absolute;
+        top: 0;
+        transform: translateX(-50%);
+        background: var(--danger);
+        color: white;
+        font-size: 0.65rem;
+        padding: 2px 6px;
+        border-radius: 0 0 4px 4px;
         font-weight: 700;
       }
 
@@ -222,21 +326,25 @@
         height: 24px; /* Smaller than row height */
         border-radius: 4px;
         background: var(--accent);
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         cursor: pointer;
         z-index: 5;
-        display: flex; align-items: center;
+        display: flex;
+        align-items: center;
         overflow: hidden;
         transition: transform 0.1s, box-shadow 0.1s;
       }
       .gantt-bar:hover {
         transform: translateY(-1px);
-        box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
         z-index: 15;
       }
       .gantt-bar-progress {
-        position: absolute; left: 0; top: 0; bottom: 0;
-        background: rgba(255,255,255,0.3);
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        background: rgba(255, 255, 255, 0.3);
       }
       /* Hidden by default as requested */
       .gantt-bar-label {
@@ -245,12 +353,25 @@
 
       /* Empty State */
       .empty-state {
-        position: absolute; inset: 0;
-        display: flex; flex-direction: column; align-items: center; justify-content: center;
-        background: #fff; z-index: 50;
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: #fff;
+        z-index: 50;
       }
-      .empty-icon { font-size: 4rem; color: #e2e8f0; margin-bottom: 16px; }
-      .empty-text { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 24px; }
+      .empty-icon {
+        font-size: 4rem;
+        color: #e2e8f0;
+        margin-bottom: 16px;
+      }
+      .empty-text {
+        font-size: 1.1rem;
+        color: var(--text-muted);
+        margin-bottom: 24px;
+      }
 
       /* Tooltip */
       .gantt-tooltip {
@@ -267,34 +388,58 @@
         box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         max-width: 300px;
       }
-      .tooltip-row { display: flex; justify-content: space-between; gap: 16px; margin-bottom: 4px; }
-      .tooltip-label { color: #94a3b8; }
-      .tooltip-val { font-weight: 600; }
+      .tooltip-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 4px;
+      }
+      .tooltip-label {
+        color: #94a3b8;
+      }
+      .tooltip-val {
+        font-weight: 600;
+      }
 
       /* Resizer */
       .resizer {
-        width: 4px; cursor: col-resize; background: transparent;
-        position: absolute; right: 0; top: 0; bottom: 0; z-index: 30;
+        width: 4px;
+        cursor: col-resize;
+        background: transparent;
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        z-index: 30;
         transition: background 0.2s;
       }
-      .resizer:hover, .task-panel:hover .resizer { background: var(--accent); }
+      .resizer:hover,
+      .task-panel:hover .resizer {
+        background: var(--accent);
+      }
 
       /* Footer */
       .app-footer {
         height: var(--footer-height);
         border-top: 1px solid var(--border);
         background: #f8fafc;
-        display: flex; align-items: center; justify-content: space-between;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         padding: 0 16px;
-        font-size: 0.75rem; color: var(--text-muted);
+        font-size: 0.75rem;
+        color: var(--text-muted);
         flex-shrink: 0;
       }
 
       /* Modal */
       .modal-overlay {
-        position: fixed; inset: 0;
-        background: rgba(0,0,0,0.5);
-        display: flex; align-items: center; justify-content: center;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
         z-index: 2000;
         backdrop-filter: blur(2px);
       }
@@ -304,15 +449,21 @@
         width: 500px;
         max-width: 90%;
         box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-        display: flex; flex-direction: column;
+        display: flex;
+        flex-direction: column;
         max-height: 90vh;
       }
       .modal-header {
         padding: 16px 24px;
         border-bottom: 1px solid var(--border);
-        display: flex; justify-content: space-between; align-items: center;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
       }
-      .modal-header h3 { margin: 0; font-size: 1.1rem; }
+      .modal-header h3 {
+        margin: 0;
+        font-size: 1.1rem;
+      }
       .modal-body {
         padding: 24px;
         overflow-y: auto;
@@ -320,39 +471,86 @@
       .modal-footer {
         padding: 16px 24px;
         border-top: 1px solid var(--border);
-        display: flex; justify-content: flex-end; gap: 12px;
+        display: flex;
+        justify-content: flex-end;
+        gap: 12px;
         background: #f8fafc;
         border-radius: 0 0 12px 12px;
       }
-      .form-group { margin-bottom: 16px; }
-      .form-group label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--secondary); margin-bottom: 6px; }
+      .form-group {
+        margin-bottom: 16px;
+      }
+      .form-group label {
+        display: block;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--secondary);
+        margin-bottom: 6px;
+      }
       .form-input {
-        width: 100%; padding: 8px 12px;
-        border: 1px solid var(--border); border-radius: 6px;
+        width: 100%;
+        padding: 8px 12px;
+        border: 1px solid var(--border);
+        border-radius: 6px;
         font-size: 0.9rem;
       }
-      .form-input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 2px rgba(59,130,246,0.1); }
-      .form-row { display: flex; gap: 16px; }
-      .form-row .form-group { flex: 1; }
-      
-      .btn-icon { background: none; border: none; cursor: pointer; font-size: 1.1rem; color: var(--text-muted); }
-      .btn-icon:hover { color: var(--danger); }
+      .form-input:focus {
+        outline: none;
+        border-color: var(--accent);
+        box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+      }
+      .form-row {
+        display: flex;
+        gap: 16px;
+      }
+      .form-row .form-group {
+        flex: 1;
+      }
+
+      .btn-icon {
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 1.1rem;
+        color: var(--text-muted);
+      }
+      .btn-icon:hover {
+        color: var(--danger);
+      }
 
       .resources-list {
         border: 1px solid var(--border);
         border-radius: 6px;
-        max-height: 150px; overflow-y: auto;
+        max-height: 150px;
+        overflow-y: auto;
       }
       .resource-row {
-        display: flex; align-items: center; justify-content: space-between;
-        padding: 8px 12px; border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 8px 12px;
+        border-bottom: 1px solid var(--border);
       }
-      .resource-row:last-child { border-bottom: none; }
-      .resource-name { font-size: 0.9rem; }
-      .resource-load { width: 80px; display: flex; align-items: center; gap: 4px; }
-      .resource-load input { width: 50px; padding: 4px; font-size: 0.85rem; text-align: right; }
+      .resource-row:last-child {
+        border-bottom: none;
+      }
+      .resource-name {
+        font-size: 0.9rem;
+      }
+      .resource-load {
+        width: 80px;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+      .resource-load input {
+        width: 50px;
+        padding: 4px;
+        font-size: 0.85rem;
+        text-align: right;
+      }
     </style>
-</head>
+  </head>
   <body>
     <script src="js/sidebar.js"></script>
     <script defer src="/_vercel/speed-insights/script.js"></script>
@@ -363,10 +561,17 @@
         <div class="app-title">
           <h1>Planning Gantt <span>Visionneur .gan</span></h1>
         </div>
-        <div style="display: flex; gap: 12px;">
-          <div class="btn-tool" id="kpi-tasks"><i class="fa-solid fa-list-check"></i> <span id="val-tasks">0</span></div>
-          <div class="btn-tool" id="kpi-progress"><i class="fa-solid fa-bars-progress"></i> <span id="val-progress">0%</span></div>
-          <div class="btn-tool" id="kpi-cost"><i class="fa-solid fa-euro-sign"></i> <span id="val-cost">0</span></div>
+        <div style="display: flex; gap: 12px">
+          <div class="btn-tool" id="kpi-tasks">
+            <i class="fa-solid fa-list-check"></i> <span id="val-tasks">0</span>
+          </div>
+          <div class="btn-tool" id="kpi-progress">
+            <i class="fa-solid fa-bars-progress"></i>
+            <span id="val-progress">0%</span>
+          </div>
+          <div class="btn-tool" id="kpi-cost">
+            <i class="fa-solid fa-euro-sign"></i> <span id="val-cost">0</span>
+          </div>
         </div>
       </header>
 
@@ -376,7 +581,12 @@
           <label class="btn-tool primary" for="file-input">
             <i class="fa-solid fa-upload"></i> Ouvrir .gan
           </label>
-          <input id="file-input" type="file" accept=".gan,.xml" style="display:none" />
+          <input
+            id="file-input"
+            type="file"
+            accept=".gan,.xml"
+            style="display: none"
+          />
           <button class="btn-tool" id="btn-example">
             <i class="fa-solid fa-flask"></i> Exemple
           </button>
@@ -386,17 +596,39 @@
           <button class="btn-tool active" data-scale="day">Jours</button>
           <button class="btn-tool" data-scale="week">Semaines</button>
           <button class="btn-tool" data-scale="month">Mois</button>
-          <div style="width: 1px; height: 20px; background: var(--border); margin: 0 8px;"></div>
-          <button class="btn-tool" id="btn-zoom-out"><i class="fa-solid fa-minus"></i></button>
-          <button class="btn-tool" id="btn-zoom-in"><i class="fa-solid fa-plus"></i></button>
-          <button class="btn-tool" id="btn-fit"><i class="fa-solid fa-expand"></i></button>
+          <div
+            style="
+              width: 1px;
+              height: 20px;
+              background: var(--border);
+              margin: 0 8px;
+            "
+          ></div>
+          <button class="btn-tool" id="btn-zoom-out">
+            <i class="fa-solid fa-minus"></i>
+          </button>
+          <button class="btn-tool" id="btn-zoom-in">
+            <i class="fa-solid fa-plus"></i>
+          </button>
+          <button class="btn-tool" id="btn-fit">
+            <i class="fa-solid fa-expand"></i>
+          </button>
         </div>
 
         <div class="toolbar-group">
-          <div style="position: relative;">
-            <input type="text" class="search-input" id="search" placeholder="Filtrer..." />
+          <div style="position: relative">
+            <input
+              type="text"
+              class="search-input"
+              id="search"
+              placeholder="Filtrer..."
+            />
           </div>
-          <button class="btn-tool" id="btn-toggle-weekend" title="Afficher/Masquer Week-ends">
+          <button
+            class="btn-tool"
+            id="btn-toggle-weekend"
+            title="Afficher/Masquer Week-ends"
+          >
             <i class="fa-solid fa-calendar-week"></i>
           </button>
         </div>
@@ -408,20 +640,32 @@
         <div class="empty-state" id="empty-state">
           <i class="fa-solid fa-folder-open empty-icon"></i>
           <div class="empty-text">Aucun projet chargé</div>
-          <button class="btn-tool primary" onclick="document.getElementById('file-input').click()">
+          <button
+            class="btn-tool primary"
+            onclick="document.getElementById('file-input').click()"
+          >
             Sélectionner un fichier .gan
           </button>
-          <div style="margin-top: 12px; font-size: 0.85rem; color: var(--text-muted);">
-            ou <a href="#" id="link-example" style="color: var(--accent);">charger l'exemple</a>
+          <div
+            style="
+              margin-top: 12px;
+              font-size: 0.85rem;
+              color: var(--text-muted);
+            "
+          >
+            ou
+            <a href="#" id="link-example" style="color: var(--accent)"
+              >charger l'exemple</a
+            >
           </div>
         </div>
 
         <!-- Task List (Left) -->
-        <div class="task-panel" id="task-panel" style="display: none;">
+        <div class="task-panel" id="task-panel" style="display: none">
           <div class="task-header">
-            <div style="flex:1">Nom de la tâche</div>
-            <div style="width: 60px; text-align: right;">Durée</div>
-            <div style="width: 80px; text-align: right;">Coût</div>
+            <div style="flex: 1">Nom de la tâche</div>
+            <div style="width: 60px; text-align: right">Durée</div>
+            <div style="width: 80px; text-align: right">Coût</div>
           </div>
           <div class="task-list" id="task-list">
             <!-- Tasks injected here -->
@@ -430,7 +674,7 @@
         </div>
 
         <!-- Timeline (Right) -->
-        <div class="timeline-panel" id="timeline-panel" style="display: none;">
+        <div class="timeline-panel" id="timeline-panel" style="display: none">
           <div class="timeline-header-scroll" id="timeline-header">
             <div class="timeline-header-content" id="timeline-header-content">
               <!-- Scales injected here -->
@@ -439,7 +683,7 @@
           <div class="timeline-body-scroll" id="timeline-body">
             <div class="timeline-grid" id="timeline-grid">
               <div class="grid-bg" id="grid-bg"></div>
-              <div class="today-marker" id="today-marker" style="display:none;">
+              <div class="today-marker" id="today-marker" style="display: none">
                 <div class="today-label">Auj.</div>
               </div>
               <!-- Bars injected here -->
@@ -458,39 +702,47 @@
     <div class="gantt-tooltip" id="tooltip"></div>
 
     <!-- Edit Modal -->
-    <div class="modal-overlay" id="edit-modal" style="display:none;">
+    <div class="modal-overlay" id="edit-modal" style="display: none">
       <div class="modal">
         <div class="modal-header">
           <h3>Modifier la tâche</h3>
-          <button class="btn-icon" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+          <button class="btn-icon" onclick="closeModal()">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
         </div>
         <div class="modal-body">
-          <input type="hidden" id="edit-id">
+          <input type="hidden" id="edit-id" />
           <div class="form-group">
             <label>Nom</label>
-            <input type="text" id="edit-name" class="form-input">
+            <input type="text" id="edit-name" class="form-input" />
           </div>
           <div class="form-row">
             <div class="form-group">
               <label>Début</label>
-              <input type="date" id="edit-start" class="form-input">
+              <input type="date" id="edit-start" class="form-input" />
             </div>
             <div class="form-group">
               <label>Durée (jours)</label>
-              <input type="number" id="edit-duration" class="form-input">
+              <input type="number" id="edit-duration" class="form-input" />
             </div>
           </div>
           <div class="form-row">
             <div class="form-group">
               <label>Avancement (%)</label>
-              <input type="number" id="edit-progress" min="0" max="100" class="form-input">
+              <input
+                type="number"
+                id="edit-progress"
+                min="0"
+                max="100"
+                class="form-input"
+              />
             </div>
             <div class="form-group">
               <label>Coût (€)</label>
-              <input type="number" id="edit-cost" class="form-input">
+              <input type="number" id="edit-cost" class="form-input" />
             </div>
           </div>
-          
+
           <div class="form-group">
             <label>Ressources & Occupation (%)</label>
             <div id="edit-resources-list" class="resources-list">
@@ -500,7 +752,9 @@
         </div>
         <div class="modal-footer">
           <button class="btn-tool" onclick="closeModal()">Annuler</button>
-          <button class="btn-tool primary" onclick="saveTask()">Enregistrer</button>
+          <button class="btn-tool primary" onclick="saveTask()">
+            Enregistrer
+          </button>
         </div>
       </div>
     </div>
@@ -510,62 +764,85 @@
       const state = {
         tasks: [],
         resources: [], // {id, name}
-        scale: 'day', // day, week, month
+        scale: "day", // day, week, month
         pxPerUnit: 40, // pixels per day (base)
         zoomLevel: 1,
         showWeekends: true,
         startDate: new Date(),
         endDate: new Date(),
-        totalDays: 0
+        totalDays: 0,
       };
 
       const DOM = {
-        fileInput: document.getElementById('file-input'),
-        btnExample: document.getElementById('btn-example'),
-        linkExample: document.getElementById('link-example'),
-        emptyState: document.getElementById('empty-state'),
-        taskPanel: document.getElementById('task-panel'),
-        timelinePanel: document.getElementById('timeline-panel'),
-        taskList: document.getElementById('task-list'),
-        timelineHeader: document.getElementById('timeline-header'),
-        timelineHeaderContent: document.getElementById('timeline-header-content'),
-        timelineBody: document.getElementById('timeline-body'),
-        timelineGrid: document.getElementById('timeline-grid'),
-        gridBg: document.getElementById('grid-bg'),
-        todayMarker: document.getElementById('today-marker'),
-        tooltip: document.getElementById('tooltip'),
-        search: document.getElementById('search'),
-        valTasks: document.getElementById('val-tasks'),
-        valProgress: document.getElementById('val-progress'),
-        valCost: document.getElementById('val-cost'),
-        btnFit: document.getElementById('btn-fit'),
-        btnZoomIn: document.getElementById('btn-zoom-in'),
-        btnZoomOut: document.getElementById('btn-zoom-out'),
-        btnToggleWeekend: document.getElementById('btn-toggle-weekend'),
-        scaleBtns: document.querySelectorAll('[data-scale]'),
+        fileInput: document.getElementById("file-input"),
+        btnExample: document.getElementById("btn-example"),
+        linkExample: document.getElementById("link-example"),
+        emptyState: document.getElementById("empty-state"),
+        taskPanel: document.getElementById("task-panel"),
+        timelinePanel: document.getElementById("timeline-panel"),
+        taskList: document.getElementById("task-list"),
+        timelineHeader: document.getElementById("timeline-header"),
+        timelineHeaderContent: document.getElementById(
+          "timeline-header-content"
+        ),
+        timelineBody: document.getElementById("timeline-body"),
+        timelineGrid: document.getElementById("timeline-grid"),
+        gridBg: document.getElementById("grid-bg"),
+        todayMarker: document.getElementById("today-marker"),
+        tooltip: document.getElementById("tooltip"),
+        search: document.getElementById("search"),
+        valTasks: document.getElementById("val-tasks"),
+        valProgress: document.getElementById("val-progress"),
+        valCost: document.getElementById("val-cost"),
+        btnFit: document.getElementById("btn-fit"),
+        btnZoomIn: document.getElementById("btn-zoom-in"),
+        btnZoomOut: document.getElementById("btn-zoom-out"),
+        btnToggleWeekend: document.getElementById("btn-toggle-weekend"),
+        scaleBtns: document.querySelectorAll("[data-scale]"),
         // Modal
-        modal: document.getElementById('edit-modal'),
-        editId: document.getElementById('edit-id'),
-        editName: document.getElementById('edit-name'),
-        editStart: document.getElementById('edit-start'),
-        editDuration: document.getElementById('edit-duration'),
-        editProgress: document.getElementById('edit-progress'),
-        editCost: document.getElementById('edit-cost'),
-        editResList: document.getElementById('edit-resources-list')
+        modal: document.getElementById("edit-modal"),
+        editId: document.getElementById("edit-id"),
+        editName: document.getElementById("edit-name"),
+        editStart: document.getElementById("edit-start"),
+        editDuration: document.getElementById("edit-duration"),
+        editProgress: document.getElementById("edit-progress"),
+        editCost: document.getElementById("edit-cost"),
+        editResList: document.getElementById("edit-resources-list"),
       };
 
       // --- Utils ---
       const ONE_DAY = 24 * 60 * 60 * 1000;
-      function addDays(d, n) { const r = new Date(d); r.setDate(r.getDate() + n); return r; }
-      function startOfDay(d) { const r = new Date(d); r.setHours(0,0,0,0); return r; }
-      function diffDays(a, b) { return Math.round((startOfDay(b) - startOfDay(a)) / ONE_DAY); }
-      function getWeekNumber(d) {
-        const date = new Date(d.getTime()); date.setHours(0, 0, 0, 0);
-        date.setDate(date.getDate() + 3 - (date.getDay() + 6) % 7);
-        const week1 = new Date(date.getFullYear(), 0, 4);
-        return 1 + Math.round(((date.getTime() - week1.getTime()) / 86400000 - 3 + (week1.getDay() + 6) % 7) / 7);
+      function addDays(d, n) {
+        const r = new Date(d);
+        r.setDate(r.getDate() + n);
+        return r;
       }
-      function fmtDateInput(d) { return d.toISOString().split('T')[0]; }
+      function startOfDay(d) {
+        const r = new Date(d);
+        r.setHours(0, 0, 0, 0);
+        return r;
+      }
+      function diffDays(a, b) {
+        return Math.round((startOfDay(b) - startOfDay(a)) / ONE_DAY);
+      }
+      function getWeekNumber(d) {
+        const date = new Date(d.getTime());
+        date.setHours(0, 0, 0, 0);
+        date.setDate(date.getDate() + 3 - ((date.getDay() + 6) % 7));
+        const week1 = new Date(date.getFullYear(), 0, 4);
+        return (
+          1 +
+          Math.round(
+            ((date.getTime() - week1.getTime()) / 86400000 -
+              3 +
+              ((week1.getDay() + 6) % 7)) /
+              7
+          )
+        );
+      }
+      function fmtDateInput(d) {
+        return d.toISOString().split("T")[0];
+      }
 
       // --- Core Logic ---
 
@@ -578,7 +855,7 @@
           // Parse Resources
           const resMap = new Map();
           const resources = [];
-          xml.querySelectorAll("resources > resource").forEach(r => {
+          xml.querySelectorAll("resources > resource").forEach((r) => {
             const id = r.getAttribute("id");
             const name = r.getAttribute("name");
             resMap.set(id, name);
@@ -588,11 +865,11 @@
 
           // Parse Allocations
           const allocs = [];
-          xml.querySelectorAll("allocations > allocation").forEach(a => {
+          xml.querySelectorAll("allocations > allocation").forEach((a) => {
             allocs.push({
               taskId: a.getAttribute("task-id"),
               resourceId: a.getAttribute("resource-id"),
-              load: parseFloat(a.getAttribute("load") || "100")
+              load: parseFloat(a.getAttribute("load") || "100"),
             });
           });
 
@@ -602,14 +879,14 @@
           let maxDate = null;
 
           const taskNodes = xml.querySelectorAll("tasks > task");
-          taskNodes.forEach(t => {
+          taskNodes.forEach((t) => {
             const id = t.getAttribute("id");
             const name = t.getAttribute("name");
             const startStr = t.getAttribute("start");
             const duration = parseInt(t.getAttribute("duration") || "1", 10);
             const complete = parseInt(t.getAttribute("complete") || "0", 10);
             const color = t.getAttribute("color") || "#3b82f6";
-            
+
             if (!startStr) return; // Skip tasks without start date
 
             const start = startOfDay(new Date(startStr));
@@ -619,17 +896,23 @@
             if (!maxDate || end > maxDate) maxDate = end;
 
             // Find resources
-            const taskAllocs = allocs.filter(a => a.taskId === id);
-            const taskResources = taskAllocs.map(a => ({
-                id: a.resourceId,
-                name: resMap.get(a.resourceId),
-                load: a.load
+            const taskAllocs = allocs.filter((a) => a.taskId === id);
+            const taskResources = taskAllocs.map((a) => ({
+              id: a.resourceId,
+              name: resMap.get(a.resourceId),
+              load: a.load,
             }));
 
             tasks.push({
-              id, name, start, end, duration, complete, color, 
+              id,
+              name,
+              start,
+              end,
+              duration,
+              complete,
+              color,
               resources: taskResources,
-              cost: 0 // Default cost
+              cost: 0, // Default cost
             });
           });
 
@@ -641,15 +924,14 @@
           state.startDate = addDays(minDate || new Date(), -7); // Buffer
           state.endDate = addDays(maxDate || new Date(), 14); // Buffer
           state.totalDays = diffDays(state.startDate, state.endDate);
-          
+
           renderApp();
-          DOM.emptyState.style.display = 'none';
-          DOM.taskPanel.style.display = 'flex';
-          DOM.timelinePanel.style.display = 'flex';
-          
+          DOM.emptyState.style.display = "none";
+          DOM.taskPanel.style.display = "flex";
+          DOM.timelinePanel.style.display = "flex";
+
           // Auto fit
           fitView();
-
         } catch (e) {
           console.error(e);
           alert("Erreur lors de la lecture du fichier .gan");
@@ -664,40 +946,56 @@
 
       function updateKPIs() {
         DOM.valTasks.textContent = state.tasks.length;
-        const totalProgress = state.tasks.reduce((acc, t) => acc + t.complete, 0);
-        const avg = state.tasks.length ? Math.round(totalProgress / state.tasks.length) : 0;
+        const totalProgress = state.tasks.reduce(
+          (acc, t) => acc + t.complete,
+          0
+        );
+        const avg = state.tasks.length
+          ? Math.round(totalProgress / state.tasks.length)
+          : 0;
         DOM.valProgress.textContent = avg + "%";
-        const totalCost = state.tasks.reduce((acc, t) => acc + (t.cost || 0), 0);
-        DOM.valCost.textContent = totalCost.toLocaleString('fr-FR');
+        const totalCost = state.tasks.reduce(
+          (acc, t) => acc + (t.cost || 0),
+          0
+        );
+        DOM.valCost.textContent = totalCost.toLocaleString("fr-FR");
       }
 
       function renderTaskList() {
-        DOM.taskList.innerHTML = '';
+        DOM.taskList.innerHTML = "";
         const filter = DOM.search.value.toLowerCase();
-        
+
         state.tasks.forEach((t, index) => {
           if (filter && !t.name.toLowerCase().includes(filter)) return;
 
-          const el = document.createElement('div');
-          el.className = 'task-item';
+          const el = document.createElement("div");
+          el.className = "task-item";
           el.dataset.id = t.id;
           el.innerHTML = `
             <span class="id-badge">${index + 1}</span>
-            <span style="flex:1; overflow:hidden; text-overflow:ellipsis;">${t.name}</span>
-            <span style="width:60px; text-align:right; font-size:0.8rem; color:var(--text-muted);">${t.duration}j</span>
-            <span style="width:80px; text-align:right; font-size:0.8rem; font-weight:500;">${(t.cost||0).toLocaleString()} €</span>
+            <span style="flex:1; overflow:hidden; text-overflow:ellipsis;">${
+              t.name
+            }</span>
+            <span style="width:60px; text-align:right; font-size:0.8rem; color:var(--text-muted);">${
+              t.duration
+            }j</span>
+            <span style="width:80px; text-align:right; font-size:0.8rem; font-weight:500;">${(
+              t.cost || 0
+            ).toLocaleString()} €</span>
           `;
-          el.addEventListener('click', () => openEditModal(t));
-          el.addEventListener('mouseenter', () => highlightTask(t.id, true));
-          el.addEventListener('mouseleave', () => highlightTask(t.id, false));
+          el.addEventListener("click", () => openEditModal(t));
+          el.addEventListener("mouseenter", () => highlightTask(t.id, true));
+          el.addEventListener("mouseleave", () => highlightTask(t.id, false));
           DOM.taskList.appendChild(el);
         });
       }
 
       function getPxPerDay() {
-        if (state.scale === 'day') return state.pxPerUnit * state.zoomLevel;
-        if (state.scale === 'week') return (state.pxPerUnit * state.zoomLevel) / 7;
-        if (state.scale === 'month') return (state.pxPerUnit * state.zoomLevel) / 30;
+        if (state.scale === "day") return state.pxPerUnit * state.zoomLevel;
+        if (state.scale === "week")
+          return (state.pxPerUnit * state.zoomLevel) / 7;
+        if (state.scale === "month")
+          return (state.pxPerUnit * state.zoomLevel) / 30;
         return 20;
       }
 
@@ -707,9 +1005,9 @@
         const rowHeight = 44; // CSS var --row-height
 
         // 1. Setup Grid Dimensions
-        DOM.timelineHeaderContent.style.width = totalWidth + 'px';
-        DOM.timelineGrid.style.width = totalWidth + 'px';
-        DOM.timelineGrid.style.height = (state.tasks.length * rowHeight) + 'px';
+        DOM.timelineHeaderContent.style.width = totalWidth + "px";
+        DOM.timelineGrid.style.width = totalWidth + "px";
+        DOM.timelineGrid.style.height = state.tasks.length * rowHeight + "px";
 
         // 2. Render Scales (Header)
         renderHeaderScales(pxPerDay);
@@ -724,124 +1022,136 @@
         const today = new Date();
         if (today >= state.startDate && today <= state.endDate) {
           const daysFromStart = diffDays(state.startDate, today);
-          DOM.todayMarker.style.display = 'block';
-          DOM.todayMarker.style.left = (daysFromStart * pxPerDay) + 'px';
+          DOM.todayMarker.style.display = "block";
+          DOM.todayMarker.style.left = daysFromStart * pxPerDay + "px";
         } else {
-          DOM.todayMarker.style.display = 'none';
+          DOM.todayMarker.style.display = "none";
         }
       }
 
       function renderHeaderScales(pxPerDay) {
-        DOM.timelineHeaderContent.innerHTML = '';
-        
-        const primaryRow = document.createElement('div'); primaryRow.className = 'time-scale-primary';
-        const secondaryRow = document.createElement('div'); secondaryRow.className = 'time-scale-secondary';
-        
+        DOM.timelineHeaderContent.innerHTML = "";
+
+        const primaryRow = document.createElement("div");
+        primaryRow.className = "time-scale-primary";
+        const secondaryRow = document.createElement("div");
+        secondaryRow.className = "time-scale-secondary";
+
         DOM.timelineHeaderContent.appendChild(primaryRow);
         DOM.timelineHeaderContent.appendChild(secondaryRow);
 
         let currentMonth = -1;
-        
-        if (state.scale === 'day') {
+
+        if (state.scale === "day") {
           for (let i = 0; i < state.totalDays; i++) {
             const d = addDays(state.startDate, i);
-            const dayCell = document.createElement('div');
-            dayCell.className = 'scale-cell';
-            dayCell.style.left = (i * pxPerDay) + 'px';
-            dayCell.style.width = pxPerDay + 'px';
+            const dayCell = document.createElement("div");
+            dayCell.className = "scale-cell";
+            dayCell.style.left = i * pxPerDay + "px";
+            dayCell.style.width = pxPerDay + "px";
             dayCell.textContent = d.getDate();
-            if (d.getDay() === 0 || d.getDay() === 6) dayCell.style.background = 'var(--weekend-color)';
+            if (d.getDay() === 0 || d.getDay() === 6)
+              dayCell.style.background = "var(--weekend-color)";
             secondaryRow.appendChild(dayCell);
 
             if (d.getMonth() !== currentMonth) {
               currentMonth = d.getMonth();
-              const monthLabel = d.toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' });
-              const mDiv = document.createElement('div');
-              mDiv.className = 'scale-cell';
-              mDiv.style.left = (i * pxPerDay) + 'px';
-              mDiv.style.justifyContent = 'flex-start';
-              mDiv.style.paddingLeft = '8px';
-              mDiv.style.borderRight = 'none';
+              const monthLabel = d.toLocaleDateString("fr-FR", {
+                month: "long",
+                year: "numeric",
+              });
+              const mDiv = document.createElement("div");
+              mDiv.className = "scale-cell";
+              mDiv.style.left = i * pxPerDay + "px";
+              mDiv.style.justifyContent = "flex-start";
+              mDiv.style.paddingLeft = "8px";
+              mDiv.style.borderRight = "none";
               mDiv.textContent = monthLabel;
               primaryRow.appendChild(mDiv);
             }
           }
-        } else if (state.scale === 'week') {
-           const weekWidth = pxPerDay * 7;
-           for (let i = 0; i < state.totalDays; i+=7) {
-             const d = addDays(state.startDate, i);
-             const wNum = getWeekNumber(d);
-             const wCell = document.createElement('div');
-             wCell.className = 'scale-cell';
-             wCell.style.left = (i * pxPerDay) + 'px';
-             wCell.style.width = weekWidth + 'px';
-             wCell.textContent = 'S' + wNum;
-             secondaryRow.appendChild(wCell);
+        } else if (state.scale === "week") {
+          const weekWidth = pxPerDay * 7;
+          for (let i = 0; i < state.totalDays; i += 7) {
+            const d = addDays(state.startDate, i);
+            const wNum = getWeekNumber(d);
+            const wCell = document.createElement("div");
+            wCell.className = "scale-cell";
+            wCell.style.left = i * pxPerDay + "px";
+            wCell.style.width = weekWidth + "px";
+            wCell.textContent = "S" + wNum;
+            secondaryRow.appendChild(wCell);
 
-             if (d.getMonth() !== currentMonth) {
-               currentMonth = d.getMonth();
-               const monthLabel = d.toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' });
-               const mDiv = document.createElement('div');
-               mDiv.className = 'scale-cell';
-               mDiv.style.left = (i * pxPerDay) + 'px';
-               mDiv.style.justifyContent = 'flex-start';
-               mDiv.style.paddingLeft = '8px';
-               mDiv.style.borderRight = 'none';
-               mDiv.textContent = monthLabel;
-               primaryRow.appendChild(mDiv);
-             }
-           }
+            if (d.getMonth() !== currentMonth) {
+              currentMonth = d.getMonth();
+              const monthLabel = d.toLocaleDateString("fr-FR", {
+                month: "long",
+                year: "numeric",
+              });
+              const mDiv = document.createElement("div");
+              mDiv.className = "scale-cell";
+              mDiv.style.left = i * pxPerDay + "px";
+              mDiv.style.justifyContent = "flex-start";
+              mDiv.style.paddingLeft = "8px";
+              mDiv.style.borderRight = "none";
+              mDiv.textContent = monthLabel;
+              primaryRow.appendChild(mDiv);
+            }
+          }
         } else {
-          const monthWidth = pxPerDay * 30; 
-          for (let i = 0; i < state.totalDays; i+=30) {
-             const d = addDays(state.startDate, i);
-             const mCell = document.createElement('div');
-             mCell.className = 'scale-cell';
-             mCell.style.left = (i * pxPerDay) + 'px';
-             mCell.style.width = monthWidth + 'px';
-             mCell.textContent = d.toLocaleDateString('fr-FR', { month: 'short' });
-             secondaryRow.appendChild(mCell);
-             
-             const yDiv = document.createElement('div');
-             yDiv.className = 'scale-cell';
-             yDiv.style.left = (i * pxPerDay) + 'px';
-             yDiv.style.width = monthWidth + 'px';
-             yDiv.style.borderRight = 'none';
-             yDiv.textContent = d.getFullYear();
-             primaryRow.appendChild(yDiv);
+          const monthWidth = pxPerDay * 30;
+          for (let i = 0; i < state.totalDays; i += 30) {
+            const d = addDays(state.startDate, i);
+            const mCell = document.createElement("div");
+            mCell.className = "scale-cell";
+            mCell.style.left = i * pxPerDay + "px";
+            mCell.style.width = monthWidth + "px";
+            mCell.textContent = d.toLocaleDateString("fr-FR", {
+              month: "short",
+            });
+            secondaryRow.appendChild(mCell);
+
+            const yDiv = document.createElement("div");
+            yDiv.className = "scale-cell";
+            yDiv.style.left = i * pxPerDay + "px";
+            yDiv.style.width = monthWidth + "px";
+            yDiv.style.borderRight = "none";
+            yDiv.textContent = d.getFullYear();
+            primaryRow.appendChild(yDiv);
           }
         }
       }
 
       function renderGridBackground(pxPerDay, totalWidth) {
-        DOM.gridBg.innerHTML = '';
+        DOM.gridBg.innerHTML = "";
         let step = 1;
-        if (state.scale === 'week') step = 7;
-        if (state.scale === 'month') step = 30;
+        if (state.scale === "week") step = 7;
+        if (state.scale === "month") step = 30;
 
         for (let i = 0; i < state.totalDays; i += step) {
-          const line = document.createElement('div');
-          line.className = 'grid-col';
-          line.style.left = (i * pxPerDay) + 'px';
-          line.style.width = (step * pxPerDay) + 'px';
-          if (state.scale === 'day' && state.showWeekends) {
-             const d = addDays(state.startDate, i);
-             if (d.getDay() === 0 || d.getDay() === 6) line.classList.add('weekend');
+          const line = document.createElement("div");
+          line.className = "grid-col";
+          line.style.left = i * pxPerDay + "px";
+          line.style.width = step * pxPerDay + "px";
+          if (state.scale === "day" && state.showWeekends) {
+            const d = addDays(state.startDate, i);
+            if (d.getDay() === 0 || d.getDay() === 6)
+              line.classList.add("weekend");
           }
           DOM.gridBg.appendChild(line);
         }
 
         state.tasks.forEach((_, idx) => {
-          const hLine = document.createElement('div');
-          hLine.className = 'grid-row-line';
-          hLine.style.top = ((idx + 1) * 44) + 'px';
+          const hLine = document.createElement("div");
+          hLine.className = "grid-row-line";
+          hLine.style.top = (idx + 1) * 44 + "px";
           DOM.gridBg.appendChild(hLine);
         });
       }
 
       function renderBars(pxPerDay, rowHeight) {
-        const existingBars = DOM.timelineGrid.querySelectorAll('.gantt-bar');
-        existingBars.forEach(b => b.remove());
+        const existingBars = DOM.timelineGrid.querySelectorAll(".gantt-bar");
+        existingBars.forEach((b) => b.remove());
         const filter = DOM.search.value.toLowerCase();
 
         state.tasks.forEach((t, idx) => {
@@ -849,39 +1159,39 @@
 
           const daysFromStart = diffDays(state.startDate, t.start);
           const durationDays = t.duration;
-          
-          const bar = document.createElement('div');
-          bar.className = 'gantt-bar';
+
+          const bar = document.createElement("div");
+          bar.className = "gantt-bar";
           bar.dataset.id = t.id;
-          
+
           const x = daysFromStart * pxPerDay;
           const w = durationDays * pxPerDay;
-          const y = (idx * rowHeight) + 10;
+          const y = idx * rowHeight + 10;
 
-          bar.style.left = x + 'px';
-          bar.style.top = y + 'px';
-          bar.style.width = Math.max(w, 4) + 'px';
+          bar.style.left = x + "px";
+          bar.style.top = y + "px";
+          bar.style.width = Math.max(w, 4) + "px";
           bar.style.backgroundColor = t.color;
 
           if (t.complete > 0) {
-            const prog = document.createElement('div');
-            prog.className = 'gantt-bar-progress';
-            prog.style.width = t.complete + '%';
+            const prog = document.createElement("div");
+            prog.className = "gantt-bar-progress";
+            prog.style.width = t.complete + "%";
             bar.appendChild(prog);
           }
 
           // Label hidden by CSS, but structure kept if needed later
-          const label = document.createElement('div');
-          label.className = 'gantt-bar-label';
-          label.textContent = t.complete + '%';
+          const label = document.createElement("div");
+          label.className = "gantt-bar-label";
+          label.textContent = t.complete + "%";
           bar.appendChild(label);
 
-          bar.addEventListener('click', () => openEditModal(t));
-          bar.addEventListener('mouseenter', (e) => {
+          bar.addEventListener("click", () => openEditModal(t));
+          bar.addEventListener("mouseenter", (e) => {
             showTooltip(e, t);
             highlightTask(t.id, true);
           });
-          bar.addEventListener('mouseleave', () => {
+          bar.addEventListener("mouseleave", () => {
             hideTooltip();
             highlightTask(t.id, false);
           });
@@ -894,46 +1204,62 @@
 
       function highlightTask(id, active) {
         const row = DOM.taskList.querySelector(`.task-item[data-id="${id}"]`);
-        const bar = DOM.timelineGrid.querySelector(`.gantt-bar[data-id="${id}"]`);
-        if (row) active ? row.classList.add('selected') : row.classList.remove('selected');
+        const bar = DOM.timelineGrid.querySelector(
+          `.gantt-bar[data-id="${id}"]`
+        );
+        if (row)
+          active
+            ? row.classList.add("selected")
+            : row.classList.remove("selected");
         if (bar) {
-          bar.style.filter = active ? 'brightness(1.1)' : 'none';
-          bar.style.zIndex = active ? '50' : '5';
+          bar.style.filter = active ? "brightness(1.1)" : "none";
+          bar.style.zIndex = active ? "50" : "5";
         }
       }
 
       function showTooltip(e, t) {
-        const resList = t.resources.map(r => `${r.name} (${r.load}%)`).join(', ') || '-';
+        const resList =
+          t.resources.map((r) => `${r.name} (${r.load}%)`).join(", ") || "-";
         DOM.tooltip.innerHTML = `
-          <div style="font-weight:700; margin-bottom:8px; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:4px;">${t.name}</div>
+          <div style="font-weight:700; margin-bottom:8px; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:4px;">${
+            t.name
+          }</div>
           <div class="tooltip-row"><span class="tooltip-label">Début</span> <span class="tooltip-val">${t.start.toLocaleDateString()}</span></div>
           <div class="tooltip-row"><span class="tooltip-label">Fin</span> <span class="tooltip-val">${t.end.toLocaleDateString()}</span></div>
-          <div class="tooltip-row"><span class="tooltip-label">Durée</span> <span class="tooltip-val">${t.duration} jours</span></div>
-          <div class="tooltip-row"><span class="tooltip-label">Avancement</span> <span class="tooltip-val">${t.complete}%</span></div>
-          <div class="tooltip-row"><span class="tooltip-label">Coût</span> <span class="tooltip-val">${(t.cost||0).toLocaleString()} €</span></div>
+          <div class="tooltip-row"><span class="tooltip-label">Durée</span> <span class="tooltip-val">${
+            t.duration
+          } jours</span></div>
+          <div class="tooltip-row"><span class="tooltip-label">Avancement</span> <span class="tooltip-val">${
+            t.complete
+          }%</span></div>
+          <div class="tooltip-row"><span class="tooltip-label">Coût</span> <span class="tooltip-val">${(
+            t.cost || 0
+          ).toLocaleString()} €</span></div>
           <div class="tooltip-row"><span class="tooltip-label">Ressources</span> <span class="tooltip-val">${resList}</span></div>
         `;
-        DOM.tooltip.style.opacity = '1';
+        DOM.tooltip.style.opacity = "1";
         moveTooltip(e);
       }
 
       function moveTooltip(e) {
         const x = e.clientX + 15;
         const y = e.clientY + 15;
-        DOM.tooltip.style.left = x + 'px';
-        DOM.tooltip.style.top = y + 'px';
+        DOM.tooltip.style.left = x + "px";
+        DOM.tooltip.style.top = y + "px";
       }
-      function hideTooltip() { DOM.tooltip.style.opacity = '0'; }
+      function hideTooltip() {
+        DOM.tooltip.style.opacity = "0";
+      }
 
-      window.addEventListener('mousemove', (e) => {
-        if (DOM.tooltip.style.opacity === '1') moveTooltip(e);
+      window.addEventListener("mousemove", (e) => {
+        if (DOM.tooltip.style.opacity === "1") moveTooltip(e);
       });
 
-      DOM.timelineBody.addEventListener('scroll', () => {
+      DOM.timelineBody.addEventListener("scroll", () => {
         DOM.timelineHeader.scrollLeft = DOM.timelineBody.scrollLeft;
         DOM.taskList.scrollTop = DOM.timelineBody.scrollTop;
       });
-      DOM.taskList.addEventListener('scroll', () => {
+      DOM.taskList.addEventListener("scroll", () => {
         DOM.timelineBody.scrollTop = DOM.taskList.scrollTop;
       });
 
@@ -944,13 +1270,13 @@
         state.zoomLevel = 1;
         state.pxPerUnit = availWidth / state.totalDays;
         if (state.pxPerUnit < 20) {
-           state.scale = 'month';
-           state.pxPerUnit = availWidth / (state.totalDays / 30);
+          state.scale = "month";
+          state.pxPerUnit = availWidth / (state.totalDays / 30);
         } else if (state.pxPerUnit < 50) {
-           state.scale = 'week';
-           state.pxPerUnit = availWidth / (state.totalDays / 7);
+          state.scale = "week";
+          state.pxPerUnit = availWidth / (state.totalDays / 7);
         } else {
-           state.scale = 'day';
+          state.scale = "day";
         }
         state.pxPerUnit = Math.max(10, Math.min(100, state.pxPerUnit));
         updateScaleBtns();
@@ -958,9 +1284,9 @@
       }
 
       function updateScaleBtns() {
-        DOM.scaleBtns.forEach(b => {
-          if (b.dataset.scale === state.scale) b.classList.add('active');
-          else b.classList.remove('active');
+        DOM.scaleBtns.forEach((b) => {
+          if (b.dataset.scale === state.scale) b.classList.add("active");
+          else b.classList.remove("active");
         });
       }
 
@@ -974,15 +1300,15 @@
         DOM.editCost.value = task.cost || 0;
 
         // Resources
-        DOM.editResList.innerHTML = '';
+        DOM.editResList.innerHTML = "";
         // Combine existing task resources with all available resources to allow adding
         // For simplicity, we just list all resources and show their load if assigned, 0 if not
-        state.resources.forEach(r => {
-          const assigned = task.resources.find(tr => tr.id === r.id);
+        state.resources.forEach((r) => {
+          const assigned = task.resources.find((tr) => tr.id === r.id);
           const load = assigned ? assigned.load : 0;
-          
-          const row = document.createElement('div');
-          row.className = 'resource-row';
+
+          const row = document.createElement("div");
+          row.className = "resource-row";
           row.innerHTML = `
             <div class="resource-name">${r.name}</div>
             <div class="resource-load">
@@ -992,16 +1318,16 @@
           DOM.editResList.appendChild(row);
         });
 
-        DOM.modal.style.display = 'flex';
+        DOM.modal.style.display = "flex";
       }
 
       function closeModal() {
-        DOM.modal.style.display = 'none';
+        DOM.modal.style.display = "none";
       }
 
       function saveTask() {
         const id = DOM.editId.value;
-        const task = state.tasks.find(t => t.id === id);
+        const task = state.tasks.find((t) => t.id === id);
         if (!task) return;
 
         task.name = DOM.editName.value;
@@ -1013,12 +1339,12 @@
 
         // Update Resources
         const newResources = [];
-        const inputs = DOM.editResList.querySelectorAll('input');
-        inputs.forEach(inp => {
+        const inputs = DOM.editResList.querySelectorAll("input");
+        inputs.forEach((inp) => {
           const load = parseFloat(inp.value);
           if (load > 0) {
             const rId = inp.dataset.resid;
-            const rName = state.resources.find(r => r.id === rId).name;
+            const rName = state.resources.find((r) => r.id === rId).name;
             newResources.push({ id: rId, name: rName, load: load });
           }
         });
@@ -1031,25 +1357,25 @@
       }
 
       // --- Event Listeners ---
-      DOM.fileInput.addEventListener('change', async (e) => {
+      DOM.fileInput.addEventListener("change", async (e) => {
         const f = e.target.files[0];
         if (!f) return;
         const text = await f.text();
         loadGanFile(text);
       });
 
-      DOM.btnExample.addEventListener('click', async () => {
-        const res = await fetch('/gantt/test.gan');
+      DOM.btnExample.addEventListener("click", async () => {
+        const res = await fetch("/gantt/test.gan");
         const text = await res.text();
         loadGanFile(text);
       });
-      DOM.linkExample.addEventListener('click', (e) => {
+      DOM.linkExample.addEventListener("click", (e) => {
         e.preventDefault();
         DOM.btnExample.click();
       });
 
-      DOM.scaleBtns.forEach(b => {
-        b.addEventListener('click', () => {
+      DOM.scaleBtns.forEach((b) => {
+        b.addEventListener("click", () => {
           state.scale = b.dataset.scale;
           state.pxPerUnit = 40; // reset base
           updateScaleBtns();
@@ -1057,40 +1383,48 @@
         });
       });
 
-      DOM.btnZoomIn.addEventListener('click', () => {
+      DOM.btnZoomIn.addEventListener("click", () => {
         state.pxPerUnit = Math.min(200, state.pxPerUnit * 1.2);
         renderTimeline();
       });
-      DOM.btnZoomOut.addEventListener('click', () => {
+      DOM.btnZoomOut.addEventListener("click", () => {
         state.pxPerUnit = Math.max(10, state.pxPerUnit * 0.8);
         renderTimeline();
       });
-      DOM.btnFit.addEventListener('click', fitView);
+      DOM.btnFit.addEventListener("click", fitView);
 
-      DOM.search.addEventListener('input', () => {
+      DOM.search.addEventListener("input", () => {
         renderTaskList();
         renderTimeline();
       });
 
-      DOM.btnToggleWeekend.addEventListener('click', () => {
+      DOM.btnToggleWeekend.addEventListener("click", () => {
         state.showWeekends = !state.showWeekends;
-        DOM.btnToggleWeekend.classList.toggle('active', state.showWeekends);
+        DOM.btnToggleWeekend.classList.toggle("active", state.showWeekends);
         renderTimeline();
       });
 
       // Resizer Logic
       let isResizing = false;
-      const resizer = document.getElementById('resizer');
-      resizer.addEventListener('mousedown', () => { isResizing = true; document.body.style.cursor = 'col-resize'; });
-      window.addEventListener('mouseup', () => { isResizing = false; document.body.style.cursor = 'default'; });
-      window.addEventListener('mousemove', (e) => {
+      const resizer = document.getElementById("resizer");
+      resizer.addEventListener("mousedown", () => {
+        isResizing = true;
+        document.body.style.cursor = "col-resize";
+      });
+      window.addEventListener("mouseup", () => {
+        isResizing = false;
+        document.body.style.cursor = "default";
+      });
+      window.addEventListener("mousemove", (e) => {
         if (!isResizing) return;
         const w = e.clientX - 260; // Sidebar width offset
         if (w > 200 && w < 800) {
-          document.documentElement.style.setProperty('--task-col-width', w + 'px');
+          document.documentElement.style.setProperty(
+            "--task-col-width",
+            w + "px"
+          );
         }
       });
-
     </script>
   </body>
 </html>

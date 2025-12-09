@@ -19,7 +19,10 @@ function writeTasks (tasks) {
 
 function withIds (tasks) {
   // Return a shallow-copied array with guaranteed numeric ids, without writing to disk
-  let maxId = tasks.reduce((m, t) => (typeof t.id === 'number' ? Math.max(m, t.id) : m), 0)
+  let maxId = tasks.reduce(
+    (m, t) => (typeof t.id === 'number' ? Math.max(m, t.id) : m),
+    0
+  )
   return tasks.map(t => {
     if (typeof t.id === 'number') return t
     maxId += 1
@@ -81,13 +84,23 @@ module.exports = async (req, res) => {
         start_week: Number(body.start_week),
         duration: Number(body.duration),
         status: body.status || 'Pending',
-        color: body.color || autoColor({ phase: body.phase, status: body.status }),
+        color:
+          body.color || autoColor({ phase: body.phase, status: body.status }),
         icon: body.icon || 'fa-tasks'
       }
 
       // Basic validation
-      if (!newTask.task || !newTask.phase || !newTask.start_week || !newTask.duration) {
-        return res.status(400).json({ error: 'Missing required fields: task, phase, start_week, duration' })
+      if (
+        !newTask.task ||
+        !newTask.phase ||
+        !newTask.start_week ||
+        !newTask.duration
+      ) {
+        return res
+          .status(400)
+          .json({
+            error: 'Missing required fields: task, phase, start_week, duration'
+          })
       }
 
       const updated = [...tasks, newTask]
@@ -99,6 +112,8 @@ module.exports = async (req, res) => {
     res.setHeader('Allow', 'GET, POST')
     return res.status(405).json({ error: 'Method Not Allowed' })
   } catch (e) {
-    return res.status(500).json({ error: 'Gantt API error', details: String(e) })
+    return res
+      .status(500)
+      .json({ error: 'Gantt API error', details: String(e) })
   }
 }

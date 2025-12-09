@@ -16,7 +16,10 @@ function writeTasks (tasks) {
 }
 
 function withIds (tasks) {
-  let maxId = tasks.reduce((m, t) => (typeof t.id === 'number' ? Math.max(m, t.id) : m), 0)
+  let maxId = tasks.reduce(
+    (m, t) => (typeof t.id === 'number' ? Math.max(m, t.id) : m),
+    0
+  )
   return tasks.map(t => {
     if (typeof t.id === 'number') return t
     maxId += 1
@@ -77,10 +80,19 @@ module.exports = async (req, res) => {
         ...current,
         task: body.task != null ? body.task : current.task,
         phase: body.phase != null ? body.phase : current.phase,
-        start_week: body.start_week != null ? Number(body.start_week) : current.start_week,
-        duration: body.duration != null ? Number(body.duration) : current.duration,
+        start_week:
+          body.start_week != null
+            ? Number(body.start_week)
+            : current.start_week,
+        duration:
+          body.duration != null ? Number(body.duration) : current.duration,
         status: body.status != null ? body.status : current.status,
-        color: body.color || autoColor({ phase: body.phase ?? current.phase, status: body.status ?? current.status }),
+        color:
+          body.color ||
+          autoColor({
+            phase: body.phase ?? current.phase,
+            status: body.status ?? current.status
+          }),
         icon: body.icon || current.icon || 'fa-tasks'
       }
       const out = tasks.slice()
@@ -98,6 +110,8 @@ module.exports = async (req, res) => {
     res.setHeader('Allow', 'GET, PUT, DELETE')
     return res.status(405).json({ error: 'Method Not Allowed' })
   } catch (e) {
-    return res.status(500).json({ error: 'Gantt detail API error', details: String(e) })
+    return res
+      .status(500)
+      .json({ error: 'Gantt detail API error', details: String(e) })
   }
 }

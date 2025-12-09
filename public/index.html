@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Overview | SmartCool Pro</title>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -13,252 +13,356 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
     <style>
-        /* Page-Specific Styles for Presentation */
-        .hero-section {
-            background: linear-gradient(135deg, #2c3e50, #3498db);
-            color: white;
-            padding: 40px;
-            border-radius: 8px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-        .hero-section h2 { color: white; border-bottom: none; margin-top: 0; font-size: 2.2rem; }
-        .hero-section p { color: #ecf0f1; font-size: 1.1rem; max-width: 800px; }
-        
-        .stat-badge {
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
-            padding: 15px;
-            border-radius: 8px;
-            text-align: center;
-            backdrop-filter: blur(5px);
-        }
-        .stat-number { font-size: 2rem; font-weight: bold; color: #f1c40f; display: block; margin-bottom: 5px; }
-        .stat-label { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; }
+      /* Page-Specific Styles for Presentation */
+      .hero-section {
+        background: linear-gradient(135deg, #2c3e50, #3498db);
+        color: white;
+        padding: 40px;
+        border-radius: 8px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+      .hero-section h2 {
+        color: white;
+        border-bottom: none;
+        margin-top: 0;
+        font-size: 2.2rem;
+      }
+      .hero-section p {
+        color: #ecf0f1;
+        font-size: 1.1rem;
+        max-width: 800px;
+      }
 
-        /* Architecture Flow Diagram */
+      .stat-badge {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 15px;
+        border-radius: 8px;
+        text-align: center;
+        backdrop-filter: blur(5px);
+      }
+      .stat-number {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #f1c40f;
+        display: block;
+        margin-bottom: 5px;
+      }
+      .stat-label {
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      /* Architecture Flow Diagram */
+      .flow-diagram {
+        display: flex;
+        justify-content: space-between;
+        align-items: stretch;
+        gap: 20px;
+        margin: 40px 0;
+        flex-wrap: wrap;
+      }
+      .flow-step {
+        flex: 1;
+        background: white;
+        border: 1px solid #eee;
+        border-radius: 8px;
+        padding: 20px;
+        position: relative;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        min-width: 200px;
+      }
+      .flow-step::after {
+        content: "→";
+        position: absolute;
+        right: -20px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 1.5rem;
+        color: #bdc3c7;
+        z-index: 1;
+      }
+      .flow-step:last-child::after {
+        display: none;
+      }
+      .flow-title {
+        font-weight: bold;
+        color: var(--primary);
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .flow-tech {
+        font-size: 0.8rem;
+        background: #f0f4f8;
+        padding: 4px 8px;
+        border-radius: 4px;
+        color: #555;
+        display: inline-block;
+        margin-top: 5px;
+      }
+
+      /* Feature List */
+      .feature-item {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 25px;
+        padding-bottom: 25px;
+        border-bottom: 1px dashed #eee;
+      }
+      .feature-item:last-child {
+        border-bottom: none;
+      }
+      .feature-icon-box {
+        width: 60px;
+        height: 60px;
+        background: #eaf2f8;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.8rem;
+        flex-shrink: 0;
+        color: var(--accent);
+      }
+
+      @media (max-width: 900px) {
         .flow-diagram {
-            display: flex;
-            justify-content: space-between;
-            align-items: stretch;
-            gap: 20px;
-            margin: 40px 0;
-            flex-wrap: wrap;
-        }
-        .flow-step {
-            flex: 1;
-            background: white;
-            border: 1px solid #eee;
-            border-radius: 8px;
-            padding: 20px;
-            position: relative;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            min-width: 200px;
+          flex-direction: column;
         }
         .flow-step::after {
-            content: "→";
-            position: absolute;
-            right: -20px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 1.5rem;
-            color: #bdc3c7;
-            z-index: 1;
+          content: "↓";
+          right: 50%;
+          top: auto;
+          bottom: -25px;
+          transform: translateX(50%);
         }
-        .flow-step:last-child::after { display: none; }
-        .flow-title { font-weight: bold; color: var(--primary); margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
-        .flow-tech { font-size: 0.8rem; background: #f0f4f8; padding: 4px 8px; border-radius: 4px; color: #555; display: inline-block; margin-top: 5px;}
-
-        /* Feature List */
-        .feature-item {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 25px;
-            padding-bottom: 25px;
-            border-bottom: 1px dashed #eee;
-        }
-        .feature-item:last-child { border-bottom: none; }
-        .feature-icon-box {
-            width: 60px;
-            height: 60px;
-            background: #eaf2f8;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            flex-shrink: 0;
-            color: var(--accent);
-        }
-
-        @media (max-width: 900px) {
-            .flow-diagram { flex-direction: column; }
-            .flow-step::after { content: "↓"; right: 50%; top: auto; bottom: -25px; transform: translateX(50%); }
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <script src="js/sidebar.js"></script>
     <script defer src="/_vercel/speed-insights/script.js"></script>
 
     <main class="main-content">
-        <header>
-            <h1>Project Vision & Architecture</h1>
-            <p>A comprehensive overview of the SmartCool Pro ecosystem.</p>
-        </header>
+      <header>
+        <h1>Project Vision & Architecture</h1>
+        <p>A comprehensive overview of the SmartCool Pro ecosystem.</p>
+      </header>
 
-        <div class="hero-section">
-            <h2>The "Zero Waste" Initiative</h2>
+      <div class="hero-section">
+        <h2>The "Zero Waste" Initiative</h2>
+        <p>
+          SmartCool Pro is not just an appliance; it is an intelligent inventory
+          management system designed to solve the global food waste crisis. By
+          shifting the refrigerator from a passive storage box to an active AI
+          agent, we empower households to save money and reduce their carbon
+          footprint.
+        </p>
+
+        <div style="display: flex; gap: 20px; margin-top: 30px">
+          <div class="stat-badge">
+            <span class="stat-number">30%</span>
+            <span class="stat-label">Household Food Wasted</span>
+          </div>
+          <div class="stat-badge">
+            <span class="stat-number">$1,500</span>
+            <span class="stat-label">Avg. Annual Savings</span>
+          </div>
+          <div class="stat-badge">
+            <span class="stat-number">24/7</span>
+            <span class="stat-label">Autonomous Monitoring</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-grid">
+        <div class="card">
+          <h3>The Problem</h3>
+          <p><strong>"Out of Sight, Out of Mind."</strong></p>
+          <p>
+            Modern consumers are busy. Groceries get pushed to the back of the
+            fridge, expire, and are thrown away. Current "Smart Fridges" rely on
+            manual data entry or barcode scanning, which has a high friction
+            cost. Users stop doing it after 2 weeks because it's tedious.
+          </p>
+        </div>
+        <div class="card" style="border-top-color: #27ae60">
+          <h3>The SmartCool Solution</h3>
+          <p><strong>"Frictionless Intelligence."</strong></p>
+          <p>
+            SmartCool Pro automates the entire process. No scanning. No typing.
+            Computer Vision cameras track items as they enter and leave. The
+            system knows you have milk, it knows when you bought it, and it
+            knows when it will spoil.
+          </p>
+        </div>
+      </div>
+
+      <h2 style="margin-top: 50px">System Architecture & Data Flow</h2>
+      <p>How the data travels from the physical world to the user's pocket.</p>
+
+      <div class="flow-diagram">
+        <div class="flow-step">
+          <div class="flow-title">1. Acquisition</div>
+          <p style="font-size: 0.9rem">
+            Triggered by door closure via magnetic reed switch.
+          </p>
+          <div class="flow-tech">Hardware: IMX219 Cameras (x3)</div>
+          <div class="flow-tech">Hardware: LED Flash Arrays</div>
+        </div>
+
+        <div class="flow-step">
+          <div class="flow-title">2. Edge Inference</div>
+          <p style="font-size: 0.9rem">
+            Images processed locally on the fridge NPU.
+          </p>
+          <div class="flow-tech">Compute: Raspberry Pi 5</div>
+          <div class="flow-tech">Model: YOLOv8 (Custom)</div>
+        </div>
+
+        <div class="flow-step">
+          <div class="flow-title">3. Cloud Sync</div>
+          <p style="font-size: 0.9rem">
+            Only JSON metadata is sent (Privacy First).
+          </p>
+          <div class="flow-tech">Protocol: MQTT / TLS 1.2</div>
+          <div class="flow-tech">Cloud: AWS IoT Core</div>
+        </div>
+
+        <div class="flow-step">
+          <div class="flow-title">4. User Action</div>
+          <p style="font-size: 0.9rem">
+            User receives alert or recipe suggestion.
+          </p>
+          <div class="flow-tech">App: React Native</div>
+          <div class="flow-tech">API: Recipe Database</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Core Capabilities</h3>
+
+        <div class="feature-item">
+          <div class="feature-icon-box">👁️</div>
+          <div>
+            <h4>Multi-Angle Computer Vision</h4>
             <p>
-                SmartCool Pro is not just an appliance; it is an intelligent inventory management system designed to solve the global food waste crisis. 
-                By shifting the refrigerator from a passive storage box to an active AI agent, we empower households to save money and reduce their carbon footprint.
+              We utilize a 3-camera array positioned at different shelf heights.
+              This solves the "Occlusion Problem" (items hiding behind other
+              items). If the top camera is blocked by a pizza box, the side
+              cameras capture the milk carton behind it.
             </p>
-            
-            <div style="display: flex; gap: 20px; margin-top: 30px;">
-                <div class="stat-badge">
-                    <span class="stat-number">30%</span>
-                    <span class="stat-label">Household Food Wasted</span>
-                </div>
-                <div class="stat-badge">
-                    <span class="stat-number">$1,500</span>
-                    <span class="stat-label">Avg. Annual Savings</span>
-                </div>
-                <div class="stat-badge">
-                    <span class="stat-number">24/7</span>
-                    <span class="stat-label">Autonomous Monitoring</span>
-                </div>
-            </div>
+          </div>
         </div>
 
-        <div class="card-grid">
-            <div class="card">
-                <h3>The Problem</h3>
-                <p><strong>"Out of Sight, Out of Mind."</strong></p>
-                <p>
-                    Modern consumers are busy. Groceries get pushed to the back of the fridge, expire, and are thrown away. 
-                    Current "Smart Fridges" rely on manual data entry or barcode scanning, which has a high friction cost. 
-                    Users stop doing it after 2 weeks because it's tedious.
-                </p>
-            </div>
-            <div class="card" style="border-top-color: #27ae60;">
-                <h3>The SmartCool Solution</h3>
-                <p><strong>"Frictionless Intelligence."</strong></p>
-                <p>
-                    SmartCool Pro automates the entire process. No scanning. No typing. 
-                    Computer Vision cameras track items as they enter and leave. The system knows you have milk, 
-                    it knows when you bought it, and it knows when it will spoil.
-                </p>
-            </div>
+        <div class="feature-item">
+          <div class="feature-icon-box">🧠</div>
+          <div>
+            <h4>Predictive Expiration AI</h4>
+            <p>
+              The system doesn't just read dates; it predicts freshness. For
+              produce (fruits/vegetables), the Vision Model analyzes color
+              shifts (e.g., browning bananas) to suggest usage *before* rot sets
+              in.
+            </p>
+          </div>
         </div>
 
-        <h2 style="margin-top: 50px;">System Architecture & Data Flow</h2>
-        <p>How the data travels from the physical world to the user's pocket.</p>
-        
-        <div class="flow-diagram">
-            <div class="flow-step">
-                <div class="flow-title">1. Acquisition</div>
-                <p style="font-size: 0.9rem;">Triggered by door closure via magnetic reed switch.</p>
-                <div class="flow-tech">Hardware: IMX219 Cameras (x3)</div>
-                <div class="flow-tech">Hardware: LED Flash Arrays</div>
-            </div>
+        <div class="feature-item">
+          <div class="feature-icon-box">🥘</div>
+          <div>
+            <h4>"What's for Dinner?" Engine</h4>
+            <p>
+              The mobile app queries a database of 10,000+ recipes, filtering
+              results based <strong>strictly</strong> on the inventory currently
+              available. It prioritizes recipes that use ingredients expiring
+              within 24 hours.
+            </p>
+          </div>
+        </div>
 
-            <div class="flow-step">
-                <div class="flow-title">2. Edge Inference</div>
-                <p style="font-size: 0.9rem;">Images processed locally on the fridge NPU.</p>
-                <div class="flow-tech">Compute: Raspberry Pi 5</div>
-                <div class="flow-tech">Model: YOLOv8 (Custom)</div>
-            </div>
+        <div class="feature-item">
+          <div class="feature-icon-box">🔒</div>
+          <div>
+            <h4>Privacy-First Design</h4>
+            <p>
+              A major concern with cameras in the home is privacy. SmartCool Pro
+              processes all images <strong>locally on the device</strong> (Edge
+              Computing). No video feeds are ever uploaded to the cloud—only the
+              text inventory list (JSON).
+            </p>
+          </div>
+        </div>
+      </div>
 
-            <div class="flow-step">
-                <div class="flow-title">3. Cloud Sync</div>
-                <p style="font-size: 0.9rem;">Only JSON metadata is sent (Privacy First).</p>
-                <div class="flow-tech">Protocol: MQTT / TLS 1.2</div>
-                <div class="flow-tech">Cloud: AWS IoT Core</div>
-            </div>
-
-            <div class="flow-step">
-                <div class="flow-title">4. User Action</div>
-                <p style="font-size: 0.9rem;">User receives alert or recipe suggestion.</p>
-                <div class="flow-tech">App: React Native</div>
-                <div class="flow-tech">API: Recipe Database</div>
-            </div>
+      <div class="card-grid" style="margin-top: 30px">
+        <div class="card" style="background: #fdfdfd">
+          <h3>User Journey: A Day with SmartCool</h3>
+          <ul style="line-height: 1.8; color: #555">
+            <li>
+              <strong>08:00 AM:</strong> User grabs milk for coffee. Fridge
+              updates inventory: Milk level 40%.
+            </li>
+            <li>
+              <strong>05:30 PM:</strong> User leaves work. Phone notification:
+              <em
+                >"Your chicken expires tomorrow. Here is a Quick Chicken
+                Stir-fry recipe."</em
+              >
+            </li>
+            <li>
+              <strong>06:00 PM:</strong> User opens the app, clicks "Add missing
+              ginger to cart."
+            </li>
+            <li>
+              <strong>06:45 PM:</strong> Grocery delivery arrives. User cooks
+              dinner. Zero waste.
+            </li>
+          </ul>
         </div>
 
         <div class="card">
-            <h3>Core Capabilities</h3>
-            
-            <div class="feature-item">
-                <div class="feature-icon-box">👁️</div>
-                <div>
-                    <h4>Multi-Angle Computer Vision</h4>
-                    <p>
-                        We utilize a 3-camera array positioned at different shelf heights. This solves the "Occlusion Problem" (items hiding behind other items). 
-                        If the top camera is blocked by a pizza box, the side cameras capture the milk carton behind it.
-                    </p>
-                </div>
+          <h3>Target Market Persona</h3>
+          <div
+            style="
+              display: flex;
+              align-items: center;
+              gap: 15px;
+              margin-bottom: 15px;
+            "
+          >
+            <div
+              style="
+                width: 50px;
+                height: 50px;
+                background: #ddd;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.5rem;
+              "
+            >
+              👩‍💻
             </div>
-
-            <div class="feature-item">
-                <div class="feature-icon-box">🧠</div>
-                <div>
-                    <h4>Predictive Expiration AI</h4>
-                    <p>
-                        The system doesn't just read dates; it predicts freshness. For produce (fruits/vegetables), the Vision Model analyzes 
-                        color shifts (e.g., browning bananas) to suggest usage *before* rot sets in.
-                    </p>
-                </div>
+            <div>
+              <strong>"Sarah, the Eco-Professional"</strong><br />
+              <span style="font-size: 0.8rem; color: #777"
+                >Age 34 | Urban | Tech-Savvy</span
+              >
             </div>
-
-            <div class="feature-item">
-                <div class="feature-icon-box">🥘</div>
-                <div>
-                    <h4>"What's for Dinner?" Engine</h4>
-                    <p>
-                        The mobile app queries a database of 10,000+ recipes, filtering results based <strong>strictly</strong> on the inventory currently available. 
-                        It prioritizes recipes that use ingredients expiring within 24 hours.
-                    </p>
-                </div>
-            </div>
-
-            <div class="feature-item">
-                <div class="feature-icon-box">🔒</div>
-                <div>
-                    <h4>Privacy-First Design</h4>
-                    <p>
-                        A major concern with cameras in the home is privacy. SmartCool Pro processes all images <strong>locally on the device</strong> (Edge Computing). 
-                        No video feeds are ever uploaded to the cloud—only the text inventory list (JSON).
-                    </p>
-                </div>
-            </div>
+          </div>
+          <p style="font-size: 0.9rem">
+            She wants to be sustainable but lacks time to meal plan. She hates
+            throwing away moldy vegetables. She is willing to pay a premium
+            ($2,500+) for a device that automates her kitchen management.
+          </p>
         </div>
-
-        <div class="card-grid" style="margin-top: 30px;">
-            <div class="card" style="background: #fdfdfd;">
-                <h3>User Journey: A Day with SmartCool</h3>
-                <ul style="line-height: 1.8; color: #555;">
-                    <li><strong>08:00 AM:</strong> User grabs milk for coffee. Fridge updates inventory: Milk level 40%.</li>
-                    <li><strong>05:30 PM:</strong> User leaves work. Phone notification: <em>"Your chicken expires tomorrow. Here is a Quick Chicken Stir-fry recipe."</em></li>
-                    <li><strong>06:00 PM:</strong> User opens the app, clicks "Add missing ginger to cart."</li>
-                    <li><strong>06:45 PM:</strong> Grocery delivery arrives. User cooks dinner. Zero waste.</li>
-                </ul>
-            </div>
-
-            <div class="card">
-                <h3>Target Market Persona</h3>
-                <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
-                    <div style="width: 50px; height: 50px; background: #ddd; border-radius: 50%; display:flex; align-items:center; justify-content:center; font-size:1.5rem;">👩‍💻</div>
-                    <div>
-                        <strong>"Sarah, the Eco-Professional"</strong><br>
-                        <span style="font-size: 0.8rem; color: #777;">Age 34 | Urban | Tech-Savvy</span>
-                    </div>
-                </div>
-                <p style="font-size: 0.9rem;">
-                    She wants to be sustainable but lacks time to meal plan. She hates throwing away moldy vegetables. 
-                    She is willing to pay a premium ($2,500+) for a device that automates her kitchen management.
-                </p>
-            </div>
-        </div>
-
+      </div>
     </main>
-</body>
+  </body>
 </html>

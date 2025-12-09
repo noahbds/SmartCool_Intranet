@@ -117,7 +117,7 @@
         }
       }
     </style>
-</head>
+  </head>
   <body>
     <script src="js/sidebar.js"></script>
     <script defer src="/_vercel/speed-insights/script.js"></script>
@@ -226,7 +226,10 @@
           const grid = document.getElementById("team-grid");
           grid.innerHTML = members
             .map((member) => {
-              const skills = typeof member.skills === 'string' ? JSON.parse(member.skills) : member.skills;
+              const skills =
+                typeof member.skills === "string"
+                  ? JSON.parse(member.skills)
+                  : member.skills;
               const skillsHtml = skills
                 .map(
                   (skill) => `

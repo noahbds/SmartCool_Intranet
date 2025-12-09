@@ -15,7 +15,9 @@ module.exports = (_req, res) => {
 
     const total = budget.summary.find(s => s.category === 'Total')
     const topRisks = [...risks]
-      .sort((a, b) => `${b.impact}${b.prob}`.localeCompare(`${a.impact}${a.prob}`))
+      .sort((a, b) =>
+        `${b.impact}${b.prob}`.localeCompare(`${a.impact}${a.prob}`)
+      )
       .slice(0, 3)
       .map(r => ({ title: r.title, color: r.color }))
 
@@ -26,6 +28,8 @@ module.exports = (_req, res) => {
       projectStart: '2025-11-10'
     })
   } catch (e) {
-    res.status(500).json({ error: 'Failed to load dashboard data', details: String(e) })
+    res
+      .status(500)
+      .json({ error: 'Failed to load dashboard data', details: String(e) })
   }
 }
