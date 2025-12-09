@@ -13,6 +13,9 @@ const sidebarContent = `
   </div>
   <div class="footer">v1.3</div>
 </nav>
+<button class="mobile-toggle" aria-label="Toggle Navigation">
+  <i class="fas fa-bars"></i>
+</button>
 `;
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -20,6 +23,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const existingSidebar = document.querySelector('.sidebar');
   if (existingSidebar) {
     existingSidebar.remove();
+  }
+  const existingToggle = document.querySelector('.mobile-toggle');
+  if (existingToggle) {
+    existingToggle.remove();
   }
 
   // Insert new sidebar at the start of body
@@ -49,4 +56,35 @@ document.addEventListener('DOMContentLoaded', () => {
       link.classList.remove('active');
     }
   });
+
+  // Mobile Toggle Logic
+  const toggleBtn = document.querySelector('.mobile-toggle');
+  const sidebar = document.querySelector('.sidebar');
+
+  if (toggleBtn && sidebar) {
+    toggleBtn.addEventListener('click', () => {
+      sidebar.classList.toggle('active');
+      const icon = toggleBtn.querySelector('i');
+      if (sidebar.classList.contains('active')) {
+        icon.classList.remove('fa-bars');
+        icon.classList.add('fa-times');
+      } else {
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
+      }
+    });
+
+    // Close sidebar when clicking outside on mobile
+    document.addEventListener('click', (e) => {
+      if (window.innerWidth <= 900 && 
+          sidebar.classList.contains('active') && 
+          !sidebar.contains(e.target) && 
+          !toggleBtn.contains(e.target)) {
+        sidebar.classList.remove('active');
+        const icon = toggleBtn.querySelector('i');
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
+      }
+    });
+  }
 });

@@ -36,8 +36,7 @@
       <header>
         <h1>
           <i
-            class="fas fa-tachometer-alt"
-            style="color: var(--accent); margin-right: 10px"
+            class="fas fa-tachometer-alt header-icon"
           ></i
           >Dashboard
         </h1>
@@ -48,33 +47,12 @@
         <!-- Project Status Card -->
         <div class="card">
           <h3><i class="fas fa-project-diagram"></i> Project Status</h3>
-          <div
-            style="
-              margin-top: 16px;
-              display: flex;
-              flex-direction: column;
-              gap: 8px;
-            "
-          >
-            <div
-              style="
-                display: flex;
-                justify-content: space-between;
-                border-bottom: 1px solid var(--border);
-                padding-bottom: 8px;
-              "
-            >
+          <div class="status-container">
+            <div class="status-row">
               <span style="color: var(--text-muted)">Phase</span>
               <span style="font-weight: 600">Proof of Concept (PoC)</span>
             </div>
-            <div
-              style="
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                margin-top: 10px;
-              "
-            >
+            <div class="progress-container">
               <!-- SVG Circular Progress -->
               <div style="width: 60px">
                 <svg viewBox="0 0 36 36" class="circular-chart orange">
@@ -94,7 +72,7 @@
               <div style="text-align: right">
                 <span
                   id="week-display"
-                  style="color: var(--text-muted); font-size: 0.8rem"
+                  class="week-text"
                   >Week -- of 24</span
                 ><br />
                 <span
@@ -174,10 +152,10 @@
           <h3><i class="fas fa-exclamation-triangle"></i> Top Risks</h3>
           <ul
             id="top-risks-list"
-            style="list-style: none; margin-top: 16px; padding: 0"
+            class="risks-list"
           >
             <!-- Risks populated by JS -->
-            <li style="color: var(--text-muted); font-size: 0.9rem">
+            <li class="text-sm text-muted">
               Loading risks...
             </li>
           </ul>
@@ -185,7 +163,7 @@
       </div>
 
       <!-- Quick Links or Mini Gantt -->
-      <h2 style="font-size: 1.25rem; margin-top: 40px">
+      <h2 class="section-subtitle">
         <i class="fas fa-flag-checkered"></i> Upcoming Milestones
       </h2>
       <div class="table-container">
@@ -250,9 +228,9 @@
               risksList.innerHTML = data.risks
                 .map(
                   (r) => `
-                            <li style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
-                                <i class="fas fa-circle" style="color: ${r.color}; font-size: 0.5rem;"></i>
-                                <span style="font-size: 0.9rem;">${r.title}</span>
+                            <li class="risk-item">
+                                <i class="fas fa-circle risk-dot" style="color: ${r.color};"></i>
+                                <span class="risk-title">${r.title}</span>
                             </li>
                         `
                 )
