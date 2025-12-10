@@ -21,7 +21,7 @@
         --toolbar-height: 56px;
         --footer-height: 32px;
         --row-height: 44px;
-        --task-col-width: 400px; /* Wider for Cost column */
+        --task-col-width: 600px; /* Wider for more columns */
         --grid-line-color: #f1f5f9;
         --weekend-color: #f8fafc;
       }
@@ -176,9 +176,8 @@
         border: 1px solid var(--border);
         font-size: 0.85rem;
         width: 200px;
-        background: white
-          url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="%2394a3b8" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>')
-          no-repeat 8px center / 14px;
+        background: white url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2394a3b8' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z' /%3E%3C/svg%3E") no-repeat 8px center;
+        background-size: 16px;
       }
       .search-input:focus {
         outline: none;
@@ -208,15 +207,22 @@
       .task-header {
         height: 48px;
         border-bottom: 1px solid var(--border);
-        display: flex;
+        display: grid;
+        grid-template-columns: 40px 50px 100px 1fr 100px 80px; /* #, ID, Phase, Task, Resp, Dur */
         align-items: center;
-        padding: 0 16px;
+        padding: 0 8px;
         font-weight: 600;
         color: var(--secondary);
-        font-size: 0.8rem;
+        font-size: 0.75rem;
         text-transform: uppercase;
         letter-spacing: 0.05em;
         background: #f8fafc;
+      }
+      .task-header div {
+          padding: 0 4px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
       }
       .task-list {
         flex: 1;
@@ -225,16 +231,20 @@
       .task-item {
         height: var(--row-height);
         border-bottom: 1px solid var(--grid-line-color);
-        display: flex;
+        display: grid;
+        grid-template-columns: 40px 50px 100px 1fr 100px 80px;
         align-items: center;
-        padding: 0 16px;
-        font-size: 0.9rem;
+        padding: 0 8px;
+        font-size: 0.8rem;
         color: var(--text-main);
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
         cursor: pointer;
         transition: background 0.1s;
+      }
+      .task-item div {
+          padding: 0 4px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
       }
       .task-item:hover {
         background: #f8fafc;
@@ -250,8 +260,6 @@
         background: #f1f5f9;
         padding: 2px 6px;
         border-radius: 4px;
-        margin-right: 10px;
-        min-width: 24px;
         text-align: center;
       }
 
@@ -403,6 +411,16 @@
       /* Hidden by default as requested */
       .gantt-bar-label {
         display: none;
+      }
+      
+      .gantt-bar-text {
+          position: absolute;
+          left: 100%;
+          margin-left: 8px;
+          font-size: 0.75rem;
+          color: var(--text-main);
+          white-space: nowrap;
+          pointer-events: none;
       }
 
       /* Empty State */
@@ -603,6 +621,23 @@
         font-size: 0.85rem;
         text-align: right;
       }
+      
+      /* Dependency Lines */
+      .dependency-line {
+          position: absolute;
+          background-color: #94a3b8;
+          z-index: 1;
+          pointer-events: none;
+      }
+      .dependency-arrow {
+          position: absolute;
+          width: 0; 
+          height: 0; 
+          border-top: 4px solid transparent;
+          border-bottom: 4px solid transparent;
+          border-left: 6px solid #94a3b8;
+          z-index: 1;
+      }
     </style>
   </head>
   <body>
@@ -611,8 +646,9 @@
       window.si =
         window.si ||
         function () {
-          (window.siq = window.siq || []).push(arguments);
+          (window.si.q = window.si.q || []).push(arguments);
         };
+      window.si("analytics", "auto");
     </script>
     <script defer src="/_vercel/speed-insights/script.js"></script>
 
@@ -620,78 +656,50 @@
       <!-- Header -->
       <header class="app-header">
         <div class="app-title">
-          <h1>Planning Gantt <span>Visionneur .gan</span></h1>
+          <h1>Planning Projet</h1>
+          <span>SmartCool Pro</span>
         </div>
         <div style="display: flex; gap: 12px">
-          <div class="btn-tool" id="kpi-tasks">
-            <i class="fa-solid fa-list-check"></i> <span id="val-tasks">0</span>
-          </div>
-          <div class="btn-tool" id="kpi-progress">
-            <i class="fa-solid fa-bars-progress"></i>
-            <span id="val-progress">0%</span>
-          </div>
-          <div class="btn-tool" id="kpi-cost">
-            <i class="fa-solid fa-euro-sign"></i> <span id="val-cost">0</span>
-          </div>
+          <button class="btn-tool" id="btn-example">
+            <i class="fa-solid fa-rotate-right"></i> Recharger
+          </button>
+          <label class="btn-tool primary">
+            <i class="fa-solid fa-upload"></i> Importer .GAN
+            <input type="file" id="file-input" accept=".gan" hidden />
+          </label>
         </div>
       </header>
 
       <!-- Toolbar -->
       <div class="toolbar">
         <div class="toolbar-group">
-          <label class="btn-tool primary" for="file-input">
-            <i class="fa-solid fa-upload"></i> Ouvrir .gan
-          </label>
-          <input
-            id="file-input"
-            type="file"
-            accept=".gan,.xml"
-            style="display: none"
-          />
-          <button class="btn-tool" id="btn-example">
-            <i class="fa-solid fa-flask"></i> Exemple
-          </button>
-        </div>
-
-        <div class="toolbar-group">
           <button class="btn-tool active" data-scale="day">Jours</button>
           <button class="btn-tool" data-scale="week">Semaines</button>
           <button class="btn-tool" data-scale="month">Mois</button>
-          <div
-            style="
-              width: 1px;
-              height: 20px;
-              background: var(--border);
-              margin: 0 8px;
-            "
-          ></div>
+        </div>
+
+        <div class="toolbar-group">
           <button class="btn-tool" id="btn-zoom-out">
-            <i class="fa-solid fa-minus"></i>
+            <i class="fa-solid fa-magnifying-glass-minus"></i>
           </button>
           <button class="btn-tool" id="btn-zoom-in">
-            <i class="fa-solid fa-plus"></i>
+            <i class="fa-solid fa-magnifying-glass-plus"></i>
           </button>
           <button class="btn-tool" id="btn-fit">
-            <i class="fa-solid fa-expand"></i>
+            <i class="fa-solid fa-compress"></i> Ajuster
+          </button>
+          <button class="btn-tool active" id="btn-toggle-weekend">
+            <i class="fa-solid fa-calendar-week"></i> WE
           </button>
         </div>
 
         <div class="toolbar-group">
-          <div style="position: relative">
-            <input
-              type="text"
-              class="search-input"
-              id="search"
-              placeholder="Filtrer..."
-            />
-          </div>
-          <button
-            class="btn-tool"
-            id="btn-toggle-weekend"
-            title="Afficher/Masquer Week-ends"
-          >
-            <i class="fa-solid fa-calendar-week"></i>
-          </button>
+          <input
+            type="text"
+            class="search-input"
+            placeholder="Filtrer les tâches..."
+            id="search"
+          />
         </div>
       </div>
 
@@ -699,37 +707,25 @@
       <div class="gantt-container" id="gantt-container">
         <!-- Empty State -->
         <div class="empty-state" id="empty-state">
-          <i class="fa-solid fa-folder-open empty-icon"></i>
-          <div class="empty-text">Aucun projet chargé</div>
-          <button
-            class="btn-tool primary"
-            onclick="document.getElementById('file-input').click()"
-          >
-            Sélectionner un fichier .gan
+          <i class="fa-solid fa-chart-gantt empty-icon"></i>
+          <div class="empty-text">Aucun planning chargé</div>
+          <button class="btn-tool primary" id="link-example">
+            Charger le planning par défaut
           </button>
-          <div
-            style="
-              margin-top: 12px;
-              font-size: 0.85rem;
-              color: var(--text-muted);
-            "
-          >
-            ou
-            <a href="#" id="link-example" style="color: var(--accent)"
-              >charger l'exemple</a
-            >
-          </div>
         </div>
 
         <!-- Task List (Left) -->
         <div class="task-panel" id="task-panel" style="display: none">
           <div class="task-header">
-            <div style="flex: 1">Nom de la tâche</div>
-            <div style="width: 60px; text-align: right">Durée</div>
-            <div style="width: 80px; text-align: right">Coût</div>
+            <div>#</div>
+            <div>ID</div>
+            <div>Phase</div>
+            <div>Tâche</div>
+            <div>Resp.</div>
+            <div>Durée</div>
           </div>
           <div class="task-list" id="task-list">
-            <!-- Tasks injected here -->
+            <!-- JS Generated -->
           </div>
           <div class="resizer" id="resizer"></div>
         </div>
@@ -738,16 +734,16 @@
         <div class="timeline-panel" id="timeline-panel" style="display: none">
           <div class="timeline-header-scroll" id="timeline-header">
             <div class="timeline-header-content" id="timeline-header-content">
-              <!-- Scales injected here -->
+              <!-- JS Generated -->
             </div>
           </div>
           <div class="timeline-body-scroll" id="timeline-body">
             <div class="timeline-grid" id="timeline-grid">
               <div class="grid-bg" id="grid-bg"></div>
-              <div class="today-marker" id="today-marker" style="display: none">
-                <div class="today-label">Auj.</div>
+              <div class="today-marker" id="today-marker">
+                <div class="today-label">AUJ</div>
               </div>
-              <!-- Bars injected here -->
+              <!-- Bars JS Generated -->
             </div>
           </div>
         </div>
@@ -756,7 +752,8 @@
       <div class="sheet-wrapper" style="margin: 20px; border-top: 1px solid #eee; padding-top: 20px;">
         <h2 style="margin-bottom: 20px;">Planning WBS Détaillé</h2>
         <a
-          href="spreadsheets/SmartCool_Planning_Detaille.csv"
+          href="#"
+          onclick="downloadCSV()"
           class="download-btn"
           >📥 Télécharger le CSV (Compatible Excel/Sheets)</a
         >
@@ -975,7 +972,7 @@
     <div class="modal-overlay" id="edit-modal" style="display: none">
       <div class="modal">
         <div class="modal-header">
-          <h3>Modifier la tâche</h3>
+          <h3>Détails de la tâche</h3>
           <button class="btn-icon" onclick="closeModal()">
             <i class="fa-solid fa-xmark"></i>
           </button>
@@ -983,17 +980,17 @@
         <div class="modal-body">
           <input type="hidden" id="edit-id" />
           <div class="form-group">
-            <label>Nom</label>
-            <input type="text" id="edit-name" class="form-input" />
+            <label>Nom de la tâche</label>
+            <input type="text" class="form-input" id="edit-name" />
           </div>
           <div class="form-row">
             <div class="form-group">
-              <label>Début</label>
-              <input type="date" id="edit-start" class="form-input" />
+              <label>Date de début</label>
+              <input type="date" class="form-input" id="edit-start" />
             </div>
             <div class="form-group">
               <label>Durée (jours)</label>
-              <input type="number" id="edit-duration" class="form-input" />
+              <input type="number" class="form-input" id="edit-duration" />
             </div>
           </div>
           <div class="form-row">
@@ -1001,22 +998,21 @@
               <label>Avancement (%)</label>
               <input
                 type="number"
-                id="edit-progress"
                 min="0"
                 max="100"
                 class="form-input"
+                id="edit-progress"
               />
             </div>
             <div class="form-group">
               <label>Coût (€)</label>
-              <input type="number" id="edit-cost" class="form-input" />
+              <input type="number" class="form-input" id="edit-cost" />
             </div>
           </div>
-
           <div class="form-group">
-            <label>Ressources & Occupation (%)</label>
-            <div id="edit-resources-list" class="resources-list">
-              <!-- JS injected -->
+            <label>Ressources & Charge (%)</label>
+            <div class="resources-list" id="edit-resources-list">
+              <!-- JS Generated -->
             </div>
           </div>
         </div>
@@ -1033,7 +1029,7 @@
       // --- Configuration & State ---
       const state = {
         tasks: [],
-        resources: [], // {id, name}
+        resources: [], // {id, name, roleName}
         scale: "day", // day, week, month
         pxPerUnit: 40, // pixels per day (base)
         zoomLevel: 1,
@@ -1061,9 +1057,6 @@
         todayMarker: document.getElementById("today-marker"),
         tooltip: document.getElementById("tooltip"),
         search: document.getElementById("search"),
-        valTasks: document.getElementById("val-tasks"),
-        valProgress: document.getElementById("val-progress"),
-        valCost: document.getElementById("val-cost"),
         btnFit: document.getElementById("btn-fit"),
         btnZoomIn: document.getElementById("btn-zoom-in"),
         btnZoomOut: document.getElementById("btn-zoom-out"),
@@ -1105,7 +1098,7 @@
           Math.round(
             ((date.getTime() - week1.getTime()) / 86400000 -
               3 +
-              ((week1.getDay() + 6) % 7)) /
+              (week1.getDay() + 6) % 7) /
               7
           )
         );
@@ -1122,14 +1115,26 @@
           const xml = parser.parseFromString(text, "text/xml");
           if (xml.querySelector("parsererror")) throw new Error("XML invalide");
 
+          // Parse Roles
+          const roleMap = new Map();
+          xml.querySelectorAll("roles > role").forEach(r => {
+            roleMap.set(r.getAttribute("id"), r.getAttribute("name"));
+          });
+
           // Parse Resources
           const resMap = new Map();
           const resources = [];
           xml.querySelectorAll("resources > resource").forEach((r) => {
             const id = r.getAttribute("id");
             const name = r.getAttribute("name");
-            resMap.set(id, name);
-            resources.push({ id, name });
+            const func = r.getAttribute("function"); // e.g. "Default:1"
+            let roleName = "Intervenant";
+            if(func && func.startsWith("Default:")) {
+                const roleId = func.split(":")[1];
+                if(roleMap.has(roleId)) roleName = roleMap.get(roleId);
+            }
+            resMap.set(id, {name, roleName});
+            resources.push({ id, name, roleName });
           });
           state.resources = resources;
 
@@ -1140,16 +1145,34 @@
               taskId: a.getAttribute("task-id"),
               resourceId: a.getAttribute("resource-id"),
               load: parseFloat(a.getAttribute("load") || "100"),
+              responsible: a.getAttribute("responsible") === "true"
             });
           });
 
-          // Parse Tasks
+          // Parse Tasks (Recursive to get Phase)
           const tasks = [];
           let minDate = null;
           let maxDate = null;
 
-          const taskNodes = xml.querySelectorAll("tasks > task");
-          taskNodes.forEach((t) => {
+          const rootTasks = xml.querySelectorAll("tasks > task");
+          
+          rootTasks.forEach(phaseNode => {
+              const phaseName = phaseNode.getAttribute("name");
+              const childNodes = phaseNode.querySelectorAll("task");
+              
+              if(childNodes.length === 0) {
+                  // Top level task without children (unlikely in this specific file but possible)
+                  // Treat as phase = itself
+                  parseTaskNode(phaseNode, phaseName, tasks, allocs, resMap);
+              } else {
+                  // It's a phase container
+                  childNodes.forEach(childNode => {
+                      parseTaskNode(childNode, phaseName, tasks, allocs, resMap);
+                  });
+              }
+          });
+
+          function parseTaskNode(t, phaseName, tasksList, allocs, resMap) {
             const id = t.getAttribute("id");
             const name = t.getAttribute("name");
             const startStr = t.getAttribute("start");
@@ -1157,7 +1180,7 @@
             const complete = parseInt(t.getAttribute("complete") || "0", 10);
             const color = t.getAttribute("color") || "#3b82f6";
 
-            if (!startStr) return; // Skip tasks without start date
+            if (!startStr) return; 
 
             const start = startOfDay(new Date(startStr));
             const end = addDays(start, duration);
@@ -1167,14 +1190,31 @@
 
             // Find resources
             const taskAllocs = allocs.filter((a) => a.taskId === id);
-            const taskResources = taskAllocs.map((a) => ({
-              id: a.resourceId,
-              name: resMap.get(a.resourceId),
-              load: a.load,
-            }));
+            const taskResources = taskAllocs.map((a) => {
+                const r = resMap.get(a.resourceId);
+                return {
+                    id: a.resourceId,
+                    name: r ? r.name : "Unknown",
+                    roleName: r ? r.roleName : "",
+                    load: a.load,
+                    responsible: a.responsible
+                };
+            });
+            
+            // Determine primary responsible role for display
+            let responsibleRole = "-";
+            const respRes = taskResources.find(r => r.responsible) || taskResources[0];
+            if(respRes) responsibleRole = respRes.roleName;
 
-            tasks.push({
+            // Dependencies
+            const depends = [];
+            t.querySelectorAll("depend").forEach(d => {
+                depends.push(d.getAttribute("id"));
+            });
+
+            tasksList.push({
               id,
+              phase: phaseName,
               name,
               start,
               end,
@@ -1182,9 +1222,11 @@
               complete,
               color,
               resources: taskResources,
-              cost: 0, // Default cost
+              responsibleRole,
+              depends,
+              cost: 0, 
             });
-          });
+          }
 
           // Sort by start date
           tasks.sort((a, b) => a.start - b.start);
@@ -1209,26 +1251,8 @@
       }
 
       function renderApp() {
-        updateKPIs();
         renderTaskList();
         renderTimeline();
-      }
-
-      function updateKPIs() {
-        DOM.valTasks.textContent = state.tasks.length;
-        const totalProgress = state.tasks.reduce(
-          (acc, t) => acc + t.complete,
-          0
-        );
-        const avg = state.tasks.length
-          ? Math.round(totalProgress / state.tasks.length)
-          : 0;
-        DOM.valProgress.textContent = avg + "%";
-        const totalCost = state.tasks.reduce(
-          (acc, t) => acc + (t.cost || 0),
-          0
-        );
-        DOM.valCost.textContent = totalCost.toLocaleString("fr-FR");
       }
 
       function renderTaskList() {
@@ -1241,17 +1265,15 @@
           const el = document.createElement("div");
           el.className = "task-item";
           el.dataset.id = t.id;
+          
+          // Columns: #, ID, Phase, Task, Resp, Dur
           el.innerHTML = `
             <span class="id-badge">${index + 1}</span>
-            <span style="flex:1; overflow:hidden; text-overflow:ellipsis;">${
-              t.name
-            }</span>
-            <span style="width:60px; text-align:right; font-size:0.8rem; color:var(--text-muted);">${
-              t.duration
-            }j</span>
-            <span style="width:80px; text-align:right; font-size:0.8rem; font-weight:500;">${(
-              t.cost || 0
-            ).toLocaleString()} €</span>
+            <div style="font-size:0.75rem; color:var(--text-muted);">${t.id}</div>
+            <div style="font-weight:500; color:var(--primary);">${t.phase}</div>
+            <div style="font-weight:600;">${t.name}</div>
+            <div style="font-size:0.75rem; color:var(--secondary);">${t.responsibleRole}</div>
+            <div style="text-align:right; font-size:0.8rem; color:var(--text-muted);">${t.duration}j</div>
           `;
           el.addEventListener("click", () => openEditModal(t));
           el.addEventListener("mouseenter", () => highlightTask(t.id, true));
@@ -1285,7 +1307,7 @@
         // 3. Render Grid Background (Vertical Lines)
         renderGridBackground(pxPerDay, totalWidth);
 
-        // 4. Render Bars
+        // 4. Render Bars & Dependencies
         renderBars(pxPerDay, rowHeight);
 
         // 5. Today Marker
@@ -1420,9 +1442,12 @@
       }
 
       function renderBars(pxPerDay, rowHeight) {
-        const existingBars = DOM.timelineGrid.querySelectorAll(".gantt-bar");
+        const existingBars = DOM.timelineGrid.querySelectorAll(".gantt-bar, .dependency-line, .dependency-arrow");
         existingBars.forEach((b) => b.remove());
         const filter = DOM.search.value.toLowerCase();
+
+        // Map for dependency drawing
+        const taskPositions = new Map();
 
         state.tasks.forEach((t, idx) => {
           if (filter && !t.name.toLowerCase().includes(filter)) return;
@@ -1437,11 +1462,18 @@
           const x = daysFromStart * pxPerDay;
           const w = durationDays * pxPerDay;
           const y = idx * rowHeight + 10;
+          const h = 24;
 
           bar.style.left = x + "px";
           bar.style.top = y + "px";
           bar.style.width = Math.max(w, 4) + "px";
-          bar.style.backgroundColor = t.color;
+          
+          // Color by Phase
+          if(t.phase === "Conception") bar.style.backgroundColor = "#3b82f6";
+          else if(t.phase === "Hardware") bar.style.backgroundColor = "#10b981";
+          else if(t.phase === "Software") bar.style.backgroundColor = "#8b5cf6";
+          else if(t.phase === "Indus & Certif") bar.style.backgroundColor = "#f59e0b";
+          else bar.style.backgroundColor = t.color;
 
           if (t.complete > 0) {
             const prog = document.createElement("div");
@@ -1449,11 +1481,11 @@
             prog.style.width = t.complete + "%";
             bar.appendChild(prog);
           }
-
-          // Label hidden by CSS, but structure kept if needed later
+          
+          // Resource Label
           const label = document.createElement("div");
-          label.className = "gantt-bar-label";
-          label.textContent = t.complete + "%";
+          label.className = "gantt-bar-text";
+          label.textContent = t.responsibleRole;
           bar.appendChild(label);
 
           bar.addEventListener("click", () => openEditModal(t));
@@ -1467,7 +1499,90 @@
           });
 
           DOM.timelineGrid.appendChild(bar);
+          
+          // Store position for dependencies
+          taskPositions.set(t.id, {x, y, w, h});
         });
+        
+        // Draw Dependencies
+        state.tasks.forEach(t => {
+            if(t.depends && t.depends.length > 0) {
+                const targetPos = taskPositions.get(t.id);
+                if(!targetPos) return;
+                
+                t.depends.forEach(depId => {
+                    const sourcePos = taskPositions.get(depId);
+                    if(sourcePos) {
+                        drawDependency(sourcePos, targetPos);
+                    }
+                });
+            }
+        });
+      }
+      
+      function drawDependency(from, to) {
+          // Simple L-shape or straight line
+          // From right-center of source to left-center of target
+          const x1 = from.x + from.w;
+          const y1 = from.y + from.h / 2;
+          const x2 = to.x;
+          const y2 = to.y + to.h / 2;
+          
+          // If target is after source, simple line
+          // We will just draw a direct line for simplicity in this version, or 3 segments
+          
+          // Segment 1: x1 to x1+10
+          // Segment 2: x1+10 to x2-10 (vertical travel)
+          // Segment 3: x2-10 to x2
+          
+          // Actually, let's just draw a direct line for now to keep DOM light, or use SVG?
+          // Using div lines is easier without SVG overlay
+          
+          // Horizontal line from source
+          const line1 = document.createElement("div");
+          line1.className = "dependency-line";
+          
+          // If x2 > x1, we can do a nice path.
+          // Let's just do a simple direct connection logic for now:
+          // 1. Exit right 10px
+          // 2. Go down/up to target Y
+          // 3. Go right to target X
+          
+          const midX = x1 + (x2 - x1) / 2;
+          
+          // Horizontal 1
+          const l1 = document.createElement("div");
+          l1.className = "dependency-line";
+          l1.style.left = x1 + "px";
+          l1.style.top = y1 + "px";
+          l1.style.width = (midX - x1) + "px";
+          l1.style.height = "1px";
+          DOM.timelineGrid.appendChild(l1);
+          
+          // Vertical
+          const l2 = document.createElement("div");
+          l2.className = "dependency-line";
+          l2.style.left = midX + "px";
+          l2.style.top = Math.min(y1, y2) + "px";
+          l2.style.width = "1px";
+          l2.style.height = Math.abs(y2 - y1) + "px";
+          DOM.timelineGrid.appendChild(l2);
+          
+          // Horizontal 2
+          const l3 = document.createElement("div");
+          l3.className = "dependency-line";
+          l3.style.left = midX + "px";
+          l3.style.top = y2 + "px";
+          l3.style.width = (x2 - midX) + "px";
+          l3.style.height = "1px";
+          DOM.timelineGrid.appendChild(l3);
+          
+          // Arrow
+          const arrow = document.createElement("div");
+          arrow.className = "dependency-arrow";
+          arrow.style.left = (x2 - 6) + "px";
+          arrow.style.top = (y2 - 4) + "px";
+          DOM.timelineGrid.appendChild(arrow);
       }
 
       // --- Interactions ---
@@ -1494,6 +1609,7 @@
           <div style="font-weight:700; margin-bottom:8px; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:4px;">${
             t.name
           }</div>
+          <div class="tooltip-row"><span class="tooltip-label">Phase</span> <span class="tooltip-val">${t.phase}</span></div>
           <div class="tooltip-row"><span class="tooltip-label">Début</span> <span class="tooltip-val">${t.start.toLocaleDateString()}</span></div>
           <div class="tooltip-row"><span class="tooltip-label">Fin</span> <span class="tooltip-val">${t.end.toLocaleDateString()}</span></div>
           <div class="tooltip-row"><span class="tooltip-label">Durée</span> <span class="tooltip-val">${
@@ -1502,9 +1618,7 @@
           <div class="tooltip-row"><span class="tooltip-label">Avancement</span> <span class="tooltip-val">${
             t.complete
           }%</span></div>
-          <div class="tooltip-row"><span class="tooltip-label">Coût</span> <span class="tooltip-val">${(
-            t.cost || 0
-          ).toLocaleString()} €</span></div>
+          <div class="tooltip-row"><span class="tooltip-label">Responsable</span> <span class="tooltip-val">${t.responsibleRole}</span></div>
           <div class="tooltip-row"><span class="tooltip-label">Ressources</span> <span class="tooltip-val">${resList}</span></div>
         `;
         DOM.tooltip.style.opacity = "1";
@@ -1580,7 +1694,7 @@
           const row = document.createElement("div");
           row.className = "resource-row";
           row.innerHTML = `
-            <div class="resource-name">${r.name}</div>
+            <div class="resource-name">${r.name} (${r.roleName})</div>
             <div class="resource-load">
               <input type="number" min="0" max="100" value="${load}" data-resid="${r.id}"> %
             </div>
@@ -1614,8 +1728,8 @@
           const load = parseFloat(inp.value);
           if (load > 0) {
             const rId = inp.dataset.resid;
-            const rName = state.resources.find((r) => r.id === rId).name;
-            newResources.push({ id: rId, name: rName, load: load });
+            const r = state.resources.find((r) => r.id === rId);
+            newResources.push({ id: rId, name: r.name, roleName: r.roleName, load: load });
           }
         });
         task.resources = newResources;
@@ -1624,6 +1738,37 @@
         // For simplicity, we just re-render. In a real app, we'd check bounds.
         renderApp();
         closeModal();
+      }
+      
+      function downloadCSV() {
+          const rows = [
+              ["#", "ID", "PHASE", "TACHE", "RESPONSABLE", "DEBUT", "FIN", "DUREE (J)", "LIVRABLE", "DEPENDANCE"]
+          ];
+          
+          // We can use state.tasks if loaded, or parse the table if not.
+          // Let's use the table content since it's the source of truth for the static view
+          const table = document.querySelector(".google-sheet-style");
+          const trs = table.querySelectorAll("tbody tr");
+          trs.forEach(tr => {
+              const tds = tr.querySelectorAll("td");
+              const row = [];
+              tds.forEach(td => row.push(td.innerText));
+              rows.push(row);
+          });
+          
+          let csvContent = "data:text/csv;charset=utf-8,";
+          rows.forEach(function(rowArray) {
+              let row = rowArray.join(";");
+              csvContent += row + "\r\n";
+          });
+          
+          var encodedUri = encodeURI(csvContent);
+          var link = document.createElement("a");
+          link.setAttribute("href", encodedUri);
+          link.setAttribute("download", "planning_smartcool.csv");
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
       }
 
       // --- Event Listeners ---
