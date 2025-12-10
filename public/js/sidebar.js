@@ -11,7 +11,7 @@ const sidebarContent = `
     <a href="comm.html"><i class="fas fa-comments"></i> <span>Communications</span></a>
     <a href="defense.html"><i class="fas fa-flag-checkered"></i> <span>Delivery & Defense</span></a>
   </div>
-  <div class="footer">v1.3</div>
+  <div class="footer">v1.9</div>
 </nav>
 <button class="mobile-toggle" aria-label="Toggle Navigation">
   <i class="fas fa-bars"></i>
