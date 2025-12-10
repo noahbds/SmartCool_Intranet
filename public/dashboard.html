@@ -268,7 +268,9 @@
             />
             <path
               id="hero-ring"
-              stroke-dasharray="0, 100"
+              pathLength="100"
+              stroke-dasharray="0 100"
+              stroke-dashoffset="100"
               d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
               fill="none"
               stroke="#2563eb"
@@ -459,7 +461,11 @@
             )))
           : 0;
         document.getElementById('hero-progress-value').innerText = `${avgTaskProgress}%`;
-        document.getElementById('hero-ring').setAttribute('stroke-dasharray', `${avgTaskProgress}, 100`);
+        const ring = document.getElementById('hero-ring');
+        if (ring) {
+          ring.setAttribute('stroke-dasharray', `${avgTaskProgress} 100`);
+          ring.setAttribute('stroke-dashoffset', `${100 - avgTaskProgress}`);
+        }
         const heroCaption = document.querySelector('.hero-progress-caption');
         if (heroCaption) heroCaption.innerText = 'Basé sur l\'avancement des tâches Gantt';
         document.getElementById('next-milestone').innerText = next
