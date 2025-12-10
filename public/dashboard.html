@@ -268,9 +268,7 @@
             />
             <path
               id="hero-ring"
-              pathLength="100"
-              stroke-dasharray="0 100"
-              stroke-dashoffset="100"
+              stroke-dasharray="0, 100"
               d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
               fill="none"
               stroke="#2563eb"
@@ -412,17 +410,12 @@
           year: "numeric",
         });
 
-      Promise.allSettled([
+      Promise.all([
         fetch('/api/dashboard').then((r) => r.json()),
         fetch('/api/budget').then((r) => r.json()),
         fetch('/api/risks').then((r) => r.json()),
         fetch('/api/gantt').then((r) => r.json()),
-      ]).then((results) => {
-        const [dashRes, budgetRes, risksRes, ganttRes] = results;
-        const dash = dashRes.status === 'fulfilled' ? dashRes.value : {};
-        const budget = budgetRes.status === 'fulfilled' ? budgetRes.value : {};
-        const risks = risksRes.status === 'fulfilled' ? risksRes.value : [];
-        const gantt = ganttRes.status === 'fulfilled' ? ganttRes.value : { tasks: [] };
+      ]).then(([dash, budget, risks, gantt]) => {
         const summary = budget.summary || [];
         const capex = summary.find((s) => s.category === 'CAPEX')?.amount || 0;
         const opex = summary.find((s) => s.category === 'OPEX')?.amount || 0;
@@ -455,17 +448,13 @@
         // Hero ring based on Gantt tasks average "Avancement (%)"
         const tasks = (gantt && gantt.tasks) ? gantt.tasks : [];
         const avgTaskProgress = tasks.length
-          ? Math.max(0, Math.min(100, Math.round(
+          ? Math.round(
               tasks.reduce((sum, t) => sum + (parseInt(t.complete || t.progress || 0, 10) || 0), 0) /
               tasks.length
-            )))
+            )
           : 0;
         document.getElementById('hero-progress-value').innerText = `${avgTaskProgress}%`;
-        const ring = document.getElementById('hero-ring');
-        if (ring) {
-          ring.setAttribute('stroke-dasharray', `${avgTaskProgress} 100`);
-          ring.setAttribute('stroke-dashoffset', `${100 - avgTaskProgress}`);
-        }
+        document.getElementById('hero-ring').setAttribute('stroke-dasharray', `${avgTaskProgress}, 100`);
         const heroCaption = document.querySelector('.hero-progress-caption');
         if (heroCaption) heroCaption.innerText = 'Basé sur l\'avancement des tâches Gantt';
         document.getElementById('next-milestone').innerText = next

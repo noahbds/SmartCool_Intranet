@@ -180,6 +180,8 @@ async function saveDB() {
   if (!res.ok) {
     throw new Error(`HTTP ${res.status}`)
   }
+
+  return res.json()
 }
 
 function renderApp() {
@@ -726,7 +728,10 @@ async function saveTask() {
   renderApp();
 
   try {
-    await saveDB();
+    const result = await saveDB();
+    if (result && result.fallback) {
+      alert("Environnement en lecture seule : sauvegarde temporaire (/tmp). Configurez un stockage persistant pour conserver les données.");
+    }
   } catch (err) {
     console.error("Save error:", err);
     alert("Impossible d'enregistrer la tâche");
