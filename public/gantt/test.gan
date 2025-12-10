@@ -78,9 +78,44 @@
             <task id="44" name="Certification Finale CE" meeting="false" start="2026-03-01" duration="30" complete="0" expand="true"/>
         </task>
     </tasks>
-    <resources/>
-    <allocations/>
+    <resources>
+        <resource id="0" name="Jean Dupont" function="Default:1" contacts="jean.dupont@smartcool.com" phone="+33 6 12 34 56 78"/>
+        <resource id="1" name="Sophie Martin" function="Default:0" contacts="sophie.martin@smartcool.com" phone="+33 6 98 76 54 32"/>
+        <resource id="2" name="Lucas Bernard" function="Default:0" contacts="lucas.bernard@smartcool.com" phone=""/>
+        <resource id="3" name="Emma Petit" function="Default:0" contacts="emma.petit@smartcool.com" phone=""/>
+        <resource id="4" name="Thomas Richard" function="Default:0" contacts="thomas.richard@smartcool.com" phone=""/>
+        <resource id="5" name="Julie Dubois" function="Default:0" contacts="julie.dubois@smartcool.com" phone=""/>
+        <resource id="6" name="Marc Moreau" function="Default:0" contacts="marc.moreau@smartcool.com" phone=""/>
+        <resource id="7" name="Équipe Data" function="Default:0" contacts="" phone=""/>
+        <resource id="8" name="Prestataire" function="Default:0" contacts="" phone=""/>
+    </resources>
+    <allocations>
+        <allocation task-id="11" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="12" resource-id="1" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="13" resource-id="2" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="21" resource-id="1" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="22" resource-id="1" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="23" resource-id="8" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="24" resource-id="1" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="31" resource-id="7" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="32" resource-id="3" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="33" resource-id="4" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="34" resource-id="4" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="41" resource-id="5" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="42" resource-id="6" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="43" resource-id="8" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="44" resource-id="8" function="Default:0" responsible="true" load="100.0"/>
+    </allocations>
     <vacations/>
     <previous/>
     <roles roleset-name="Default"/>
+    <roles>
+        <role id="1" name="Chef de Projet"/>
+        <role id="2" name="Hardware Lead"/>
+        <role id="3" name="Cloud Architect"/>
+        <role id="4" name="Data Scientist"/>
+        <role id="5" name="Embedded Dev"/>
+        <role id="6" name="Mech Eng"/>
+        <role id="7" name="Acheteur"/>
+    </roles>
 </project>
