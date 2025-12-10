@@ -25,7 +25,7 @@
           (window.siq = window.siq || []).push(arguments);
         };
     </script>
-    <script defer src="/_vercel/speed-insights/script.js"></script>
+    <script src="/_vercel/speed-insights/script.js"></script>
     <main class="main-content">
       <header>
         <h1>
@@ -38,6 +38,7 @@
         <p>Project validation, strategic justification, and lessons learned.</p>
       </header>
 
+      <!-- 1. Technical Feasibility -->
       <div class="card">
         <h2>
           <i class="fas fa-check-double"></i> 1. Technical Feasibility
@@ -65,8 +66,7 @@
               style="color: var(--accent); width: 20px"
             ></i>
             <strong>AI Performance:</strong> The YOLOv8 model achieved an
-            <strong>88% mAP (mean Average Precision)</strong> on our custom
-            dataset of 50 common grocery items.
+            <strong>88% mAP</strong> on our custom dataset. Edge inference on RPi5 is stable at < 200ms latency.
           </li>
           <li>
             <i
@@ -74,53 +74,57 @@
               style="color: var(--accent); width: 20px"
             ></i>
             <strong>Connectivity:</strong> Real-time inventory updates were
-            pushed to the mobile app via MQTT with < 2 seconds latency.
+            pushed to the mobile app via MQTT.
           </li>
         </ul>
-        <div
-          style="
-            margin-top: 16px;
-            padding: 12px;
-            background: #dcfce7;
-            border-radius: 8px;
-            color: #166534;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-          "
-        >
-          <i class="fas fa-check-circle"></i> Conclusion: The technology is
-          ready for industrial refinement.
-        </div>
       </div>
 
+      <!-- 2. Budget Strategy -->
       <div class="card" style="margin-top: 24px">
         <h2>
           <i class="fas fa-chart-pie"></i> 2. Budget Strategy Justification
         </h2>
         <p style="margin-bottom: 16px">
           We prioritized <strong>CAPEX on Tooling</strong> (€98.5k) early to lock
-          mold lead times for the enclosure (task 4.2 in the Gantt). Soft-steel
-          molds let us ship 100+ beta-grade units identical to the final run,
-          derisking EMC (4.3) and CE certification (4.4).
+          mold lead times for the enclosure. Soft-steel molds allow us to produce 
+          ISO-standard units for certification.
         </p>
         <p>
-          <strong>OPEX discipline:</strong> Engineering effort is contained at
-          €152.9k across firmware (C++), cloud (AWS) and data labelling. We keep
-          the core team to seven people and use targeted contractors for the 3D
-          design and EMC pre-scan steps only.
-        </p>
-        <p style="margin-top: 12px">
-          <strong>Total envelope:</strong> €251.6k, mirroring the budget file
-          and surfaced in the dashboard KPIs (CAPEX 39%, OPEX 61%).
+          <strong>OPEX Discipline:</strong> We adjusted our BOM estimates to reflect 2025 supply chain realities (CM5 price increase to €65). 
+          We balance this by keeping the core team lean (7 people) and using targeted contractors for specific tasks like EMC Pre-scans.
         </p>
       </div>
 
+      <!-- 3. Market Risks (ADDED based on Rule 9) -->
+      <div class="card" style="margin-top: 24px; border-left: 4px solid #8b5cf6;">
+        <h2>
+          <i class="fas fa-bullseye"></i> 3. Mitigating Market-Related Risks
+        </h2>
+        <p style="margin-bottom: 16px; color: var(--text-muted);">
+          Addressing adoption, pricing, and competition as per Project Delivery requirements.
+        </p>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div>
+                <h4 style="color: #4b5563; margin-bottom:8px;">Risk: High Entry Price</h4>
+                <p class="text-sm">Competitors like Samsung have economies of scale we lack. A $2,500 price point limits mass adoption.</p>
+                <div style="margin-top:8px; padding: 10px; background:#f5f3ff; border-radius:6px; font-size:0.9rem;">
+                    <strong><i class="fas fa-sync"></i> Strategy:</strong> Pivot to "Hardware-as-a-Service". Sell hardware at near-cost ($2000) and monetize via a $5/mo "Zero-Waste" app subscription that guarantees food savings > cost.
+                </div>
+            </div>
+            <div>
+                <h4 style="color: #4b5563; margin-bottom:8px;">Risk: User Churn (Novelty wears off)</h4>
+                <p class="text-sm">Users stop checking the app after 2 months.</p>
+                <div style="margin-top:8px; padding: 10px; background:#f5f3ff; border-radius:6px; font-size:0.9rem;">
+                    <strong><i class="fas fa-magic"></i> Strategy:</strong> "Push" over "Pull". The fridge doesn't wait for you to check it; it proactively adds expiring milk to your online grocery cart (integration with Amazon Fresh/Carrefour).
+                </div>
+            </div>
+        </div>
+      </div>
+
+      <!-- 4. Pitfalls -->
       <div class="card" style="margin-top: 24px">
         <h2>
-          <i class="fas fa-exclamation-triangle"></i> 3. Handling Pitfalls &
-          Unforeseen Events
+          <i class="fas fa-exclamation-triangle"></i> 4. Pitfalls & Unforeseen Events
         </h2>
         <div
           style="
@@ -142,15 +146,10 @@
               <i class="fas fa-bolt"></i> Pitfall: Sensor Fogging
             </h3>
             <p style="font-size: 0.9rem">
-              <strong>Issue:</strong> During Week 6 testing, opening the fridge
-              door caused immediate condensation on the camera lens, rendering
-              the AI blind.
+              <strong>Issue:</strong> Condensation blinded the AI during door-open events.
             </p>
             <p style="font-size: 0.9rem; margin-top: 8px">
-              <strong><i class="fas fa-wrench"></i> Resolution:</strong> We
-              pivoted the design to include a small heating element ring around
-              the lens (borrowed from automotive camera designs) and applied a
-              hydrophobic coating.
+              <strong><i class="fas fa-wrench"></i> Resolution:</strong> Added heating element ring (automotive grade) to lens assembly.
             </p>
           </div>
           <div
@@ -162,54 +161,19 @@
             "
           >
             <h3 style="font-size: 1rem; color: #f59e0b">
-              <i class="fas fa-shipping-fast"></i> Pitfall: Supply Chain Delay
+              <i class="fas fa-shipping-fast"></i> Pitfall: CM5 Shortage
             </h3>
             <p style="font-size: 0.9rem">
-              <strong>Issue:</strong> Raspberry Pi modules went out of stock
-              globally in Week 3.
+              <strong>Issue:</strong> Raspberry Pi CM5 modules faced 12-week lead times.
             </p>
             <p style="font-size: 0.9rem; margin-top: 8px">
               <strong
                 ><i class="fas fa-money-bill-wave"></i> Resolution:</strong
               >
-              We activated our risk contingency budget to purchase units from a
-              secondary market at a premium (+30% cost) to keep the timeline on
-              track, proving the value of our risk management fund.
+              Activated contingency budget to source from secondary market at +20% premium to maintain schedule.
             </p>
           </div>
         </div>
-      </div>
-
-      <div class="card" style="margin-top: 24px">
-        <h2><i class="fas fa-sync-alt"></i> 4. Agile Hardware Methodology</h2>
-        <p style="margin-bottom: 16px">
-          We adopted an <strong>Agile Hardware</strong> approach, synchronizing
-          hardware and software development in <strong>2-week sprints</strong>.
-        </p>
-        <ul
-          style="margin-left: 20px; color: var(--text-main); list-style: none"
-        >
-          <li style="margin-bottom: 8px">
-            <i
-              class="fas fa-check"
-              style="color: var(--accent); width: 20px"
-            ></i>
-            <strong>Gate-based Planning:</strong> We run 2-week sprints with
-            gates tied to the WBS: PCB bring-up on 20 Nov, RPi5 integration on
-            10 Dec, and EMC pre-scan on 15 Dec. Changes in one stream auto-roll
-            into the next gate.
-          </li>
-          <li>
-            <i
-              class="fas fa-check"
-              style="color: var(--accent); width: 20px"
-            ></i>
-            <strong>Cross-Functional Sync:</strong> Hardware schematics and AI
-            model updates are reviewed together every sprint review, ensuring
-            the camera placement matches the AI field-of-view and firmware
-            power budgets.
-          </li>
-        </ul>
       </div>
     </main>
   </body>

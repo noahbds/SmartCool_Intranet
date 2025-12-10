@@ -764,7 +764,8 @@ function downloadCSV() {
     var encodedUri = encodeURI(csvContent);
     var link = document.createElement("a");
     link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "planning_smartcool.csv");
+    // Updated filename to match rules
+    link.setAttribute("download", "SmartCool_Gantt.csv");
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
