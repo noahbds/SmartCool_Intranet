@@ -410,12 +410,17 @@
           year: "numeric",
         });
 
-      Promise.all([
+      Promise.allSettled([
         fetch('/api/dashboard').then((r) => r.json()),
         fetch('/api/budget').then((r) => r.json()),
         fetch('/api/risks').then((r) => r.json()),
         fetch('/api/gantt').then((r) => r.json()),
-      ]).then(([dash, budget, risks, gantt]) => {
+      ]).then((results) => {
+        const [dashRes, budgetRes, risksRes, ganttRes] = results;
+        const dash = dashRes.status === 'fulfilled' ? dashRes.value : {};
+        const budget = budgetRes.status === 'fulfilled' ? budgetRes.value : {};
+        const risks = risksRes.status === 'fulfilled' ? risksRes.value : [];
+        const gantt = ganttRes.status === 'fulfilled' ? ganttRes.value : { tasks: [] };
         const summary = budget.summary || [];
         const capex = summary.find((s) => s.category === 'CAPEX')?.amount || 0;
         const opex = summary.find((s) => s.category === 'OPEX')?.amount || 0;
@@ -448,10 +453,10 @@
         // Hero ring based on Gantt tasks average "Avancement (%)"
         const tasks = (gantt && gantt.tasks) ? gantt.tasks : [];
         const avgTaskProgress = tasks.length
-          ? Math.round(
+          ? Math.max(0, Math.min(100, Math.round(
               tasks.reduce((sum, t) => sum + (parseInt(t.complete || t.progress || 0, 10) || 0), 0) /
               tasks.length
-            )
+            )))
           : 0;
         document.getElementById('hero-progress-value').innerText = `${avgTaskProgress}%`;
         document.getElementById('hero-ring').setAttribute('stroke-dasharray', `${avgTaskProgress}, 100`);
