@@ -1,0 +1,277 @@
+{
+  "projectName": "SmartCool - Intelligent Refrigeration System",
+  "projectCode": "SC-2025-001",
+  "projectStart": "2025-10-15",
+  "projectEnd": "2026-03-30",
+  "tasks": [
+    {
+      "id": "1",
+      "name": "Conception",
+      "type": "Project",
+      "start": "2025-10-15",
+      "end": "2025-12-20",
+      "duration": 67,
+      "progress": 40,
+      "resources": ["Jean Dupont"],
+      "dependencies": [],
+      "notes": "Phase de conception et validation"
+    },
+    {
+      "id": "1.1",
+      "name": "Spécifications fonctionnelles",
+      "type": "Task",
+      "start": "2025-10-15",
+      "end": "2025-10-25",
+      "duration": 11,
+      "progress": 100,
+      "resources": ["Jean Dupont"],
+      "dependencies": [],
+      "notes": ""
+    },
+    {
+      "id": "1.2",
+      "name": "Analyse des capteurs",
+      "type": "Task",
+      "start": "2025-10-20",
+      "end": "2025-11-05",
+      "duration": 17,
+      "progress": 100,
+      "resources": ["Emma Petit", "Lucas Bernard"],
+      "dependencies": ["1.1"],
+      "notes": ""
+    },
+    {
+      "id": "1.3",
+      "name": "Design Hardware (PCB, boîtier)",
+      "type": "Task",
+      "start": "2025-10-25",
+      "end": "2025-12-15",
+      "duration": 52,
+      "progress": 50,
+      "resources": ["Sophie Martin", "Julie Dubois"],
+      "dependencies": ["1.1"],
+      "notes": ""
+    },
+    {
+      "id": "1.4",
+      "name": "Architecture Cloud & IA",
+      "type": "Task",
+      "start": "2025-11-01",
+      "end": "2025-12-20",
+      "duration": 50,
+      "progress": 30,
+      "resources": ["Lucas Bernard", "Emma Petit"],
+      "dependencies": ["1.2"],
+      "notes": ""
+    },
+    {
+      "id": "2",
+      "name": "Développement",
+      "type": "Project",
+      "start": "2025-11-01",
+      "end": "2026-02-28",
+      "duration": 120,
+      "progress": 15,
+      "resources": [],
+      "dependencies": ["1.1"],
+      "notes": "Phase de développement et intégration"
+    },
+    {
+      "id": "2.1",
+      "name": "Firmware (STM32 + Raspberry)",
+      "type": "Task",
+      "start": "2025-11-15",
+      "end": "2026-01-30",
+      "duration": 77,
+      "progress": 10,
+      "resources": ["Thomas Richard"],
+      "dependencies": ["1.3"],
+      "notes": ""
+    },
+    {
+      "id": "2.2",
+      "name": "Backend Cloud (API REST)",
+      "type": "Task",
+      "start": "2025-12-01",
+      "end": "2026-02-15",
+      "duration": 76,
+      "progress": 5,
+      "resources": ["Lucas Bernard"],
+      "dependencies": ["1.4"],
+      "notes": ""
+    },
+    {
+      "id": "2.3",
+      "name": "Collecte et labellisation données",
+      "type": "Task",
+      "start": "2025-12-15",
+      "end": "2026-02-20",
+      "duration": 68,
+      "progress": 20,
+      "resources": ["Emma Petit"],
+      "dependencies": ["1.4"],
+      "notes": ""
+    },
+    {
+      "id": "2.4",
+      "name": "Entraînement YOLOv8",
+      "type": "Task",
+      "start": "2026-01-10",
+      "end": "2026-02-28",
+      "duration": 50,
+      "progress": 0,
+      "resources": ["Emma Petit"],
+      "dependencies": ["2.3"],
+      "notes": ""
+    },
+    {
+      "id": "3",
+      "name": "Validation & Certification",
+      "type": "Project",
+      "start": "2025-12-01",
+      "end": "2026-03-30",
+      "duration": 120,
+      "progress": 0,
+      "resources": [],
+      "dependencies": ["2.1"],
+      "notes": "Phase de tests et certification"
+    },
+    {
+      "id": "3.1",
+      "name": "Tests unitaires & intégration",
+      "type": "Task",
+      "start": "2026-01-15",
+      "end": "2026-02-10",
+      "duration": 27,
+      "progress": 0,
+      "resources": ["Thomas Richard", "Lucas Bernard"],
+      "dependencies": ["2.1", "2.2"],
+      "notes": ""
+    },
+    {
+      "id": "3.2",
+      "name": "Pré-scan EMC",
+      "type": "Milestone",
+      "start": "2026-01-20",
+      "end": "2026-01-20",
+      "duration": 1,
+      "progress": 0,
+      "resources": ["Sophie Martin"],
+      "dependencies": ["1.3"],
+      "notes": ""
+    },
+    {
+      "id": "3.3",
+      "name": "Certification CE/FCC",
+      "type": "Task",
+      "start": "2026-02-15",
+      "end": "2026-03-30",
+      "duration": 44,
+      "progress": 0,
+      "resources": ["Marc Moreau"],
+      "dependencies": ["3.1", "3.2"],
+      "notes": ""
+    },
+    {
+      "id": "4",
+      "name": "Procurement & Industrialisation",
+      "type": "Project",
+      "start": "2025-10-15",
+      "end": "2026-02-28",
+      "duration": 136,
+      "progress": 5,
+      "resources": [],
+      "dependencies": [],
+      "notes": "Gestion des achats et préparation industrialisation"
+    },
+    {
+      "id": "4.1",
+      "name": "Sourcing composants critiques",
+      "type": "Task",
+      "start": "2025-10-15",
+      "end": "2025-11-15",
+      "duration": 32,
+      "progress": 30,
+      "resources": ["Marc Moreau"],
+      "dependencies": [],
+      "notes": ""
+    },
+    {
+      "id": "4.2",
+      "name": "Tooling PCB & boîtier",
+      "type": "Task",
+      "start": "2025-11-01",
+      "end": "2026-01-15",
+      "duration": 76,
+      "progress": 5,
+      "resources": ["Sophie Martin", "Julie Dubois", "Marc Moreau"],
+      "dependencies": ["1.3"],
+      "notes": "Conception moules et outillage (€98.5k budget)"
+    },
+    {
+      "id": "4.3",
+      "name": "Validation fournisseurs",
+      "type": "Task",
+      "start": "2025-12-01",
+      "end": "2026-02-15",
+      "duration": 76,
+      "progress": 0,
+      "resources": ["Marc Moreau"],
+      "dependencies": ["4.1"],
+      "notes": ""
+    }
+  ],
+  "resources": [
+    {
+      "id": "jean-dupont",
+      "name": "Jean Dupont",
+      "role": "Project Manager",
+      "email": "jean.dupont@smartcool.io",
+      "allocation": 100
+    },
+    {
+      "id": "sophie-martin",
+      "name": "Sophie Martin",
+      "role": "Hardware Lead",
+      "email": "sophie.martin@smartcool.io",
+      "allocation": 100
+    },
+    {
+      "id": "lucas-bernard",
+      "name": "Lucas Bernard",
+      "role": "Cloud Platform",
+      "email": "lucas.bernard@smartcool.io",
+      "allocation": 80
+    },
+    {
+      "id": "emma-petit",
+      "name": "Emma Petit",
+      "role": "Data Science",
+      "email": "emma.petit@smartcool.io",
+      "allocation": 100
+    },
+    {
+      "id": "thomas-richard",
+      "name": "Thomas Richard",
+      "role": "Embedded Systems",
+      "email": "thomas.richard@smartcool.io",
+      "allocation": 100
+    },
+    {
+      "id": "julie-dubois",
+      "name": "Julie Dubois",
+      "role": "Mechanical Design",
+      "email": "julie.dubois@smartcool.io",
+      "allocation": 90
+    },
+    {
+      "id": "marc-moreau",
+      "name": "Marc Moreau",
+      "role": "Procurement",
+      "email": "marc.moreau@smartcool.io",
+      "allocation": 80
+    }
+  ],
+  "lastModified": "2025-12-10T12:00:00Z",
+  "lastModifiedBy": "system"
+}

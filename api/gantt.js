@@ -1,51 +1,58 @@
 const fs = require('fs')
 const path = require('path')
 
-const ganttDir = path.join(process.cwd(), 'public', 'gantt')
+const dbPath = path.join(process.cwd(), 'data', 'gantt.json')
+
+function readGanttDB() {
+  try {
+    const data = fs.readFileSync(dbPath, 'utf-8')
+    return JSON.parse(data)
+  } catch (e) {
+    console.error('Error reading gantt DB:', e)
+    return null
+  }
+}
+
+function writeGanttDB(data) {
+  try {
+    fs.writeFileSync(dbPath, JSON.stringify(data, null, 2), 'utf-8')
+    return true
+  } catch (e) {
+    console.error('Error writing gantt DB:', e)
+    return false
+  }
+}
 
 module.exports = (req, res) => {
   try {
     if (req.method === 'GET') {
-      // List all .gan files
-      if (!fs.existsSync(ganttDir)) {
-        fs.mkdirSync(ganttDir, { recursive: true })
+      // Get gantt database
+      const data = readGanttDB()
+      if (!data) {
+        return res.status(500).json({ error: 'Failed to read gantt database' })
       }
-      
-      const files = fs.readdirSync(ganttDir)
-        .filter(f => f.endsWith('.gan'))
-        .map(f => ({
-          name: f,
-          path: `/gantt/${f}`,
-          size: fs.statSync(path.join(ganttDir, f)).size
-        }))
-        .sort((a, b) => b.size - a.size)
-      
-      res.json({ files })
+      res.json(data)
     } else if (req.method === 'POST') {
-      // Save uploaded .gan file
-      const filename = req.body?.filename || `gantt_${Date.now()}.gan`
-      const content = req.body?.content
+      // Update gantt database
+      const updatedData = req.body
       
-      if (!filename.endsWith('.gan')) {
-        return res.status(400).json({ error: 'File must have .gan extension' })
+      if (!updatedData || typeof updatedData !== 'object') {
+        return res.status(400).json({ error: 'Invalid data provided' })
       }
       
-      if (!content) {
-        return res.status(400).json({ error: 'No content provided' })
-      }
+      // Add metadata
+      updatedData.lastModified = new Date().toISOString()
+      updatedData.lastModifiedBy = req.headers['x-user-id'] || 'api'
       
-      if (!fs.existsSync(ganttDir)) {
-        fs.mkdirSync(ganttDir, { recursive: true })
+      const success = writeGanttDB(updatedData)
+      if (!success) {
+        return res.status(500).json({ error: 'Failed to save gantt database' })
       }
-      
-      const filePath = path.join(ganttDir, filename)
-      fs.writeFileSync(filePath, content, 'utf-8')
       
       res.json({ 
-        success: true, 
-        filename, 
-        path: `/gantt/${filename}`,
-        message: `File saved as ${filename}` 
+        success: true,
+        message: 'Gantt data saved successfully',
+        lastModified: updatedData.lastModified
       })
     } else {
       res.status(405).json({ error: 'Method not allowed' })
