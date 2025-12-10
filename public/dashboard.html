@@ -58,8 +58,8 @@
       }
       .hero-progress {
         position: relative;
-        width: 160px;
-        height: 160px;
+        width: 180px;
+        height: 180px;
         flex-shrink: 0;
       }
       .hero-progress svg {
@@ -76,14 +76,15 @@
       }
       .hero-progress-caption {
         position: absolute;
-        bottom: 8px;
+        bottom: 4px;
         width: 100%;
         text-align: center;
-        font-size: 0.75rem;
+        font-size: 0.7rem;
         color: #475569;
-        padding: 0 10px;
-        line-height: 1.2;
+        padding: 0 12px;
+        line-height: 1.1;
         word-wrap: break-word;
+        overflow-wrap: break-word;
       }
       .kpi-row {
         display: grid;
@@ -510,7 +511,7 @@
           .setAttribute("stroke-dasharray", `${avgTaskProgress}, 100`);
         const heroCaption = document.querySelector(".hero-progress-caption");
         if (heroCaption)
-          heroCaption.innerText = "Basé sur l'avancement des tâches Gantt";
+          heroCaption.innerText = "Avancement tâches Gantt";
         document.getElementById("next-milestone").innerText = next
           ? `Next: ${next.name} · ${next.date}`
           : "Next: all caught up";
