@@ -229,6 +229,24 @@ function renderApp() {
   renderTimeline();
 }
 
+// Load list of saved gantt files
+async function loadGanttFileList() {
+  try {
+    const res = await fetch('/api/gantt');
+    const { files } = await res.json();
+    const fileMenu = document.getElementById('gantt-file-menu');
+    if (fileMenu && files && files.length > 0) {
+      const current = fileMenu.value;
+      fileMenu.innerHTML = '<option value="">-- Fichiers sauvegardés --</option>' + 
+        files.map(f => `<option value="${f.path}">${f.name}</option>`).join('');
+      if (current) fileMenu.value = current;
+      fileMenu.style.display = 'inline-block';
+    }
+  } catch (err) {
+    console.warn('Could not load gantt file list:', err);
+  }
+}
+
 function getFilteredTasks() {
   const filter = DOM.search.value.toLowerCase().trim();
   if (!filter) return state.tasks;
@@ -758,7 +776,16 @@ DOM.fileInput.addEventListener("change", async (e) => {
   if (!f) return;
   try {
     const text = await f.text();
+    // Save the file to server
+    const filename = f.name || `upload_${Date.now()}.gan`;
+    await fetch('/api/gantt', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ filename, content: text })
+    });
     loadGanFile(text);
+    // Refresh file list
+    loadGanttFileList();
   } catch (err) {
     console.error("File read error:", err);
     alert("Erreur lors de la lecture du fichier");
@@ -781,8 +808,23 @@ DOM.linkExample.addEventListener("click", (e) => {
   DOM.btnExample.click();
 });
 
-// Auto-load default gantt file on page load
-window.addEventListener("load", () => {
+// File dropdown change handler
+window.addEventListener('load', () => {
+  const ganttFileMenu = document.getElementById('gantt-file-menu');
+  if (ganttFileMenu) {
+    ganttFileMenu.addEventListener('change', async (e) => {
+      if (!e.target.value) return;
+      try {
+        const res = await fetch(e.target.value);
+        const text = await res.text();
+        loadGanFile(text);
+      } catch (err) {
+        console.error('File load error:', err);
+        alert('Erreur lors du chargement du fichier');
+      }
+    });
+    loadGanttFileList();
+  }
   DOM.btnExample.click();
 });
 

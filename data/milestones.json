@@ -1,5 +1,8 @@
 [
-  { "name": "PCB Design Review", "date": "Dec 15, 2025", "owner": "Sarah Chen", "status": "In Progress" },
-  { "name": "Dataset Collection", "date": "Dec 20, 2025", "owner": "Marcus Johnson", "status": "In Progress" },
-  { "name": "Initial Prototype", "date": "Jan 10, 2026", "owner": "Team", "status": "Pending" }
+  { "name": "Project Kickoff", "date": "Oct 01, 2025", "owner": "Jean Dupont", "status": "Done" },
+  { "name": "PCB Design Review", "date": "Dec 15, 2025", "owner": "Sophie Martin", "status": "In Progress" },
+  { "name": "Dataset Collection", "date": "Dec 20, 2025", "owner": "Emma Petit", "status": "In Progress" },
+  { "name": "Hardware Bring-up", "date": "Jan 10, 2026", "owner": "Sophie Martin", "status": "Pending" },
+  { "name": "EMC Pre-scan", "date": "Jan 20, 2026", "owner": "Lucas Bernard", "status": "Pending" },
+  { "name": "CE Certification", "date": "Mar 30, 2026", "owner": "Marc Moreau", "status": "Pending" }
 ]
