@@ -511,7 +511,7 @@
           .setAttribute("stroke-dasharray", `${avgTaskProgress}, 100`);
         const heroCaption = document.querySelector(".hero-progress-caption");
         if (heroCaption)
-          heroCaption.innerText = "Avancement tâches Gantt";
+          heroCaption.innerText = "Based on task progress";
         document.getElementById("next-milestone").innerText = next
           ? `Next: ${next.name} · ${next.date}`
           : "Next: all caught up";
