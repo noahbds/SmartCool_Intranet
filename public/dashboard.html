@@ -414,7 +414,8 @@
         fetch('/api/dashboard').then((r) => r.json()),
         fetch('/api/budget').then((r) => r.json()),
         fetch('/api/risks').then((r) => r.json()),
-      ]).then(([dash, budget, risks]) => {
+        fetch('/api/gantt').then((r) => r.json()),
+      ]).then(([dash, budget, risks, gantt]) => {
         const summary = budget.summary || [];
         const capex = summary.find((s) => s.category === 'CAPEX')?.amount || 0;
         const opex = summary.find((s) => s.category === 'OPEX')?.amount || 0;
@@ -436,15 +437,26 @@
         // Milestones
         const milestones = dash.milestones || [];
         const done = milestones.filter((m) => (m.status || '').toLowerCase() === 'done').length;
-        const progress = milestones.length ? percent(done, milestones.length) : 0;
+        const milestoneProgress = milestones.length ? percent(done, milestones.length) : 0;
         const next = milestones
           .filter((m) => (m.status || '').toLowerCase() !== 'done')
           .sort((a, b) => parseDate(a.date) - parseDate(b.date))[0];
 
         document.getElementById('milestone-count').innerText = `${done}/${milestones.length || 0}`;
-        document.getElementById('kpi-progress').innerText = `${progress}%`;
-        document.getElementById('hero-progress-value').innerText = `${progress}%`;
-        document.getElementById('hero-ring').setAttribute('stroke-dasharray', `${progress}, 100`);
+        document.getElementById('kpi-progress').innerText = `${milestoneProgress}%`;
+
+        // Hero ring based on Gantt tasks average "Avancement (%)"
+        const tasks = (gantt && gantt.tasks) ? gantt.tasks : [];
+        const avgTaskProgress = tasks.length
+          ? Math.round(
+              tasks.reduce((sum, t) => sum + (parseInt(t.complete || t.progress || 0, 10) || 0), 0) /
+              tasks.length
+            )
+          : 0;
+        document.getElementById('hero-progress-value').innerText = `${avgTaskProgress}%`;
+        document.getElementById('hero-ring').setAttribute('stroke-dasharray', `${avgTaskProgress}, 100`);
+        const heroCaption = document.querySelector('.hero-progress-caption');
+        if (heroCaption) heroCaption.innerText = 'Basé sur l\'avancement des tâches Gantt';
         document.getElementById('next-milestone').innerText = next
           ? `Next: ${next.name} · ${next.date}`
           : 'Next: all caught up';

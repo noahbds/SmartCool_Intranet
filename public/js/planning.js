@@ -189,7 +189,7 @@ function renderApp() {
 
 async function loadRisks() {
   try {
-    const res = await fetch("/data/risks.json")
+    const res = await fetch("/api/risks")
     if (!res.ok) throw new Error(`HTTP ${res.status}`)
     const risks = await res.json()
     renderRisks(risks)
