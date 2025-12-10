@@ -1,0 +1,28 @@
+CATEGORIE,SOUS-CATEGORIE,ELEMENT,FOURNISSEUR,COUT UNITAIRE (€),QUANTITE / MOIS,TOTAL (€),NOTES
+BOM (Matériel),Calcul,Compute Module 5 (CM5) 4GB,Raspberry Pi Ltd,55.00,1,55.00,Prix volume OEM >1k
+BOM (Matériel),Calcul,Dissipateur Thermique Passif,Local Metal,1.20,1,1.20,Aluminium extrudé custom
+BOM (Matériel),Vision,Module Caméra IMX219 (Wide),Arducam,8.50,3,25.50,"3 angles de vue (Haut, Milieu, Bas)"
+BOM (Matériel),Vision,Nappe FFC (Câble plat),Molex,0.45,3,1.35,Blindage EMI requis
+BOM (Matériel),PCB,Carte Mère Custom (Carrier Board),JLCPCB / PCBWay,12.00,1,12.00,"4 couches, ENIG finish"
+BOM (Matériel),PCB,Microcontrôleur (Gestion temps réel),STM32G030,1.80,1,1.80,Gestion capteurs portes & LED
+BOM (Matériel),Capteurs,Capteur Temp/Humidité (I2C),Sensirion SHT40,2.10,1,2.10,Précision +/- 0.2C
+BOM (Matériel),Capteurs,Capteur Portes (Reed Switch),DigiKey,0.60,2,1.20,Détection ouverture
+BOM (Matériel),Interface,Écran LCD 7 pouces Touch,BOE / Tianma,35.00,1,35.00,Interface utilisateur externe
+BOM (Matériel),Alim,Convertisseur AC/DC 5V 5A,Mean Well,14.50,1,14.50,Certifié CE/UL de qualité industrielle
+BOM (Matériel),Boitier,Injection Plastique (ABS),Usine Partenaire,18.00,1,18.00,Moule 2 cavités
+BOM (Matériel),Divers,Visserie & Assemblage,-,2.00,1,2.00,
+,,SOUS-TOTAL BOM (par unité),,,,169.65,Marge brute visée: 40%
+CAPEX (One-off),Outillage,Moule Injection Acier (Chassis),Foxconn Molding,45000.00,1,45000.00,Durée de vie: 500k cycles
+CAPEX (One-off),Outillage,Moule Injection (Support Caméra),Foxconn Molding,12000.00,1,12000.00,Précision optique requise
+CAPEX (One-off),R&D,Banc de Test (Calibration Caméra),Interne,8500.00,1,8500.00,Mire de calibration automatisée
+CAPEX (One-off),Légal,Certification CE/RED (Europe),TUV Rheinland,15000.00,1,15000.00,Test EMC et Radio
+CAPEX (One-off),Légal,Certification FCC (USA),SGS Labs,18000.00,1,18000.00,Part 15 Class B
+,,SOUS-TOTAL CAPEX,,,,98500.00,
+OPEX (Mensuel),RH,Lead Developer (Embedded),Interne,6500.00,6,39000.00,Salaire chargé (France)
+OPEX (Mensuel),RH,Data Scientist (Computer Vision),Freelance,800.00 (TJM),80 (jours),64000.00,Expert Senior
+OPEX (Mensuel),RH,Chef de Projet,Interne,5800.00,6,34800.00,Salaire chargé
+OPEX (Mensuel),Cloud,AWS IoT Core (MQTT),Amazon AWS,0.05 (par device),100,30.00,Dev environment
+OPEX (Mensuel),Cloud,Stockage S3 (Images Dataset),Amazon AWS,0.023 (par GB),5000,115.00,Training data
+OPEX (Mensuel),Bureaux,Location Labo Électronique,WeWork/Labs,2500.00,6,15000.00,Paris Intra-muros
+,,SOUS-TOTAL OPEX (6 Mois),,,,152945.00,
+,,TOTAL GENERAL PROJET,,,,251614.65,Besoin de financement

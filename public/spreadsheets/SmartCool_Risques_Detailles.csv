@@ -1,0 +1,7 @@
+REF,DESCRIPTION DU RISQUE,CATEGORIE,PROBABILITE (1-5),IMPACT (1-5),CRITICITE,DECLENCHEUR,PLAN D'ATTENUATION (MITIGATION),RESPONSABLE
+R01,Rupture de stock microcontrôleur STM32,Supply Chain,4,5,20,Délai fournisseur > 12 sem,Design 'Double Empreinte' sur le PCB pour accepter une puce GigaDevice (clone) en backup.,Hardware Lead
+R02,Condensation sur la lentille caméra,Technique,3,5,15,Flou sur les images,Intégration d'un fil résistif chauffant autour de la lentille + Algorithme de désembuage.,Hardware Lead
+R03,Coût BOM dépasse la cible (170€),Financier,3,4,12,Inflation composants,Négociation de prix sur volume annuel (10k unités) ou suppression de l'écran tactile (remplacé par App mobile).,Acheteur
+R04,Faux positifs IA (Confusion Pomme/Tomate),Qualité,4,3,12,Plaintes utilisateurs bêta,"Mise en place d'un système 'Human-in-the-loop' : l'utilisateur corrige l'IA dans l'app, améliorant le modèle.",Data Scientist
+R05,Échec Certification EMC (Rayonnement),Légal,2,5,10,Refus labo certification,Ajout de cages de Faraday sur le PCB dès la version Alpha + perles de ferrite sur les câbles.,RF Engineer
+R06,Latence Cloud trop élevée (>3s),UX,2,3,6,Mauvaise connexion Wi-Fi,"Architecture 'Edge First' : tout le traitement critique se fait en local sur le Raspberry Pi, pas de dépendance cloud.",Software Lead
