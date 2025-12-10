@@ -100,20 +100,20 @@
           <i class="fas fa-chart-pie"></i> 2. Budget Strategy Justification
         </h2>
         <p style="margin-bottom: 16px">
-          We prioritized <strong>CAPEX on Tooling</strong> ($98.5k) early in the
-          process. Why?
+          We prioritized <strong>CAPEX on Tooling</strong> (€98.5k) early to lock
+          mold lead times for the enclosure (task 4.2 in the Gantt). Soft-steel
+          molds let us ship 100+ beta-grade units identical to the final run,
+          derisking EMC (4.3) and CE certification (4.4).
         </p>
         <p>
-          While 3D printing is cheaper for prototypes, it does not simulate the
-          structural integrity of the final product. Investing in soft-steel
-          molds allows us to produce 100+ units for beta testing that are
-          physically identical to the mass-produced version. This reduces the
-          risk of "design-for-manufacturing" failures later.
+          <strong>OPEX discipline:</strong> Engineering effort is contained at
+          €152.9k across firmware (C++), cloud (AWS) and data labelling. We keep
+          the core team to seven people and use targeted contractors for the 3D
+          design and EMC pre-scan steps only.
         </p>
         <p style="margin-top: 12px">
-          <strong>OPEX Efficiency:</strong> We utilized contract workers for
-          specialized tasks (Industrial Design) rather than full-time hires,
-          keeping OPEX to $153k while accelerating delivery.
+          <strong>Total envelope:</strong> €251.6k, mirroring the budget file
+          and surfaced in the dashboard KPIs (CAPEX 39%, OPEX 61%).
         </p>
       </div>
 
@@ -194,10 +194,10 @@
               class="fas fa-check"
               style="color: var(--accent); width: 20px"
             ></i>
-            <strong>Recursive Planning:</strong> Our Gantt chart was a "living
-            document". For example, when the sensor fogging issue arose in
-            Sprint 3, we immediately inserted a "Hardware Revision" sprint
-            without derailing the software team.
+            <strong>Gate-based Planning:</strong> We run 2-week sprints with
+            gates tied to the WBS: PCB bring-up on 20 Nov, RPi5 integration on
+            10 Dec, and EMC pre-scan on 15 Dec. Changes in one stream auto-roll
+            into the next gate.
           </li>
           <li>
             <i
@@ -205,8 +205,9 @@
               style="color: var(--accent); width: 20px"
             ></i>
             <strong>Cross-Functional Sync:</strong> Hardware schematics and AI
-            model updates were reviewed together every sprint review, ensuring
-            the camera placement matched the AI's field-of-view requirements.
+            model updates are reviewed together every sprint review, ensuring
+            the camera placement matches the AI field-of-view and firmware
+            power budgets.
           </li>
         </ul>
       </div>

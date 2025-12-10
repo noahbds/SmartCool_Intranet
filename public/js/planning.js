@@ -229,13 +229,22 @@ function renderApp() {
   renderTimeline();
 }
 
+function getFilteredTasks() {
+  const filter = DOM.search.value.toLowerCase().trim();
+  if (!filter) return state.tasks;
+  return state.tasks.filter(
+    (t) =>
+      t.name.toLowerCase().includes(filter) ||
+      t.phase.toLowerCase().includes(filter) ||
+      String(t.id).toLowerCase().includes(filter)
+  );
+}
+
 function renderTaskList() {
   DOM.taskList.innerHTML = "";
-  const filter = DOM.search.value.toLowerCase();
+  const tasks = getFilteredTasks();
 
-  state.tasks.forEach((t, index) => {
-    if (filter && !t.name.toLowerCase().includes(filter)) return;
-
+  tasks.forEach((t, index) => {
     const el = document.createElement("div");
     el.className = "task-item";
     el.dataset.id = t.id;
@@ -266,6 +275,7 @@ function getPxPerDay() {
 }
 
 function renderTimeline() {
+  const tasks = getFilteredTasks();
   const pxPerDay = getPxPerDay();
   const totalWidth = state.totalDays * pxPerDay;
   const rowHeight = 44; // CSS var --row-height
@@ -273,16 +283,16 @@ function renderTimeline() {
   // 1. Setup Grid Dimensions
   DOM.timelineHeaderContent.style.width = totalWidth + "px";
   DOM.timelineGrid.style.width = totalWidth + "px";
-  DOM.timelineGrid.style.height = state.tasks.length * rowHeight + "px";
+  DOM.timelineGrid.style.height = tasks.length * rowHeight + "px";
 
   // 2. Render Scales (Header)
   renderHeaderScales(pxPerDay);
 
   // 3. Render Grid Background (Vertical Lines)
-  renderGridBackground(pxPerDay, totalWidth);
+  renderGridBackground(pxPerDay, totalWidth, tasks.length);
 
   // 4. Render Bars & Dependencies
-  renderBars(pxPerDay, rowHeight);
+  renderBars(pxPerDay, rowHeight, tasks);
 
   // 5. Today Marker
   const today = new Date();
@@ -388,7 +398,7 @@ function renderHeaderScales(pxPerDay) {
   }
 }
 
-function renderGridBackground(pxPerDay, totalWidth) {
+function renderGridBackground(pxPerDay, totalWidth, rowCount = state.tasks.length) {
   DOM.gridBg.innerHTML = "";
   let step = 1;
   if (state.scale === "week") step = 7;
@@ -407,25 +417,22 @@ function renderGridBackground(pxPerDay, totalWidth) {
     DOM.gridBg.appendChild(line);
   }
 
-  state.tasks.forEach((_, idx) => {
+  for (let idx = 0; idx < rowCount; idx += 1) {
     const hLine = document.createElement("div");
     hLine.className = "grid-row-line";
     hLine.style.top = (idx + 1) * 44 + "px";
     DOM.gridBg.appendChild(hLine);
-  });
+  }
 }
 
-function renderBars(pxPerDay, rowHeight) {
+function renderBars(pxPerDay, rowHeight, tasks) {
   const existingBars = DOM.timelineGrid.querySelectorAll(".gantt-bar, .dependency-line, .dependency-arrow");
   existingBars.forEach((b) => b.remove());
-  const filter = DOM.search.value.toLowerCase();
 
   // Map for dependency drawing
   const taskPositions = new Map();
 
-  state.tasks.forEach((t, idx) => {
-    if (filter && !t.name.toLowerCase().includes(filter)) return;
-
+  tasks.forEach((t, idx) => {
     const daysFromStart = diffDays(state.startDate, t.start);
     const durationDays = t.duration;
 
@@ -479,7 +486,7 @@ function renderBars(pxPerDay, rowHeight) {
   });
 
   // Draw Dependencies
-  state.tasks.forEach(t => {
+  tasks.forEach(t => {
       if(t.depends && t.depends.length > 0) {
           const targetPos = taskPositions.get(t.id);
           if(!targetPos) return;
@@ -749,17 +756,33 @@ function downloadCSV() {
 DOM.fileInput.addEventListener("change", async (e) => {
   const f = e.target.files[0];
   if (!f) return;
-  const text = await f.text();
-  loadGanFile(text);
+  try {
+    const text = await f.text();
+    loadGanFile(text);
+  } catch (err) {
+    console.error("File read error:", err);
+    alert("Erreur lors de la lecture du fichier");
+  }
 });
 
 DOM.btnExample.addEventListener("click", async () => {
-  const res = await fetch("/gantt/test.gan");
-  const text = await res.text();
-  loadGanFile(text);
+  try {
+    const res = await fetch("/gantt/test.gan");
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const text = await res.text();
+    loadGanFile(text);
+  } catch (err) {
+    console.error("Gantt file fetch error:", err);
+    alert("Erreur lors du chargement du planning. Vérifiez que le fichier /gantt/test.gan est accessible.");
+  }
 });
 DOM.linkExample.addEventListener("click", (e) => {
   e.preventDefault();
+  DOM.btnExample.click();
+});
+
+// Auto-load default gantt file on page load
+window.addEventListener("load", () => {
   DOM.btnExample.click();
 });
 
