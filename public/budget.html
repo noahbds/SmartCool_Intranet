@@ -185,7 +185,9 @@
         </table>
       </div>
 
-      <h2 style="margin-top: 40px; margin-bottom: 20px;">Budget Détaillé & Financier</h2>
+      <h2 style="margin-top: 40px; margin-bottom: 20px">
+        Budget Détaillé & Financier
+      </h2>
       <a href="spreadsheets/SmartCool_Budget_Detaille.csv" class="download-btn"
         >📥 Télécharger le CSV (Compatible Excel/Sheets)</a
       >
@@ -516,7 +518,7 @@
           const capex = data.summary.find((s) => s.category === "CAPEX").amount;
           const opex = data.summary.find((s) => s.category === "OPEX").amount;
 
-            cardsContainer.innerHTML = `
+          cardsContainer.innerHTML = `
                 <div class="card">
                   <h3>Budget Total</h3>
                   <p class="counter" data-target="${total}" style="font-size: 2rem; font-weight: 700; color: var(--primary); margin: 10px 0;">€0</p>
@@ -534,13 +536,13 @@
                 </div>
               `;
 
-            // Update pie chart with live ratios
-            const pie = document.querySelector('.pie-chart');
-            const capexPct = Math.round((capex / total) * 100);
-            const opexPct = 100 - capexPct;
-            pie.style.background = `conic-gradient(var(--accent) 0% ${capexPct}%, #10b981 ${capexPct}% 100%)`;
-            document.getElementById('capex-percent').innerText = capexPct;
-            document.getElementById('opex-percent').innerText = opexPct;
+          // Update pie chart with live ratios
+          const pie = document.querySelector(".pie-chart");
+          const capexPct = Math.round((capex / total) * 100);
+          const opexPct = 100 - capexPct;
+          pie.style.background = `conic-gradient(var(--accent) 0% ${capexPct}%, #10b981 ${capexPct}% 100%)`;
+          document.getElementById("capex-percent").innerText = capexPct;
+          document.getElementById("opex-percent").innerText = opexPct;
 
           // Render BOM
           const bomBody = document.getElementById("bom-body");
@@ -567,33 +569,194 @@
           // Render detailed budget
           const detailedBody = document.getElementById("detailed-budget-body");
           const budgetItems = [
-            { category: 'BOM (Matériel)', item: 'Compute Module 5 (CM5) 4GB', supplier: 'Raspberry Pi Ltd', unitCost: 55.00, quantity: 1, type: 'OPEX' },
-            { category: 'BOM (Matériel)', item: 'Dissipateur Thermique Passif', supplier: 'Local Metal', unitCost: 1.20, quantity: 1, type: 'OPEX' },
-            { category: 'BOM (Matériel)', item: 'Module Caméra IMX219 (Wide)', supplier: 'Arducam', unitCost: 8.50, quantity: 3, type: 'OPEX' },
-            { category: 'BOM (Matériel)', item: 'Nappe FFC (Câble plat)', supplier: 'Molex', unitCost: 0.45, quantity: 3, type: 'OPEX' },
-            { category: 'BOM (Matériel)', item: 'Carte Mère Custom (Carrier Board)', supplier: 'JLCPCB / PCBWay', unitCost: 12.00, quantity: 1, type: 'OPEX' },
-            { category: 'BOM (Matériel)', item: 'Microcontrôleur (Gestion temps réel)', supplier: 'STM32G030', unitCost: 1.80, quantity: 1, type: 'OPEX' },
-            { category: 'BOM (Matériel)', item: 'Capteur Temp/Humidité', supplier: 'Sensirion', unitCost: 2.10, quantity: 1, type: 'OPEX' },
-            { category: 'BOM (Matériel)', item: 'Capteur Portes (Reed Switch)', supplier: 'DigiKey', unitCost: 0.60, quantity: 2, type: 'OPEX' },
-            { category: 'BOM (Matériel)', item: 'Écran LCD 7 pouces Touch', supplier: 'BOE / Tianma', unitCost: 35.00, quantity: 1, type: 'OPEX' },
-            { category: 'BOM (Matériel)', item: 'Convertisseur AC/DC 5V 5A', supplier: 'Mean Well', unitCost: 14.50, quantity: 1, type: 'OPEX' },
-            { category: 'BOM (Matériel)', item: 'Injection Plastique (ABS)', supplier: 'Usine Partenaire', unitCost: 18.00, quantity: 1, type: 'OPEX' },
-            { category: 'BOM (Matériel)', item: 'Visserie & Assemblage', supplier: '-', unitCost: 2.00, quantity: 1, type: 'OPEX' },
-            { category: 'CAPEX (One-off)', item: 'Moule Injection Acier (Chassis)', supplier: 'Foxconn Molding', unitCost: 45000.00, quantity: 1, type: 'CAPEX' },
-            { category: 'CAPEX (One-off)', item: 'Moule Injection (Support Caméra)', supplier: 'Foxconn Molding', unitCost: 12000.00, quantity: 1, type: 'CAPEX' },
-            { category: 'CAPEX (One-off)', item: 'Banc de Test (Calibration Caméra)', supplier: 'Interne', unitCost: 8500.00, quantity: 1, type: 'CAPEX' },
-            { category: 'CAPEX (One-off)', item: 'Certification CE/RED (Europe)', supplier: 'TUV Rheinland', unitCost: 15000.00, quantity: 1, type: 'CAPEX' },
-            { category: 'CAPEX (One-off)', item: 'Certification FCC (USA)', supplier: 'SGS Labs', unitCost: 18000.00, quantity: 1, type: 'CAPEX' },
-            { category: 'OPEX (Mensuel)', item: 'Lead Developer (Embedded)', supplier: 'Interne', unitCost: 6500.00, quantity: 6, type: 'OPEX' },
-            { category: 'OPEX (Mensuel)', item: 'Data Scientist (Computer Vision)', supplier: 'Freelance', unitCost: 800.00, quantity: 80, type: 'OPEX' },
-            { category: 'OPEX (Mensuel)', item: 'Chef de Projet', supplier: 'Interne', unitCost: 5800.00, quantity: 6, type: 'OPEX' },
-            { category: 'OPEX (Mensuel)', item: 'AWS IoT Core (MQTT)', supplier: 'Amazon AWS', unitCost: 0.05, quantity: 100, type: 'OPEX' },
-            { category: 'OPEX (Mensuel)', item: 'Stockage S3 (Images Dataset)', supplier: 'Amazon AWS', unitCost: 0.023, quantity: 5000, type: 'OPEX' },
-            { category: 'OPEX (Mensuel)', item: 'Location Labo Électronique', supplier: 'WeWork/Labs', unitCost: 2500.00, quantity: 6, type: 'OPEX' },
+            {
+              category: "BOM (Matériel)",
+              item: "Compute Module 5 (CM5) 4GB",
+              supplier: "Raspberry Pi Ltd",
+              unitCost: 55.0,
+              quantity: 1,
+              type: "OPEX",
+            },
+            {
+              category: "BOM (Matériel)",
+              item: "Dissipateur Thermique Passif",
+              supplier: "Local Metal",
+              unitCost: 1.2,
+              quantity: 1,
+              type: "OPEX",
+            },
+            {
+              category: "BOM (Matériel)",
+              item: "Module Caméra IMX219 (Wide)",
+              supplier: "Arducam",
+              unitCost: 8.5,
+              quantity: 3,
+              type: "OPEX",
+            },
+            {
+              category: "BOM (Matériel)",
+              item: "Nappe FFC (Câble plat)",
+              supplier: "Molex",
+              unitCost: 0.45,
+              quantity: 3,
+              type: "OPEX",
+            },
+            {
+              category: "BOM (Matériel)",
+              item: "Carte Mère Custom (Carrier Board)",
+              supplier: "JLCPCB / PCBWay",
+              unitCost: 12.0,
+              quantity: 1,
+              type: "OPEX",
+            },
+            {
+              category: "BOM (Matériel)",
+              item: "Microcontrôleur (Gestion temps réel)",
+              supplier: "STM32G030",
+              unitCost: 1.8,
+              quantity: 1,
+              type: "OPEX",
+            },
+            {
+              category: "BOM (Matériel)",
+              item: "Capteur Temp/Humidité",
+              supplier: "Sensirion",
+              unitCost: 2.1,
+              quantity: 1,
+              type: "OPEX",
+            },
+            {
+              category: "BOM (Matériel)",
+              item: "Capteur Portes (Reed Switch)",
+              supplier: "DigiKey",
+              unitCost: 0.6,
+              quantity: 2,
+              type: "OPEX",
+            },
+            {
+              category: "BOM (Matériel)",
+              item: "Écran LCD 7 pouces Touch",
+              supplier: "BOE / Tianma",
+              unitCost: 35.0,
+              quantity: 1,
+              type: "OPEX",
+            },
+            {
+              category: "BOM (Matériel)",
+              item: "Convertisseur AC/DC 5V 5A",
+              supplier: "Mean Well",
+              unitCost: 14.5,
+              quantity: 1,
+              type: "OPEX",
+            },
+            {
+              category: "BOM (Matériel)",
+              item: "Injection Plastique (ABS)",
+              supplier: "Usine Partenaire",
+              unitCost: 18.0,
+              quantity: 1,
+              type: "OPEX",
+            },
+            {
+              category: "BOM (Matériel)",
+              item: "Visserie & Assemblage",
+              supplier: "-",
+              unitCost: 2.0,
+              quantity: 1,
+              type: "OPEX",
+            },
+            {
+              category: "CAPEX (One-off)",
+              item: "Moule Injection Acier (Chassis)",
+              supplier: "Foxconn Molding",
+              unitCost: 45000.0,
+              quantity: 1,
+              type: "CAPEX",
+            },
+            {
+              category: "CAPEX (One-off)",
+              item: "Moule Injection (Support Caméra)",
+              supplier: "Foxconn Molding",
+              unitCost: 12000.0,
+              quantity: 1,
+              type: "CAPEX",
+            },
+            {
+              category: "CAPEX (One-off)",
+              item: "Banc de Test (Calibration Caméra)",
+              supplier: "Interne",
+              unitCost: 8500.0,
+              quantity: 1,
+              type: "CAPEX",
+            },
+            {
+              category: "CAPEX (One-off)",
+              item: "Certification CE/RED (Europe)",
+              supplier: "TUV Rheinland",
+              unitCost: 15000.0,
+              quantity: 1,
+              type: "CAPEX",
+            },
+            {
+              category: "CAPEX (One-off)",
+              item: "Certification FCC (USA)",
+              supplier: "SGS Labs",
+              unitCost: 18000.0,
+              quantity: 1,
+              type: "CAPEX",
+            },
+            {
+              category: "OPEX (Mensuel)",
+              item: "Lead Developer (Embedded)",
+              supplier: "Interne",
+              unitCost: 6500.0,
+              quantity: 6,
+              type: "OPEX",
+            },
+            {
+              category: "OPEX (Mensuel)",
+              item: "Data Scientist (Computer Vision)",
+              supplier: "Freelance",
+              unitCost: 800.0,
+              quantity: 80,
+              type: "OPEX",
+            },
+            {
+              category: "OPEX (Mensuel)",
+              item: "Chef de Projet",
+              supplier: "Interne",
+              unitCost: 5800.0,
+              quantity: 6,
+              type: "OPEX",
+            },
+            {
+              category: "OPEX (Mensuel)",
+              item: "AWS IoT Core (MQTT)",
+              supplier: "Amazon AWS",
+              unitCost: 0.05,
+              quantity: 100,
+              type: "OPEX",
+            },
+            {
+              category: "OPEX (Mensuel)",
+              item: "Stockage S3 (Images Dataset)",
+              supplier: "Amazon AWS",
+              unitCost: 0.023,
+              quantity: 5000,
+              type: "OPEX",
+            },
+            {
+              category: "OPEX (Mensuel)",
+              item: "Location Labo Électronique",
+              supplier: "WeWork/Labs",
+              unitCost: 2500.0,
+              quantity: 6,
+              type: "OPEX",
+            },
           ];
-          
+
           detailedBody.innerHTML = budgetItems
-            .map(item => {
+            .map((item) => {
               const total = (item.unitCost * item.quantity).toFixed(2);
               return `
                 <tr>
@@ -603,7 +766,9 @@
                   <td>€${item.unitCost.toFixed(2)}</td>
                   <td>${item.quantity}</td>
                   <td>€${total}</td>
-                  <td><span class="status-badge ${item.type === 'CAPEX' ? 'status-warn' : 'status-info'}">${item.type}</span></td>
+                  <td><span class="status-badge ${
+                    item.type === "CAPEX" ? "status-warn" : "status-info"
+                  }">${item.type}</span></td>
                 </tr>
               `;
             })
@@ -623,10 +788,11 @@
           const updateCounter = () => {
             current += increment;
             if (current < target) {
-              counter.innerText = "€" + Math.ceil(current).toLocaleString('fr-FR');
+              counter.innerText =
+                "€" + Math.ceil(current).toLocaleString("fr-FR");
               requestAnimationFrame(updateCounter);
             } else {
-              counter.innerText = "€" + target.toLocaleString('fr-FR');
+              counter.innerText = "€" + target.toLocaleString("fr-FR");
             }
           };
           updateCounter();

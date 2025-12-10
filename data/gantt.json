@@ -16,7 +16,13 @@
       "depends": [],
       "color": "#3b82f6",
       "resources": [
-        { "id": "0", "name": "Jean Dupont", "roleName": "Chef de Projet", "load": 20, "responsible": true }
+        {
+          "id": "0",
+          "name": "Jean Dupont",
+          "roleName": "Chef de Projet",
+          "load": 20,
+          "responsible": true
+        }
       ],
       "cost": 0
     },
@@ -30,7 +36,13 @@
       "depends": ["21", "33"],
       "color": "#3b82f6",
       "resources": [
-        { "id": "1", "name": "Sophie Martin", "roleName": "Hardware Lead", "load": 40, "responsible": true }
+        {
+          "id": "1",
+          "name": "Sophie Martin",
+          "roleName": "Hardware Lead",
+          "load": 40,
+          "responsible": true
+        }
       ],
       "cost": 0
     },
@@ -44,7 +56,13 @@
       "depends": [],
       "color": "#3b82f6",
       "resources": [
-        { "id": "2", "name": "Lucas Bernard", "roleName": "Cloud Architect", "load": 60, "responsible": true }
+        {
+          "id": "2",
+          "name": "Lucas Bernard",
+          "roleName": "Cloud Architect",
+          "load": 60,
+          "responsible": true
+        }
       ],
       "cost": 0
     },
@@ -58,7 +76,13 @@
       "depends": ["22"],
       "color": "#10b981",
       "resources": [
-        { "id": "1", "name": "Sophie Martin", "roleName": "Hardware Lead", "load": 50, "responsible": true }
+        {
+          "id": "1",
+          "name": "Sophie Martin",
+          "roleName": "Hardware Lead",
+          "load": 50,
+          "responsible": true
+        }
       ],
       "cost": 0
     },
@@ -72,7 +96,13 @@
       "depends": ["23", "41"],
       "color": "#10b981",
       "resources": [
-        { "id": "1", "name": "Sophie Martin", "roleName": "Hardware Lead", "load": 50, "responsible": true }
+        {
+          "id": "1",
+          "name": "Sophie Martin",
+          "roleName": "Hardware Lead",
+          "load": 50,
+          "responsible": true
+        }
       ],
       "cost": 0
     },
@@ -86,7 +116,13 @@
       "depends": ["24"],
       "color": "#10b981",
       "resources": [
-        { "id": "8", "name": "Prestataire", "roleName": "Externe", "load": 100, "responsible": true }
+        {
+          "id": "8",
+          "name": "Prestataire",
+          "roleName": "Externe",
+          "load": 100,
+          "responsible": true
+        }
       ],
       "cost": 0
     },
@@ -100,7 +136,13 @@
       "depends": ["34", "43"],
       "color": "#10b981",
       "resources": [
-        { "id": "1", "name": "Sophie Martin", "roleName": "Hardware Lead", "load": 80, "responsible": true }
+        {
+          "id": "1",
+          "name": "Sophie Martin",
+          "roleName": "Hardware Lead",
+          "load": 80,
+          "responsible": true
+        }
       ],
       "cost": 0
     },
@@ -114,7 +156,13 @@
       "depends": ["32"],
       "color": "#8b5cf6",
       "resources": [
-        { "id": "7", "name": "Équipe Data", "roleName": "Data Squad", "load": 100, "responsible": true }
+        {
+          "id": "7",
+          "name": "Équipe Data",
+          "roleName": "Data Squad",
+          "load": 100,
+          "responsible": true
+        }
       ],
       "cost": 0
     },
@@ -128,7 +176,13 @@
       "depends": ["34"],
       "color": "#8b5cf6",
       "resources": [
-        { "id": "3", "name": "Emma Petit", "roleName": "Data Scientist", "load": 60, "responsible": true }
+        {
+          "id": "3",
+          "name": "Emma Petit",
+          "roleName": "Data Scientist",
+          "load": 60,
+          "responsible": true
+        }
       ],
       "cost": 0
     },
@@ -142,7 +196,13 @@
       "depends": [],
       "color": "#8b5cf6",
       "resources": [
-        { "id": "4", "name": "Thomas Richard", "roleName": "Embedded Dev", "load": 70, "responsible": true }
+        {
+          "id": "4",
+          "name": "Thomas Richard",
+          "roleName": "Embedded Dev",
+          "load": 70,
+          "responsible": true
+        }
       ],
       "cost": 0
     },
@@ -156,7 +216,13 @@
       "depends": [],
       "color": "#8b5cf6",
       "resources": [
-        { "id": "4", "name": "Thomas Richard", "roleName": "Embedded Dev", "load": 80, "responsible": true }
+        {
+          "id": "4",
+          "name": "Thomas Richard",
+          "roleName": "Embedded Dev",
+          "load": 80,
+          "responsible": true
+        }
       ],
       "cost": 0
     },
@@ -170,7 +236,13 @@
       "depends": ["42"],
       "color": "#f59e0b",
       "resources": [
-        { "id": "5", "name": "Julie Dubois", "roleName": "Mech Eng", "load": 60, "responsible": true }
+        {
+          "id": "5",
+          "name": "Julie Dubois",
+          "roleName": "Mech Eng",
+          "load": 60,
+          "responsible": true
+        }
       ],
       "cost": 0
     },
@@ -184,7 +256,13 @@
       "depends": ["44"],
       "color": "#f59e0b",
       "resources": [
-        { "id": "6", "name": "Marc Moreau", "roleName": "Acheteur", "load": 40, "responsible": true }
+        {
+          "id": "6",
+          "name": "Marc Moreau",
+          "roleName": "Acheteur",
+          "load": 40,
+          "responsible": true
+        }
       ],
       "cost": 0
     },
@@ -198,7 +276,13 @@
       "depends": [],
       "color": "#f59e0b",
       "resources": [
-        { "id": "8", "name": "Prestataire", "roleName": "Externe", "load": 100, "responsible": true }
+        {
+          "id": "8",
+          "name": "Prestataire",
+          "roleName": "Externe",
+          "load": 100,
+          "responsible": true
+        }
       ],
       "cost": 0
     },
@@ -212,21 +296,81 @@
       "depends": [],
       "color": "#f59e0b",
       "resources": [
-        { "id": "8", "name": "Prestataire", "roleName": "Externe", "load": 100, "responsible": true }
+        {
+          "id": "8",
+          "name": "Prestataire",
+          "roleName": "Externe",
+          "load": 100,
+          "responsible": true
+        }
       ],
       "cost": 0
     }
   ],
   "resources": [
-    { "id": "0", "name": "Jean Dupont", "roleName": "Chef de Projet", "email": "jean.dupont@smartcool.com", "allocation": 100 },
-    { "id": "1", "name": "Sophie Martin", "roleName": "Hardware Lead", "email": "sophie.martin@smartcool.com", "allocation": 100 },
-    { "id": "2", "name": "Lucas Bernard", "roleName": "Cloud Architect", "email": "lucas.bernard@smartcool.com", "allocation": 100 },
-    { "id": "3", "name": "Emma Petit", "roleName": "Data Scientist", "email": "emma.petit@smartcool.com", "allocation": 100 },
-    { "id": "4", "name": "Thomas Richard", "roleName": "Embedded Dev", "email": "thomas.richard@smartcool.com", "allocation": 100 },
-    { "id": "5", "name": "Julie Dubois", "roleName": "Mech Eng", "email": "julie.dubois@smartcool.com", "allocation": 90 },
-    { "id": "6", "name": "Marc Moreau", "roleName": "Acheteur", "email": "marc.moreau@smartcool.com", "allocation": 80 },
-    { "id": "7", "name": "Équipe Data", "roleName": "Data Squad", "email": "", "allocation": 100 },
-    { "id": "8", "name": "Prestataire", "roleName": "Externe", "email": "", "allocation": 100 }
+    {
+      "id": "0",
+      "name": "Jean Dupont",
+      "roleName": "Chef de Projet",
+      "email": "jean.dupont@smartcool.com",
+      "allocation": 100
+    },
+    {
+      "id": "1",
+      "name": "Sophie Martin",
+      "roleName": "Hardware Lead",
+      "email": "sophie.martin@smartcool.com",
+      "allocation": 100
+    },
+    {
+      "id": "2",
+      "name": "Lucas Bernard",
+      "roleName": "Cloud Architect",
+      "email": "lucas.bernard@smartcool.com",
+      "allocation": 100
+    },
+    {
+      "id": "3",
+      "name": "Emma Petit",
+      "roleName": "Data Scientist",
+      "email": "emma.petit@smartcool.com",
+      "allocation": 100
+    },
+    {
+      "id": "4",
+      "name": "Thomas Richard",
+      "roleName": "Embedded Dev",
+      "email": "thomas.richard@smartcool.com",
+      "allocation": 100
+    },
+    {
+      "id": "5",
+      "name": "Julie Dubois",
+      "roleName": "Mech Eng",
+      "email": "julie.dubois@smartcool.com",
+      "allocation": 90
+    },
+    {
+      "id": "6",
+      "name": "Marc Moreau",
+      "roleName": "Acheteur",
+      "email": "marc.moreau@smartcool.com",
+      "allocation": 80
+    },
+    {
+      "id": "7",
+      "name": "Équipe Data",
+      "roleName": "Data Squad",
+      "email": "",
+      "allocation": 100
+    },
+    {
+      "id": "8",
+      "name": "Prestataire",
+      "roleName": "Externe",
+      "email": "",
+      "allocation": 100
+    }
   ],
   "lastModified": "2025-12-10T00:00:00.000Z",
   "lastModifiedBy": "system"

@@ -4,7 +4,7 @@
     "type": "Internal",
     "sender": "Noah (Project Lead)",
     "recipient": "SmartCool Team",
-    "subject": "🚀 Project Kickoff: SmartCool Pro",
+    "subject": "Project Kickoff: SmartCool Pro",
     "content": "<p>Team,</p><p>I am thrilled to officially launch the <strong>SmartCool Pro</strong> project. Our mission is to revolutionize the kitchen with a \"Zero Waste\" smart fridge powered by embedded AI.</p><p><strong>Key Objectives:</strong></p><ul><li>Integrate Raspberry Pi & YOLOv8 for real-time inventory tracking.</li><li>Develop a user-friendly mobile app for recipe suggestions.</li><li>Validate our \"Agile Hardware\" approach with 2-week sprints.</li></ul><p>Let&#39;s make this a reality!</p><p>Best,<br>Noah</p>",
     "icon": "fa-paper-plane"
   },

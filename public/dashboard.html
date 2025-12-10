@@ -316,7 +316,9 @@
       <div class="dashboard-grid">
         <div class="column">
           <div class="card">
-            <div class="section-title"><i class="fas fa-heartbeat"></i>Execution Health</div>
+            <div class="section-title">
+              <i class="fas fa-heartbeat"></i>Execution Health
+            </div>
             <div class="health-grid">
               <div>
                 <div class="small-label">Schedule</div>
@@ -332,32 +334,59 @@
           </div>
 
           <div class="card">
-            <div class="section-title"><i class="fas fa-flag"></i>Milestones</div>
+            <div class="section-title">
+              <i class="fas fa-flag"></i>Milestones
+            </div>
             <ul class="list" id="milestones-list"></ul>
           </div>
 
           <div class="card">
-            <div class="section-title"><i class="fas fa-coins"></i>Budget Breakdown</div>
-            <div class="budget-bars">
-              <div class="label-row"><span>CAPEX</span><span id="capex-label">--</span></div>
-              <div class="bar-track"><div class="bar-fill" id="capex-bar" style="background:#2563eb; width:0%"></div></div>
-              <div class="label-row"><span>OPEX</span><span id="opex-label">--</span></div>
-              <div class="bar-track"><div class="bar-fill" id="opex-bar" style="background:#0ea5e9; width:0%"></div></div>
+            <div class="section-title">
+              <i class="fas fa-coins"></i>Budget Breakdown
             </div>
-            <div class="section-title" style="margin-top:16px;">
+            <div class="budget-bars">
+              <div class="label-row">
+                <span>CAPEX</span><span id="capex-label">--</span>
+              </div>
+              <div class="bar-track">
+                <div
+                  class="bar-fill"
+                  id="capex-bar"
+                  style="background: #2563eb; width: 0%"
+                ></div>
+              </div>
+              <div class="label-row">
+                <span>OPEX</span><span id="opex-label">--</span>
+              </div>
+              <div class="bar-track">
+                <div
+                  class="bar-fill"
+                  id="opex-bar"
+                  style="background: #0ea5e9; width: 0%"
+                ></div>
+              </div>
+            </div>
+            <div class="section-title" style="margin-top: 16px">
               <i class="fas fa-cubes"></i>BOM Snapshot
             </div>
             <ul class="list" id="bom-list"></ul>
           </div>
         </div>
 
-        <div class="column" style="display:flex; flex-direction:column; gap:20px;">
+        <div
+          class="column"
+          style="display: flex; flex-direction: column; gap: 20px"
+        >
           <div class="card">
-            <div class="section-title"><i class="fas fa-shield-alt"></i>Risk Board</div>
+            <div class="section-title">
+              <i class="fas fa-shield-alt"></i>Risk Board
+            </div>
             <ul class="list" id="risk-list"></ul>
           </div>
           <div class="card">
-            <div class="section-title"><i class="fas fa-users"></i>Resource Load</div>
+            <div class="section-title">
+              <i class="fas fa-users"></i>Resource Load
+            </div>
             <ul class="list" id="resource-load">
               <li class="list-item">
                 <div>
@@ -411,70 +440,97 @@
         });
 
       Promise.all([
-        fetch('/api/dashboard').then((r) => r.json()),
-        fetch('/api/budget').then((r) => r.json()),
-        fetch('/api/risks').then((r) => r.json()),
-        fetch('/api/gantt').then((r) => r.json()),
+        fetch("/api/dashboard").then((r) => r.json()),
+        fetch("/api/budget").then((r) => r.json()),
+        fetch("/api/risks").then((r) => r.json()),
+        fetch("/api/gantt").then((r) => r.json()),
       ]).then(([dash, budget, risks, gantt]) => {
         const summary = budget.summary || [];
-        const capex = summary.find((s) => s.category === 'CAPEX')?.amount || 0;
-        const opex = summary.find((s) => s.category === 'OPEX')?.amount || 0;
+        const capex = summary.find((s) => s.category === "CAPEX")?.amount || 0;
+        const opex = summary.find((s) => s.category === "OPEX")?.amount || 0;
         const total = dash.totalBudget || capex + opex;
 
-        document.getElementById('kpi-total').innerText = currency(total);
-        document.getElementById('kpi-capex').innerText = currency(capex);
-        document.getElementById('kpi-opex').innerText = currency(opex);
-        document.getElementById('capex-share').innerText = `${percent(capex, total)}% of total`;
-        document.getElementById('opex-share').innerText = `${percent(opex, total)}% of total`;
+        document.getElementById("kpi-total").innerText = currency(total);
+        document.getElementById("kpi-capex").innerText = currency(capex);
+        document.getElementById("kpi-opex").innerText = currency(opex);
+        document.getElementById("capex-share").innerText = `${percent(
+          capex,
+          total
+        )}% of total`;
+        document.getElementById("opex-share").innerText = `${percent(
+          opex,
+          total
+        )}% of total`;
 
         const capexPct = percent(capex, total);
-        document.getElementById('capex-bar').style.width = `${capexPct}%`;
-        document.getElementById('capex-label').innerText = `${capexPct}%`;
+        document.getElementById("capex-bar").style.width = `${capexPct}%`;
+        document.getElementById("capex-label").innerText = `${capexPct}%`;
         const opexPct = percent(opex, total);
-        document.getElementById('opex-bar').style.width = `${opexPct}%`;
-        document.getElementById('opex-label').innerText = `${opexPct}%`;
+        document.getElementById("opex-bar").style.width = `${opexPct}%`;
+        document.getElementById("opex-label").innerText = `${opexPct}%`;
 
         // Milestones
         const milestones = dash.milestones || [];
-        const done = milestones.filter((m) => (m.status || '').toLowerCase() === 'done').length;
-        const milestoneProgress = milestones.length ? percent(done, milestones.length) : 0;
+        const done = milestones.filter(
+          (m) => (m.status || "").toLowerCase() === "done"
+        ).length;
+        const milestoneProgress = milestones.length
+          ? percent(done, milestones.length)
+          : 0;
         const next = milestones
-          .filter((m) => (m.status || '').toLowerCase() !== 'done')
+          .filter((m) => (m.status || "").toLowerCase() !== "done")
           .sort((a, b) => parseDate(a.date) - parseDate(b.date))[0];
 
-        document.getElementById('milestone-count').innerText = `${done}/${milestones.length || 0}`;
-        document.getElementById('kpi-progress').innerText = `${milestoneProgress}%`;
+        document.getElementById("milestone-count").innerText = `${done}/${
+          milestones.length || 0
+        }`;
+        document.getElementById(
+          "kpi-progress"
+        ).innerText = `${milestoneProgress}%`;
 
         // Hero ring based on Gantt tasks average "Avancement (%)"
-        const tasks = (gantt && gantt.tasks) ? gantt.tasks : [];
+        const tasks = gantt && gantt.tasks ? gantt.tasks : [];
         const avgTaskProgress = tasks.length
           ? Math.round(
-              tasks.reduce((sum, t) => sum + (parseInt(t.complete || t.progress || 0, 10) || 0), 0) /
-              tasks.length
+              tasks.reduce(
+                (sum, t) =>
+                  sum + (parseInt(t.complete || t.progress || 0, 10) || 0),
+                0
+              ) / tasks.length
             )
           : 0;
-        document.getElementById('hero-progress-value').innerText = `${avgTaskProgress}%`;
-        document.getElementById('hero-ring').setAttribute('stroke-dasharray', `${avgTaskProgress}, 100`);
-        const heroCaption = document.querySelector('.hero-progress-caption');
-        if (heroCaption) heroCaption.innerText = 'Basé sur l\'avancement des tâches Gantt';
-        document.getElementById('next-milestone').innerText = next
+        document.getElementById(
+          "hero-progress-value"
+        ).innerText = `${avgTaskProgress}%`;
+        document
+          .getElementById("hero-ring")
+          .setAttribute("stroke-dasharray", `${avgTaskProgress}, 100`);
+        const heroCaption = document.querySelector(".hero-progress-caption");
+        if (heroCaption)
+          heroCaption.innerText = "Basé sur l'avancement des tâches Gantt";
+        document.getElementById("next-milestone").innerText = next
           ? `Next: ${next.name} · ${next.date}`
-          : 'Next: all caught up';
+          : "Next: all caught up";
 
-        const mList = document.getElementById('milestones-list');
-        mList.innerHTML = (milestones.length ? milestones : []).slice(0, 6)
+        const mList = document.getElementById("milestones-list");
+        mList.innerHTML = (milestones.length ? milestones : [])
+          .slice(0, 6)
           .map(
             (m) => `
               <li class="list-item">
                 <div>
                   <div class="title">${m.name}</div>
-                  <div class="subtitle">Owner: ${m.owner || '-'} · ${m.date}</div>
+                  <div class="subtitle">Owner: ${m.owner || "-"} · ${
+              m.date
+            }</div>
                 </div>
-                <span class="status-pill ${m.status === 'Done' ? '' : 'warn'}">${m.status}</span>
+                <span class="status-pill ${
+                  m.status === "Done" ? "" : "warn"
+                }">${m.status}</span>
               </li>
             `
           )
-          .join('');
+          .join("");
 
         // Schedule health based on project start
         if (dash.projectStart) {
@@ -482,24 +538,41 @@
           const today = new Date();
           const diff = Math.ceil((today - start) / (1000 * 60 * 60 * 24));
           const currentWeek = Math.max(1, Math.ceil(diff / 7));
-          document.getElementById('kpi-week').innerText = `Week ${currentWeek}`;
-          document.getElementById('health-schedule').innerText = next
+          document.getElementById("kpi-week").innerText = `Week ${currentWeek}`;
+          document.getElementById("health-schedule").innerText = next
             ? `${next.name} · ${formatDate(next.date)}`
-            : 'All current milestones done';
-          document.getElementById('hero-start').innerText = `Start: ${formatDate(start)}`;
+            : "All current milestones done";
+          document.getElementById(
+            "hero-start"
+          ).innerText = `Start: ${formatDate(start)}`;
         }
 
         // Risks
         const weight = { High: 3, Medium: 2, Low: 1 };
         const sortedRisks = [...(risks || [])].sort(
-          (a, b) => (weight[b.impact] + weight[b.prob]) - (weight[a.impact] + weight[a.prob])
+          (a, b) =>
+            weight[b.impact] +
+            weight[b.prob] -
+            (weight[a.impact] + weight[a.prob])
         );
-        document.getElementById('kpi-risks').innerText = sortedRisks.length;
-        document.getElementById('health-confidence').className = `status-pill ${sortedRisks.length > 4 ? 'danger' : sortedRisks.length > 2 ? 'warn' : ''}`;
-        document.getElementById('health-confidence').innerText = sortedRisks.length > 4 ? 'At Risk' : sortedRisks.length > 2 ? 'Watch' : 'On Track';
+        document.getElementById("kpi-risks").innerText = sortedRisks.length;
+        document.getElementById("health-confidence").className = `status-pill ${
+          sortedRisks.length > 4
+            ? "danger"
+            : sortedRisks.length > 2
+            ? "warn"
+            : ""
+        }`;
+        document.getElementById("health-confidence").innerText =
+          sortedRisks.length > 4
+            ? "At Risk"
+            : sortedRisks.length > 2
+            ? "Watch"
+            : "On Track";
 
-        const riskList = document.getElementById('risk-list');
-        riskList.innerHTML = sortedRisks.slice(0, 5)
+        const riskList = document.getElementById("risk-list");
+        riskList.innerHTML = sortedRisks
+          .slice(0, 5)
           .map(
             (r) => `
               <li class="list-item">
@@ -508,28 +581,37 @@
                   <div class="subtitle">${r.context}</div>
                   <div class="subtitle">Mitigation: ${r.mitigation}</div>
                 </div>
-                <span class="status-pill ${r.impact === 'High' ? 'danger' : r.impact === 'Medium' ? 'warn' : ''}">${r.prob}/${r.impact}</span>
+                <span class="status-pill ${
+                  r.impact === "High"
+                    ? "danger"
+                    : r.impact === "Medium"
+                    ? "warn"
+                    : ""
+                }">${r.prob}/${r.impact}</span>
               </li>
             `
           )
-          .join('');
+          .join("");
 
         // BOM snapshot
-        const bomList = document.getElementById('bom-list');
-        bomList.innerHTML = (budget.bom || []).slice(0, 6)
+        const bomList = document.getElementById("bom-list");
+        bomList.innerHTML = (budget.bom || [])
+          .slice(0, 6)
           .map(
             (item) => `
               <li class="list-item">
                 <div>
                   <div class="title">${item.component}</div>
                   <div class="subtitle">${item.description}</div>
-                  <div class="subtitle">${item.supplier} · €${item.cost.toFixed(2)}</div>
+                  <div class="subtitle">${item.supplier} · €${item.cost.toFixed(
+              2
+            )}</div>
                 </div>
                 <span class="status-pill">${item.status}</span>
               </li>
             `
           )
-          .join('');
+          .join("");
       });
     </script>
   </body>

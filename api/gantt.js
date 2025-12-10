@@ -9,24 +9,29 @@ const REDIS_KEY = 'gantt:data'
 let redisClient = null
 let redisReady = false
 
-async function getRedis() {
+async function getRedis () {
   if (!process.env.REDIS_URL) return null
   if (redisReady && redisClient) return redisClient
   try {
     redisClient = createClient({ url: process.env.REDIS_URL })
-    redisClient.on('error', (err) => console.warn('Redis error:', err?.message || err))
+    redisClient.on('error', err =>
+      console.warn('Redis error:', err?.message || err)
+    )
     await redisClient.connect()
     redisReady = true
     return redisClient
   } catch (e) {
-    console.warn('Redis connect failed, will use filesystem fallback:', e?.message || e)
+    console.warn(
+      'Redis connect failed, will use filesystem fallback:',
+      e?.message || e
+    )
     redisClient = null
     redisReady = false
     return null
   }
 }
 
-function ensureDir(p) {
+function ensureDir (p) {
   try {
     fs.mkdirSync(path.dirname(p), { recursive: true })
   } catch (e) {
@@ -34,7 +39,7 @@ function ensureDir(p) {
   }
 }
 
-function readGanttDB() {
+function readGanttDB () {
   try {
     // Prefer runtime-writeable copy if it exists
     if (fs.existsSync(tmpPath)) {
@@ -50,7 +55,7 @@ function readGanttDB() {
   }
 }
 
-function resolveWritePath() {
+function resolveWritePath () {
   try {
     fs.accessSync(path.dirname(dbPath), fs.constants.W_OK)
     return dbPath
@@ -59,7 +64,7 @@ function resolveWritePath() {
   }
 }
 
-function writeGanttDB(data) {
+function writeGanttDB (data) {
   const primaryTarget = resolveWritePath()
   try {
     ensureDir(primaryTarget)
@@ -104,9 +109,11 @@ module.exports = async (req, res) => {
       }
 
       // Prime Redis asynchronously (best effort)
-      getRedis().then(async (r) => {
-        if (r) await r.set(REDIS_KEY, JSON.stringify(data))
-      }).catch(() => {})
+      getRedis()
+        .then(async r => {
+          if (r) await r.set(REDIS_KEY, JSON.stringify(data))
+        })
+        .catch(() => {})
 
       return res.json(data)
     }
@@ -118,12 +125,23 @@ module.exports = async (req, res) => {
         return res.status(400).json({ error: 'Invalid data provided' })
       }
 
-      if (!Array.isArray(updatedData.tasks) || !Array.isArray(updatedData.resources)) {
-        return res.status(400).json({ error: 'Invalid gantt payload: tasks and resources are required arrays' })
+      if (
+        !Array.isArray(updatedData.tasks) ||
+        !Array.isArray(updatedData.resources)
+      ) {
+        return res
+          .status(400)
+          .json({
+            error:
+              'Invalid gantt payload: tasks and resources are required arrays'
+          })
       }
 
       const payload = {
-        project: updatedData.project || { name: 'SmartCool Pro Planning', code: 'SC-PRO' },
+        project: updatedData.project || {
+          name: 'SmartCool Pro Planning',
+          code: 'SC-PRO'
+        },
         tasks: updatedData.tasks,
         resources: updatedData.resources,
         lastModified: new Date().toISOString(),
@@ -144,12 +162,20 @@ module.exports = async (req, res) => {
           })
         }
       } catch (e) {
-        console.warn('Redis write failed, falling back to filesystem:', e?.message || e)
+        console.warn(
+          'Redis write failed, falling back to filesystem:',
+          e?.message || e
+        )
       }
 
       const result = writeGanttDB(payload)
       if (!result.success) {
-        return res.status(500).json({ error: 'Failed to save gantt database', details: String(result.error || 'unknown') })
+        return res
+          .status(500)
+          .json({
+            error: 'Failed to save gantt database',
+            details: String(result.error || 'unknown')
+          })
       }
 
       return res.json({
@@ -164,6 +190,8 @@ module.exports = async (req, res) => {
 
     res.status(405).json({ error: 'Method not allowed' })
   } catch (e) {
-    res.status(500).json({ error: 'Failed to handle gantt request', details: String(e) })
+    res
+      .status(500)
+      .json({ error: 'Failed to handle gantt request', details: String(e) })
   }
 }

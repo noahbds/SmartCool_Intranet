@@ -56,8 +56,8 @@
               class="fas fa-camera"
               style="color: var(--accent); width: 20px"
             ></i>
-            <strong>Sensor Integration:</strong> The Compute Module 5 (CM5) + IMX219
-            setup successfully captured clear images inside a test fridge
+            <strong>Sensor Integration:</strong> The Compute Module 5 (CM5) +
+            IMX219 setup successfully captured clear images inside a test fridge
             environment (4°C).
           </li>
           <li style="margin-bottom: 8px">
@@ -66,7 +66,8 @@
               style="color: var(--accent); width: 20px"
             ></i>
             <strong>AI Performance:</strong> The YOLOv8 model achieved an
-            <strong>88% mAP</strong> on our custom dataset. Edge inference on RPi5 is stable at < 200ms latency.
+            <strong>88% mAP</strong> on our custom dataset. Edge inference on
+            RPi5 is stable at < 200ms latency.
           </li>
           <li>
             <i
@@ -85,46 +86,82 @@
           <i class="fas fa-chart-pie"></i> 2. Budget Strategy Justification
         </h2>
         <p style="margin-bottom: 16px">
-          We prioritized <strong>CAPEX on Tooling</strong> (€98.5k) early to lock
-          mold lead times for the enclosure. Soft-steel molds allow us to produce 
-          ISO-standard units for certification.
+          We prioritized <strong>CAPEX on Tooling</strong> (€98.5k) early to
+          lock mold lead times for the enclosure. Soft-steel molds allow us to
+          produce ISO-standard units for certification.
         </p>
         <p>
-          <strong>OPEX Discipline:</strong> We adjusted our BOM estimates to reflect 2025 supply chain realities (CM5 price increase to €65). 
-          We balance this by keeping the core team lean (7 people) and using targeted contractors for specific tasks like EMC Pre-scans.
+          <strong>OPEX Discipline:</strong> We adjusted our BOM estimates to
+          reflect 2025 supply chain realities (CM5 price increase to €65). We
+          balance this by keeping the core team lean (7 people) and using
+          targeted contractors for specific tasks like EMC Pre-scans.
         </p>
       </div>
 
       <!-- 3. Market Risks (ADDED based on Rule 9) -->
-      <div class="card" style="margin-top: 24px; border-left: 4px solid #8b5cf6;">
+      <div
+        class="card"
+        style="margin-top: 24px; border-left: 4px solid #8b5cf6"
+      >
         <h2>
           <i class="fas fa-bullseye"></i> 3. Mitigating Market-Related Risks
         </h2>
-        <p style="margin-bottom: 16px; color: var(--text-muted);">
-          Addressing adoption, pricing, and competition as per Project Delivery requirements.
+        <p style="margin-bottom: 16px; color: var(--text-muted)">
+          Addressing adoption, pricing, and competition as per Project Delivery
+          requirements.
         </p>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-            <div>
-                <h4 style="color: #4b5563; margin-bottom:8px;">Risk: High Entry Price</h4>
-                <p class="text-sm">Competitors like Samsung have economies of scale we lack. A $2,500 price point limits mass adoption.</p>
-                <div style="margin-top:8px; padding: 10px; background:#f5f3ff; border-radius:6px; font-size:0.9rem;">
-                    <strong><i class="fas fa-sync"></i> Strategy:</strong> Pivot to "Hardware-as-a-Service". Sell hardware at near-cost ($2000) and monetize via a $5/mo "Zero-Waste" app subscription that guarantees food savings > cost.
-                </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px">
+          <div>
+            <h4 style="color: #4b5563; margin-bottom: 8px">
+              Risk: High Entry Price
+            </h4>
+            <p class="text-sm">
+              Competitors like Samsung have economies of scale we lack. A $2,500
+              price point limits mass adoption.
+            </p>
+            <div
+              style="
+                margin-top: 8px;
+                padding: 10px;
+                background: #f5f3ff;
+                border-radius: 6px;
+                font-size: 0.9rem;
+              "
+            >
+              <strong><i class="fas fa-sync"></i> Strategy:</strong> Pivot to
+              "Hardware-as-a-Service". Sell hardware at near-cost ($2000) and
+              monetize via a $5/mo "Zero-Waste" app subscription that guarantees
+              food savings > cost.
             </div>
-            <div>
-                <h4 style="color: #4b5563; margin-bottom:8px;">Risk: User Churn (Novelty wears off)</h4>
-                <p class="text-sm">Users stop checking the app after 2 months.</p>
-                <div style="margin-top:8px; padding: 10px; background:#f5f3ff; border-radius:6px; font-size:0.9rem;">
-                    <strong><i class="fas fa-magic"></i> Strategy:</strong> "Push" over "Pull". The fridge doesn't wait for you to check it; it proactively adds expiring milk to your online grocery cart (integration with Amazon Fresh/Carrefour).
-                </div>
+          </div>
+          <div>
+            <h4 style="color: #4b5563; margin-bottom: 8px">
+              Risk: User Churn (Novelty wears off)
+            </h4>
+            <p class="text-sm">Users stop checking the app after 2 months.</p>
+            <div
+              style="
+                margin-top: 8px;
+                padding: 10px;
+                background: #f5f3ff;
+                border-radius: 6px;
+                font-size: 0.9rem;
+              "
+            >
+              <strong><i class="fas fa-magic"></i> Strategy:</strong> "Push"
+              over "Pull". The fridge doesn't wait for you to check it; it
+              proactively adds expiring milk to your online grocery cart
+              (integration with Amazon Fresh/Carrefour).
             </div>
+          </div>
         </div>
       </div>
 
       <!-- 4. Pitfalls -->
       <div class="card" style="margin-top: 24px">
         <h2>
-          <i class="fas fa-exclamation-triangle"></i> 4. Pitfalls & Unforeseen Events
+          <i class="fas fa-exclamation-triangle"></i> 4. Pitfalls & Unforeseen
+          Events
         </h2>
         <div
           style="
@@ -146,10 +183,12 @@
               <i class="fas fa-bolt"></i> Pitfall: Sensor Fogging
             </h3>
             <p style="font-size: 0.9rem">
-              <strong>Issue:</strong> Condensation blinded the AI during door-open events.
+              <strong>Issue:</strong> Condensation blinded the AI during
+              door-open events.
             </p>
             <p style="font-size: 0.9rem; margin-top: 8px">
-              <strong><i class="fas fa-wrench"></i> Resolution:</strong> Added heating element ring (automotive grade) to lens assembly.
+              <strong><i class="fas fa-wrench"></i> Resolution:</strong> Added
+              heating element ring (automotive grade) to lens assembly.
             </p>
           </div>
           <div
@@ -164,13 +203,15 @@
               <i class="fas fa-shipping-fast"></i> Pitfall: CM5 Shortage
             </h3>
             <p style="font-size: 0.9rem">
-              <strong>Issue:</strong> Raspberry Pi CM5 modules faced 12-week lead times.
+              <strong>Issue:</strong> Raspberry Pi CM5 modules faced 12-week
+              lead times.
             </p>
             <p style="font-size: 0.9rem; margin-top: 8px">
               <strong
                 ><i class="fas fa-money-bill-wave"></i> Resolution:</strong
               >
-              Activated contingency budget to source from secondary market at +20% premium to maintain schedule.
+              Activated contingency budget to source from secondary market at
+              +20% premium to maintain schedule.
             </p>
           </div>
         </div>
