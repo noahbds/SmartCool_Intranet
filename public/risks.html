@@ -1,9 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Risks | SmartCool Pro</title>
+    <meta
+      name="description"
+      content="Gestion des Risques — SmartCool Pro Intranet"
+    />
+    <meta name="theme-color" content="#3b82f6" />
+    <title>Gestion des Risques | SmartCool Pro</title>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="css/style.css" />
     <link
@@ -18,19 +23,23 @@
         background: white;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
         margin-bottom: 16px;
-        transition: transform 0.2s;
       }
-      .risk-card:hover {
-        transform: translateX(5px);
+      .risk-card.high {
+        border-left-color: #ef4444;
+        background: #fef2f2;
       }
-      .risk-card.High { border-left-color: #ef4444; background: #fff5f5; }
-      .risk-card.Medium { border-left-color: #f59e0b; background: #fffaf0; }
-      .risk-card.Low { border-left-color: #10b981; background: #f0fdf4; }
-
+      .risk-card.medium {
+        border-left-color: #f59e0b;
+        background: #fffbeb;
+      }
+      .risk-card.low {
+        border-left-color: #10b981;
+        background: #f0fdf4;
+      }
       .risk-header {
         display: flex;
-        align-items: flex-start;
-        gap: 15px;
+        align-items: center;
+        gap: 12px;
         margin-bottom: 12px;
       }
       .risk-icon {
@@ -41,131 +50,169 @@
         align-items: center;
         justify-content: center;
         border-radius: 8px;
-        background: rgba(0,0,0,0.05);
+      }
+      .risk-card.high .risk-icon {
+        background: #fee2e2;
+        color: #991b1b;
+      }
+      .risk-card.medium .risk-icon {
+        background: #fef3c7;
+        color: #92400e;
+      }
+      .risk-card.low .risk-icon {
+        background: #dcfce7;
+        color: #166534;
       }
       .risk-title {
         font-size: 1.1rem;
         font-weight: 700;
         color: #0f172a;
-        margin: 0 0 5px 0;
+        margin: 0;
       }
       .risk-badges {
         display: flex;
         gap: 8px;
       }
       .risk-badge {
-        padding: 2px 8px;
-        border-radius: 4px;
-        font-size: 0.75rem;
+        display: inline-flex;
+        align-items: center;
+        padding: 4px 10px;
+        border-radius: 999px;
+        font-size: 0.8rem;
         font-weight: 600;
-        text-transform: uppercase;
       }
-      .risk-badge.prob { background: #e2e8f0; color: #475569; }
-      .risk-badge.impact { background: #fee2e2; color: #991b1b; }
-      
-      .risk-details {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      .risk-badge.prob {
+        background: #dbeafe;
+        color: #1e40af;
+      }
+      .risk-badge.impact {
+        background: #fee2e2;
+        color: #991b1b;
+      }
+      .risk-content {
+        margin-bottom: 12px;
+      }
+      .risk-field {
+        display: flex;
         gap: 12px;
-        margin-top: 12px;
+        margin-bottom: 8px;
+      }
+      .risk-field-label {
+        font-weight: 600;
+        color: #475569;
+        min-width: 100px;
+        font-size: 0.9rem;
+      }
+      .risk-field-value {
+        color: #0f172a;
+        font-size: 0.9rem;
+      }
+      .risk-mitigation {
+        background: rgba(255, 255, 255, 0.5);
+        border-left: 2px solid currentColor;
+        padding: 12px;
+        border-radius: 4px;
         font-size: 0.9rem;
         color: #334155;
+        margin-top: 12px;
       }
-      .detail-item strong { color: #1e293b; display: block; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px; }
-      
-      .mitigation-box {
-        margin-top: 15px;
-        padding: 12px;
-        background: rgba(255,255,255,0.6);
-        border: 1px solid rgba(0,0,0,0.1);
-        border-radius: 6px;
-        font-size: 0.9rem;
-      }
-      .mitigation-box i { color: #10b981; margin-right: 6px; }
     </style>
   </head>
   <body>
     <script src="js/sidebar.js"></script>
+    <script>
+      window.si =
+        window.si ||
+        function () {
+          (window.siq = window.siq || []).push(arguments);
+        };
+    </script>
+    <script defer src="/_vercel/speed-insights/script.js"></script>
     <main class="main-content">
       <header>
-        <h1><i class="fas fa-shield-alt header-icon"></i>Gestion des Risques</h1>
-        <p>Identification et mitigation des menaces critiques (Règles §7).</p>
+        <h1>
+          <i
+            class="fas fa-shield-alt"
+            style="color: var(--accent); margin-right: 10px"
+          ></i>
+          Gestion des Risques
+        </h1>
+        <p>Identification, évaluation et atténuation des risques critiques du projet.</p>
       </header>
 
-      <div id="loading" style="text-align: center; padding: 40px; color: #64748b;">
-        <i class="fas fa-spinner fa-spin fa-2x"></i><br>Chargement des risques...
+      <div id="risks-container" style="display: grid; gap: 16px;">
+        <!-- Risk cards injected by JS -->
       </div>
 
-      <div id="risks-container"></div>
     </main>
-
     <script>
-      const scoreMap = { 'High': 5, 'Medium': 3, 'Low': 1 };
-
-      async function loadRisks() {
+      async function loadRiskCards() {
         try {
-          const res = await fetch('/api/risks');
-          const data = await res.json();
-          const container = document.getElementById('risks-container');
+          const resp = await fetch('/api/risks');
+          const risks = await resp.json();
           
-          // Sort by severity (Impact * Prob)
-          const sortedRisks = data.sort((a, b) => {
-            const scoreA = (scoreMap[a.impact] || 0) + (scoreMap[a.prob] || 0);
-            const scoreB = (scoreMap[b.impact] || 0) + (scoreMap[b.prob] || 0);
-            return scoreB - scoreA;
-          });
+          if (!risks || risks.length === 0) {
+            console.log('No risks available');
+            return;
+          }
 
-          container.innerHTML = sortedRisks.map(risk => {
-            // Mapping values for display
-            const probScore = scoreMap[risk.prob] || '?';
-            const impactScore = scoreMap[risk.impact] || '?';
+          const container = document.getElementById('risks-container');
+          container.innerHTML = '';
+          
+          // Sort by impact score and show all
+          const sorted = risks
+            .map(r => ({
+              ...r,
+              score: (r.probability || 0) * (r.impact || 0)
+            }))
+            .sort((a, b) => b.score - a.score);
+
+          sorted.forEach((risk, idx) => {
+            const severity = risk.impact >= 4 ? 'high' : risk.impact >= 3 ? 'medium' : 'low';
+            const icon = severity === 'high' ? '⚠️' : severity === 'medium' ? '⚡' : 'ℹ️';
             
-            return `
-              <div class="risk-card ${risk.impact}">
+            const html = `
+              <div class="risk-card ${severity}" id="risk-${idx}">
                 <div class="risk-header">
-                  <div class="risk-icon" style="color: ${risk.color}">
-                    <i class="fas ${risk.icon || 'fa-exclamation-triangle'}"></i>
-                  </div>
-                  <div style="flex: 1;">
-                    <h3 class="risk-title">${risk.title}</h3>
+                  <div class="risk-icon">${icon}</div>
+                  <div>
+                    <h3 class="risk-title">${risk.name || 'Sans nom'}</h3>
                     <div class="risk-badges">
-                      <span class="risk-badge prob">Prob: ${risk.prob} (${probScore}/5)</span>
-                      <span class="risk-badge impact">Impact: ${risk.impact} (${impactScore}/5)</span>
+                      <span class="risk-badge prob">Prob: ${risk.probability || 0}/5</span>
+                      <span class="risk-badge impact">Impact: ${risk.impact || 0}/5</span>
                     </div>
                   </div>
                 </div>
-                
-                <div class="risk-details">
-                  <div class="detail-item">
-                    <strong>Contexte / Cause</strong>
-                    ${risk.context}
+                <div class="risk-content">
+                  <div class="risk-field">
+                    <div class="risk-field-label">Domaine:</div>
+                    <div class="risk-field-value">${risk.category || 'N/A'}</div>
                   </div>
-                  <div class="detail-item">
-                    <strong>Catégorie</strong>
-                    <span style="display:inline-block; padding:2px 6px; background:#f1f5f9; border-radius:4px;">${risk.category}</span>
+                  <div class="risk-field">
+                    <div class="risk-field-label">Responsable:</div>
+                    <div class="risk-field-value">${risk.owner || 'N/A'}</div>
                   </div>
-                  <div class="detail-item">
-                    <strong>Responsable</strong>
-                    ${risk.owner}
+                  <div class="risk-field">
+                    <div class="risk-field-label">Description:</div>
+                    <div class="risk-field-value">${risk.description || 'N/A'}</div>
                   </div>
-                </div>
-
-                <div class="mitigation-box">
-                  <strong><i class="fas fa-tools"></i> Plan d'Atténuation:</strong><br>
-                  ${risk.mitigation}
+                  <div class="risk-mitigation">
+                    <strong>Atténuation:</strong><br/>
+                    ${risk.mitigation || 'N/A'}
+                  </div>
                 </div>
               </div>
             `;
-          }).join('');
-          
-          document.getElementById('loading').style.display = 'none';
-        } catch (e) {
-          console.error(e);
-          document.getElementById('loading').innerHTML = `<span style="color:red">Erreur de chargement: ${e.message}</span>`;
+            container.innerHTML += html;
+          });
+
+        } catch (err) {
+          console.error('Error loading risks:', err);
         }
       }
 
-      loadRisks();
+      // Load on page load
+      window.addEventListener('load', loadRiskCards);
     </script>
   </body>
 </html>
