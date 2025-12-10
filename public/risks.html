@@ -15,6 +15,59 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
+    <style>
+      /* Styles from ddd/risks.html */
+      .sheet-wrapper {
+        overflow-x: auto;
+        background: white;
+        border: 1px solid #e0e0e0;
+        margin-top: 20px;
+      }
+      .google-sheet-style {
+        border-collapse: collapse;
+        width: 100%;
+        font-family: arial, sans-serif;
+        font-size: 13px;
+      }
+      .google-sheet-style th {
+        background-color: #f8f9fa;
+        border: 1px solid #e0e0e0;
+        padding: 8px;
+        text-align: left;
+        color: #5f6368;
+        font-weight: bold;
+        position: sticky;
+        top: 0;
+      }
+      .google-sheet-style td {
+        border: 1px solid #e0e0e0;
+        padding: 6px 8px;
+        color: #000;
+      }
+      .google-sheet-style tr:nth-child(even) {
+        background-color: #ffffff;
+      }
+      .google-sheet-style .row-num {
+        background-color: #f8f9fa;
+        text-align: center;
+        color: #5f6368;
+        font-weight: bold;
+        width: 30px;
+      }
+      .download-btn {
+        display: inline-block;
+        background: #27ae60;
+        color: white;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        font-weight: bold;
+      }
+      .download-btn:hover {
+        background: #219150;
+      }
+    </style>
   </head>
   <body>
     <script src="js/sidebar.js"></script>
@@ -46,6 +99,123 @@
         id="risks-container"
       >
         <!-- Risks injected by JS -->
+      </div>
+
+      <h2 style="margin-top: 40px; margin-bottom: 20px;">Matrice des Risques Complète</h2>
+      <a
+        href="spreadsheets/SmartCool_Risques_Detailles.csv"
+        class="download-btn"
+        >📥 Télécharger le CSV (Compatible Excel/Sheets)</a
+      >
+      <div class="sheet-container">
+        <table class="google-sheet-style">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>REF</th>
+              <th>DESCRIPTION DU RISQUE</th>
+              <th>CATEGORIE</th>
+              <th>PROBABILITE (1-5)</th>
+              <th>IMPACT (1-5)</th>
+              <th>CRITICITE</th>
+              <th>DECLENCHEUR</th>
+              <th>PLAN D'ATTENUATION (MITIGATION)</th>
+              <th>RESPONSABLE</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="row-num">1</td>
+              <td>R01</td>
+              <td>Rupture de stock microcontrôleur STM32</td>
+              <td>Supply Chain</td>
+              <td>4</td>
+              <td>5</td>
+              <td>20</td>
+              <td>Délai fournisseur > 12 sem</td>
+              <td>
+                Design 'Double Empreinte' sur le PCB pour accepter une puce
+                GigaDevice (clone) en backup.
+              </td>
+              <td>Hardware Lead</td>
+            </tr>
+            <tr>
+              <td class="row-num">2</td>
+              <td>R02</td>
+              <td>Condensation sur la lentille caméra</td>
+              <td>Technique</td>
+              <td>3</td>
+              <td>5</td>
+              <td>15</td>
+              <td>Flou sur les images</td>
+              <td>
+                Intégration d'un fil résistif chauffant autour de la lentille +
+                Algorithme de désembuage.
+              </td>
+              <td>Hardware Lead</td>
+            </tr>
+            <tr>
+              <td class="row-num">3</td>
+              <td>R03</td>
+              <td>Coût BOM dépasse la cible (170€)</td>
+              <td>Financier</td>
+              <td>3</td>
+              <td>4</td>
+              <td>12</td>
+              <td>Inflation composants</td>
+              <td>
+                Négociation de prix sur volume annuel (10k unités) ou
+                suppression de l'écran tactile (remplacé par App mobile).
+              </td>
+              <td>Acheteur</td>
+            </tr>
+            <tr>
+              <td class="row-num">4</td>
+              <td>R04</td>
+              <td>Faux positifs IA (Confusion Pomme/Tomate)</td>
+              <td>Qualité</td>
+              <td>4</td>
+              <td>3</td>
+              <td>12</td>
+              <td>Plaintes utilisateurs bêta</td>
+              <td>
+                Mise en place d'un système 'Human-in-the-loop' : l'utilisateur
+                corrige l'IA dans l'app, améliorant le modèle.
+              </td>
+              <td>Data Scientist</td>
+            </tr>
+            <tr>
+              <td class="row-num">5</td>
+              <td>R05</td>
+              <td>Échec Certification EMC (Rayonnement)</td>
+              <td>Légal</td>
+              <td>2</td>
+              <td>5</td>
+              <td>10</td>
+              <td>Refus labo certification</td>
+              <td>
+                Ajout de cages de Faraday sur le PCB dès la version Alpha +
+                perles de ferrite sur les câbles.
+              </td>
+              <td>RF Engineer</td>
+            </tr>
+            <tr>
+              <td class="row-num">6</td>
+              <td>R06</td>
+              <td>Latence Cloud trop élevée (>3s)</td>
+              <td>UX</td>
+              <td>2</td>
+              <td>3</td>
+              <td>6</td>
+              <td>Mauvaise connexion Wi-Fi</td>
+              <td>
+                Architecture 'Edge First' : tout le traitement critique se fait
+                en local sur le Raspberry Pi, pas de dépendance cloud.
+              </td>
+              <td>Software Lead</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </main>
     <script>

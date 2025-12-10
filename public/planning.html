@@ -27,16 +27,69 @@
       }
 
       body {
-        overflow: hidden; /* App-like feel */
+        overflow-y: auto; /* App-like feel but scrollable for detailed view */
       }
 
       .main-content {
         margin-left: var(--sidebar-width);
-        height: 100vh;
+        min-height: 100vh;
         display: flex;
         flex-direction: column;
         padding: 0; /* Reset default padding */
         background: #fff;
+      }
+
+      /* Styles from ddd/planning.html */
+      .sheet-wrapper {
+        overflow-x: auto;
+        background: white;
+        border: 1px solid #e0e0e0;
+        margin-top: 20px;
+        padding: 20px;
+      }
+      .google-sheet-style {
+        border-collapse: collapse;
+        width: 100%;
+        font-family: arial, sans-serif;
+        font-size: 13px;
+      }
+      .google-sheet-style th {
+        background-color: #f8f9fa;
+        border: 1px solid #e0e0e0;
+        padding: 8px;
+        text-align: left;
+        color: #5f6368;
+        font-weight: bold;
+        position: sticky;
+        top: 0;
+      }
+      .google-sheet-style td {
+        border: 1px solid #e0e0e0;
+        padding: 6px 8px;
+        color: #000;
+      }
+      .google-sheet-style tr:nth-child(even) {
+        background-color: #ffffff;
+      }
+      .google-sheet-style .row-num {
+        background-color: #f8f9fa;
+        text-align: center;
+        color: #5f6368;
+        font-weight: bold;
+        width: 30px;
+      }
+      .download-btn {
+        display: inline-block;
+        background: #27ae60;
+        color: white;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        font-weight: bold;
+      }
+      .download-btn:hover {
+        background: #219150;
       }
 
       /* Header Area */
@@ -138,6 +191,7 @@
         display: flex;
         overflow: hidden;
         position: relative;
+        min-height: 600px; /* Ensure it has height even if page scrolls */
       }
 
       /* Left Panel: Task List */
@@ -696,6 +750,215 @@
               <!-- Bars injected here -->
             </div>
           </div>
+        </div>
+      </div>
+
+      <div class="sheet-wrapper" style="margin: 20px; border-top: 1px solid #eee; padding-top: 20px;">
+        <h2 style="margin-bottom: 20px;">Planning WBS Détaillé</h2>
+        <a
+          href="spreadsheets/SmartCool_Planning_Detaille.csv"
+          class="download-btn"
+          >📥 Télécharger le CSV (Compatible Excel/Sheets)</a
+        >
+        <div class="sheet-container">
+          <table class="google-sheet-style">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>ID</th>
+                <th>PHASE</th>
+                <th>TACHE</th>
+                <th>RESPONSABLE</th>
+                <th>DEBUT</th>
+                <th>FIN</th>
+                <th>DUREE (J)</th>
+                <th>LIVRABLE</th>
+                <th>DEPENDANCE</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="row-num">1</td>
+                <td>1.1</td>
+                <td>Conception</td>
+                <td>Définition des Specs Techniques</td>
+                <td>CTO</td>
+                <td>01/10/2025</td>
+                <td>07/10/2025</td>
+                <td>7</td>
+                <td>Cahier des charges v1.0</td>
+                <td>-</td>
+              </tr>
+              <tr>
+                <td class="row-num">2</td>
+                <td>1.2</td>
+                <td>Conception</td>
+                <td>Sélection des composants clés (BOM)</td>
+                <td>Hardware Lead</td>
+                <td>08/10/2025</td>
+                <td>14/10/2025</td>
+                <td>7</td>
+                <td>BOM Preliminaire</td>
+                <td>1.1</td>
+              </tr>
+              <tr>
+                <td class="row-num">3</td>
+                <td>1.3</td>
+                <td>Conception</td>
+                <td>Architecture Cloud (AWS)</td>
+                <td>Cloud Architect</td>
+                <td>08/10/2025</td>
+                <td>14/10/2025</td>
+                <td>7</td>
+                <td>Diagramme d'architecture</td>
+                <td>1.1</td>
+              </tr>
+              <tr>
+                <td class="row-num">4</td>
+                <td>2.1</td>
+                <td>Hardware</td>
+                <td>Schématique PCB (Altium)</td>
+                <td>Hardware Lead</td>
+                <td>15/10/2025</td>
+                <td>30/10/2025</td>
+                <td>15</td>
+                <td>Gerber Files v0.1</td>
+                <td>1.2</td>
+              </tr>
+              <tr>
+                <td class="row-num">5</td>
+                <td>2.2</td>
+                <td>Hardware</td>
+                <td>Routage PCB (Placement)</td>
+                <td>Hardware Lead</td>
+                <td>31/10/2025</td>
+                <td>07/11/2025</td>
+                <td>7</td>
+                <td>Fichiers de fab</td>
+                <td>2.1</td>
+              </tr>
+              <tr>
+                <td class="row-num">6</td>
+                <td>2.3</td>
+                <td>Hardware</td>
+                <td>Fabrication PCB Alpha (JLCPCB)</td>
+                <td>Externe</td>
+                <td>08/11/2025</td>
+                <td>15/11/2025</td>
+                <td>7</td>
+                <td>Cartes nues</td>
+                <td>2.2</td>
+              </tr>
+              <tr>
+                <td class="row-num">7</td>
+                <td>2.4</td>
+                <td>Hardware</td>
+                <td>Assemblage & Bring-up (Test)</td>
+                <td>Hardware Lead</td>
+                <td>16/11/2025</td>
+                <td>20/11/2025</td>
+                <td>4</td>
+                <td>PCB Fonctionnel</td>
+                <td>2.3</td>
+              </tr>
+              <tr>
+                <td class="row-num">8</td>
+                <td>3.1</td>
+                <td>Software</td>
+                <td>Collecte Dataset (Photos frigo)</td>
+                <td>Data Team</td>
+                <td>15/10/2025</td>
+                <td>01/11/2025</td>
+                <td>16</td>
+                <td>5000 images annotées</td>
+                <td>1.1</td>
+              </tr>
+              <tr>
+                <td class="row-num">9</td>
+                <td>3.2</td>
+                <td>Software</td>
+                <td>Entrainement Modèle YOLOv8</td>
+                <td>Data Scientist</td>
+                <td>02/11/2025</td>
+                <td>20/11/2025</td>
+                <td>18</td>
+                <td>Modèle .pt optimisé</td>
+                <td>3.1</td>
+              </tr>
+              <tr>
+                <td class="row-num">10</td>
+                <td>3.3</td>
+                <td>Software</td>
+                <td>Développement Firmware (C++)</td>
+                <td>Embedded Dev</td>
+                <td>15/10/2025</td>
+                <td>30/11/2025</td>
+                <td>45</td>
+                <td>Firmware v0.5</td>
+                <td>1.2</td>
+              </tr>
+              <tr>
+                <td class="row-num">11</td>
+                <td>3.4</td>
+                <td>Software</td>
+                <td>Intégration Modèle sur RPi5</td>
+                <td>Embedded Dev</td>
+                <td>01/12/2025</td>
+                <td>10/12/2025</td>
+                <td>10</td>
+                <td>Inférence < 200ms</td>
+                <td>2.4, 3.2</td>
+              </tr>
+              <tr>
+                <td class="row-num">12</td>
+                <td>4.1</td>
+                <td>Indus</td>
+                <td>Design Mécanique 3D (Boitier)</td>
+                <td>Mech Eng</td>
+                <td>15/11/2025</td>
+                <td>15/12/2025</td>
+                <td>30</td>
+                <td>Fichiers STEP</td>
+                <td>2.2</td>
+              </tr>
+              <tr>
+                <td class="row-num">13</td>
+                <td>4.2</td>
+                <td>Indus</td>
+                <td>Lancement Outillage (Moules)</td>
+                <td>Acheteur</td>
+                <td>01/01/2026</td>
+                <td>28/02/2026</td>
+                <td>58</td>
+                <td>Moules Acier T1</td>
+                <td>4.1</td>
+              </tr>
+              <tr>
+                <td class="row-num">14</td>
+                <td>4.3</td>
+                <td>Certif</td>
+                <td>Pré-scan EMC (Compatibilité)</td>
+                <td>Labo Interne</td>
+                <td>15/12/2025</td>
+                <td>20/12/2025</td>
+                <td>5</td>
+                <td>Rapport de test</td>
+                <td>2.4</td>
+              </tr>
+              <tr>
+                <td class="row-num">15</td>
+                <td>4.4</td>
+                <td>Certif</td>
+                <td>Certification Finale CE</td>
+                <td>TUV Lab</td>
+                <td>01/03/2026</td>
+                <td>30/03/2026</td>
+                <td>30</td>
+                <td>Certificat CE</td>
+                <td>4.2</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
 
