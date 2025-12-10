@@ -14,9 +14,10 @@ SmartCool Pro Intranet is a dashboard for managing the Zero-Waste Smart Fridge p
 
 ## Tech Stack
 
-- **Frontend**: HTML5, CSS3, Vanilla JavaScript
-- **Backend**: Node.js, Express
-- **Database**: SQLite
+- **Frontend**: Static HTML, CSS, and vanilla JavaScript
+- **Backend**: Vercel serverless functions (Node.js)
+- **Data**: JSON files in `/data` consumed by the API routes
+- **Optional cache**: Redis (set `REDIS_URL`) for persisting the Gantt edits across deployments
 - **Icons**: FontAwesome
 
 ## Setup Instructions
@@ -32,23 +33,32 @@ SmartCool Pro Intranet is a dashboard for managing the Zero-Waste Smart Fridge p
     npm install
     ```
 
-3.  **Start the server:**
+3.  **Start the dev server (Vercel):**
     ```bash
-    node server.js
+    npm run vercel
+    # or
+    npx vercel dev
     ```
 
 4.  **Open the application:**
     Open your browser and navigate to `http://localhost:3000`.
 
+### Optional: enable Redis caching
+
+Add a `.env.local` with:
+
+```
+REDIS_URL=redis://<user>:<password>@<host>:<port>
+```
+
+This keeps Gantt edits persistent when running on read-only filesystems (e.g., Vercel serverless).
+
 ## Project Structure
 
-- `api/`: Backend API endpoints.
-- `css/`: Stylesheets.
-- `data/`: JSON data files.
-- `gantt/`: Gantt chart data.
-- `js/`: Frontend JavaScript files.
-- `server.js`: Main server file.
-- `*.html`: HTML pages for different sections.
+- `api/`: Serverless API endpoints (Vercel) that read JSON in `/data` and optionally cache to Redis.
+- `public/`: Static HTML, CSS, and JS assets for each section of the intranet.
+- `data/`: JSON data files consumed by the API routes and pages.
+- `vercel.json`: Deployment configuration.
 
 ## License
 
