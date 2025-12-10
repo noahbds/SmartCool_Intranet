@@ -1,29 +1,56 @@
 [
   {
-    "title": "Global Chip Shortage",
-    "context": "High demand for ARM-based processors (Raspberry Pi) may lead to 12+ week lead times.",
-    "mitigation": "Pre-order critical compute modules immediately (Week 2). Validate alternative hardware.",
+    "title": "Rupture de stock microcontrôleur STM32",
+    "context": "Délai fournisseur > 12 sem",
+    "mitigation": "Design 'Double Empreinte' sur le PCB pour accepter une puce GigaDevice (clone) en backup.",
     "prob": "High",
     "impact": "High",
     "color": "#ef4444",
-    "icon": "fa-exclamation-circle"
+    "icon": "fa-microchip"
   },
   {
-    "title": "Camera Fogging",
-    "context": "The fridge interior is cold and humid. Opening the door causes condensation.",
-    "mitigation": "Integrate hydrophobic coating on lens glass. Design placement away from vents.",
+    "title": "Condensation sur la lentille caméra",
+    "context": "Flou sur les images",
+    "mitigation": "Intégration d'un fil résistif chauffant autour de la lentille + Algorithme de désembuage.",
     "prob": "Medium",
     "impact": "High",
     "color": "#f59e0b",
-    "icon": "fa-temperature-low"
+    "icon": "fa-water"
   },
   {
-    "title": "AI Model Accuracy < 90%",
-    "context": "YOLOv8 may struggle with occluded items or poor lighting.",
-    "mitigation": "Collect a custom dataset with 'messy fridge' scenarios. Implement multi-frame tracking.",
+    "title": "Coût BOM dépasse la cible (170€)",
+    "context": "Inflation composants",
+    "mitigation": "Négociation de prix sur volume annuel (10k unités) ou suppression de l'écran tactile (remplacé par App mobile).",
     "prob": "Medium",
+    "impact": "High",
+    "color": "#f59e0b",
+    "icon": "fa-coins"
+  },
+  {
+    "title": "Faux positifs IA (Confusion Pomme/Tomate)",
+    "context": "Plaintes utilisateurs bêta",
+    "mitigation": "Mise en place d'un système 'Human-in-the-loop' : l'utilisateur corrige l'IA dans l'app, améliorant le modèle.",
+    "prob": "High",
+    "impact": "Medium",
+    "color": "#ef4444",
+    "icon": "fa-robot"
+  },
+  {
+    "title": "Échec Certification EMC (Rayonnement)",
+    "context": "Refus labo certification",
+    "mitigation": "Ajout de cages de Faraday sur le PCB dès la version Alpha + perles de ferrite sur les câbles.",
+    "prob": "Low",
+    "impact": "High",
+    "color": "#3b82f6",
+    "icon": "fa-radiation"
+  },
+  {
+    "title": "Latence Cloud trop élevée (>3s)",
+    "context": "Mauvaise connexion Wi-Fi",
+    "mitigation": "Architecture 'Edge First' : tout le traitement critique se fait en local sur le Raspberry Pi, pas de dépendance cloud.",
+    "prob": "Low",
     "impact": "Medium",
     "color": "#3b82f6",
-    "icon": "fa-eye-slash"
+    "icon": "fa-cloud"
   }
 ]

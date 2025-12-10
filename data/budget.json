@@ -1,15 +1,21 @@
 {
   "summary": [
-    { "category": "Total", "amount": 60000 },
-    { "category": "CAPEX", "amount": 40000 },
-    { "category": "OPEX", "amount": 20000 }
+    { "category": "Total", "amount": 251614.65 },
+    { "category": "CAPEX", "amount": 98500.00 },
+    { "category": "OPEX", "amount": 152945.00 }
   ],
   "bom": [
-    { "component": "Compute Module", "description": "Raspberry Pi 4 Model B (4GB)", "cost": 55.0, "supplier": "Element14", "status": "Sourced", "icon": "fa-microchip" },
-    { "component": "Vision Sensor", "description": "Sony IMX219 8MP Camera Module", "cost": 25.0, "supplier": "Arducam", "status": "Ordering", "icon": "fa-camera" },
-    { "component": "Custom PCB", "description": "Power Mgmt & Sensor Interface", "cost": 10.0, "supplier": "JLCPCB", "status": "Design Phase", "icon": "fa-print" },
-    { "component": "Housing", "description": "Injection Molded ABS (Prototype)", "cost": 15.0, "supplier": "Local Fab", "status": "Pending", "icon": "fa-cube" },
-    { "component": "Power Supply", "description": "5V 3A USB-C Power Supply", "cost": 8.0, "supplier": "DigiKey", "status": "Sourced", "icon": "fa-plug" },
-    { "component": "Display", "description": "7-inch Touchscreen LCD", "cost": 45.0, "supplier": "Waveshare", "status": "Pending", "icon": "fa-tv" }
+    { "component": "Compute Module 5 (CM5) 4GB", "description": "Raspberry Pi Ltd - Prix volume OEM >1k", "cost": 55.00, "supplier": "Raspberry Pi Ltd", "status": "Sourced", "icon": "fa-microchip" },
+    { "component": "Dissipateur Thermique Passif", "description": "Aluminium extrudé custom", "cost": 1.20, "supplier": "Local Metal", "status": "Sourced", "icon": "fa-snowflake" },
+    { "component": "Module Caméra IMX219 (Wide)", "description": "3 angles de vue (Haut, Milieu, Bas)", "cost": 8.50, "supplier": "Arducam", "status": "Ordering", "icon": "fa-camera" },
+    { "component": "Nappe FFC (Câble plat)", "description": "Blindage EMI requis", "cost": 0.45, "supplier": "Molex", "status": "Sourced", "icon": "fa-link" },
+    { "component": "Carte Mère Custom", "description": "4 couches, ENIG finish", "cost": 12.00, "supplier": "JLCPCB / PCBWay", "status": "Design Phase", "icon": "fa-print" },
+    { "component": "Microcontrôleur", "description": "STM32G030 - Gestion capteurs portes & LED", "cost": 1.80, "supplier": "STM32G030", "status": "Sourced", "icon": "fa-microchip" },
+    { "component": "Capteur Temp/Humidité", "description": "Sensirion SHT40 - Précision +/- 0.2C", "cost": 2.10, "supplier": "Sensirion", "status": "Sourced", "icon": "fa-thermometer-half" },
+    { "component": "Capteur Portes", "description": "Reed Switch - Détection ouverture", "cost": 0.60, "supplier": "DigiKey", "status": "Sourced", "icon": "fa-door-open" },
+    { "component": "Écran LCD 7 pouces Touch", "description": "Interface utilisateur externe", "cost": 35.00, "supplier": "BOE / Tianma", "status": "Pending", "icon": "fa-tv" },
+    { "component": "Convertisseur AC/DC 5V 5A", "description": "Certifié CE/UL de qualité industrielle", "cost": 14.50, "supplier": "Mean Well", "status": "Sourced", "icon": "fa-plug" },
+    { "component": "Injection Plastique (ABS)", "description": "Moule 2 cavités", "cost": 18.00, "supplier": "Usine Partenaire", "status": "Pending", "icon": "fa-cube" },
+    { "component": "Visserie & Assemblage", "description": "Assemblage divers", "cost": 2.00, "supplier": "-", "status": "Sourced", "icon": "fa-tools" }
   ]
 }
