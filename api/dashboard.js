@@ -16,10 +16,10 @@ module.exports = (_req, res) => {
     const total = budget.summary.find(s => s.category === 'Total')
     const topRisks = [...risks]
       .sort((a, b) =>
-        `${b.impact}${b.prob}`.localeCompare(`${a.impact}${a.prob}`)
+        `${b.impact}${b.probability}`.localeCompare(`${a.impact}${a.probability}`)
       )
       .slice(0, 3)
-      .map(r => ({ title: r.title, color: r.color }))
+      .map(r => ({ title: r.name, category: r.category }))
 
     res.json({
       milestones,

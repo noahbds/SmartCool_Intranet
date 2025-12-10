@@ -28,80 +28,9 @@
     <script defer src="/_vercel/speed-insights/script.js"></script>
     <main class="main-content">
       <header>
-        <h1>
-          <i
-            class="fas fa-envelope-open-text"
-            style="color: var(--accent); margin-right: 10px"
-          ></i
-          >Communications
-        </h1>
-        <p>Internal and External Project Correspondence.</p>
+        <h1>Communications</h1>
+        <p>WORK IN PROGRESS</p>
       </header>
-
-      <div
-        class="card-grid"
-        style="grid-template-columns: 1fr; gap: 40px"
-        id="comms-container"
-      >
-        <!-- Emails injected by JS -->
-      </div>
     </main>
-    <script>
-      fetch("/api/comms")
-        .then((res) => res.json())
-        .then((comms) => {
-          const container = document.getElementById("comms-container");
-          container.innerHTML = comms
-            .map(
-              (comm, index) => `
-                    <div>
-                        <h3 style="margin-bottom: 16px;"><i class="fas ${
-                          comm.icon
-                        }"></i> ${index + 1}. ${comm.subject}</h3>
-                        <div class="card" style="padding: 0; overflow: hidden; border: 1px solid #e2e8f0;">
-                            <div style="background: #f8fafc; padding: 20px; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center;">
-                                <div>
-                                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
-                                        <div style="width: 32px; height: 32px; background: var(--accent); border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 0.8rem;">${comm.sender.charAt(
-                                          0
-                                        )}</div>
-                                        <div>
-                                            <p style="font-weight: 600; font-size: 0.9rem;">${
-                                              comm.sender
-                                            }</p>
-                                            <p style="font-size: 0.8rem; color: var(--text-muted);">To: ${
-                                              comm.recipient
-                                            }</p>
-                                        </div>
-                                    </div>
-                                    <p style="font-weight: 600;">Subject: ${
-                                      comm.subject
-                                    }</p>
-                                </div>
-                                <button onclick="copyToClipboard('email-${
-                                  comm.id
-                                }')" style="background: white; border: 1px solid #cbd5e1; padding: 8px 12px; border-radius: 6px; cursor: pointer; color: #64748b;">
-                                    <i class="far fa-copy"></i> Copy
-                                </button>
-                            </div>
-                            <div id="email-${
-                              comm.id
-                            }" style="padding: 32px; font-family: 'Georgia', serif; color: #334155;">
-                                ${comm.content}
-                            </div>
-                        </div>
-                    </div>
-                `
-            )
-            .join("");
-        });
-
-      function copyToClipboard(elementId) {
-        const text = document.getElementById(elementId).innerText;
-        navigator.clipboard.writeText(text).then(() => {
-          alert("Email content copied to clipboard!");
-        });
-      }
-    </script>
   </body>
 </html>
