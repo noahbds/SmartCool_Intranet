@@ -14,7 +14,7 @@
     "sender": "Noah (Project Manager)",
     "recipient": "Board of Directors",
     "subject": "Budget Approval Request",
-    "content": "<p>Dear Board Members,</p><p>Following the successful completion of our initial feasibility study, I am submitting the formal budget request for the T-CEN-500 Industrialization Phase.</p><p><strong>Request Summary:</strong></p><ul><li><strong>Total Budget:</strong> $60,000</li><li><strong>CAPEX ($40k):</strong> Allocated for soft-steel tooling and molds to ensure production quality.</li><li><strong>OPEX ($20k):</strong> Dedicated to specialized labor and cloud infrastructure for AI training.</li></ul><p>We are confident this investment will yield a market-ready prototype by Q2.</p><p>Sincerely,<br>Noah</p>",
+    "content": "<p>Dear Board Members,</p><p>Following the feasibility and risk reviews, I am submitting the formal budget request for the SmartCool Pro industrialization phase.</p><p><strong>Request Summary:</strong></p><ul><li><strong>Total Budget:</strong> €251,615</li><li><strong>CAPEX (€98,500):</strong> Tooling, certification, and test bench investments.</li><li><strong>OPEX (€153,115):</strong> Six-month run covering engineering, cloud, and the initial BOM for the pilot build.</li></ul><p>This envelope keeps us on track for a Q2 pilot and aligns with the updated Gantt, skills, and risk plans.</p><p>Sincerely,<br>Noah</p>",
     "icon": "fa-file-invoice-dollar"
   }
 ]

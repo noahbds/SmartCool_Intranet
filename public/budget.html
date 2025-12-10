@@ -20,7 +20,7 @@
         width: 120px;
         height: 120px;
         border-radius: 50%;
-        background: conic-gradient(var(--accent) 0% 66%, #10b981 66% 100%);
+        background: conic-gradient(#cbd5e1 0% 50%, #e2e8f0 50% 100%);
         margin: 0 auto 20px auto;
         position: relative;
       }
@@ -137,8 +137,10 @@
         >
           <div class="pie-chart"></div>
           <div style="font-size: 0.8rem; color: var(--text-muted)">
-            <span style="color: var(--accent)">●</span> CAPEX (66%) <br />
-            <span style="color: #10b981">●</span> OPEX (33%)
+            <span style="color: var(--accent)">●</span>
+            CAPEX (<span id="capex-percent">--</span>%) <br />
+            <span style="color: #10b981">●</span>
+            OPEX (<span id="opex-percent">--</span>%)
           </div>
         </div>
       </div>
@@ -514,23 +516,31 @@
           const capex = data.summary.find((s) => s.category === "CAPEX").amount;
           const opex = data.summary.find((s) => s.category === "OPEX").amount;
 
-          cardsContainer.innerHTML = `
-                    <div class="card">
-                        <h3>Budget Total</h3>
-                        <p class="counter" data-target="${total}" style="font-size: 2rem; font-weight: 700; color: var(--primary); margin: 10px 0;">€0</p>
-                        <p style="color: var(--text-muted);"><i class="fas fa-check-circle"></i> Approuvé par le Conseil</p>
-                    </div>
-                    <div class="card">
-                        <h3>CAPEX (One-time)</h3>
-                        <p class="counter" data-target="${capex}" style="font-size: 2rem; font-weight: 700; color: var(--accent); margin: 10px 0;">€0</p>
-                        <p style="color: var(--text-muted);">Outillage, Moules</p>
-                    </div>
-                    <div class="card">
-                        <h3>OPEX (Récurrent)</h3>
-                        <p class="counter" data-target="${opex}" style="font-size: 2rem; font-weight: 700; color: #10b981; margin: 10px 0;">€0</p>
-                        <p style="color: var(--text-muted);">RH, Cloud</p>
-                    </div>
-                `;
+            cardsContainer.innerHTML = `
+                <div class="card">
+                  <h3>Budget Total</h3>
+                  <p class="counter" data-target="${total}" style="font-size: 2rem; font-weight: 700; color: var(--primary); margin: 10px 0;">€0</p>
+                  <p style="color: var(--text-muted);"><i class="fas fa-check-circle"></i> Approuvé par le Conseil</p>
+                </div>
+                <div class="card">
+                  <h3>CAPEX (One-time)</h3>
+                  <p class="counter" data-target="${capex}" style="font-size: 2rem; font-weight: 700; color: var(--accent); margin: 10px 0;">€0</p>
+                  <p style="color: var(--text-muted);">Outillage, Moules</p>
+                </div>
+                <div class="card">
+                  <h3>OPEX (Récurrent)</h3>
+                  <p class="counter" data-target="${opex}" style="font-size: 2rem; font-weight: 700; color: #10b981; margin: 10px 0;">€0</p>
+                  <p style="color: var(--text-muted);">RH, Cloud, BOM</p>
+                </div>
+              `;
+
+            // Update pie chart with live ratios
+            const pie = document.querySelector('.pie-chart');
+            const capexPct = Math.round((capex / total) * 100);
+            const opexPct = 100 - capexPct;
+            pie.style.background = `conic-gradient(var(--accent) 0% ${capexPct}%, #10b981 ${capexPct}% 100%)`;
+            document.getElementById('capex-percent').innerText = capexPct;
+            document.getElementById('opex-percent').innerText = opexPct;
 
           // Render BOM
           const bomBody = document.getElementById("bom-body");

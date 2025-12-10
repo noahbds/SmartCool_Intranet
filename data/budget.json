@@ -1,21 +1,21 @@
 {
   "summary": [
-    { "category": "Total", "amount": 263614.65 },
-    { "category": "CAPEX", "amount": 98500.00 },
-    { "category": "OPEX", "amount": 165114.65 }
+    { "category": "Total", "amount": 251614.65 },
+    { "category": "CAPEX", "amount": 98500.0 },
+    { "category": "OPEX", "amount": 153114.65 }
   ],
   "bom": [
-    { "component": "Compute Module 5 (CM5) 4GB", "description": "Raspberry Pi Ltd - Adjusted 2025 Pricing", "cost": 65.00, "supplier": "Raspberry Pi Ltd", "status": "Sourced", "icon": "fa-microchip" },
-    { "component": "Dissipateur Thermique Passif", "description": "Aluminium extrudé custom", "cost": 1.20, "supplier": "Local Metal", "status": "Sourced", "icon": "fa-snowflake" },
-    { "component": "Module Caméra IMX219 (Wide)", "description": "3 angles de vue (Haut, Milieu, Bas)", "cost": 8.50, "supplier": "Arducam", "status": "Ordering", "icon": "fa-camera" },
+    { "component": "Compute Module 5 (CM5) 4GB", "description": "Raspberry Pi Ltd", "cost": 55.0, "supplier": "Raspberry Pi Ltd", "status": "Sourced", "icon": "fa-microchip" },
+    { "component": "Dissipateur Thermique Passif", "description": "Aluminium extrudé custom", "cost": 1.2, "supplier": "Local Metal", "status": "Sourced", "icon": "fa-snowflake" },
+    { "component": "Module Caméra IMX219 (Wide)", "description": "3 angles de vue (Haut, Milieu, Bas)", "cost": 8.5, "supplier": "Arducam", "status": "Ordering", "icon": "fa-camera" },
     { "component": "Nappe FFC (Câble plat)", "description": "Blindage EMI requis", "cost": 0.45, "supplier": "Molex", "status": "Sourced", "icon": "fa-link" },
-    { "component": "Carte Mère Custom", "description": "4 couches, ENIG finish", "cost": 12.00, "supplier": "JLCPCB / PCBWay", "status": "Design Phase", "icon": "fa-print" },
-    { "component": "Microcontrôleur", "description": "STM32G030 - Gestion capteurs portes & LED", "cost": 1.80, "supplier": "STM32G030", "status": "Sourced", "icon": "fa-microchip" },
-    { "component": "Capteur Temp/Humidité", "description": "Sensirion SHT40 - Précision +/- 0.2C", "cost": 2.10, "supplier": "Sensirion", "status": "Sourced", "icon": "fa-thermometer-half" },
-    { "component": "Capteur Portes", "description": "Reed Switch - Détection ouverture", "cost": 0.60, "supplier": "DigiKey", "status": "Sourced", "icon": "fa-door-open" },
-    { "component": "Écran LCD 7 pouces Touch", "description": "Interface utilisateur externe", "cost": 42.00, "supplier": "BOE / Tianma", "status": "Pending", "icon": "fa-tv" },
-    { "component": "Convertisseur AC/DC 5V 5A", "description": "Certifié CE/UL de qualité industrielle", "cost": 14.50, "supplier": "Mean Well", "status": "Sourced", "icon": "fa-plug" },
-    { "component": "Injection Plastique (ABS)", "description": "Moule 2 cavités", "cost": 18.00, "supplier": "Usine Partenaire", "status": "Pending", "icon": "fa-cube" },
-    { "component": "Visserie & Assemblage", "description": "Assemblage divers", "cost": 2.00, "supplier": "-", "status": "Sourced", "icon": "fa-tools" }
+    { "component": "Carte Mère Custom", "description": "4 couches, ENIG finish", "cost": 12.0, "supplier": "JLCPCB / PCBWay", "status": "Design Phase", "icon": "fa-print" },
+    { "component": "Microcontrôleur", "description": "STM32G030 - Gestion capteurs portes & LED", "cost": 1.8, "supplier": "STM32G030", "status": "Sourced", "icon": "fa-microchip" },
+    { "component": "Capteur Temp/Humidité", "description": "Sensirion SHT40 - Précision +/- 0.2C", "cost": 2.1, "supplier": "Sensirion", "status": "Sourced", "icon": "fa-thermometer-half" },
+    { "component": "Capteur Portes", "description": "Reed Switch - Détection ouverture", "cost": 0.6, "supplier": "DigiKey", "status": "Sourced", "icon": "fa-door-open" },
+    { "component": "Écran LCD 7 pouces Touch", "description": "Interface utilisateur externe", "cost": 35.0, "supplier": "BOE / Tianma", "status": "Pending", "icon": "fa-tv" },
+    { "component": "Convertisseur AC/DC 5V 5A", "description": "Certifié CE/UL de qualité industrielle", "cost": 14.5, "supplier": "Mean Well", "status": "Sourced", "icon": "fa-plug" },
+    { "component": "Injection Plastique (ABS)", "description": "Moule 2 cavités", "cost": 18.0, "supplier": "Usine Partenaire", "status": "Pending", "icon": "fa-cube" },
+    { "component": "Visserie & Assemblage", "description": "Assemblage divers", "cost": 2.0, "supplier": "-", "status": "Sourced", "icon": "fa-tools" }
   ]
 }
