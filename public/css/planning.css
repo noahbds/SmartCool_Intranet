@@ -32,60 +32,90 @@ body {
 }
 
 /* Styles from ddd/planning.html */
-.sheet-wrapper {
-  overflow-x: auto;
-  background: white;
-  border: 1px solid #e0e0e0;
+.risks-wrapper {
   margin: 20px;
-  border-top: 1px solid #eee;
   padding: 20px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
 }
-.sheet-wrapper h2 {
-  margin-bottom: 20px;
+.risks-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
 }
-.google-sheet-style {
-  border-collapse: collapse;
-  width: 100%;
-  font-family: arial, sans-serif;
-  font-size: 13px;
+.risks-eyebrow {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 700;
+  font-size: 0.75rem;
+  color: var(--secondary);
 }
-.google-sheet-style th {
-  background-color: #f8f9fa;
-  border: 1px solid #e0e0e0;
-  padding: 8px;
-  text-align: left;
-  color: #5f6368;
-  font-weight: bold;
-  position: sticky;
-  top: 0;
+.risks-title {
+  margin: 4px 0 0 0;
+  font-size: 1.2rem;
 }
-.google-sheet-style td {
-  border: 1px solid #e0e0e0;
-  padding: 6px 8px;
-  color: #000;
+.risk-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 14px;
 }
-.google-sheet-style tr:nth-child(even) {
-  background-color: #ffffff;
+.risk-card {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 12px 14px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.04);
 }
-.google-sheet-style .row-num {
-  background-color: #f8f9fa;
+.risk-card.error {
   text-align: center;
-  color: #5f6368;
-  font-weight: bold;
-  width: 30px;
+  color: var(--danger);
 }
-.download-btn {
-  display: inline-block;
-  background: #27ae60;
-  color: white;
-  padding: 10px 20px;
-  text-decoration: none;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  font-weight: bold;
+.risk-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  color: var(--secondary);
+  margin-bottom: 6px;
 }
-.download-btn:hover {
-  background: #219150;
+.risk-tag {
+  background: #e0f2fe;
+  color: #0369a1;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.75rem;
+}
+.risk-score {
+  font-weight: 700;
+  color: var(--accent);
+}
+.risk-title {
+  margin: 4px 0;
+  font-size: 1rem;
+}
+.risk-text {
+  margin: 0 0 8px 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+.risk-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: var(--secondary);
+  margin-bottom: 8px;
+}
+.risk-detail {
+  font-size: 0.85rem;
+  background: #f8fafc;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  margin-top: 6px;
 }
 
 /* Header Area */

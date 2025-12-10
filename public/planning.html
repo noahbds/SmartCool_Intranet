@@ -36,13 +36,9 @@
           <span>SmartCool Pro</span>
         </div>
         <div class="header-actions">
-          <button class="btn-tool" id="btn-example">
+          <button class="btn-tool" id="btn-reload">
             <i class="fa-solid fa-rotate-right"></i> Recharger
           </button>
-          <label class="btn-tool primary">
-            <i class="fa-solid fa-upload"></i> Importer .GAN
-            <input type="file" id="file-input" accept=".gan" hidden />
-          </label>
         </div>
       </header>
 
@@ -52,11 +48,6 @@
           <button class="btn-tool active" data-scale="day">Jours</button>
           <button class="btn-tool" data-scale="week">Semaines</button>
           <button class="btn-tool" data-scale="month">Mois</button>
-        </div>
-
-        <div class="toolbar-group">
-          <select id="gantt-file-menu" style="display:none; height:32px; padding:0 12px; border-radius:6px; border:1px solid var(--border); font-size:0.85rem; background:white;">
-          </select>
         </div>
 
         <div class="toolbar-group">
@@ -130,212 +121,15 @@
         </div>
       </div>
 
-      <div class="sheet-wrapper">
-        <h2>Planning WBS Détaillé</h2>
-        <a href="#" onclick="downloadCSV()" class="download-btn"
-          >📥 Télécharger le CSV (Compatible Excel/Sheets)</a
-        >
-        <div class="sheet-container">
-          <table class="google-sheet-style">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>ID</th>
-                <th>PHASE</th>
-                <th>TACHE</th>
-                <th>RESPONSABLE</th>
-                <th>DEBUT</th>
-                <th>FIN</th>
-                <th>DUREE (J)</th>
-                <th>LIVRABLE</th>
-                <th>DEPENDANCE</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="row-num">1</td>
-                <td>1.1</td>
-                <td>Conception</td>
-                <td>Définition des Specs Techniques</td>
-                <td>CTO</td>
-                <td>01/10/2025</td>
-                <td>07/10/2025</td>
-                <td>7</td>
-                <td>Cahier des charges v1.0</td>
-                <td>-</td>
-              </tr>
-              <tr>
-                <td class="row-num">2</td>
-                <td>1.2</td>
-                <td>Conception</td>
-                <td>Sélection des composants clés (BOM)</td>
-                <td>Hardware Lead</td>
-                <td>08/10/2025</td>
-                <td>14/10/2025</td>
-                <td>7</td>
-                <td>BOM Preliminaire</td>
-                <td>1.1</td>
-              </tr>
-              <tr>
-                <td class="row-num">3</td>
-                <td>1.3</td>
-                <td>Conception</td>
-                <td>Architecture Cloud (AWS)</td>
-                <td>Cloud Architect</td>
-                <td>08/10/2025</td>
-                <td>14/10/2025</td>
-                <td>7</td>
-                <td>Diagramme d'architecture</td>
-                <td>1.1</td>
-              </tr>
-              <tr>
-                <td class="row-num">4</td>
-                <td>2.1</td>
-                <td>Hardware</td>
-                <td>Schématique PCB (Altium)</td>
-                <td>Hardware Lead</td>
-                <td>15/10/2025</td>
-                <td>30/10/2025</td>
-                <td>15</td>
-                <td>Gerber Files v0.1</td>
-                <td>1.2</td>
-              </tr>
-              <tr>
-                <td class="row-num">5</td>
-                <td>2.2</td>
-                <td>Hardware</td>
-                <td>Routage PCB (Placement)</td>
-                <td>Hardware Lead</td>
-                <td>31/10/2025</td>
-                <td>07/11/2025</td>
-                <td>7</td>
-                <td>Fichiers de fab</td>
-                <td>2.1</td>
-              </tr>
-              <tr>
-                <td class="row-num">6</td>
-                <td>2.3</td>
-                <td>Hardware</td>
-                <td>Fabrication PCB Alpha (JLCPCB)</td>
-                <td>Externe</td>
-                <td>08/11/2025</td>
-                <td>15/11/2025</td>
-                <td>7</td>
-                <td>Cartes nues</td>
-                <td>2.2</td>
-              </tr>
-              <tr>
-                <td class="row-num">7</td>
-                <td>2.4</td>
-                <td>Hardware</td>
-                <td>Assemblage & Bring-up (Test)</td>
-                <td>Hardware Lead</td>
-                <td>16/11/2025</td>
-                <td>20/11/2025</td>
-                <td>4</td>
-                <td>PCB Fonctionnel</td>
-                <td>2.3</td>
-              </tr>
-              <tr>
-                <td class="row-num">8</td>
-                <td>3.1</td>
-                <td>Software</td>
-                <td>Collecte Dataset (Photos frigo)</td>
-                <td>Data Team</td>
-                <td>15/10/2025</td>
-                <td>01/11/2025</td>
-                <td>16</td>
-                <td>5000 images annotées</td>
-                <td>1.1</td>
-              </tr>
-              <tr>
-                <td class="row-num">9</td>
-                <td>3.2</td>
-                <td>Software</td>
-                <td>Entrainement Modèle YOLOv8</td>
-                <td>Data Scientist</td>
-                <td>02/11/2025</td>
-                <td>20/11/2025</td>
-                <td>18</td>
-                <td>Modèle .pt optimisé</td>
-                <td>3.1</td>
-              </tr>
-              <tr>
-                <td class="row-num">10</td>
-                <td>3.3</td>
-                <td>Software</td>
-                <td>Développement Firmware (C++)</td>
-                <td>Embedded Dev</td>
-                <td>15/10/2025</td>
-                <td>30/11/2025</td>
-                <td>45</td>
-                <td>Firmware v0.5</td>
-                <td>1.2</td>
-              </tr>
-              <tr>
-                <td class="row-num">11</td>
-                <td>3.4</td>
-                <td>Software</td>
-                <td>Intégration Modèle sur RPi5</td>
-                <td>Embedded Dev</td>
-                <td>01/12/2025</td>
-                <td>10/12/2025</td>
-                <td>10</td>
-                <td>Inférence < 200ms</td>
-                <td>2.4, 3.2</td>
-              </tr>
-              <tr>
-                <td class="row-num">12</td>
-                <td>4.1</td>
-                <td>Indus</td>
-                <td>Design Mécanique 3D (Boitier)</td>
-                <td>Mech Eng</td>
-                <td>15/11/2025</td>
-                <td>15/12/2025</td>
-                <td>30</td>
-                <td>Fichiers STEP</td>
-                <td>2.2</td>
-              </tr>
-              <tr>
-                <td class="row-num">13</td>
-                <td>4.2</td>
-                <td>Indus</td>
-                <td>Lancement Outillage (Moules)</td>
-                <td>Acheteur</td>
-                <td>01/01/2026</td>
-                <td>28/02/2026</td>
-                <td>58</td>
-                <td>Moules Acier T1</td>
-                <td>4.1</td>
-              </tr>
-              <tr>
-                <td class="row-num">14</td>
-                <td>4.3</td>
-                <td>Certif</td>
-                <td>Pré-scan EMC (Compatibilité)</td>
-                <td>Labo Interne</td>
-                <td>15/12/2025</td>
-                <td>20/12/2025</td>
-                <td>5</td>
-                <td>Rapport de test</td>
-                <td>2.4</td>
-              </tr>
-              <tr>
-                <td class="row-num">15</td>
-                <td>4.4</td>
-                <td>Certif</td>
-                <td>Certification Finale CE</td>
-                <td>TUV Lab</td>
-                <td>01/03/2026</td>
-                <td>30/03/2026</td>
-                <td>30</td>
-                <td>Certificat CE</td>
-                <td>4.2</td>
-              </tr>
-            </tbody>
-          </table>
+      <section class="risks-wrapper" id="risk-section">
+        <div class="risks-header">
+          <div>
+            <p class="risks-eyebrow">Risques clés</p>
+            <h2 class="risks-title">Synthèse transposée</h2>
+          </div>
         </div>
-      </div>
+        <div class="risk-grid" id="risk-grid"></div>
+      </section>
 
       <!-- Footer -->
       <footer class="app-footer">

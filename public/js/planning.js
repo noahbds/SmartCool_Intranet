@@ -12,9 +12,7 @@ const state = {
 };
 
 const DOM = {
-  fileInput: document.getElementById("file-input"),
-  btnExample: document.getElementById("btn-example"),
-  linkExample: document.getElementById("link-example"),
+  btnReload: document.getElementById("btn-reload"),
   emptyState: document.getElementById("empty-state"),
   taskPanel: document.getElementById("task-panel"),
   timelinePanel: document.getElementById("timeline-panel"),
@@ -34,6 +32,7 @@ const DOM = {
   btnZoomOut: document.getElementById("btn-zoom-out"),
   btnToggleWeekend: document.getElementById("btn-toggle-weekend"),
   scaleBtns: document.querySelectorAll("[data-scale]"),
+  riskGrid: document.getElementById("risk-grid"),
   // Modal
   modal: document.getElementById("edit-modal"),
   editId: document.getElementById("edit-id"),
@@ -83,144 +82,103 @@ function fmtDateInput(d) {
 
 // --- Core Logic ---
 
-async function loadGanFile(text) {
-  try {
-    const parser = new DOMParser();
-    const xml = parser.parseFromString(text, "text/xml");
-    if (xml.querySelector("parsererror")) throw new Error("XML invalide");
+function recalcTimelineBounds() {
+  if (!state.tasks.length) {
+    state.startDate = new Date()
+    state.endDate = addDays(new Date(), 30)
+    state.totalDays = diffDays(state.startDate, state.endDate)
+    return
+  }
 
-    // Parse Roles
-    const roleMap = new Map();
-    xml.querySelectorAll("roles > role").forEach(r => {
-      roleMap.set(r.getAttribute("id"), r.getAttribute("name"));
-    });
+  const minStart = state.tasks.reduce((min, t) => (t.start < min ? t.start : min), state.tasks[0].start)
+  const maxEnd = state.tasks.reduce((max, t) => (t.end > max ? t.end : max), state.tasks[0].end)
+  state.startDate = addDays(minStart, -7)
+  state.endDate = addDays(maxEnd, 14)
+  state.totalDays = diffDays(state.startDate, state.endDate)
+}
 
-    // Parse Resources
-    const resMap = new Map();
-    const resources = [];
-    xml.querySelectorAll("resources > resource").forEach((r) => {
-      const id = r.getAttribute("id");
-      const name = r.getAttribute("name");
-      const func = r.getAttribute("function"); // e.g. "Default:1"
-      let roleName = "Intervenant";
-      if(func && func.startsWith("Default:")) {
-          const roleId = func.split(":")[1];
-          if(roleMap.has(roleId)) roleName = roleMap.get(roleId);
-      }
-      resMap.set(id, {name, roleName});
-      resources.push({ id, name, roleName });
-    });
-    state.resources = resources;
+function hydrateFromDB(data) {
+  const resources = data.resources || []
+  state.resources = resources
 
-    // Parse Allocations
-    const allocs = [];
-    xml.querySelectorAll("allocations > allocation").forEach((a) => {
-      allocs.push({
-        taskId: a.getAttribute("task-id"),
-        resourceId: a.getAttribute("resource-id"),
-        load: parseFloat(a.getAttribute("load") || "100"),
-        responsible: a.getAttribute("responsible") === "true"
-      });
-    });
-
-    // Parse Tasks (Recursive to get Phase)
-    const tasks = [];
-    let minDate = null;
-    let maxDate = null;
-
-    const rootTasks = xml.querySelectorAll("tasks > task");
-
-    rootTasks.forEach(phaseNode => {
-        const phaseName = phaseNode.getAttribute("name");
-        const childNodes = phaseNode.querySelectorAll("task");
-
-        if(childNodes.length === 0) {
-            // Top level task without children (unlikely in this specific file but possible)
-            // Treat as phase = itself
-            parseTaskNode(phaseNode, phaseName, tasks, allocs, resMap);
-        } else {
-            // It's a phase container
-            childNodes.forEach(childNode => {
-                parseTaskNode(childNode, phaseName, tasks, allocs, resMap);
-            });
-        }
-    });
-
-    function parseTaskNode(t, phaseName, tasksList, allocs, resMap) {
-      const id = t.getAttribute("id");
-      const name = t.getAttribute("name");
-      const startStr = t.getAttribute("start");
-      const duration = parseInt(t.getAttribute("duration") || "1", 10);
-      const complete = parseInt(t.getAttribute("complete") || "0", 10);
-      const color = t.getAttribute("color") || "#3b82f6";
-
-      if (!startStr) return; 
-
-      const start = startOfDay(new Date(startStr));
-      const end = addDays(start, duration);
-
-      if (!minDate || start < minDate) minDate = start;
-      if (!maxDate || end > maxDate) maxDate = end;
-
-      // Find resources
-      const taskAllocs = allocs.filter((a) => a.taskId === id);
-      const taskResources = taskAllocs.map((a) => {
-          const r = resMap.get(a.resourceId);
-          return {
-              id: a.resourceId,
-              name: r ? r.name : "Unknown",
-              roleName: r ? r.roleName : "",
-              load: a.load,
-              responsible: a.responsible
-          };
-      });
-
-      // Determine primary responsible role for display
-      let responsibleRole = "-";
-      const respRes = taskResources.find(r => r.responsible) || taskResources[0];
-      if(respRes) responsibleRole = respRes.roleName;
-
-      // Dependencies
-      const depends = [];
-      t.querySelectorAll("depend").forEach(d => {
-          depends.push(d.getAttribute("id"));
-      });
-
-      tasksList.push({
-        id,
-        phase: phaseName,
-        name,
-        start,
-        end,
-        duration,
-        complete,
-        color,
-        resources: taskResources,
-        responsibleRole,
-        depends,
-        cost: 0, 
-      });
+  const tasks = (data.tasks || []).map((t) => {
+    const start = startOfDay(new Date(t.start))
+    const duration = parseInt(t.duration, 10) || 1
+    const end = addDays(start, duration)
+    const res = (t.resources || []).map((r) => ({
+      id: r.id,
+      name: r.name,
+      roleName: r.roleName,
+      load: parseFloat(r.load) || 0,
+      responsible: !!r.responsible,
+    }))
+    const resp = res.find((r) => r.responsible) || res[0]
+    return {
+      id: t.id,
+      phase: t.phase || "",
+      name: t.name,
+      start,
+      end,
+      duration,
+      complete: parseInt(t.complete || t.progress || 0, 10),
+      color: t.color || "#3b82f6",
+      resources: res,
+      responsibleRole: resp ? resp.roleName : "-",
+      depends: t.depends || t.dependencies || [],
+      cost: t.cost || 0,
     }
+  })
 
-    // Sort by start date
-    tasks.sort((a, b) => a.start - b.start);
+  tasks.sort((a, b) => a.start - b.start)
+  state.tasks = tasks
+  state.project = data.project || { name: "SmartCool Pro Planning", code: "SC-PRO" }
+  recalcTimelineBounds()
+}
 
-    // Update State
-    state.tasks = tasks;
-    state.startDate = addDays(minDate || new Date(), -7); // Buffer
-    state.endDate = addDays(maxDate || new Date(), 14); // Buffer
-    state.totalDays = diffDays(state.startDate, state.endDate);
+async function loadFromDB(showLoader = true) {
+  try {
+    if (showLoader && DOM.emptyState) DOM.emptyState.classList.remove(HIDDEN_CLASS)
+    const res = await fetch("/api/gantt")
+    if (!res.ok) throw new Error(`HTTP ${res.status}`)
+    const data = await res.json()
+    hydrateFromDB(data)
+    renderApp()
+    DOM.emptyState.classList.add(HIDDEN_CLASS)
+    DOM.taskPanel.classList.remove(HIDDEN_CLASS)
+    DOM.timelinePanel.classList.remove(HIDDEN_CLASS)
+    fitView()
+  } catch (err) {
+    console.error("Gantt load error:", err)
+    alert("Erreur lors du chargement du planning (DB)")
+  }
+}
 
-    renderApp();
-    DOM.emptyState.classList.add(HIDDEN_CLASS);
-    DOM.taskPanel.classList.remove(HIDDEN_CLASS);
-    DOM.timelinePanel.classList.remove(HIDDEN_CLASS);
+async function saveDB() {
+  const payload = {
+    project: state.project || { name: "SmartCool Pro Planning", code: "SC-PRO" },
+    tasks: state.tasks.map((t) => ({
+      id: t.id,
+      phase: t.phase,
+      name: t.name,
+      start: fmtDateInput(t.start),
+      duration: t.duration,
+      complete: t.complete,
+      depends: t.depends || [],
+      color: t.color,
+      resources: t.resources,
+      cost: t.cost || 0,
+    })),
+    resources: state.resources,
+  }
 
-    // Auto fit
-    fitView();
-  } catch (e) {
-    console.error(e);
-    alert("Erreur lors de la lecture du fichier .gan");
+  const res = await fetch("/api/gantt", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  })
+
+  if (!res.ok) {
+    throw new Error(`HTTP ${res.status}`)
   }
 }
 
@@ -229,22 +187,41 @@ function renderApp() {
   renderTimeline();
 }
 
-// Load list of saved gantt files
-async function loadGanttFileList() {
+async function loadRisks() {
   try {
-    const res = await fetch('/api/gantt');
-    const { files } = await res.json();
-    const fileMenu = document.getElementById('gantt-file-menu');
-    if (fileMenu && files && files.length > 0) {
-      const current = fileMenu.value;
-      fileMenu.innerHTML = '<option value="">-- Fichiers sauvegardés --</option>' + 
-        files.map(f => `<option value="${f.path}">${f.name}</option>`).join('');
-      if (current) fileMenu.value = current;
-      fileMenu.style.display = 'inline-block';
-    }
+    const res = await fetch("/data/risks.json")
+    if (!res.ok) throw new Error(`HTTP ${res.status}`)
+    const risks = await res.json()
+    renderRisks(risks)
   } catch (err) {
-    console.warn('Could not load gantt file list:', err);
+    console.warn("Risks load error:", err)
+    if (DOM.riskGrid) DOM.riskGrid.innerHTML = "<div class='risk-card error'>Impossible de charger les risques</div>"
   }
+}
+
+function renderRisks(risks = []) {
+  if (!DOM.riskGrid) return
+  DOM.riskGrid.innerHTML = ""
+  risks.forEach((risk) => {
+    const card = document.createElement("div")
+    card.className = "risk-card"
+    card.innerHTML = `
+      <div class="risk-header">
+        <span class="risk-tag">${risk.category}</span>
+        <span class="risk-score">P:${risk.probability} / I:${risk.impact}</span>
+      </div>
+      <h4 class="risk-title">${risk.name}</h4>
+      <p class="risk-text">${risk.description}</p>
+      <div class="risk-meta">
+        <span>Owner: ${risk.owner}</span>
+        <span>Status: ${risk.status}</span>
+      </div>
+      <div class="risk-detail"><strong>Mitigation</strong><br>${risk.mitigation}</div>
+      <div class="risk-detail"><strong>Trigger</strong><br>${risk.trigger}</div>
+      <div class="risk-detail"><strong>Fallback</strong><br>${risk.fallback}</div>
+    `
+    DOM.riskGrid.appendChild(card)
+  })
 }
 
 function getFilteredTasks() {
@@ -708,7 +685,7 @@ function closeModal() {
   DOM.modal.classList.add(HIDDEN_CLASS);
 }
 
-function saveTask() {
+async function saveTask() {
   const id = DOM.editId.value;
   const task = state.tasks.find((t) => t.id === id);
   if (!task) return;
@@ -728,105 +705,44 @@ function saveTask() {
     if (load > 0) {
       const rId = inp.dataset.resid;
       const r = state.resources.find((r) => r.id === rId);
-      newResources.push({ id: rId, name: r.name, roleName: r.roleName, load: load });
+      const previous = task.resources.find((tr) => tr.id === rId);
+      newResources.push({
+        id: rId,
+        name: r.name,
+        roleName: r.roleName,
+        load: load,
+        responsible: previous ? previous.responsible : false,
+      });
     }
   });
+  if (newResources.length && !newResources.some((r) => r.responsible)) {
+    newResources[0].responsible = true;
+  }
   task.resources = newResources;
+  const resp = newResources.find((r) => r.responsible) || newResources[0];
+  task.responsibleRole = resp ? resp.roleName : "-";
 
-  // Re-calc bounds if dates changed
-  // For simplicity, we just re-render. In a real app, we'd check bounds.
+  recalcTimelineBounds();
   renderApp();
+
+  try {
+    await saveDB();
+  } catch (err) {
+    console.error("Save error:", err);
+    alert("Impossible d'enregistrer la tâche");
+  }
+
   closeModal();
 }
 
-function downloadCSV() {
-    const rows = [
-        ["#", "ID", "PHASE", "TACHE", "RESPONSABLE", "DEBUT", "FIN", "DUREE (J)", "LIVRABLE", "DEPENDANCE"]
-    ];
-
-    // We can use state.tasks if loaded, or parse the table if not.
-    // Let's use the table content since it's the source of truth for the static view
-    const table = document.querySelector(".google-sheet-style");
-    const trs = table.querySelectorAll("tbody tr");
-    trs.forEach(tr => {
-        const tds = tr.querySelectorAll("td");
-        const row = [];
-        tds.forEach(td => row.push(td.innerText));
-        rows.push(row);
-    });
-
-    let csvContent = "data:text/csv;charset=utf-8,";
-    rows.forEach(function(rowArray) {
-        let row = rowArray.join(";");
-        csvContent += row + "\r\n";
-    });
-
-    var encodedUri = encodeURI(csvContent);
-    var link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
-    // Updated filename to match rules
-    link.setAttribute("download", "SmartCool_Gantt.csv");
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+// --- Event Listeners ---
+if (DOM.btnReload) {
+  DOM.btnReload.addEventListener("click", () => loadFromDB(false));
 }
 
-// --- Event Listeners ---
-DOM.fileInput.addEventListener("change", async (e) => {
-  const f = e.target.files[0];
-  if (!f) return;
-  try {
-    const text = await f.text();
-    // Save the file to server
-    const filename = f.name || `upload_${Date.now()}.gan`;
-    await fetch('/api/gantt', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ filename, content: text })
-    });
-    loadGanFile(text);
-    // Refresh file list
-    loadGanttFileList();
-  } catch (err) {
-    console.error("File read error:", err);
-    alert("Erreur lors de la lecture du fichier");
-  }
-});
-
-DOM.btnExample.addEventListener("click", async () => {
-  try {
-    const res = await fetch("/gantt/test.gan");
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const text = await res.text();
-    loadGanFile(text);
-  } catch (err) {
-    console.error("Gantt file fetch error:", err);
-    alert("Erreur lors du chargement du planning. Vérifiez que le fichier /gantt/test.gan est accessible.");
-  }
-});
-DOM.linkExample.addEventListener("click", (e) => {
-  e.preventDefault();
-  DOM.btnExample.click();
-});
-
-// File dropdown change handler
 window.addEventListener('load', () => {
-  const ganttFileMenu = document.getElementById('gantt-file-menu');
-  if (ganttFileMenu) {
-    ganttFileMenu.addEventListener('change', async (e) => {
-      if (!e.target.value) return;
-      try {
-        const res = await fetch(e.target.value);
-        const text = await res.text();
-        loadGanFile(text);
-      } catch (err) {
-        console.error('File load error:', err);
-        alert('Erreur lors du chargement du fichier');
-      }
-    });
-    loadGanttFileList();
-  }
-  DOM.btnExample.click();
+  loadFromDB(true);
+  loadRisks();
 });
 
 DOM.scaleBtns.forEach((b) => {
