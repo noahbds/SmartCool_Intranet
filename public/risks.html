@@ -16,106 +16,41 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
     <style>
+      .risks-grid { display: grid; gap: 16px; }
       .risk-card {
         border-left: 6px solid;
-        border-radius: 8px;
+        border-radius: 10px;
         padding: 20px;
         background: white;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-        margin-bottom: 16px;
       }
-      .risk-card.high {
-        border-left-color: #ef4444;
-        background: #fef2f2;
-      }
-      .risk-card.medium {
-        border-left-color: #f59e0b;
-        background: #fffbeb;
-      }
-      .risk-card.low {
-        border-left-color: #10b981;
-        background: #f0fdf4;
-      }
-      .risk-header {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        margin-bottom: 12px;
-      }
-      .risk-icon {
-        font-size: 1.5rem;
-        width: 40px;
-        height: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 8px;
-      }
-      .risk-card.high .risk-icon {
-        background: #fee2e2;
-        color: #991b1b;
-      }
-      .risk-card.medium .risk-icon {
-        background: #fef3c7;
-        color: #92400e;
-      }
-      .risk-card.low .risk-icon {
-        background: #dcfce7;
-        color: #166534;
-      }
-      .risk-title {
-        font-size: 1.1rem;
-        font-weight: 700;
-        color: #0f172a;
-        margin: 0;
-      }
-      .risk-badges {
-        display: flex;
-        gap: 8px;
-      }
-      .risk-badge {
-        display: inline-flex;
-        align-items: center;
-        padding: 4px 10px;
-        border-radius: 999px;
-        font-size: 0.8rem;
-        font-weight: 600;
-      }
-      .risk-badge.prob {
-        background: #dbeafe;
-        color: #1e40af;
-      }
-      .risk-badge.impact {
-        background: #fee2e2;
-        color: #991b1b;
-      }
-      .risk-content {
-        margin-bottom: 12px;
-      }
-      .risk-field {
-        display: flex;
-        gap: 12px;
-        margin-bottom: 8px;
-      }
-      .risk-field-label {
-        font-weight: 600;
-        color: #475569;
-        min-width: 100px;
-        font-size: 0.9rem;
-      }
-      .risk-field-value {
-        color: #0f172a;
-        font-size: 0.9rem;
-      }
-      .risk-mitigation {
-        background: rgba(255, 255, 255, 0.5);
-        border-left: 2px solid currentColor;
-        padding: 12px;
-        border-radius: 4px;
-        font-size: 0.9rem;
-        color: #334155;
-        margin-top: 12px;
-      }
+      .risk-card.high { border-left-color: #ef4444; background: #fef2f2; }
+      .risk-card.medium { border-left-color: #f59e0b; background: #fffbeb; }
+      .risk-card.low { border-left-color: #10b981; background: #f0fdf4; }
+      .risk-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+      .risk-icon { font-size: 1.5rem; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: 10px; }
+      .risk-card.high .risk-icon { background: #fee2e2; color: #991b1b; }
+      .risk-card.medium .risk-icon { background: #fef3c7; color: #92400e; }
+      .risk-card.low .risk-icon { background: #dcfce7; color: #166534; }
+      .risk-title { font-size: 1.1rem; font-weight: 700; color: #0f172a; margin: 0; }
+      .risk-badges { display: flex; gap: 8px; flex-wrap: wrap; }
+      .risk-badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 999px; font-size: 0.8rem; font-weight: 600; }
+      .risk-badge.prob { background: #dbeafe; color: #1e40af; }
+      .risk-badge.impact { background: #fee2e2; color: #991b1b; }
+      .risk-badge.score { background: #e0f2fe; color: #075985; }
+      .risk-badge.owner { background: #ecfeff; color: #0f172a; }
+      .risk-content { margin-bottom: 12px; display: grid; gap: 8px; }
+      .risk-field { display: flex; gap: 8px; }
+      .risk-field-label { font-weight: 600; color: #475569; min-width: 120px; font-size: 0.9rem; }
+      .risk-field-value { color: #0f172a; font-size: 0.9rem; }
+      .risk-mitigation { background: rgba(255, 255, 255, 0.75); border-left: 2px solid currentColor; padding: 12px; border-radius: 6px; font-size: 0.9rem; color: #334155; }
+      .risk-legend { display: grid; gap: 10px; margin-bottom: 24px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+      .legend-card { background: white; border: 1px solid #e2e8f0; border-radius: 10px; padding: 14px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+      .legend-title { font-weight: 700; margin-bottom: 6px; color: #0f172a; display: flex; align-items: center; gap: 8px; }
+      .pill { display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 999px; font-weight: 600; font-size: 0.85rem; border: 1px solid #e2e8f0; }
+      .pill.red { background: #fef2f2; color: #b91c1c; border-color: #fecdd3; }
+      .pill.amber { background: #fffbeb; color: #92400e; border-color: #fcd34d; }
+      .pill.green { background: #f0fdf4; color: #166534; border-color: #bbf7d0; }
     </style>
   </head>
   <body>
@@ -131,79 +66,154 @@
     <main class="main-content">
       <header>
         <h1>
-          <i
-            class="fas fa-shield-alt"
-            style="color: var(--accent); margin-right: 10px"
-          ></i>
+          <i class="fas fa-shield-alt" style="color: var(--accent); margin-right: 10px"></i>
           Gestion des Risques
         </h1>
-        <p>Identification, évaluation et atténuation des risques critiques du projet.</p>
+        <p>Identification, évaluation et atténuation des risques critiques du projet Smart Fridge.</p>
       </header>
 
-      <div id="risks-container" style="display: grid; gap: 16px;">
+      <section class="risk-legend" id="risk-summary">
+        <!-- summary injected by JS -->
+      </section>
+
+      <div id="risks-container" class="risks-grid">
         <!-- Risk cards injected by JS -->
       </div>
 
     </main>
     <script>
+      function normalizeLevel(value) {
+        if (typeof value === 'number') return value;
+        if (!value) return 0;
+        const v = String(value).toLowerCase();
+        if (v.startsWith('high')) return 5;
+        if (v.startsWith('med')) return 3;
+        if (v.startsWith('low')) return 1;
+        const parsed = parseInt(v, 10);
+        return Number.isFinite(parsed) ? parsed : 0;
+      }
+
+      function severityClass(score) {
+        if (score >= 16) return 'high';
+        if (score >= 9) return 'medium';
+        return 'low';
+      }
+
+      function createEl(tag, className, text) {
+        const el = document.createElement(tag);
+        if (className) el.className = className;
+        if (text !== undefined) el.textContent = text;
+        return el;
+      }
+
+      function renderSummary(risks) {
+        const summary = document.getElementById('risk-summary');
+        const total = risks.length;
+        const high = risks.filter(r => r.severity === 'high').length;
+        const medium = risks.filter(r => r.severity === 'medium').length;
+        const low = risks.filter(r => r.severity === 'low').length;
+        const top3 = risks.slice(0, 3).map(r => `${r.name} (RPN ${r.score})`).join(' · ');
+
+        summary.innerHTML = '';
+
+        const cards = [
+          { title: 'RPN cumulé', value: risks.reduce((s, r) => s + r.score, 0), icon: 'fa-calculator' },
+          { title: 'Top 3 risques', value: top3 || 'N/A', icon: 'fa-list-ol' },
+          { title: 'Seuils', value: `${high} high · ${medium} medium · ${low} low (sur ${total})`, icon: 'fa-traffic-light' }
+        ];
+
+        cards.forEach(c => {
+          const card = createEl('div', 'legend-card');
+          const title = createEl('div', 'legend-title');
+          const icon = createEl('i', `fas ${c.icon}`);
+          title.append(icon, createEl('span', null, c.title));
+          const value = createEl('div');
+          value.textContent = c.value;
+          card.append(title, value);
+          summary.appendChild(card);
+        });
+
+        const legend = createEl('div', 'legend-card');
+        const lTitle = createEl('div', 'legend-title');
+        lTitle.append(createEl('i', 'fas fa-chart-area'), createEl('span', null, 'Grille Probabilité x Impact (1-5)'));
+        const pills = createEl('div');
+        pills.append(
+          createEl('span', 'pill red', '>=16 Critique'),
+          createEl('span', 'pill amber', '9-15 Majeur'),
+          createEl('span', 'pill green', '<9 Modéré')
+        );
+        legend.append(lTitle, pills);
+        summary.appendChild(legend);
+      }
+
       async function loadRiskCards() {
         try {
           const resp = await fetch('/api/risks');
-          const risks = await resp.json();
-          
-          if (!risks || risks.length === 0) {
-            console.log('No risks available');
+          const risksRaw = await resp.json();
+
+          if (!Array.isArray(risksRaw) || risksRaw.length === 0) {
+            document.getElementById('risks-container').innerHTML = '<p>Aucun risque disponible.</p>';
             return;
           }
 
+          const normalized = risksRaw.map((r) => {
+            const prob = normalizeLevel(r.probability ?? r.prob ?? r.likelihood);
+            const impact = normalizeLevel(r.impact);
+            const score = prob * impact;
+            const severity = severityClass(score);
+            return {
+              ...r,
+              probability: prob,
+              impact,
+              score,
+              severity,
+              name: r.name || r.title || 'Sans nom',
+              description: r.description || r.context || 'N/A'
+            };
+          }).sort((a, b) => b.score - a.score);
+
+          renderSummary(normalized);
+
           const container = document.getElementById('risks-container');
           container.innerHTML = '';
-          
-          // Sort by impact score and show all
-          const sorted = risks
-            .map(r => ({
-              ...r,
-              score: (r.probability || 0) * (r.impact || 0)
-            }))
-            .sort((a, b) => b.score - a.score);
 
-          sorted.forEach((risk, idx) => {
-            const severity = risk.impact >= 4 ? 'high' : risk.impact >= 3 ? 'medium' : 'low';
-            const icon = severity === 'high' ? '⚠️' : severity === 'medium' ? '⚡' : 'ℹ️';
-            
-            const html = `
-              <div class="risk-card ${severity}" id="risk-${idx}">
-                <div class="risk-header">
-                  <div class="risk-icon">${icon}</div>
-                  <div>
-                    <h3 class="risk-title">${risk.name || 'Sans nom'}</h3>
-                    <div class="risk-badges">
-                      <span class="risk-badge prob">Prob: ${risk.probability || 0}/5</span>
-                      <span class="risk-badge impact">Impact: ${risk.impact || 0}/5</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="risk-content">
-                  <div class="risk-field">
-                    <div class="risk-field-label">Domaine:</div>
-                    <div class="risk-field-value">${risk.category || 'N/A'}</div>
-                  </div>
-                  <div class="risk-field">
-                    <div class="risk-field-label">Responsable:</div>
-                    <div class="risk-field-value">${risk.owner || 'N/A'}</div>
-                  </div>
-                  <div class="risk-field">
-                    <div class="risk-field-label">Description:</div>
-                    <div class="risk-field-value">${risk.description || 'N/A'}</div>
-                  </div>
-                  <div class="risk-mitigation">
-                    <strong>Atténuation:</strong><br/>
-                    ${risk.mitigation || 'N/A'}
-                  </div>
-                </div>
-              </div>
-            `;
-            container.innerHTML += html;
+          normalized.forEach((risk, idx) => {
+            const card = createEl('div', `risk-card ${risk.severity}`);
+            card.id = `risk-${idx}`;
+
+            const header = createEl('div', 'risk-header');
+            const iconWrap = createEl('div', 'risk-icon', risk.severity === 'high' ? '⚠️' : risk.severity === 'medium' ? '⚡' : 'ℹ️');
+            const hBlock = createEl('div');
+            hBlock.append(createEl('h3', 'risk-title', risk.name));
+            const badges = createEl('div', 'risk-badges');
+            badges.append(
+              createEl('span', 'risk-badge prob', `Prob: ${risk.probability}/5`),
+              createEl('span', 'risk-badge impact', `Impact: ${risk.impact}/5`),
+              createEl('span', 'risk-badge score', `RPN: ${risk.score}`),
+              createEl('span', 'risk-badge owner', risk.owner || 'N/A')
+            );
+            hBlock.appendChild(badges);
+            header.append(iconWrap, hBlock);
+
+            const content = createEl('div', 'risk-content');
+            const fields = [
+              ['Domaine', risk.category || 'N/A'],
+              ['Description', risk.description],
+              ['Déclencheur', risk.trigger || 'N/A'],
+              ['Plan B', risk.fallback || 'N/A'],
+              ['Statut', risk.status || 'N/A']
+            ];
+            fields.forEach(([label, value]) => {
+              const row = createEl('div', 'risk-field');
+              row.append(createEl('div', 'risk-field-label', `${label}:`), createEl('div', 'risk-field-value', value));
+              content.appendChild(row);
+            });
+
+            const mitigation = createEl('div', 'risk-mitigation');
+            mitigation.append(createEl('strong', null, 'Atténuation:'), createEl('div', null, risk.mitigation || 'N/A'));
+
+            card.append(header, content, mitigation);
+            container.appendChild(card);
           });
 
         } catch (err) {
@@ -211,7 +221,6 @@
         }
       }
 
-      // Load on page load
       window.addEventListener('load', loadRiskCards);
     </script>
   </body>
