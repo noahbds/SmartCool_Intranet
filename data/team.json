@@ -1,46 +1,79 @@
 [
   {
-    "name": "Sarah Chen",
-    "role": "HW Architect",
+    "name": "Jean Dupont",
+    "role": "Chef de Projet",
+    "category": "management",
+    "description": "Pilote le projet T-CEN-500, garant des délais et du budget.",
+    "icon": "fa-tasks",
+    "skills": [
+      { "name": "Gestion Projet", "val": "100%" },
+      { "name": "Budget", "val": "90%" }
+    ]
+  },
+  {
+    "name": "Sophie Martin",
+    "role": "Hardware Lead",
     "category": "hardware",
-    "description": "Lead engineer for PCB design and sensor integration. Expert in low-power IoT devices.",
+    "description": "Conception de la carte mère et intégration des capteurs.",
     "icon": "fa-microchip",
     "skills": [
       { "name": "PCB Design", "val": "95%" },
-      { "name": "Sensors", "val": "85%" }
+      { "name": "Electronique", "val": "90%" }
     ]
   },
   {
-    "name": "Marcus Johnson",
-    "role": "AI Scientist",
+    "name": "Lucas Bernard",
+    "role": "Cloud Architect",
     "category": "software",
-    "description": "Specializes in Computer Vision and Edge AI. Developing the food recognition model.",
+    "description": "Architecture cloud et API pour l'application mobile.",
+    "icon": "fa-cloud",
+    "skills": [
+      { "name": "AWS/Azure", "val": "90%" },
+      { "name": "Node.js", "val": "85%" }
+    ]
+  },
+  {
+    "name": "Emma Petit",
+    "role": "Data Scientist",
+    "category": "software",
+    "description": "Entraînement du modèle IA pour la reconnaissance d'images.",
     "icon": "fa-brain",
     "skills": [
-      { "name": "YOLOv8", "val": "98%" },
-      { "name": "Edge AI", "val": "90%" }
+      { "name": "Python", "val": "95%" },
+      { "name": "YOLOv8", "val": "98%" }
     ]
   },
   {
-    "name": "Elena Rodriguez",
-    "role": "Project Manager",
-    "category": "management",
-    "description": "Ensures timeline adherence and budget management. Scrum Master certified.",
-    "icon": "fa-tasks",
+    "name": "Thomas Richard",
+    "role": "Embedded Dev",
+    "category": "hardware",
+    "description": "Développement du firmware et drivers capteurs.",
+    "icon": "fa-code",
     "skills": [
-      { "name": "Agile", "val": "100%" },
-      { "name": "Budget", "val": "85%" }
+      { "name": "C/C++", "val": "90%" },
+      { "name": "RTOS", "val": "85%" }
     ]
   },
   {
-    "name": "David Kim",
-    "role": "UX/UI Designer",
+    "name": "Julie Dubois",
+    "role": "Mech Eng",
     "category": "design",
-    "description": "Designing the mobile app interface and physical fridge interaction points.",
-    "icon": "fa-pen-nib",
+    "description": "Conception mécanique et intégration physique.",
+    "icon": "fa-cogs",
     "skills": [
-      { "name": "Figma", "val": "95%" },
-      { "name": "User Research", "val": "80%" }
+      { "name": "CAD", "val": "90%" },
+      { "name": "Thermique", "val": "80%" }
+    ]
+  },
+  {
+    "name": "Marc Moreau",
+    "role": "Acheteur",
+    "category": "management",
+    "description": "Sourcing des composants et gestion des fournisseurs.",
+    "icon": "fa-shopping-cart",
+    "skills": [
+      { "name": "Négociation", "val": "95%" },
+      { "name": "Supply Chain", "val": "85%" }
     ]
   }
 ]
