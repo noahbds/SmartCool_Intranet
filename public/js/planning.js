@@ -518,8 +518,8 @@ function renderBars (pxPerDay, rowHeight, tasks) {
   marker.setAttribute('viewBox', '0 0 10 10')
   marker.setAttribute('refX', '9')
   marker.setAttribute('refY', '5')
-  marker.setAttribute('markerWidth', '6')
-  marker.setAttribute('markerHeight', '6')
+  marker.setAttribute('markerWidth', '4.5')
+  marker.setAttribute('markerHeight', '4.5')
   marker.setAttribute('orient', 'auto')
   const markerPath = document.createElementNS('http://www.w3.org/2000/svg', 'path')
   markerPath.setAttribute('d', 'M 0 0 L 10 5 L 0 10 z')
@@ -537,7 +537,10 @@ function renderBars (pxPerDay, rowHeight, tasks) {
       t.depends.forEach(depId => {
         const sourcePos = taskPositions.get(depId)
         if (sourcePos) {
-          drawDependency(depLayer, sourcePos, targetPos)
+          // Only draw forward-looking dependencies to reduce clutter
+          if (sourcePos.x <= targetPos.x) {
+            drawDependency(depLayer, sourcePos, targetPos)
+          }
         }
       })
     }
@@ -557,7 +560,8 @@ function drawDependency (svgLayer, from, to) {
   const endX = x2 - 6
 
   // Use smooth curve; if target is left of source, route up slightly to avoid backwards line
-  const midX = startX + Math.max(24, (endX - startX) / 2)
+  const deltaX = Math.max(24, (endX - startX) / 2)
+  const midX = startX + deltaX
   const ctrl1Y = y1
   const ctrl2Y = y2
 
@@ -566,8 +570,8 @@ function drawDependency (svgLayer, from, to) {
 
   if (endX <= startX) {
     // Route with small upward loop when dependency goes backwards
-    const offset = 18
-    const viaX = startX + 24
+    const offset = 14
+    const viaX = startX + 20
     const viaY = Math.min(y1, y2) - offset
     const d = `M ${startX} ${y1} C ${viaX} ${y1} ${viaX} ${viaY} ${startX} ${viaY} S ${endX} ${viaY} ${endX} ${y2}`
     path.setAttribute('d', d)
