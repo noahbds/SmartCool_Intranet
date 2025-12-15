@@ -159,6 +159,34 @@ body {
   align-items: center;
 }
 
+/* Phase Legend */
+.phase-legend {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 10px 16px;
+  background: white;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.legend-color {
+  width: 20px;
+  height: 12px;
+  border-radius: 3px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+.legend-label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--secondary);
+}
+
 .btn-tool {
   display: inline-flex;
   align-items: center;
@@ -224,27 +252,27 @@ body {
 /* Left Panel: Task List */
 .task-panel {
   width: var(--task-col-width);
-  border-right: 1px solid var(--border);
+  border-right: 2px solid var(--border);
   display: flex;
   flex-direction: column;
   background: #fff;
   flex-shrink: 0;
   z-index: 20;
-  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.03);
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.04);
 }
 .task-header {
-  height: 48px;
-  border-bottom: 1px solid var(--border);
+  height: 56px;
+  border-bottom: 2px solid var(--border);
   display: grid;
   grid-template-columns: 40px 50px 100px 1fr 100px 80px; /* #, ID, Phase, Task, Resp, Dur */
   align-items: center;
   padding: 0 8px;
-  font-weight: 600;
-  color: var(--secondary);
+  font-weight: 700;
+  color: var(--primary);
   font-size: 0.75rem;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  background: #f8fafc;
+  letter-spacing: 0.06em;
+  background: linear-gradient(to bottom, #f8fafc, #f1f5f9);
 }
 .task-header div {
   padding: 0 4px;
@@ -298,14 +326,15 @@ body {
   flex-direction: column;
   overflow: hidden;
   position: relative;
-  background: #fff;
+  background: #fafbfc;
 }
 .timeline-header-scroll {
   overflow: hidden;
-  height: 48px;
-  background: #f8fafc;
-  border-bottom: 1px solid var(--border);
+  height: 56px;
+  background: linear-gradient(to bottom, #f8fafc, #f1f5f9);
+  border-bottom: 2px solid var(--border);
   position: relative;
+  z-index: 10;
 }
 .timeline-header-content {
   position: relative;
@@ -314,22 +343,24 @@ body {
 .time-scale-primary {
   position: absolute;
   top: 0;
-  height: 24px;
+  height: 28px;
   display: flex;
   align-items: center;
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   font-weight: 700;
-  color: var(--secondary);
+  color: var(--primary);
   border-bottom: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.5);
 }
 .time-scale-secondary {
   position: absolute;
-  top: 24px;
-  height: 24px;
+  top: 28px;
+  height: 28px;
   display: flex;
   align-items: center;
-  font-size: 0.7rem;
-  color: var(--text-muted);
+  font-size: 0.75rem;
+  color: var(--secondary);
+  font-weight: 500;
 }
 .scale-cell {
   position: absolute;
@@ -372,51 +403,55 @@ body {
   right: 0;
   bottom: 0;
   pointer-events: none;
+  background: #fff;
 }
 .grid-col {
   position: absolute;
   top: 0;
   bottom: 0;
-  border-right: 1px solid var(--grid-line-color);
+  border-right: 1px solid #e5e9f0;
 }
 .grid-col.weekend {
-  background: var(--weekend-color);
+  background: linear-gradient(to bottom, #f8fafc, #f1f5f9);
 }
 .grid-row-line {
   position: absolute;
   left: 0;
   right: 0;
   height: 1px;
-  background: var(--grid-line-color);
+  background: #e5e9f0;
 }
 .today-marker {
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 2px;
-  background: var(--danger);
+  width: 3px;
+  background: linear-gradient(to bottom, #ef4444, #dc2626);
   z-index: 10;
   pointer-events: none;
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.4);
 }
 .today-label {
   position: absolute;
   top: 0;
+  left: 50%;
   transform: translateX(-50%);
-  background: var(--danger);
+  background: linear-gradient(135deg, #ef4444, #dc2626);
   color: white;
-  font-size: 0.65rem;
-  padding: 2px 6px;
-  border-radius: 0 0 4px 4px;
+  font-size: 0.7rem;
+  padding: 3px 8px;
+  border-radius: 0 0 6px 6px;
   font-weight: 700;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 /* Bars */
 .gantt-bar {
   position: absolute;
-  height: 24px; /* Smaller than row height */
-  border-radius: 4px;
+  height: 32px; /* Taller bars for better visibility */
+  border-radius: 6px;
   background: var(--accent);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
   cursor: pointer;
   z-index: 5;
   display: flex;
@@ -425,9 +460,10 @@ body {
   transition: transform 0.1s, box-shadow 0.1s;
 }
 .gantt-bar:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
   z-index: 15;
+  filter: brightness(1.1) saturate(1.2);
 }
 .gantt-bar-progress {
   position: absolute;
@@ -443,18 +479,19 @@ body {
 
 .gantt-bar-text {
   position: absolute;
-  left: 4px;
-  right: 4px;
+  left: 6px;
+  right: 6px;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   color: white;
   font-weight: 600;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   pointer-events: none;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  letter-spacing: 0.01em;
 }
 
 /* Empty State */
@@ -659,16 +696,18 @@ body {
 /* Dependency Lines */
 .dependency-line {
   position: absolute;
-  background-color: #94a3b8;
-  z-index: 1;
+  background-color: #64748b;
+  z-index: 2;
   pointer-events: none;
+  opacity: 0.7;
 }
 .dependency-arrow {
   position: absolute;
   width: 0;
   height: 0;
-  border-top: 4px solid transparent;
-  border-bottom: 4px solid transparent;
-  border-left: 6px solid #94a3b8;
-  z-index: 1;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 8px solid #64748b;
+  z-index: 2;
+  opacity: 0.7;
 }

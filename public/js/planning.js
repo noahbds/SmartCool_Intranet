@@ -329,6 +329,7 @@ function renderHeaderScales (pxPerDay) {
   DOM.timelineHeaderContent.appendChild(secondaryRow)
 
   let currentMonth = -1
+  let currentYear = -1
 
   if (state.scale === 'day') {
     for (let i = 0; i < state.totalDays; i++) {
@@ -338,23 +339,26 @@ function renderHeaderScales (pxPerDay) {
       dayCell.style.left = i * pxPerDay + 'px'
       dayCell.style.width = pxPerDay + 'px'
       dayCell.textContent = d.getDate()
-      if (d.getDay() === 0 || d.getDay() === 6)
-        dayCell.style.background = 'var(--weekend-color)'
+      if (d.getDay() === 0 || d.getDay() === 6) {
+        dayCell.style.background = 'rgba(248, 250, 252, 0.8)'
+        dayCell.style.color = 'var(--text-muted)'
+      }
       secondaryRow.appendChild(dayCell)
 
-      if (d.getMonth() !== currentMonth) {
+      if (d.getMonth() !== currentMonth || d.getFullYear() !== currentYear) {
         currentMonth = d.getMonth()
+        currentYear = d.getFullYear()
         const monthLabel = d.toLocaleDateString('fr-FR', {
-          month: 'long',
+          month: 'short',
           year: 'numeric'
-        })
+        }).replace('.', '')
         const mDiv = document.createElement('div')
         mDiv.className = 'scale-cell'
         mDiv.style.left = i * pxPerDay + 'px'
         mDiv.style.justifyContent = 'flex-start'
-        mDiv.style.paddingLeft = '8px'
+        mDiv.style.paddingLeft = '12px'
         mDiv.style.borderRight = 'none'
-        mDiv.textContent = monthLabel
+        mDiv.textContent = monthLabel.charAt(0).toUpperCase() + monthLabel.slice(1)
         primaryRow.appendChild(mDiv)
       }
     }
@@ -459,8 +463,8 @@ function renderBars (pxPerDay, rowHeight, tasks) {
 
     const x = daysFromStart * pxPerDay
     const w = durationDays * pxPerDay
-    const y = idx * rowHeight + 10
-    const h = 24
+    const y = idx * rowHeight + 6
+    const h = 32
 
     bar.style.left = x + 'px'
     bar.style.top = y + 'px'
