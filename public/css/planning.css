@@ -404,9 +404,9 @@ body {
 }
 .dependency-path {
   fill: none;
-  stroke: #cbd5e1;
-  stroke-width: 1.6px;
-  opacity: 0.55;
+  stroke: #94a3b8;
+  stroke-width: 1.4px;
+  opacity: 0.65;
 }
 .grid-bg {
   position: absolute;

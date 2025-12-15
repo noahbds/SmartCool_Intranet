@@ -6,7 +6,7 @@ const state = {
   pxPerUnit: 40, // pixels per day (base)
   zoomLevel: 1,
   showWeekends: true,
-   showDependencies: true,
+  showDependencies: false,
   startDate: new Date(),
   endDate: new Date(),
   totalDays: 0
@@ -153,6 +153,7 @@ async function loadFromDB (showLoader = true) {
     const data = await res.json()
     hydrateFromDB(data)
     renderApp()
+    updateToggleButtons()
     DOM.emptyState.classList.add(HIDDEN_CLASS)
     DOM.taskPanel.classList.remove(HIDDEN_CLASS)
     DOM.timelinePanel.classList.remove(HIDDEN_CLASS)
@@ -200,6 +201,15 @@ async function saveDB () {
 function renderApp () {
   renderTaskList()
   renderTimeline()
+}
+
+function updateToggleButtons () {
+  if (DOM.btnToggleWeekend) {
+    DOM.btnToggleWeekend.classList.toggle('active', state.showWeekends)
+  }
+  if (DOM.btnToggleDeps) {
+    DOM.btnToggleDeps.classList.toggle('active', state.showDependencies)
+  }
 }
 
 async function loadRisks () {
@@ -800,13 +810,13 @@ DOM.search.addEventListener('input', () => {
 
 DOM.btnToggleWeekend?.addEventListener('click', () => {
   state.showWeekends = !state.showWeekends
-  DOM.btnToggleWeekend.classList.toggle('active', state.showWeekends)
+  updateToggleButtons()
   renderTimeline()
 })
 
 DOM.btnToggleDeps?.addEventListener('click', () => {
   state.showDependencies = !state.showDependencies
-  DOM.btnToggleDeps.classList.toggle('active', state.showDependencies)
+  updateToggleButtons()
   renderTimeline()
 })
 
