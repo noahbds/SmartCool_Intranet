@@ -396,6 +396,18 @@ body {
   position: relative;
   /* Height set by JS */
 }
+.dependency-layer {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+  pointer-events: none;
+}
+.dependency-path {
+  fill: none;
+  stroke: #64748b;
+  stroke-width: 2.25px;
+  opacity: 0.75;
+}
 .grid-bg {
   position: absolute;
   top: 0;

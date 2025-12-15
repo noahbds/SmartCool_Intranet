@@ -6,6 +6,7 @@ const state = {
   pxPerUnit: 40, // pixels per day (base)
   zoomLevel: 1,
   showWeekends: true,
+   showDependencies: true,
   startDate: new Date(),
   endDate: new Date(),
   totalDays: 0
@@ -29,6 +30,7 @@ const DOM = {
   btnZoomIn: document.getElementById('btn-zoom-in'),
   btnZoomOut: document.getElementById('btn-zoom-out'),
   btnToggleWeekend: document.getElementById('btn-toggle-weekend'),
+  btnToggleDeps: document.getElementById('btn-toggle-deps'),
   scaleBtns: document.querySelectorAll('[data-scale]'),
   riskGrid: document.getElementById('risk-grid'),
   // Modal
@@ -445,13 +447,13 @@ function renderGridBackground (
 }
 
 function renderBars (pxPerDay, rowHeight, tasks) {
-  const existingBars = DOM.timelineGrid.querySelectorAll(
-    '.gantt-bar, .dependency-line, .dependency-arrow'
-  )
+  const existingBars = DOM.timelineGrid.querySelectorAll('.gantt-bar')
   existingBars.forEach(b => b.remove())
+  const existingLayer = DOM.timelineGrid.querySelector('.dependency-layer')
+  if (existingLayer) existingLayer.remove()
 
-  // Map for dependency drawing
   const taskPositions = new Map()
+  const totalWidth = state.totalDays * pxPerDay
 
   tasks.forEach((t, idx) => {
     const daysFromStart = diffDays(state.startDate, t.start)
@@ -484,7 +486,6 @@ function renderBars (pxPerDay, rowHeight, tasks) {
       bar.appendChild(prog)
     }
 
-    // Resource Label
     const label = document.createElement('div')
     label.className = 'gantt-bar-text'
     label.textContent = t.responsibleRole
@@ -502,11 +503,32 @@ function renderBars (pxPerDay, rowHeight, tasks) {
 
     DOM.timelineGrid.appendChild(bar)
 
-    // Store position for dependencies
     taskPositions.set(t.id, { x, y, w, h })
   })
 
-  // Draw Dependencies
+  if (!state.showDependencies) return
+
+  const depLayer = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
+  depLayer.classList.add('dependency-layer')
+  depLayer.setAttribute('width', totalWidth)
+  depLayer.setAttribute('height', tasks.length * rowHeight)
+
+  const marker = document.createElementNS('http://www.w3.org/2000/svg', 'marker')
+  marker.setAttribute('id', 'dep-arrow')
+  marker.setAttribute('viewBox', '0 0 10 10')
+  marker.setAttribute('refX', '9')
+  marker.setAttribute('refY', '5')
+  marker.setAttribute('markerWidth', '6')
+  marker.setAttribute('markerHeight', '6')
+  marker.setAttribute('orient', 'auto')
+  const markerPath = document.createElementNS('http://www.w3.org/2000/svg', 'path')
+  markerPath.setAttribute('d', 'M 0 0 L 10 5 L 0 10 z')
+  markerPath.setAttribute('fill', '#64748b')
+  marker.appendChild(markerPath)
+  const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs')
+  defs.appendChild(marker)
+  depLayer.appendChild(defs)
+
   tasks.forEach(t => {
     if (t.depends && t.depends.length > 0) {
       const targetPos = taskPositions.get(t.id)
@@ -515,76 +537,47 @@ function renderBars (pxPerDay, rowHeight, tasks) {
       t.depends.forEach(depId => {
         const sourcePos = taskPositions.get(depId)
         if (sourcePos) {
-          drawDependency(sourcePos, targetPos)
+          drawDependency(depLayer, sourcePos, targetPos)
         }
       })
     }
   })
+
+  DOM.timelineGrid.appendChild(depLayer)
 }
 
-function drawDependency (from, to) {
-  // Simple L-shape or straight line
-  // From right-center of source to left-center of target
+function drawDependency (svgLayer, from, to) {
   const x1 = from.x + from.w
   const y1 = from.y + from.h / 2
   const x2 = to.x
   const y2 = to.y + to.h / 2
 
-  // If target is after source, simple line
-  // We will just draw a direct line for simplicity in this version, or 3 segments
+  // Slight horizontal padding to avoid overlap with bars
+  const startX = x1 + 6
+  const endX = x2 - 6
 
-  // Segment 1: x1 to x1+10
-  // Segment 2: x1+10 to x2-10 (vertical travel)
-  // Segment 3: x2-10 to x2
+  // Use smooth curve; if target is left of source, route up slightly to avoid backwards line
+  const midX = startX + Math.max(24, (endX - startX) / 2)
+  const ctrl1Y = y1
+  const ctrl2Y = y2
 
-  // Actually, let's just draw a direct line for now to keep DOM light, or use SVG?
-  // Using div lines is easier without SVG overlay
+  const path = document.createElementNS('http://www.w3.org/2000/svg', 'path')
+  path.classList.add('dependency-path')
 
-  // Horizontal line from source
-  const line1 = document.createElement('div')
-  line1.className = 'dependency-line'
+  if (endX <= startX) {
+    // Route with small upward loop when dependency goes backwards
+    const offset = 18
+    const viaX = startX + 24
+    const viaY = Math.min(y1, y2) - offset
+    const d = `M ${startX} ${y1} C ${viaX} ${y1} ${viaX} ${viaY} ${startX} ${viaY} S ${endX} ${viaY} ${endX} ${y2}`
+    path.setAttribute('d', d)
+  } else {
+    const d = `M ${startX} ${y1} C ${midX} ${ctrl1Y} ${midX} ${ctrl2Y} ${endX} ${y2}`
+    path.setAttribute('d', d)
+  }
 
-  // If x2 > x1, we can do a nice path.
-  // Let's just do a simple direct connection logic for now:
-  // 1. Exit right 10px
-  // 2. Go down/up to target Y
-  // 3. Go right to target X
-
-  const midX = x1 + (x2 - x1) / 2
-
-  // Horizontal 1
-  const l1 = document.createElement('div')
-  l1.className = 'dependency-line'
-  l1.style.left = x1 + 'px'
-  l1.style.top = y1 + 'px'
-  l1.style.width = midX - x1 + 'px'
-  l1.style.height = '1px'
-  DOM.timelineGrid.appendChild(l1)
-
-  // Vertical
-  const l2 = document.createElement('div')
-  l2.className = 'dependency-line'
-  l2.style.left = midX + 'px'
-  l2.style.top = Math.min(y1, y2) + 'px'
-  l2.style.width = '1px'
-  l2.style.height = Math.abs(y2 - y1) + 'px'
-  DOM.timelineGrid.appendChild(l2)
-
-  // Horizontal 2
-  const l3 = document.createElement('div')
-  l3.className = 'dependency-line'
-  l3.style.left = midX + 'px'
-  l3.style.top = y2 + 'px'
-  l3.style.width = x2 - midX + 'px'
-  l3.style.height = '1px'
-  DOM.timelineGrid.appendChild(l3)
-
-  // Arrow
-  const arrow = document.createElement('div')
-  arrow.className = 'dependency-arrow'
-  arrow.style.left = x2 - 6 + 'px'
-  arrow.style.top = y2 - 4 + 'px'
-  DOM.timelineGrid.appendChild(arrow)
+  path.setAttribute('marker-end', 'url(#dep-arrow)')
+  svgLayer.appendChild(path)
 }
 
 // --- Interactions ---
@@ -801,9 +794,15 @@ DOM.search.addEventListener('input', () => {
   renderTimeline()
 })
 
-DOM.btnToggleWeekend.addEventListener('click', () => {
+DOM.btnToggleWeekend?.addEventListener('click', () => {
   state.showWeekends = !state.showWeekends
   DOM.btnToggleWeekend.classList.toggle('active', state.showWeekends)
+  renderTimeline()
+})
+
+DOM.btnToggleDeps?.addEventListener('click', () => {
+  state.showDependencies = !state.showDependencies
+  DOM.btnToggleDeps.classList.toggle('active', state.showDependencies)
   renderTimeline()
 })
 
