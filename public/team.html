@@ -8,151 +8,12 @@
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <title>Team & RACI | SmartCool Pro</title>
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/team.css" />
     <!-- FontAwesome for icons -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
-    <style>
-      /* Internal styles for Team page enhancements */
-      .filter-container {
-        margin-bottom: 30px;
-        display: flex;
-        gap: 10px;
-        flex-wrap: wrap;
-      }
-
-      .filter-btn {
-        padding: 8px 16px;
-        border: 1px solid #cbd5e1;
-        background: white;
-        border-radius: 20px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        font-size: 0.9rem;
-        color: #64748b;
-      }
-
-      .filter-btn.active,
-      .filter-btn:hover {
-        background: var(--primary, #2563eb);
-        color: white;
-        border-color: var(--primary, #2563eb);
-      }
-
-      .raci-section {
-        margin-top: 50px;
-        background: white;
-        padding: 30px;
-        border-radius: 10px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-      }
-
-      .raci-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 20px;
-      }
-
-      .raci-table th,
-      .raci-table td {
-        padding: 12px 15px;
-        text-align: center;
-        border-bottom: 1px solid #e2e8f0;
-      }
-
-      .raci-table th {
-        background-color: #f8fafc;
-        color: #475569;
-        font-weight: 600;
-        text-align: left;
-      }
-
-      .raci-table th:not(:first-child) {
-        text-align: center;
-      }
-
-      .raci-cell {
-        font-weight: bold;
-        transition: transform 0.2s;
-        cursor: default;
-      }
-      .raci-cell:hover {
-        transform: scale(1.2);
-      }
-
-      .raci-r {
-        color: #ef4444;
-      } /* Red for Responsible */
-      .raci-a {
-        color: #f59e0b;
-      } /* Orange for Accountable */
-      .raci-c {
-        color: #3b82f6;
-      } /* Blue for Consulted */
-      .raci-i {
-        color: #10b981;
-      } /* Green for Informed */
-
-      .legend {
-        display: flex;
-        gap: 20px;
-        margin-top: 15px;
-        font-size: 0.85rem;
-        color: #64748b;
-      }
-      .legend span {
-        font-weight: bold;
-        margin-right: 5px;
-      }
-
-      .skill-container {
-        margin-bottom: 12px;
-      }
-      
-      .skill-label {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 6px;
-        font-size: 0.9rem;
-      }
-      
-      .skill-label span:first-child {
-        color: #475569;
-        font-weight: 500;
-      }
-      
-      .skill-label span:last-child {
-        color: #1e293b;
-        font-weight: 600;
-      }
-      
-      .skill-bar-bg {
-        background: #e2e8f0;
-        border-radius: 4px;
-        height: 8px;
-        overflow: hidden;
-      }
-      
-      .skill-bar-fill {
-        background: linear-gradient(90deg, #3b82f6, #2563eb);
-        height: 100%;
-        border-radius: 4px;
-        transition: width 0.8s ease-out;
-      }
-
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-    </style>
   </head>
   <body>
     <script src="js/sidebar.js"></script>
@@ -308,35 +169,40 @@
         .then((res) => res.json())
         .then((members) => {
           const grid = document.getElementById("team-grid");
+          if (!grid) {
+            console.error("team-grid element not found");
+            return;
+          }
           grid.innerHTML = members
             .map((member) => {
-              const skills =
+              const skills = member.skills ? (
                 typeof member.skills === "string"
                   ? JSON.parse(member.skills)
-                  : member.skills;
-              const skillsHtml = skills
+                  : member.skills
+              ) : [];
+              const skillsHtml = (skills || [])
                 .map(
                   (skill) => `
                         <div class="skill-container">
-                            <div class="skill-label"><span>${skill.name}</span><span>${skill.val}</span></div>
-                            <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="${skill.val}" style="width: 0%"></div></div>
+                            <div class="skill-label"><span>${skill.name || 'N/A'}</span><span>${skill.val || 0}</span></div>
+                            <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="${skill.val || 0}" style="width: 0%"></div></div>
                         </div>
                     `
                 )
                 .join("");
 
               return `
-                    <div class="card" data-category="${member.category}">
+                    <div class="card" data-category="${member.category || 'other'}">
                         <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
                             <div style="width: 50px; height: 50px; background: #e2e8f0; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #64748b;">
-                                <i class="fas ${member.icon}"></i>
+                                <i class="fas ${member.icon || 'fa-user'}"></i>
                             </div>
                             <div>
-                                <h3>${member.name}</h3>
-                                <p style="color: var(--accent, #2563eb); font-size: 0.9rem; font-weight: 500;">${member.role}</p>
+                                <h3>${member.name || 'N/A'}</h3>
+                                <p style="color: var(--accent, #2563eb); font-size: 0.9rem; font-weight: 500;">${member.role || 'N/A'}</p>
                             </div>
                         </div>
-                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;">${member.description}</p>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;">${member.description || 'N/A'}</p>
                         ${skillsHtml}
                     </div>`;
             })
@@ -344,6 +210,9 @@
 
           // Re-initialize animations and filters
           initInteractions();
+        })
+        .catch((err) => {
+          console.error("Error loading team data:", err);
         });
 
       function initInteractions() {

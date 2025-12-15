@@ -1,0 +1,188 @@
+.risks-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.risk-card {
+  border-left: 6px solid;
+  border-radius: 10px;
+  padding: 20px;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.risk-card.high {
+  border-left-color: #ef4444;
+  background: #fef2f2;
+}
+
+.risk-card.medium {
+  border-left-color: #f59e0b;
+  background: #fffbeb;
+}
+
+.risk-card.low {
+  border-left-color: #10b981;
+  background: #f0fdf4;
+}
+
+.risk-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.risk-icon {
+  font-size: 1.5rem;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  font-family: "Material Symbols Outlined";
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 48;
+}
+
+.risk-card.high .risk-icon {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.risk-card.medium .risk-icon {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.risk-card.low .risk-icon {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.risk-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+}
+
+.risk-badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.risk-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.risk-badge.prob {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.risk-badge.impact {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.risk-badge.score {
+  background: #e0f2fe;
+  color: #075985;
+}
+
+.risk-badge.owner {
+  background: #ecfeff;
+  color: #0f172a;
+}
+
+.risk-content {
+  margin-bottom: 12px;
+  display: grid;
+  gap: 8px;
+}
+
+.risk-field {
+  display: flex;
+  gap: 8px;
+}
+
+.risk-field-label {
+  font-weight: 600;
+  color: #475569;
+  min-width: 120px;
+  font-size: 0.9rem;
+}
+
+.risk-field-value {
+  color: #0f172a;
+  font-size: 0.9rem;
+}
+
+.risk-mitigation {
+  background: rgba(255, 255, 255, 0.75);
+  border-left: 2px solid currentColor;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  color: #334155;
+}
+
+.risk-legend {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.legend-card {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 14px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.legend-title {
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #0f172a;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  border: 1px solid #e2e8f0;
+}
+
+.pill.red {
+  background: #fef2f2;
+  color: #b91c1c;
+  border-color: #fecdd3;
+}
+
+.pill.amber {
+  background: #fffbeb;
+  color: #92400e;
+  border-color: #fcd34d;
+}
+
+.pill.green {
+  background: #f0fdf4;
+  color: #166534;
+  border-color: #bbf7d0;
+}

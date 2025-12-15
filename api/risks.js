@@ -15,17 +15,23 @@ module.exports = (_req, res) => {
     
     // Transform data to match dashboard expectations
     const transformed = data.map(risk => ({
+      id: risk.id,
+      name: risk.name,
       title: risk.name,
+      description: risk.description,
       context: risk.description,
-      mitigation: risk.mitigation,
-      impact: getLevel(risk.impact),
-      prob: getLevel(risk.probability),
       category: risk.category,
-      owner: risk.owner,
-      status: risk.status,
-      trigger: risk.trigger,
-      fallback: risk.fallback,
-      id: risk.id
+      owner: risk.owner || 'N/A',
+      status: risk.status || 'N/A',
+      trigger: risk.trigger || 'N/A',
+      fallback: risk.fallback || 'N/A',
+      mitigation: risk.mitigation || 'N/A',
+      // Numeric versions for risks.html calculation
+      probability: risk.probability,
+      likelihood: risk.probability,
+      // Text versions for dashboard display and filtering
+      prob: getLevel(risk.probability),
+      impact: getLevel(risk.impact)
     }))
     
     res.json(transformed)
