@@ -308,35 +308,40 @@
         .then((res) => res.json())
         .then((members) => {
           const grid = document.getElementById("team-grid");
+          if (!grid) {
+            console.error("team-grid element not found");
+            return;
+          }
           grid.innerHTML = members
             .map((member) => {
-              const skills =
+              const skills = member.skills ? (
                 typeof member.skills === "string"
                   ? JSON.parse(member.skills)
-                  : member.skills;
-              const skillsHtml = skills
+                  : member.skills
+              ) : [];
+              const skillsHtml = (skills || [])
                 .map(
                   (skill) => `
                         <div class="skill-container">
-                            <div class="skill-label"><span>${skill.name}</span><span>${skill.val}</span></div>
-                            <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="${skill.val}" style="width: 0%"></div></div>
+                            <div class="skill-label"><span>${skill.name || 'N/A'}</span><span>${skill.val || 0}</span></div>
+                            <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="${skill.val || 0}" style="width: 0%"></div></div>
                         </div>
                     `
                 )
                 .join("");
 
               return `
-                    <div class="card" data-category="${member.category}">
+                    <div class="card" data-category="${member.category || 'other'}">
                         <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
                             <div style="width: 50px; height: 50px; background: #e2e8f0; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #64748b;">
-                                <i class="fas ${member.icon}"></i>
+                                <i class="fas ${member.icon || 'fa-user'}"></i>
                             </div>
                             <div>
-                                <h3>${member.name}</h3>
-                                <p style="color: var(--accent, #2563eb); font-size: 0.9rem; font-weight: 500;">${member.role}</p>
+                                <h3>${member.name || 'N/A'}</h3>
+                                <p style="color: var(--accent, #2563eb); font-size: 0.9rem; font-weight: 500;">${member.role || 'N/A'}</p>
                             </div>
                         </div>
-                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;">${member.description}</p>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;">${member.description || 'N/A'}</p>
                         ${skillsHtml}
                     </div>`;
             })
@@ -344,6 +349,9 @@
 
           // Re-initialize animations and filters
           initInteractions();
+        })
+        .catch((err) => {
+          console.error("Error loading team data:", err);
         });
 
       function initInteractions() {

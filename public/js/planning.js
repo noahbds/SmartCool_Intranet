@@ -637,17 +637,18 @@ window.addEventListener('mousemove', e => {
   if (DOM.tooltip.style.opacity === '1') moveTooltip(e)
 })
 
-DOM.timelineBody.addEventListener('scroll', () => {
-  DOM.timelineHeader.scrollLeft = DOM.timelineBody.scrollLeft
-  DOM.taskList.scrollTop = DOM.timelineBody.scrollTop
+DOM.timelineBody?.addEventListener('scroll', () => {
+  if (DOM.timelineHeader) DOM.timelineHeader.scrollLeft = DOM.timelineBody?.scrollLeft || 0
+  if (DOM.taskList) DOM.taskList.scrollTop = DOM.timelineBody?.scrollTop || 0
 })
-DOM.taskList.addEventListener('scroll', () => {
-  DOM.timelineBody.scrollTop = DOM.taskList.scrollTop
+DOM.taskList?.addEventListener('scroll', () => {
+  if (DOM.timelineBody) DOM.timelineBody.scrollTop = DOM.taskList?.scrollTop || 0
 })
 
 // Zoom & Fit
 function fitView () {
   if (state.totalDays <= 0) return
+  if (!DOM.timelinePanel) return
   const availWidth = DOM.timelinePanel.clientWidth
   state.zoomLevel = 1
   state.pxPerUnit = availWidth / state.totalDays

@@ -514,9 +514,9 @@
         .then((data) => {
           // Render Budget Cards
           const cardsContainer = document.getElementById("budget-cards");
-          const total = data.summary.find((s) => s.category === "Total").amount;
-          const capex = data.summary.find((s) => s.category === "CAPEX").amount;
-          const opex = data.summary.find((s) => s.category === "OPEX").amount;
+          const total = data.summary?.find((s) => s.category === "Total")?.amount || 0;
+          const capex = data.summary?.find((s) => s.category === "CAPEX")?.amount || 0;
+          const opex = data.summary?.find((s) => s.category === "OPEX")?.amount || 0;
 
           cardsContainer.innerHTML = `
                 <div class="card">
@@ -546,16 +546,16 @@
 
           // Render BOM
           const bomBody = document.getElementById("bom-body");
-          bomBody.innerHTML = data.bom
+          bomBody.innerHTML = (data.bom || [])
             .map(
               (item) => `
                     <tr>
-                        <td><i class="fas ${item.icon}"></i> ${
-                item.component
+                        <td><i class="fas ${item.icon || 'fa-cube'}"></i> ${
+                item.component || 'N/A'
               }</td>
-                        <td>${item.description}</td>
-                        <td>€${item.cost.toFixed(2)}</td>
-                        <td>${item.supplier}</td>
+                        <td>${item.description || 'N/A'}</td>
+                        <td>€${(item.cost || 0).toFixed(2)}</td>
+                        <td>${item.supplier || 'N/A'}</td>
                         <td><span class="status-badge ${
                           item.status === "Sourced"
                             ? "status-done"

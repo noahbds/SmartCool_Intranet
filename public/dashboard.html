@@ -585,9 +585,9 @@
             (r) => `
               <li class="list-item">
                 <div>
-                  <div class="title">${r.title}</div>
-                  <div class="subtitle">${r.context}</div>
-                  <div class="subtitle">Mitigation: ${r.mitigation}</div>
+                  <div class="title">${r.title || r.name || 'N/A'}</div>
+                  <div class="subtitle">${r.context || r.description || 'N/A'}</div>
+                  <div class="subtitle">Mitigation: ${r.mitigation || 'N/A'}</div>
                 </div>
                 <span class="status-pill ${
                   r.impact === "High"
@@ -595,7 +595,7 @@
                     : r.impact === "Medium"
                     ? "warn"
                     : ""
-                }">${r.prob}/${r.impact}</span>
+                }">${r.prob || 'N/A'}/${r.impact || 'N/A'}</span>
               </li>
             `
           )
