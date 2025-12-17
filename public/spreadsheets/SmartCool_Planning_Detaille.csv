@@ -1,16 +1,16 @@
-ID,PHASE,TACHE,RESPONSABLE,DEBUT,FIN,DUREE (J),LIVRABLE,DEPENDANCE
-1.1,Conception,Définition des Specs Techniques,CTO,01/10/2025,07/10/2025,7,Cahier des charges v1.0,-
-1.2,Conception,Sélection des composants clés (BOM),Hardware Lead,08/10/2025,14/10/2025,7,BOM Preliminaire,1.1
-1.3,Conception,Architecture Cloud (AWS),Cloud Architect,08/10/2025,14/10/2025,7,Diagramme d'architecture,1.1
-2.1,Hardware,Schématique PCB (Altium),Hardware Lead,15/10/2025,30/10/2025,15,Gerber Files v0.1,1.2
-2.2,Hardware,Routage PCB (Placement),Hardware Lead,31/10/2025,07/11/2025,7,Fichiers de fab,2.1
-2.3,Hardware,Fabrication PCB Alpha (JLCPCB),Externe,08/11/2025,15/11/2025,7,Cartes nues,2.2
-2.4,Hardware,Assemblage & Bring-up (Test),Hardware Lead,16/11/2025,20/11/2025,4,PCB Fonctionnel,2.3
-3.1,Software,Collecte Dataset (Photos frigo),Data Team,15/10/2025,01/11/2025,16,5000 images annotées,1.1
-3.2,Software,Entrainement Modèle YOLOv8,Data Scientist,02/11/2025,20/11/2025,18,Modèle .pt optimisé,3.1
-3.3,Software,Développement Firmware (C++),Embedded Dev,15/10/2025,30/11/2025,45,Firmware v0.5,1.2
-3.4,Software,Intégration Modèle sur RPi5,Embedded Dev,01/12/2025,10/12/2025,10,Inférence < 200ms,"2.4, 3.2"
-4.1,Indus,Design Mécanique 3D (Boitier),Mech Eng,15/11/2025,15/12/2025,30,Fichiers STEP,2.2
-4.2,Indus,Lancement Outillage (Moules),Acheteur,01/01/2026,28/02/2026,58,Moules Acier T1,4.1
-4.3,Certif,Pré-scan EMC (Compatibilité),Labo Interne,15/12/2025,20/12/2025,5,Rapport de test,2.4
-4.4,Certif,Certification Finale CE,TUV Lab,01/03/2026,30/03/2026,30,Certificat CE,4.2
+ID,PHASE,TASK,RESPONSIBLE,START,END,DURATION (D),DELIVERABLE,DEPENDENCY
+1.1,Design,Technical Specs Definition,CTO,01/10/2025,07/10/2025,7,Requirements Document v1.0,-
+1.2,Design,Key Component Selection (BOM),Hardware Lead,08/10/2025,14/10/2025,7,Preliminary BOM,1.1
+1.3,Design,Cloud Architecture (AWS),Cloud Architect,08/10/2025,14/10/2025,7,Architecture Diagram,1.1
+2.1,Hardware,PCB Schematics (Altium),Hardware Lead,15/10/2025,30/10/2025,15,Gerber Files v0.1,1.2
+2.2,Hardware,PCB Routing (Placement),Hardware Lead,31/10/2025,07/11/2025,7,Fab Files,2.1
+2.3,Hardware,PCB Fabrication Alpha (JLCPCB),External,08/11/2025,15/11/2025,7,Bare Boards,2.2
+2.4,Hardware,Assembly & Bring-up (Test),Hardware Lead,16/11/2025,20/11/2025,4,Functional PCB,2.3
+3.1,Software,Dataset Collection (Fridge Photos),Data Team,15/10/2025,01/11/2025,16,5000 Annotated Images,1.1
+3.2,Software,YOLOv8 Model Training,Data Scientist,02/11/2025,20/11/2025,18,Optimized .pt Model,3.1
+3.3,Software,Firmware Development (C++),Embedded Dev,15/10/2025,30/11/2025,45,Firmware v0.5,1.2
+3.4,Software,Model Integration on RPi5,Embedded Dev,01/12/2025,10/12/2025,10,Inference < 200ms,"2.4, 3.2"
+4.1,Manufacturing,3D Mechanical Design (Enclosure),Mech Eng,15/11/2025,15/12/2025,30,STEP Files,2.2
+4.2,Manufacturing,Tooling Launch (Molds),Purchaser,01/01/2026,28/02/2026,58,Steel Molds T1,4.1
+4.3,Certification,EMC Pre-scan (Compliance),Internal Lab,15/12/2025,20/12/2025,5,Test Report,2.4
+4.4,Certification,Final CE Certification,TUV Lab,01/03/2026,30/03/2026,30,CE Certificate,4.2

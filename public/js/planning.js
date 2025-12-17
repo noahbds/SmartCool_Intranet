@@ -222,7 +222,7 @@ async function loadRisks () {
     console.warn('Risks load error:', err)
     if (DOM.riskGrid)
       DOM.riskGrid.innerHTML =
-        "<div class='risk-card error'>Impossible de charger les risques</div>"
+        "<div class='risk-card error'>Unable to load risks</div>"
   }
 }
 
@@ -360,7 +360,7 @@ function renderHeaderScales (pxPerDay) {
       if (d.getMonth() !== currentMonth || d.getFullYear() !== currentYear) {
         currentMonth = d.getMonth()
         currentYear = d.getFullYear()
-        const monthLabel = d.toLocaleDateString('fr-FR', {
+        const monthLabel = d.toLocaleDateString('en-US', {
           month: 'short',
           year: 'numeric'
         }).replace('.', '')
@@ -388,7 +388,7 @@ function renderHeaderScales (pxPerDay) {
 
       if (d.getMonth() !== currentMonth) {
         currentMonth = d.getMonth()
-        const monthLabel = d.toLocaleDateString('fr-FR', {
+        const monthLabel = d.toLocaleDateString('en-US', {
           month: 'long',
           year: 'numeric'
         })
@@ -410,7 +410,7 @@ function renderHeaderScales (pxPerDay) {
       mCell.className = 'scale-cell'
       mCell.style.left = i * pxPerDay + 'px'
       mCell.style.width = monthWidth + 'px'
-      mCell.textContent = d.toLocaleDateString('fr-FR', {
+      mCell.textContent = d.toLocaleDateString('en-US', {
         month: 'short'
       })
       secondaryRow.appendChild(mCell)
@@ -617,18 +617,18 @@ function showTooltip (e, t) {
     <div class="tooltip-row"><span class="tooltip-label">Phase</span> <span class="tooltip-val">${
       t.phase
     }</span></div>
-    <div class="tooltip-row"><span class="tooltip-label">Début</span> <span class="tooltip-val">${t.start.toLocaleDateString()}</span></div>
-    <div class="tooltip-row"><span class="tooltip-label">Fin</span> <span class="tooltip-val">${t.end.toLocaleDateString()}</span></div>
-    <div class="tooltip-row"><span class="tooltip-label">Durée</span> <span class="tooltip-val">${
+    <div class="tooltip-row"><span class="tooltip-label">Start</span> <span class="tooltip-val">${t.start.toLocaleDateString()}</span></div>
+    <div class="tooltip-row"><span class="tooltip-label">End</span> <span class="tooltip-val">${t.end.toLocaleDateString()}</span></div>
+    <div class="tooltip-row"><span class="tooltip-label">Duration</span> <span class="tooltip-val">${
       t.duration
-    } jours</span></div>
-    <div class="tooltip-row"><span class="tooltip-label">Avancement</span> <span class="tooltip-val">${
+    } days</span></div>
+    <div class="tooltip-row"><span class="tooltip-label">Progress</span> <span class="tooltip-val">${
       t.complete
     }%</span></div>
-    <div class="tooltip-row"><span class="tooltip-label">Responsable</span> <span class="tooltip-val">${
+    <div class="tooltip-row"><span class="tooltip-label">Responsible</span> <span class="tooltip-val">${
       t.responsibleRole
     }</span></div>
-    <div class="tooltip-row"><span class="tooltip-label">Ressources</span> <span class="tooltip-val">${resList}</span></div>
+    <div class="tooltip-row"><span class="tooltip-label">Resources</span> <span class="tooltip-val">${resList}</span></div>
   `
   DOM.tooltip.style.opacity = '1'
   moveTooltip(e)
@@ -763,12 +763,12 @@ async function saveTask () {
     const result = await saveDB()
     if (result && result.fallback) {
       alert(
-        'Environnement en lecture seule : sauvegarde temporaire (/tmp). Configurez un stockage persistant pour conserver les données.'
+        'Read-only environment: temporary save (/tmp). Configure persistent storage to keep data.'
       )
     }
   } catch (err) {
     console.error('Save error:', err)
-    alert("Impossible d'enregistrer la tâche")
+    alert("Unable to save the task")
   }
 
   closeModal()
