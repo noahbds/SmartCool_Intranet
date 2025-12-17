@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Visionneur de Planning Gantt — SmartCool Pro"
+      content="Gantt Planning Viewer — SmartCool Pro"
     />
     <title>Planning | SmartCool Pro</title>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -30,24 +30,19 @@
 
     <main class="main-content">
       <!-- Header -->
-      <header class="app-header">
-        <div class="app-title">
-          <h1>Planning Projet</h1>
-          <span>SmartCool Pro</span>
-        </div>
-        <div class="header-actions">
-          <button class="btn-tool" id="btn-reload">
-            <i class="fa-solid fa-rotate-right"></i> Recharger
-          </button>
-        </div>
+      <header style="margin-bottom: 30px;">
+        <h1 style="font-size: 2.5rem; margin-bottom: 10px;">
+          <i class="fas fa-calendar-alt" style="color: var(--accent);"></i> Project Planning
+        </h1>
+        <p style="font-size: 1.2rem; color: var(--text-muted);">Master Gantt Chart & Timeline</p>
       </header>
 
       <!-- Toolbar -->
       <div class="toolbar">
         <div class="toolbar-group">
-          <button class="btn-tool active" data-scale="day">Jours</button>
-          <button class="btn-tool" data-scale="week">Semaines</button>
-          <button class="btn-tool" data-scale="month">Mois</button>
+          <button class="btn-tool active" data-scale="day">Days</button>
+          <button class="btn-tool" data-scale="week">Weeks</button>
+          <button class="btn-tool" data-scale="month">Months</button>
         </div>
 
         <div class="toolbar-group">
@@ -58,13 +53,13 @@
             <i class="fa-solid fa-magnifying-glass-plus"></i>
           </button>
           <button class="btn-tool" id="btn-fit">
-            <i class="fa-solid fa-compress"></i> Ajuster
+            <i class="fa-solid fa-compress"></i> Fit
           </button>
           <button class="btn-tool active" id="btn-toggle-weekend">
             <i class="fa-solid fa-calendar-week"></i> WE
           </button>
           <button class="btn-tool active" id="btn-toggle-deps">
-            <i class="fa-solid fa-diagram-project"></i> Dépendances
+            <i class="fa-solid fa-diagram-project"></i> Deps
           </button>
         </div>
 
@@ -72,7 +67,7 @@
           <input
             type="text"
             class="search-input"
-            placeholder="Filtrer les tâches..."
+            placeholder="Filter tasks..."
             id="search"
           />
         </div>
@@ -82,7 +77,7 @@
       <div class="phase-legend">
         <div class="legend-item">
           <span class="legend-color" style="background: #3b82f6;"></span>
-          <span class="legend-label">Conception</span>
+          <span class="legend-label">Concept</span>
         </div>
         <div class="legend-item">
           <span class="legend-color" style="background: #10b981;"></span>
@@ -94,7 +89,7 @@
         </div>
         <div class="legend-item">
           <span class="legend-color" style="background: #f59e0b;"></span>
-          <span class="legend-label">Indus & Certif</span>
+          <span class="legend-label">Industrialization</span>
         </div>
       </div>
 
@@ -103,13 +98,13 @@
         <!-- Empty State -->
         <div class="empty-state" id="empty-state">
           <i class="fa-solid fa-chart-gantt empty-icon"></i>
-          <div class="empty-text">Chargement du planning...</div>
+          <div class="empty-text">Loading planning...</div>
           <button
             class="btn-tool primary"
             id="link-example"
             style="display: none"
           >
-            Charger le planning par défaut
+            Load default planning
           </button>
         </div>
 
@@ -119,9 +114,9 @@
             <div>#</div>
             <div>ID</div>
             <div>Phase</div>
-            <div>Tâche</div>
-            <div>Resp.</div>
-            <div>Durée</div>
+            <div>Task</div>
+            <div>Owner</div>
+            <div>Dur.</div>
           </div>
           <div class="task-list" id="task-list">
             <!-- JS Generated -->
@@ -140,7 +135,7 @@
             <div class="timeline-grid" id="timeline-grid">
               <div class="grid-bg" id="grid-bg"></div>
               <div class="today-marker" id="today-marker">
-                <div class="today-label">AUJ</div>
+                <div class="today-label">TODAY</div>
               </div>
               <!-- Bars JS Generated -->
             </div>
@@ -151,8 +146,8 @@
       <section class="risks-wrapper" id="risk-section">
         <div class="risks-header">
           <div>
-            <p class="risks-eyebrow">Risques clés</p>
-            <h2 class="risks-title">Synthèse transposée</h2>
+            <p class="risks-eyebrow">Key Risks</p>
+            <h2 class="risks-title">Risk Synthesis</h2>
           </div>
         </div>
         <div class="risk-grid" id="risk-grid"></div>
@@ -160,7 +155,7 @@
 
       <!-- Footer -->
       <footer class="app-footer">
-        <div>SmartCool Intranet - Module Planning</div>
+        <div>SmartCool Intranet - Planning Module</div>
         <div>© 2025 SmartCool Inc.</div>
       </footer>
     </main>
@@ -171,7 +166,7 @@
     <div class="modal-overlay is-hidden" id="edit-modal">
       <div class="modal">
         <div class="modal-header">
-          <h3>Détails de la tâche</h3>
+          <h3>Task Details</h3>
           <button class="btn-icon" onclick="closeModal()">
             <i class="fa-solid fa-xmark"></i>
           </button>
@@ -179,22 +174,22 @@
         <div class="modal-body">
           <input type="hidden" id="edit-id" />
           <div class="form-group">
-            <label>Nom de la tâche</label>
+            <label>Task Name</label>
             <input type="text" class="form-input" id="edit-name" />
           </div>
           <div class="form-row">
             <div class="form-group">
-              <label>Date de début</label>
+              <label>Start Date</label>
               <input type="date" class="form-input" id="edit-start" />
             </div>
             <div class="form-group">
-              <label>Durée (jours)</label>
+              <label>Duration (days)</label>
               <input type="number" class="form-input" id="edit-duration" />
             </div>
           </div>
           <div class="form-row">
             <div class="form-group">
-              <label>Avancement (%)</label>
+              <label>Progress (%)</label>
               <input
                 type="number"
                 min="0"
@@ -204,21 +199,21 @@
               />
             </div>
             <div class="form-group">
-              <label>Coût (€)</label>
+              <label>Cost (€)</label>
               <input type="number" class="form-input" id="edit-cost" />
             </div>
           </div>
           <div class="form-group">
-            <label>Ressources & Charge (%)</label>
+            <label>Resources & Load (%)</label>
             <div class="resources-list" id="edit-resources-list">
               <!-- JS Generated -->
             </div>
           </div>
         </div>
         <div class="modal-footer">
-          <button class="btn-tool" onclick="closeModal()">Annuler</button>
+          <button class="btn-tool" onclick="closeModal()">Cancel</button>
           <button class="btn-tool primary" onclick="saveTask()">
-            Enregistrer
+            Save
           </button>
         </div>
       </div>

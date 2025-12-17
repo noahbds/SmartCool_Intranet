@@ -8,18 +8,18 @@
   "tasks": [
     {
       "id": "11",
-      "phase": "Conception",
-      "name": "Définition des Specs Techniques",
+      "phase": "Concept Phase",
+      "name": "Technical Specs Definition",
       "start": "2025-10-01",
       "duration": 7,
-      "complete": 0,
+      "complete": 100,
       "depends": [],
       "color": "#3b82f6",
       "resources": [
         {
           "id": "0",
           "name": "Jean Dupont",
-          "roleName": "Chef de Projet",
+          "roleName": "Project Manager",
           "load": 20,
           "responsible": true
         }
@@ -28,11 +28,11 @@
     },
     {
       "id": "12",
-      "phase": "Conception",
-      "name": "Sélection des composants clés (BOM)",
+      "phase": "Concept Phase",
+      "name": "Key Component Selection (BOM)",
       "start": "2025-10-08",
       "duration": 7,
-      "complete": 0,
+      "complete": 100,
       "depends": ["11"],
       "color": "#3b82f6",
       "resources": [
@@ -48,11 +48,11 @@
     },
     {
       "id": "13",
-      "phase": "Conception",
-      "name": "Architecture Cloud (AWS)",
+      "phase": "Concept Phase",
+      "name": "Cloud Architecture (AWS)",
       "start": "2025-10-08",
       "duration": 7,
-      "complete": 0,
+      "complete": 100,
       "depends": ["11"],
       "color": "#3b82f6",
       "resources": [
@@ -69,10 +69,10 @@
     {
       "id": "21",
       "phase": "Hardware",
-      "name": "Schématique PCB (Altium)",
+      "name": "PCB Schematics (Altium)",
       "start": "2025-10-15",
       "duration": 15,
-      "complete": 0,
+      "complete": 100,
       "depends": ["12"],
       "color": "#10b981",
       "resources": [
@@ -89,10 +89,10 @@
     {
       "id": "22",
       "phase": "Hardware",
-      "name": "Routage PCB (Placement)",
+      "name": "PCB Layout & Routing",
       "start": "2025-10-31",
       "duration": 7,
-      "complete": 0,
+      "complete": 100,
       "depends": ["21"],
       "color": "#10b981",
       "resources": [
@@ -109,17 +109,17 @@
     {
       "id": "23",
       "phase": "Hardware",
-      "name": "Fabrication PCB Alpha (JLCPCB)",
+      "name": "PCB Alpha Fabrication (JLCPCB)",
       "start": "2025-11-08",
       "duration": 7,
-      "complete": 0,
+      "complete": 100,
       "depends": ["22"],
       "color": "#10b981",
       "resources": [
         {
           "id": "8",
-          "name": "Prestataire",
-          "roleName": "Externe",
+          "name": "Contractor",
+          "roleName": "External",
           "load": 100,
           "responsible": true
         }
@@ -129,10 +129,10 @@
     {
       "id": "24",
       "phase": "Hardware",
-      "name": "Assemblage & Bring-up (Test)",
+      "name": "Assembly & Bring-up",
       "start": "2025-11-16",
       "duration": 4,
-      "complete": 0,
+      "complete": 100,
       "depends": ["23"],
       "color": "#10b981",
       "resources": [
@@ -149,16 +149,16 @@
     {
       "id": "31",
       "phase": "Software",
-      "name": "Collecte Dataset (Photos frigo)",
+      "name": "Dataset Collection (Fridge Photos)",
       "start": "2025-10-15",
       "duration": 16,
-      "complete": 0,
+      "complete": 100,
       "depends": ["13"],
       "color": "#8b5cf6",
       "resources": [
         {
           "id": "7",
-          "name": "Équipe Data",
+          "name": "Data Squad",
           "roleName": "Data Squad",
           "load": 100,
           "responsible": true
@@ -169,10 +169,10 @@
     {
       "id": "32",
       "phase": "Software",
-      "name": "Entrainement Modèle YOLOv8",
+      "name": "YOLOv8 Model Training",
       "start": "2025-11-02",
       "duration": 18,
-      "complete": 0,
+      "complete": 90,
       "depends": ["31"],
       "color": "#8b5cf6",
       "resources": [
@@ -189,10 +189,10 @@
     {
       "id": "33",
       "phase": "Software",
-      "name": "Développement Firmware (C++)",
+      "name": "Firmware Development (C++)",
       "start": "2025-10-15",
       "duration": 45,
-      "complete": 0,
+      "complete": 60,
       "depends": ["12"],
       "color": "#8b5cf6",
       "resources": [
@@ -209,7 +209,7 @@
     {
       "id": "34",
       "phase": "Software",
-      "name": "Intégration Modèle sur RPi5",
+      "name": "Model Integration on RPi5",
       "start": "2025-12-01",
       "duration": 10,
       "complete": 0,
@@ -228,11 +228,11 @@
     },
     {
       "id": "41",
-      "phase": "Indus & Certif",
-      "name": "Design Mécanique 3D (Boitier)",
+      "phase": "Industrialization",
+      "name": "3D Mechanical Design (Enclosure)",
       "start": "2025-11-15",
       "duration": 30,
-      "complete": 0,
+      "complete": 40,
       "depends": ["21"],
       "color": "#f59e0b",
       "resources": [
@@ -248,8 +248,8 @@
     },
     {
       "id": "42",
-      "phase": "Indus & Certif",
-      "name": "Lancement Outillage (Moules)",
+      "phase": "Industrialization",
+      "name": "Tooling Launch (Molds)",
       "start": "2026-01-01",
       "duration": 58,
       "complete": 0,
@@ -259,7 +259,7 @@
         {
           "id": "6",
           "name": "Marc Moreau",
-          "roleName": "Acheteur",
+          "roleName": "Purchaser",
           "load": 40,
           "responsible": true
         }
@@ -268,8 +268,8 @@
     },
     {
       "id": "43",
-      "phase": "Indus & Certif",
-      "name": "Pré-scan EMC (Compatibilité)",
+      "phase": "Industrialization",
+      "name": "EMC Pre-scan",
       "start": "2025-12-15",
       "duration": 5,
       "complete": 0,
@@ -278,8 +278,8 @@
       "resources": [
         {
           "id": "8",
-          "name": "Prestataire",
-          "roleName": "Externe",
+          "name": "Contractor",
+          "roleName": "External",
           "load": 100,
           "responsible": true
         }
@@ -288,18 +288,18 @@
     },
     {
       "id": "45",
-      "phase": "Indus & Certif",
-      "name": "Définition Plan Assurance Qualité",
+      "phase": "Industrialization",
+      "name": "Quality Assurance Plan Definition",
       "start": "2025-11-01",
       "duration": 14,
-      "complete": 0,
+      "complete": 100,
       "depends": ["11"],
       "color": "#f59e0b",
       "resources": [
         {
           "id": "0",
           "name": "Jean Dupont",
-          "roleName": "Chef de Projet",
+          "roleName": "Project Manager",
           "load": 30,
           "responsible": true
         }
@@ -308,8 +308,8 @@
     },
     {
       "id": "44",
-      "phase": "Indus & Certif",
-      "name": "Certification Finale CE",
+      "phase": "Industrialization",
+      "name": "Final CE Certification",
       "start": "2026-03-01",
       "duration": 30,
       "complete": 0,
@@ -318,8 +318,8 @@
       "resources": [
         {
           "id": "8",
-          "name": "Prestataire",
-          "roleName": "Externe",
+          "name": "Contractor",
+          "roleName": "External",
           "load": 100,
           "responsible": true
         }
@@ -331,7 +331,7 @@
     {
       "id": "0",
       "name": "Jean Dupont",
-      "roleName": "Chef de Projet",
+      "roleName": "Project Manager",
       "email": "jean.dupont@smartcool.com",
       "allocation": 100
     },
@@ -373,25 +373,25 @@
     {
       "id": "6",
       "name": "Marc Moreau",
-      "roleName": "Acheteur",
+      "roleName": "Purchaser",
       "email": "marc.moreau@smartcool.com",
       "allocation": 80
     },
     {
       "id": "7",
-      "name": "Équipe Data",
+      "name": "Data Squad",
       "roleName": "Data Squad",
       "email": "",
       "allocation": 100
     },
     {
       "id": "8",
-      "name": "Prestataire",
-      "roleName": "Externe",
+      "name": "Contractor",
+      "roleName": "External",
       "email": "",
       "allocation": 100
     }
   ],
-  "lastModified": "2025-12-10T00:00:00.000Z",
+  "lastModified": "2025-12-17T00:00:00.000Z",
   "lastModifiedBy": "system"
 }

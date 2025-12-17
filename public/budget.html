@@ -23,8 +23,9 @@
       window.si =
         window.si ||
         function () {
-          (window.siq = window.siq || []).push(arguments);
+          (window.si.q = window.si.q || []).push(arguments);
         };
+      window.si("analytics", "auto");
     </script>
     <script defer src="/_vercel/speed-insights/script.js"></script>
     <main class="main-content">
@@ -95,16 +96,16 @@
         </table>
       </div>
 
-      <h2>Répartition Budgétaire Détaillée</h2>
+      <h2>Detailed Budget Breakdown</h2>
       <div class="table-container">
         <table>
           <thead>
             <tr>
-              <th>Catégorie</th>
-              <th>Élément</th>
-              <th>Fournisseur</th>
-              <th>Coût Unitaire (€)</th>
-              <th>Quantité</th>
+              <th>Category</th>
+              <th>Item</th>
+              <th>Supplier</th>
+              <th>Unit Cost (€)</th>
+              <th>Quantity</th>
               <th>Total (€)</th>
               <th>Type</th>
             </tr>
@@ -128,19 +129,19 @@
 
           cardsContainer.innerHTML = `
                 <div class="card">
-                  <h3>Budget Total</h3>
+                  <h3>Total Budget</h3>
                   <p class="counter" data-target="${total}" style="font-size: 2rem; font-weight: 700; color: var(--primary); margin: 10px 0;">€0</p>
-                  <p style="color: var(--text-muted);"><i class="fas fa-check-circle"></i> Approuvé par le Conseil</p>
+                  <p style="color: var(--text-muted);"><i class="fas fa-check-circle"></i> Board Approved</p>
                 </div>
                 <div class="card">
                   <h3>CAPEX (One-time)</h3>
                   <p class="counter" data-target="${capex}" style="font-size: 2rem; font-weight: 700; color: var(--accent); margin: 10px 0;">€0</p>
-                  <p style="color: var(--text-muted);">Outillage, Moules</p>
+                  <p style="color: var(--text-muted);">Tooling, Molds</p>
                 </div>
                 <div class="card">
-                  <h3>OPEX (Récurrent)</h3>
+                  <h3>OPEX (Recurring)</h3>
                   <p class="counter" data-target="${opex}" style="font-size: 2rem; font-weight: 700; color: #10b981; margin: 10px 0;">€0</p>
-                  <p style="color: var(--text-muted);">RH, Cloud, BOM</p>
+                  <p style="color: var(--text-muted);">HR, Cloud, BOM</p>
                 </div>
               `;
 
@@ -178,7 +179,7 @@
           const detailedBody = document.getElementById("detailed-budget-body");
           const budgetItems = [
             ...(data.bom || []).map(item => ({
-                category: "BOM (Matériel)",
+                category: "BOM (Hardware)",
                 item: item.component,
                 supplier: item.supplier,
                 unitCost: item.cost,
@@ -188,7 +189,7 @@
             ...(data.staffing || []).map(item => ({
                 category: "Staffing",
                 item: item.role,
-                supplier: "Interne",
+                supplier: "Internal",
                 unitCost: item.monthly_cost + item.charges,
                 quantity: item.duration,
                 type: "OPEX"
@@ -196,7 +197,7 @@
             ...(data.operating || []).map(item => ({
                 category: "Operating",
                 item: item.item,
-                supplier: "Divers",
+                supplier: "Misc",
                 unitCost: item.monthly_cost,
                 quantity: item.duration,
                 type: "OPEX"
@@ -245,10 +246,10 @@
             current += increment;
             if (current < target) {
               counter.innerText =
-                "€" + Math.ceil(current).toLocaleString("fr-FR");
+                "€" + Math.ceil(current).toLocaleString("en-US");
               requestAnimationFrame(updateCounter);
             } else {
-              counter.innerText = "€" + target.toLocaleString("fr-FR");
+              counter.innerText = "€" + target.toLocaleString("en-US");
             }
           };
           updateCounter();

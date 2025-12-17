@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Gestion des Risques — SmartCool Pro Intranet"
+      content="Risk Management — SmartCool Pro Intranet"
     />
     <meta name="theme-color" content="#3b82f6" />
-    <title>Gestion des Risques | SmartCool Pro</title>
+    <title>Risk Management | SmartCool Pro</title>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/risks.css" />
@@ -38,11 +38,10 @@
             class="fas fa-shield-alt"
             style="color: var(--accent); margin-right: 10px"
           ></i>
-          Gestion des Risques
+          Risk Management
         </h1>
         <p>
-          Identification, évaluation et atténuation des risques critiques du
-          projet Smart Fridge.
+          Identification, assessment and mitigation of critical Smart Fridge project risks.
         </p>
       </header>
 
@@ -94,14 +93,14 @@
 
         const cards = [
           {
-            title: "RPN cumulé",
+            title: "Cumulative RPN",
             value: risks.reduce((s, r) => s + r.score, 0),
             icon: "fa-calculator",
           },
-          { title: "Top 3 risques", value: top3 || "N/A", icon: "fa-list-ol" },
+          { title: "Top 3 Risks", value: top3 || "N/A", icon: "fa-list-ol" },
           {
-            title: "Seuils",
-            value: `${high} high · ${medium} medium · ${low} low (sur ${total})`,
+            title: "Thresholds",
+            value: `${high} high · ${medium} medium · ${low} low (of ${total})`,
             icon: "fa-traffic-light",
           },
         ];
@@ -121,13 +120,13 @@
         const lTitle = createEl("div", "legend-title");
         lTitle.append(
           createEl("i", "fas fa-chart-area"),
-          createEl("span", null, "Grille Probabilité x Impact (1-5)")
+          createEl("span", null, "Probability x Impact Grid (1-5)")
         );
         const pills = createEl("div");
         pills.append(
-          createEl("span", "pill red", ">=16 Critique"),
-          createEl("span", "pill amber", "9-15 Majeur"),
-          createEl("span", "pill green", "<9 Modéré")
+          createEl("span", "pill red", ">=16 Critical"),
+          createEl("span", "pill amber", "9-15 Major"),
+          createEl("span", "pill green", "<9 Moderate")
         );
         legend.append(lTitle, pills);
         summary.appendChild(legend);
@@ -140,7 +139,7 @@
 
           if (!Array.isArray(risksRaw) || risksRaw.length === 0) {
             document.getElementById("risks-container").innerHTML =
-              "<p>Aucun risque disponible.</p>";
+              "<p>No risks available.</p>";
             return;
           }
 
@@ -158,7 +157,7 @@
                 impact,
                 score,
                 severity,
-                name: r.name || r.title || "Sans nom",
+                name: r.name || r.title || "Unnamed",
                 description: r.description || r.context || "N/A",
               };
             })
@@ -201,11 +200,11 @@
 
             const content = createEl("div", "risk-content");
             const fields = [
-              ["Domaine", risk.category || "N/A"],
+              ["Domain", risk.category || "N/A"],
               ["Description", risk.description],
-              ["Déclencheur", risk.trigger || "N/A"],
-              ["Plan B", risk.fallback || "N/A"],
-              ["Statut", risk.status || "N/A"],
+              ["Trigger", risk.trigger || "N/A"],
+              ["Fallback", risk.fallback || "N/A"],
+              ["Status", risk.status || "N/A"],
             ];
             fields.forEach(([label, value]) => {
               const row = createEl("div", "risk-field");
@@ -218,7 +217,7 @@
 
             const mitigation = createEl("div", "risk-mitigation");
             mitigation.append(
-              createEl("strong", null, "Atténuation:"),
+              createEl("strong", null, "Mitigation:"),
               createEl("div", null, risk.mitigation || "N/A")
             );
 

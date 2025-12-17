@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard | SmartCool Pro</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/dashboard.css" />
     <link
@@ -17,8 +18,9 @@
       window.si =
         window.si ||
         function () {
-          (window.siq = window.siq || []).push(arguments);
+          (window.si.q = window.si.q || []).push(arguments);
         };
+      window.si("analytics", "auto");
     </script>
     <script defer src="/_vercel/speed-insights/script.js"></script>
 
@@ -55,7 +57,7 @@
             />
           </svg>
           <div class="hero-progress-value" id="hero-progress-value">0%</div>
-          <div class="hero-progress-caption">Based on milestone completion</div>
+          <div class="hero-progress-caption">Based on task progress</div>
         </div>
       </header>
 
@@ -184,7 +186,7 @@
               <li class="list-item">
                 <div>
                   <div class="title">Jean Dupont</div>
-                  <div class="subtitle">Chef de Projet</div>
+                  <div class="subtitle">Project Manager</div>
                 </div>
                 <div class="status-pill">60%</div>
               </li>
@@ -203,7 +205,7 @@
 
     <script>
       const currency = (n) =>
-        `€${(n || 0).toLocaleString("fr-FR", {
+        `€${(n || 0).toLocaleString("en-US", {
           maximumFractionDigits: 0,
         })}`;
       const percent = (part, total) => {
@@ -212,7 +214,7 @@
       };
       const parseDate = (val) => new Date(val);
       const formatDate = (val) =>
-        parseDate(val).toLocaleDateString("fr-FR", {
+        parseDate(val).toLocaleDateString("en-GB", {
           day: "2-digit",
           month: "short",
           year: "numeric",
