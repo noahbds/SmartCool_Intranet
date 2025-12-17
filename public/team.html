@@ -29,7 +29,7 @@
       <header>
         <h1>Team & Expertise</h1>
         <p>
-          Meet the SmartInnovators behind the Zero-Waste Fridge and their Roles
+          Meet the SmartCool Team behind the Connected Smart Fridge and their Roles
           (RACI).
         </p>
       </header>
@@ -37,10 +37,10 @@
       <!-- Filter Controls -->
       <div class="filter-container">
         <button class="filter-btn active" data-filter="all">All Members</button>
+        <button class="filter-btn" data-filter="design">Design</button>
         <button class="filter-btn" data-filter="hardware">Hardware</button>
         <button class="filter-btn" data-filter="software">AI & Software</button>
         <button class="filter-btn" data-filter="management">Management</button>
-        <button class="filter-btn" data-filter="design">Design</button>
       </div>
 
       <div class="card-grid" id="team-grid">
@@ -53,7 +53,7 @@
           RACI Matrix (Responsibility Assignment)
         </h2>
         <p style="color: #64748b; margin-bottom: 20px">
-          Defining roles for the T-CEN-500 Industrialization Phase.
+          Defining roles for the SmartFridge Project Implementation Phase.
         </p>
 
         <div style="overflow-x: auto">
@@ -62,94 +62,147 @@
               <tr>
                 <th>Deliverable / Task</th>
                 <th>Jean Dupont<br /><small>Chef de Projet</small></th>
-                <th>Sophie Martin<br /><small>Hardware Lead</small></th>
-                <th>Lucas Bernard<br /><small>Cloud Architect</small></th>
-                <th>Emma Petit<br /><small>Data Scientist</small></th>
-                <th>Thomas Richard<br /><small>Embedded Dev</small></th>
-                <th>Julie Dubois<br /><small>Mech Eng</small></th>
-                <th>Marc Moreau<br /><small>Acheteur</small></th>
+                <th>Sophie Martin<br /><small>Design Extérieur</small></th>
+                <th>Lucas Bernard<br /><small>Design Intérieur</small></th>
+                <th>Emma Petit<br /><small>Serrure Connectée</small></th>
+                <th>Thomas Richard<br /><small>Thermostats</small></th>
+                <th>Julie Dubois<br /><small>Éclairage</small></th>
+                <th>Marc Moreau<br /><small>Assistant IA</small></th>
+                <th>Alice Rousseau<br /><small>Suivi Énergie</small></th>
+                <th>Baptiste Lefevre<br /><small>Traçabilité</small></th>
+                <th>Camille Dubos<br /><small>Gantt & Dashboard</small></th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>Project Charter & Scope</td>
-                <td class="raci-cell raci-a">A/R</td>
-                <td class="raci-cell raci-c">C</td>
-                <td class="raci-cell raci-c">C</td>
-                <td class="raci-cell raci-c">C</td>
-                <td class="raci-cell raci-i">I</td>
-                <td class="raci-cell raci-i">I</td>
-                <td class="raci-cell raci-i">I</td>
-              </tr>
-              <tr>
-                <td>Hardware Schematics & PCB Placement</td>
+                <td>Design Extérieur du Frigo</td>
                 <td class="raci-cell raci-a">A</td>
                 <td class="raci-cell raci-r">R</td>
+                <td class="raci-cell raci-c">C</td>
                 <td class="raci-cell raci-i">I</td>
                 <td class="raci-cell raci-i">I</td>
                 <td class="raci-cell raci-c">C</td>
-                <td class="raci-cell raci-c">C</td>
-                <td class="raci-cell raci-c">C</td>
-              </tr>
-              <tr>
-                <td>Cloud & Data Pipeline (AWS + MQTT)</td>
-                <td class="raci-cell raci-a">A</td>
                 <td class="raci-cell raci-i">I</td>
-                <td class="raci-cell raci-r">R</td>
-                <td class="raci-cell raci-c">C</td>
                 <td class="raci-cell raci-i">I</td>
                 <td class="raci-cell raci-i">I</td>
                 <td class="raci-cell raci-i">I</td>
               </tr>
               <tr>
-                <td>YOLOv8 Model Training & Dataset</td>
-                <td class="raci-cell raci-a">A</td>
-                <td class="raci-cell raci-i">I</td>
-                <td class="raci-cell raci-c">C</td>
-                <td class="raci-cell raci-r">R</td>
-                <td class="raci-cell raci-i">I</td>
-                <td class="raci-cell raci-i">I</td>
-                <td class="raci-cell raci-i">I</td>
-              </tr>
-              <tr>
-                <td>Firmware & Edge Integration (RPi5 + Sensors)</td>
+                <td>Design Intérieur du Frigo</td>
                 <td class="raci-cell raci-a">A</td>
                 <td class="raci-cell raci-c">C</td>
-                <td class="raci-cell raci-c">C</td>
-                <td class="raci-cell raci-c">C</td>
                 <td class="raci-cell raci-r">R</td>
+                <td class="raci-cell raci-c">C</td>
+                <td class="raci-cell raci-c">C</td>
+                <td class="raci-cell raci-c">C</td>
+                <td class="raci-cell raci-i">I</td>
+                <td class="raci-cell raci-i">I</td>
                 <td class="raci-cell raci-i">I</td>
                 <td class="raci-cell raci-i">I</td>
               </tr>
               <tr>
-                <td>Mechanical Enclosure & Thermal</td>
-                <td class="raci-cell raci-i">I</td>
-                <td class="raci-cell raci-c">C</td>
-                <td class="raci-cell raci-i">I</td>
-                <td class="raci-cell raci-i">I</td>
-                <td class="raci-cell raci-c">C</td>
-                <td class="raci-cell raci-r">R</td>
-                <td class="raci-cell raci-i">I</td>
-              </tr>
-              <tr>
-                <td>Procurement & BOM Freeze</td>
+                <td>Rédaction des Caractéristiques Techniques</td>
                 <td class="raci-cell raci-a">A</td>
                 <td class="raci-cell raci-c">C</td>
+                <td class="raci-cell raci-r">R</td>
+                <td class="raci-cell raci-c">C</td>
+                <td class="raci-cell raci-c">C</td>
+                <td class="raci-cell raci-c">C</td>
+                <td class="raci-cell raci-c">C</td>
+                <td class="raci-cell raci-c">C</td>
+                <td class="raci-cell raci-c">C</td>
                 <td class="raci-cell raci-i">I</td>
+              </tr>
+              <tr>
+                <td>Mise en Place de Serrure Connectée</td>
+                <td class="raci-cell raci-a">A</td>
+                <td class="raci-cell raci-i">I</td>
+                <td class="raci-cell raci-c">C</td>
+                <td class="raci-cell raci-r">R</td>
+                <td class="raci-cell raci-c">C</td>
+                <td class="raci-cell raci-i">I</td>
+                <td class="raci-cell raci-i">I</td>
+                <td class="raci-cell raci-i">I</td>
+                <td class="raci-cell raci-i">I</td>
+                <td class="raci-cell raci-i">I</td>
+              </tr>
+              <tr>
+                <td>Mise en Place des Thermostats Intelligents</td>
+                <td class="raci-cell raci-a">A</td>
+                <td class="raci-cell raci-i">I</td>
+                <td class="raci-cell raci-c">C</td>
+                <td class="raci-cell raci-i">I</td>
+                <td class="raci-cell raci-r">R</td>
+                <td class="raci-cell raci-c">C</td>
+                <td class="raci-cell raci-i">I</td>
+                <td class="raci-cell raci-c">C</td>
+                <td class="raci-cell raci-i">I</td>
+                <td class="raci-cell raci-i">I</td>
+              </tr>
+              <tr>
+                <td>Adopter l'Éclairage Automatisé</td>
+                <td class="raci-cell raci-a">A</td>
+                <td class="raci-cell raci-c">C</td>
+                <td class="raci-cell raci-c">C</td>
+                <td class="raci-cell raci-i">I</td>
+                <td class="raci-cell raci-c">C</td>
+                <td class="raci-cell raci-r">R</td>
+                <td class="raci-cell raci-i">I</td>
+                <td class="raci-cell raci-c">C</td>
+                <td class="raci-cell raci-i">I</td>
+                <td class="raci-cell raci-i">I</td>
+              </tr>
+              <tr>
+                <td>Mise en Place de l'Assistance Culinaire</td>
+                <td class="raci-cell raci-a">A</td>
+                <td class="raci-cell raci-i">I</td>
+                <td class="raci-cell raci-c">C</td>
                 <td class="raci-cell raci-i">I</td>
                 <td class="raci-cell raci-i">I</td>
                 <td class="raci-cell raci-i">I</td>
                 <td class="raci-cell raci-r">R</td>
+                <td class="raci-cell raci-c">C</td>
+                <td class="raci-cell raci-c">C</td>
+                <td class="raci-cell raci-i">I</td>
               </tr>
               <tr>
-                <td>EMC Pre-scan & CE Certification</td>
-                <td class="raci-cell raci-i">I</td>
+                <td>Système de Suivi de Consommation Électricité</td>
                 <td class="raci-cell raci-a">A</td>
                 <td class="raci-cell raci-i">I</td>
                 <td class="raci-cell raci-i">I</td>
+                <td class="raci-cell raci-i">I</td>
+                <td class="raci-cell raci-c">C</td>
+                <td class="raci-cell raci-c">C</td>
+                <td class="raci-cell raci-c">C</td>
+                <td class="raci-cell raci-r">R</td>
+                <td class="raci-cell raci-i">I</td>
+                <td class="raci-cell raci-c">C</td>
+              </tr>
+              <tr>
+                <td>Système de Suivi des Produits (Péremption)</td>
+                <td class="raci-cell raci-a">A</td>
+                <td class="raci-cell raci-i">I</td>
+                <td class="raci-cell raci-c">C</td>
+                <td class="raci-cell raci-i">I</td>
+                <td class="raci-cell raci-i">I</td>
+                <td class="raci-cell raci-i">I</td>
+                <td class="raci-cell raci-c">C</td>
+                <td class="raci-cell raci-c">C</td>
                 <td class="raci-cell raci-r">R</td>
                 <td class="raci-cell raci-c">C</td>
+              </tr>
+              <tr>
+                <td>Amélioration Gantt en Ligne & Dashboard</td>
+                <td class="raci-cell raci-a">A</td>
+                <td class="raci-cell raci-i">I</td>
+                <td class="raci-cell raci-i">I</td>
+                <td class="raci-cell raci-i">I</td>
+                <td class="raci-cell raci-i">I</td>
+                <td class="raci-cell raci-i">I</td>
                 <td class="raci-cell raci-c">C</td>
+                <td class="raci-cell raci-c">C</td>
+                <td class="raci-cell raci-c">C</td>
+                <td class="raci-cell raci-r">R</td>
               </tr>
             </tbody>
           </table>
@@ -164,10 +217,18 @@
     </main>
 
     <script>
+      console.log('📋 Team page loading...');
+      
       // Fetch Team Data
       fetch("/api/team")
-        .then((res) => res.json())
+        .then((res) => {
+          console.log('✓ API Response status:', res.status);
+          return res.json();
+        })
         .then((members) => {
+          console.log('✓ Members loaded:', members.length, 'members');
+          console.log('Categories found:', [...new Set(members.map(m => m.category))]);
+          
           const grid = document.getElementById("team-grid");
           if (!grid) {
             console.error("team-grid element not found");
@@ -208,28 +269,38 @@
             })
             .join("");
 
+          console.log('✓ Cards rendered');
           // Re-initialize animations and filters
           initInteractions();
         })
         .catch((err) => {
-          console.error("Error loading team data:", err);
+          console.error("❌ Error loading team data:", err);
+          document.getElementById("team-grid").innerHTML = 
+            '<p style="color: red; padding: 20px;">❌ Error loading team data: ' + err.message + '</p>';
         });
 
       function initInteractions() {
+        console.log('🔄 Initializing interactions...');
+        
         // Filter Functionality
         const filterBtns = document.querySelectorAll(".filter-btn");
         const cards = document.querySelectorAll(".card");
+        
+        console.log('Found buttons:', filterBtns.length, 'Found cards:', cards.length);
 
         filterBtns.forEach((btn) => {
-          btn.addEventListener("click", () => {
+          btn.addEventListener("click", (e) => {
+            console.log('🔘 Filter clicked:', btn.getAttribute("data-filter"));
+            
             filterBtns.forEach((b) => b.classList.remove("active"));
             btn.classList.add("active");
             const filterValue = btn.getAttribute("data-filter");
 
             cards.forEach((card) => {
+              const cardCategory = card.getAttribute("data-category");
               if (
                 filterValue === "all" ||
-                card.getAttribute("data-category") === filterValue
+                cardCategory === filterValue
               ) {
                 card.style.display = "block";
                 card.style.animation = "fadeIn 0.5s forwards";
@@ -258,6 +329,7 @@
         );
 
         cards.forEach((card) => observer.observe(card));
+        console.log('✓ Interactions initialized');
       }
     </script>
   </body>
