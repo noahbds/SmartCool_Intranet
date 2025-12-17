@@ -125,7 +125,9 @@
           const cardsContainer = document.getElementById("budget-cards");
           const total = data.summary?.find((s) => s.category === "Total")?.amount || 0;
           const capex = data.summary?.find((s) => s.category === "CAPEX")?.amount || 0;
-          const opex = data.summary?.find((s) => s.category === "OPEX")?.amount || 0;
+          // OPEX is not explicitly in summary, so we calculate it or sum relevant parts
+          // Based on data: Total = CAPEX + Staffing + Operating. So OPEX = Total - CAPEX
+          const opex = total - capex;
 
           cardsContainer.innerHTML = `
                 <div class="card">

@@ -7,7 +7,7 @@
   ],
   "staffing": [
     {
-      "role": "Chef de Projet",
+      "role": "Project Manager",
       "count": 1,
       "monthly_cost": 5500,
       "charges": 2200,
@@ -55,7 +55,7 @@
       "total": 42840
     },
     {
-      "role": "Acheteur",
+      "role": "Purchaser",
       "count": 1,
       "monthly_cost": 4700,
       "charges": 1880,
@@ -65,13 +65,13 @@
   ],
   "operating": [
     {
-      "item": "Location Bureau",
+      "item": "Office Rent",
       "monthly_cost": 1500,
       "duration": 6,
       "total": 9000
     },
     {
-      "item": "Licences Logiciels (Altium, AWS, etc.)",
+      "item": "Software Licenses (Altium, AWS, etc.)",
       "monthly_cost": 500,
       "duration": 6,
       "total": 3000
@@ -79,31 +79,31 @@
   ],
   "capex": [
     {
-      "item": "Moule Injection Acier (Chassis)",
+      "item": "Steel Injection Mold (Chassis)",
       "supplier": "Foxconn Molding",
       "cost": 45000.0,
       "quantity": 1
     },
     {
-      "item": "Moule Injection (Support Caméra)",
+      "item": "Injection Mold (Camera Mount)",
       "supplier": "Foxconn Molding",
       "cost": 12000.0,
       "quantity": 1
     },
     {
-      "item": "Banc de Test (Calibration Caméra)",
-      "supplier": "Interne",
+      "item": "Test Bench (Camera Calibration)",
+      "supplier": "Internal",
       "cost": 8500.0,
       "quantity": 1
     },
     {
-      "item": "Certification CE/RED (Europe)",
+      "item": "CE/RED Certification (Europe)",
       "supplier": "TUV Rheinland",
       "cost": 15000.0,
       "quantity": 1
     },
     {
-      "item": "Certification FCC (USA)",
+      "item": "FCC Certification (USA)",
       "supplier": "SGS Labs",
       "cost": 18000.0,
       "quantity": 1
@@ -119,88 +119,88 @@
       "icon": "fa-microchip"
     },
     {
-      "component": "Dissipateur Thermique Passif",
-      "description": "Aluminium extrudé custom",
+      "component": "Passive Heat Sink",
+      "description": "Custom extruded aluminum",
       "cost": 1.2,
       "supplier": "Local Metal",
       "status": "Sourced",
       "icon": "fa-snowflake"
     },
     {
-      "component": "Module Caméra IMX219 (Wide)",
-      "description": "3 angles de vue (Haut, Milieu, Bas)",
+      "component": "Camera Module IMX219 (Wide)",
+      "description": "3 viewing angles (Top, Middle, Bottom)",
       "cost": 8.5,
       "supplier": "Arducam",
       "status": "Ordering",
       "icon": "fa-camera"
     },
     {
-      "component": "Nappe FFC (Câble plat)",
-      "description": "Blindage EMI requis",
+      "component": "FFC Ribbon Cable",
+      "description": "EMI shielding required",
       "cost": 0.45,
       "supplier": "Molex",
       "status": "Sourced",
       "icon": "fa-link"
     },
     {
-      "component": "Carte Mère Custom",
-      "description": "4 couches, ENIG finish",
+      "component": "Custom Motherboard",
+      "description": "4 layers, ENIG finish",
       "cost": 12.0,
       "supplier": "JLCPCB / PCBWay",
       "status": "Design Phase",
       "icon": "fa-print"
     },
     {
-      "component": "Microcontrôleur",
-      "description": "STM32G030 - Gestion capteurs portes & LED",
+      "component": "Microcontroller",
+      "description": "STM32G030 - Door sensors & LED management",
       "cost": 1.8,
       "supplier": "STM32G030",
       "status": "Sourced",
       "icon": "fa-microchip"
     },
     {
-      "component": "Capteur Temp/Humidité",
-      "description": "Sensirion SHT40 - Précision +/- 0.2C",
+      "component": "Temp/Humidity Sensor",
+      "description": "Sensirion SHT40 - Accuracy +/- 0.2C",
       "cost": 2.1,
       "supplier": "Sensirion",
       "status": "Sourced",
       "icon": "fa-thermometer-half"
     },
     {
-      "component": "Capteur Portes",
-      "description": "Reed Switch - Détection ouverture",
+      "component": "Door Sensor",
+      "description": "Reed Switch - Opening detection",
       "cost": 0.6,
       "supplier": "DigiKey",
       "status": "Sourced",
       "icon": "fa-door-open"
     },
     {
-      "component": "Écran LCD 7 pouces Touch",
-      "description": "Interface utilisateur externe",
+      "component": "7-inch Touch LCD Screen",
+      "description": "External user interface",
       "cost": 35.0,
       "supplier": "BOE / Tianma",
       "status": "Pending",
       "icon": "fa-tv"
     },
     {
-      "component": "Convertisseur AC/DC 5V 5A",
-      "description": "Certifié CE/UL de qualité industrielle",
+      "component": "AC/DC Converter 5V 5A",
+      "description": "Industrial quality CE/UL certified",
       "cost": 14.5,
       "supplier": "Mean Well",
       "status": "Sourced",
       "icon": "fa-plug"
     },
     {
-      "component": "Injection Plastique (ABS)",
-      "description": "Moule 2 cavités",
+      "component": "Plastic Injection (ABS)",
+      "description": "2-cavity mold",
       "cost": 18.0,
-      "supplier": "Usine Partenaire",
+      "supplier": "Partner Factory",
       "status": "Pending",
       "icon": "fa-cube"
     },
     {
-      "component": "Visserie & Assemblage",
-      "description": "Assemblage divers",
+      "component": "Screws & Assembly",
+      "description": "Misc assembly",
       "cost": 2.0,
       "supplier": "-",
       "status": "Sourced",
