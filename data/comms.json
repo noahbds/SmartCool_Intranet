@@ -16,5 +16,14 @@
     "subject": "Budget Approval Request",
     "content": "<p>Dear Board Members,</p><p>Following the feasibility and risk reviews, I am submitting the formal budget request for the SmartCool Pro industrialization phase.</p><p><strong>Request Summary:</strong></p><ul><li><strong>Total Budget:</strong> €251,615</li><li><strong>CAPEX (€98,500):</strong> Tooling, certification, and test bench investments.</li><li><strong>OPEX (€153,115):</strong> Six-month run covering engineering, cloud, and the initial BOM for the pilot build.</li></ul><p>This envelope keeps us on track for a Q2 pilot and aligns with the updated Gantt, skills, and risk plans.</p><p>Sincerely,<br>Noah</p>",
     "icon": "fa-file-invoice-dollar"
+  },
+  {
+    "id": 3,
+    "type": "External",
+    "sender": "Marc Moreau (Acheteur)",
+    "recipient": "Raspberry Pi Ltd (Supplier)",
+    "subject": "Order Inquiry: Compute Module 5",
+    "content": "<p>Dear Sales Team,</p><p>We are interested in placing an order for 500 units of the <strong>Compute Module 5 (4GB RAM)</strong> for our upcoming pilot production of the SmartCool Pro.</p><p>Could you please provide:</p><ul><li>Current lead times and availability.</li><li>Volume pricing for 500 and 1000 units.</li><li>Technical datasheets regarding thermal dissipation requirements.</li></ul><p>We are looking to finalize our BOM by next week.</p><p>Best regards,<br>Marc Moreau</p>",
+    "icon": "fa-envelope"
   }
 ]

@@ -4,6 +4,8 @@
     "role": "Chef de Projet",
     "category": "management",
     "description": "Pilote le projet T-CEN-500, garant des délais et du budget.",
+    "experience": "8 ans d'expérience en gestion de projets IoT.",
+    "salary_cost": 5500,
     "icon": "fa-tasks",
     "skills": [
       { "name": "Gestion Projet", "val": "100%" },
@@ -15,6 +17,8 @@
     "role": "Hardware Lead",
     "category": "hardware",
     "description": "Conception de la carte mère et intégration des capteurs.",
+    "experience": "6 ans en conception électronique et PCB.",
+    "salary_cost": 5200,
     "icon": "fa-microchip",
     "skills": [
       { "name": "PCB Design", "val": "95%" },
@@ -26,6 +30,8 @@
     "role": "Cloud Architect",
     "category": "software",
     "description": "Architecture cloud et API pour l'application mobile.",
+    "experience": "5 ans en architecture cloud et DevOps.",
+    "salary_cost": 5000,
     "icon": "fa-cloud",
     "skills": [
       { "name": "AWS/Azure", "val": "90%" },
@@ -37,6 +43,8 @@
     "role": "Data Scientist",
     "category": "software",
     "description": "Entraînement du modèle IA pour la reconnaissance d'images.",
+    "experience": "4 ans en Machine Learning et Computer Vision.",
+    "salary_cost": 4800,
     "icon": "fa-brain",
     "skills": [
       { "name": "Python", "val": "95%" },
@@ -48,6 +56,8 @@
     "role": "Embedded Dev",
     "category": "hardware",
     "description": "Développement du firmware et drivers capteurs.",
+    "experience": "5 ans en développement embarqué C/C++.",
+    "salary_cost": 4900,
     "icon": "fa-code",
     "skills": [
       { "name": "C/C++", "val": "90%" },
@@ -59,6 +69,8 @@
     "role": "Mech Eng",
     "category": "design",
     "description": "Conception mécanique et intégration physique.",
+    "experience": "7 ans en conception mécanique et plasturgie.",
+    "salary_cost": 5100,
     "icon": "fa-cogs",
     "skills": [
       { "name": "CAD", "val": "90%" },
@@ -70,6 +82,8 @@
     "role": "Acheteur",
     "category": "management",
     "description": "Sourcing des composants et gestion des fournisseurs.",
+    "experience": "10 ans en achats industriels.",
+    "salary_cost": 4700,
     "icon": "fa-shopping-cart",
     "skills": [
       { "name": "Négociation", "val": "95%" },

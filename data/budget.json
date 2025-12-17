@@ -1,8 +1,113 @@
 {
   "summary": [
-    { "category": "Total", "amount": 251614.65 },
+    { "category": "Total", "amount": 406180.0 },
     { "category": "CAPEX", "amount": 98500.0 },
-    { "category": "OPEX", "amount": 153114.65 }
+    { "category": "Staffing", "amount": 295680.0 },
+    { "category": "Operating", "amount": 12000.0 }
+  ],
+  "staffing": [
+    {
+      "role": "Chef de Projet",
+      "count": 1,
+      "monthly_cost": 5500,
+      "charges": 2200,
+      "duration": 6,
+      "total": 46200
+    },
+    {
+      "role": "Hardware Lead",
+      "count": 1,
+      "monthly_cost": 5200,
+      "charges": 2080,
+      "duration": 6,
+      "total": 43680
+    },
+    {
+      "role": "Cloud Architect",
+      "count": 1,
+      "monthly_cost": 5000,
+      "charges": 2000,
+      "duration": 6,
+      "total": 42000
+    },
+    {
+      "role": "Data Scientist",
+      "count": 1,
+      "monthly_cost": 4800,
+      "charges": 1920,
+      "duration": 6,
+      "total": 40320
+    },
+    {
+      "role": "Embedded Dev",
+      "count": 1,
+      "monthly_cost": 4900,
+      "charges": 1960,
+      "duration": 6,
+      "total": 41160
+    },
+    {
+      "role": "Mech Eng",
+      "count": 1,
+      "monthly_cost": 5100,
+      "charges": 2040,
+      "duration": 6,
+      "total": 42840
+    },
+    {
+      "role": "Acheteur",
+      "count": 1,
+      "monthly_cost": 4700,
+      "charges": 1880,
+      "duration": 6,
+      "total": 39480
+    }
+  ],
+  "operating": [
+    {
+      "item": "Location Bureau",
+      "monthly_cost": 1500,
+      "duration": 6,
+      "total": 9000
+    },
+    {
+      "item": "Licences Logiciels (Altium, AWS, etc.)",
+      "monthly_cost": 500,
+      "duration": 6,
+      "total": 3000
+    }
+  ],
+  "capex": [
+    {
+      "item": "Moule Injection Acier (Chassis)",
+      "supplier": "Foxconn Molding",
+      "cost": 45000.0,
+      "quantity": 1
+    },
+    {
+      "item": "Moule Injection (Support Caméra)",
+      "supplier": "Foxconn Molding",
+      "cost": 12000.0,
+      "quantity": 1
+    },
+    {
+      "item": "Banc de Test (Calibration Caméra)",
+      "supplier": "Interne",
+      "cost": 8500.0,
+      "quantity": 1
+    },
+    {
+      "item": "Certification CE/RED (Europe)",
+      "supplier": "TUV Rheinland",
+      "cost": 15000.0,
+      "quantity": 1
+    },
+    {
+      "item": "Certification FCC (USA)",
+      "supplier": "SGS Labs",
+      "cost": 18000.0,
+      "quantity": 1
+    }
   ],
   "bom": [
     {

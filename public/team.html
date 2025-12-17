@@ -264,6 +264,10 @@
                             </div>
                         </div>
                         <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;">${member.description || 'N/A'}</p>
+                        <div style="margin-bottom: 15px; font-size: 0.85rem; color: #475569; background: #f8fafc; padding: 10px; border-radius: 6px;">
+                            <p style="margin-bottom: 5px;"><i class="fas fa-briefcase" style="width: 20px; color: var(--accent);"></i> <strong>Exp:</strong> ${member.experience || 'N/A'}</p>
+                            <p><i class="fas fa-money-bill-wave" style="width: 20px; color: #10b981;"></i> <strong>Cost:</strong> €${member.salary_cost || 0} / month</p>
+                        </div>
                         ${skillsHtml}
                     </div>`;
             })

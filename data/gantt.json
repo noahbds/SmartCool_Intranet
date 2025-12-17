@@ -287,6 +287,26 @@
       "cost": 0
     },
     {
+      "id": "45",
+      "phase": "Indus & Certif",
+      "name": "Définition Plan Assurance Qualité",
+      "start": "2025-11-01",
+      "duration": 14,
+      "complete": 0,
+      "depends": ["11"],
+      "color": "#f59e0b",
+      "resources": [
+        {
+          "id": "0",
+          "name": "Jean Dupont",
+          "roleName": "Chef de Projet",
+          "load": 30,
+          "responsible": true
+        }
+      ],
+      "cost": 0
+    },
+    {
       "id": "44",
       "phase": "Indus & Certif",
       "name": "Certification Finale CE",

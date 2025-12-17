@@ -76,5 +76,18 @@
     "status": "Edge pipeline déployée",
     "trigger": "p95 latence API > 3s ou taux timeout > 2%",
     "fallback": "Mode dégradé sans image, notifications locales seulement"
+  },
+  {
+    "id": 7,
+    "name": "Taux de défaut élevé en production pilote",
+    "category": "Quality",
+    "description": "Défauts d'assemblage ou composants défectueux dépassant 5% sur le premier lot.",
+    "probability": 3,
+    "impact": 4,
+    "mitigation": "Mise en place d'un banc de test automatisé (FCT) en fin de ligne + Inspection Optique Automatique (AOI).",
+    "owner": "Hardware Lead",
+    "status": "Spécification banc de test en cours",
+    "trigger": "Yield < 95% sur les 50 premières unités",
+    "fallback": "Rework manuel des cartes défectueuses et audit fournisseur"
   }
 ]
