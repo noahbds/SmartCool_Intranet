@@ -1,0 +1,6 @@
+.feature-icon-box,
+.persona-icon {
+  font-family: 'Material Symbols Outlined';
+  font-size: 2rem;
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+}

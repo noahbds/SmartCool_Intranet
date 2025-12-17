@@ -33,7 +33,7 @@
       "start": "2025-10-08",
       "duration": 7,
       "complete": 0,
-      "depends": ["21", "33"],
+      "depends": ["11"],
       "color": "#3b82f6",
       "resources": [
         {
@@ -53,7 +53,7 @@
       "start": "2025-10-08",
       "duration": 7,
       "complete": 0,
-      "depends": [],
+      "depends": ["11"],
       "color": "#3b82f6",
       "resources": [
         {
@@ -73,7 +73,7 @@
       "start": "2025-10-15",
       "duration": 15,
       "complete": 0,
-      "depends": ["22"],
+      "depends": ["12"],
       "color": "#10b981",
       "resources": [
         {
@@ -93,7 +93,7 @@
       "start": "2025-10-31",
       "duration": 7,
       "complete": 0,
-      "depends": ["23", "41"],
+      "depends": ["21"],
       "color": "#10b981",
       "resources": [
         {
@@ -113,7 +113,7 @@
       "start": "2025-11-08",
       "duration": 7,
       "complete": 0,
-      "depends": ["24"],
+      "depends": ["22"],
       "color": "#10b981",
       "resources": [
         {
@@ -133,7 +133,7 @@
       "start": "2025-11-16",
       "duration": 4,
       "complete": 0,
-      "depends": ["34", "43"],
+      "depends": ["23"],
       "color": "#10b981",
       "resources": [
         {
@@ -153,7 +153,7 @@
       "start": "2025-10-15",
       "duration": 16,
       "complete": 0,
-      "depends": ["32"],
+      "depends": ["13"],
       "color": "#8b5cf6",
       "resources": [
         {
@@ -173,7 +173,7 @@
       "start": "2025-11-02",
       "duration": 18,
       "complete": 0,
-      "depends": ["34"],
+      "depends": ["31"],
       "color": "#8b5cf6",
       "resources": [
         {
@@ -193,7 +193,7 @@
       "start": "2025-10-15",
       "duration": 45,
       "complete": 0,
-      "depends": [],
+      "depends": ["12"],
       "color": "#8b5cf6",
       "resources": [
         {
@@ -213,7 +213,7 @@
       "start": "2025-12-01",
       "duration": 10,
       "complete": 0,
-      "depends": [],
+      "depends": ["32", "33"],
       "color": "#8b5cf6",
       "resources": [
         {
@@ -233,7 +233,7 @@
       "start": "2025-11-15",
       "duration": 30,
       "complete": 0,
-      "depends": ["42"],
+      "depends": ["21"],
       "color": "#f59e0b",
       "resources": [
         {
@@ -253,7 +253,7 @@
       "start": "2026-01-01",
       "duration": 58,
       "complete": 0,
-      "depends": ["44"],
+      "depends": ["41"],
       "color": "#f59e0b",
       "resources": [
         {
@@ -273,7 +273,7 @@
       "start": "2025-12-15",
       "duration": 5,
       "complete": 0,
-      "depends": [],
+      "depends": ["24"],
       "color": "#f59e0b",
       "resources": [
         {
@@ -293,7 +293,7 @@
       "start": "2026-03-01",
       "duration": 30,
       "complete": 0,
-      "depends": [],
+      "depends": ["42", "43", "34"],
       "color": "#f59e0b",
       "resources": [
         {

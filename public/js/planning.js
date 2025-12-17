@@ -6,6 +6,7 @@ const state = {
   pxPerUnit: 40, // pixels per day (base)
   zoomLevel: 1,
   showWeekends: true,
+  showDependencies: false,
   startDate: new Date(),
   endDate: new Date(),
   totalDays: 0
@@ -29,6 +30,7 @@ const DOM = {
   btnZoomIn: document.getElementById('btn-zoom-in'),
   btnZoomOut: document.getElementById('btn-zoom-out'),
   btnToggleWeekend: document.getElementById('btn-toggle-weekend'),
+  btnToggleDeps: document.getElementById('btn-toggle-deps'),
   scaleBtns: document.querySelectorAll('[data-scale]'),
   riskGrid: document.getElementById('risk-grid'),
   // Modal
@@ -151,6 +153,7 @@ async function loadFromDB (showLoader = true) {
     const data = await res.json()
     hydrateFromDB(data)
     renderApp()
+    updateToggleButtons()
     DOM.emptyState.classList.add(HIDDEN_CLASS)
     DOM.taskPanel.classList.remove(HIDDEN_CLASS)
     DOM.timelinePanel.classList.remove(HIDDEN_CLASS)
@@ -198,6 +201,15 @@ async function saveDB () {
 function renderApp () {
   renderTaskList()
   renderTimeline()
+}
+
+function updateToggleButtons () {
+  if (DOM.btnToggleWeekend) {
+    DOM.btnToggleWeekend.classList.toggle('active', state.showWeekends)
+  }
+  if (DOM.btnToggleDeps) {
+    DOM.btnToggleDeps.classList.toggle('active', state.showDependencies)
+  }
 }
 
 async function loadRisks () {
@@ -329,6 +341,7 @@ function renderHeaderScales (pxPerDay) {
   DOM.timelineHeaderContent.appendChild(secondaryRow)
 
   let currentMonth = -1
+  let currentYear = -1
 
   if (state.scale === 'day') {
     for (let i = 0; i < state.totalDays; i++) {
@@ -338,23 +351,26 @@ function renderHeaderScales (pxPerDay) {
       dayCell.style.left = i * pxPerDay + 'px'
       dayCell.style.width = pxPerDay + 'px'
       dayCell.textContent = d.getDate()
-      if (d.getDay() === 0 || d.getDay() === 6)
-        dayCell.style.background = 'var(--weekend-color)'
+      if (d.getDay() === 0 || d.getDay() === 6) {
+        dayCell.style.background = 'rgba(248, 250, 252, 0.8)'
+        dayCell.style.color = 'var(--text-muted)'
+      }
       secondaryRow.appendChild(dayCell)
 
-      if (d.getMonth() !== currentMonth) {
+      if (d.getMonth() !== currentMonth || d.getFullYear() !== currentYear) {
         currentMonth = d.getMonth()
+        currentYear = d.getFullYear()
         const monthLabel = d.toLocaleDateString('fr-FR', {
-          month: 'long',
+          month: 'short',
           year: 'numeric'
-        })
+        }).replace('.', '')
         const mDiv = document.createElement('div')
         mDiv.className = 'scale-cell'
         mDiv.style.left = i * pxPerDay + 'px'
         mDiv.style.justifyContent = 'flex-start'
-        mDiv.style.paddingLeft = '8px'
+        mDiv.style.paddingLeft = '12px'
         mDiv.style.borderRight = 'none'
-        mDiv.textContent = monthLabel
+        mDiv.textContent = monthLabel.charAt(0).toUpperCase() + monthLabel.slice(1)
         primaryRow.appendChild(mDiv)
       }
     }
@@ -441,13 +457,13 @@ function renderGridBackground (
 }
 
 function renderBars (pxPerDay, rowHeight, tasks) {
-  const existingBars = DOM.timelineGrid.querySelectorAll(
-    '.gantt-bar, .dependency-line, .dependency-arrow'
-  )
+  const existingBars = DOM.timelineGrid.querySelectorAll('.gantt-bar')
   existingBars.forEach(b => b.remove())
+  const existingLayer = DOM.timelineGrid.querySelector('.dependency-layer')
+  if (existingLayer) existingLayer.remove()
 
-  // Map for dependency drawing
   const taskPositions = new Map()
+  const totalWidth = state.totalDays * pxPerDay
 
   tasks.forEach((t, idx) => {
     const daysFromStart = diffDays(state.startDate, t.start)
@@ -459,8 +475,8 @@ function renderBars (pxPerDay, rowHeight, tasks) {
 
     const x = daysFromStart * pxPerDay
     const w = durationDays * pxPerDay
-    const y = idx * rowHeight + 10
-    const h = 24
+    const y = idx * rowHeight + 6
+    const h = 32
 
     bar.style.left = x + 'px'
     bar.style.top = y + 'px'
@@ -480,7 +496,6 @@ function renderBars (pxPerDay, rowHeight, tasks) {
       bar.appendChild(prog)
     }
 
-    // Resource Label
     const label = document.createElement('div')
     label.className = 'gantt-bar-text'
     label.textContent = t.responsibleRole
@@ -498,11 +513,32 @@ function renderBars (pxPerDay, rowHeight, tasks) {
 
     DOM.timelineGrid.appendChild(bar)
 
-    // Store position for dependencies
     taskPositions.set(t.id, { x, y, w, h })
   })
 
-  // Draw Dependencies
+  if (!state.showDependencies) return
+
+  const depLayer = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
+  depLayer.classList.add('dependency-layer')
+  depLayer.setAttribute('width', totalWidth)
+  depLayer.setAttribute('height', tasks.length * rowHeight)
+
+  const marker = document.createElementNS('http://www.w3.org/2000/svg', 'marker')
+  marker.setAttribute('id', 'dep-arrow')
+  marker.setAttribute('viewBox', '0 0 10 10')
+  marker.setAttribute('refX', '9')
+  marker.setAttribute('refY', '5')
+  marker.setAttribute('markerWidth', '4.5')
+  marker.setAttribute('markerHeight', '4.5')
+  marker.setAttribute('orient', 'auto')
+  const markerPath = document.createElementNS('http://www.w3.org/2000/svg', 'path')
+  markerPath.setAttribute('d', 'M 0 0 L 10 5 L 0 10 z')
+  markerPath.setAttribute('fill', '#64748b')
+  marker.appendChild(markerPath)
+  const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs')
+  defs.appendChild(marker)
+  depLayer.appendChild(defs)
+
   tasks.forEach(t => {
     if (t.depends && t.depends.length > 0) {
       const targetPos = taskPositions.get(t.id)
@@ -511,76 +547,51 @@ function renderBars (pxPerDay, rowHeight, tasks) {
       t.depends.forEach(depId => {
         const sourcePos = taskPositions.get(depId)
         if (sourcePos) {
-          drawDependency(sourcePos, targetPos)
+          // Only draw forward-looking dependencies to reduce clutter
+          if (sourcePos.x <= targetPos.x) {
+            drawDependency(depLayer, sourcePos, targetPos)
+          }
         }
       })
     }
   })
+
+  DOM.timelineGrid.appendChild(depLayer)
 }
 
-function drawDependency (from, to) {
-  // Simple L-shape or straight line
-  // From right-center of source to left-center of target
+function drawDependency (svgLayer, from, to) {
   const x1 = from.x + from.w
   const y1 = from.y + from.h / 2
   const x2 = to.x
   const y2 = to.y + to.h / 2
 
-  // If target is after source, simple line
-  // We will just draw a direct line for simplicity in this version, or 3 segments
+  // Slight horizontal padding to avoid overlap with bars
+  const startX = x1 + 6
+  const endX = x2 - 6
 
-  // Segment 1: x1 to x1+10
-  // Segment 2: x1+10 to x2-10 (vertical travel)
-  // Segment 3: x2-10 to x2
+  // Use smooth curve; if target is left of source, route up slightly to avoid backwards line
+  const deltaX = Math.max(24, (endX - startX) / 2)
+  const midX = startX + deltaX
+  const ctrl1Y = y1
+  const ctrl2Y = y2
 
-  // Actually, let's just draw a direct line for now to keep DOM light, or use SVG?
-  // Using div lines is easier without SVG overlay
+  const path = document.createElementNS('http://www.w3.org/2000/svg', 'path')
+  path.classList.add('dependency-path')
 
-  // Horizontal line from source
-  const line1 = document.createElement('div')
-  line1.className = 'dependency-line'
+  if (endX <= startX) {
+    // Route with small upward loop when dependency goes backwards
+    const offset = 14
+    const viaX = startX + 20
+    const viaY = Math.min(y1, y2) - offset
+    const d = `M ${startX} ${y1} C ${viaX} ${y1} ${viaX} ${viaY} ${startX} ${viaY} S ${endX} ${viaY} ${endX} ${y2}`
+    path.setAttribute('d', d)
+  } else {
+    const d = `M ${startX} ${y1} C ${midX} ${ctrl1Y} ${midX} ${ctrl2Y} ${endX} ${y2}`
+    path.setAttribute('d', d)
+  }
 
-  // If x2 > x1, we can do a nice path.
-  // Let's just do a simple direct connection logic for now:
-  // 1. Exit right 10px
-  // 2. Go down/up to target Y
-  // 3. Go right to target X
-
-  const midX = x1 + (x2 - x1) / 2
-
-  // Horizontal 1
-  const l1 = document.createElement('div')
-  l1.className = 'dependency-line'
-  l1.style.left = x1 + 'px'
-  l1.style.top = y1 + 'px'
-  l1.style.width = midX - x1 + 'px'
-  l1.style.height = '1px'
-  DOM.timelineGrid.appendChild(l1)
-
-  // Vertical
-  const l2 = document.createElement('div')
-  l2.className = 'dependency-line'
-  l2.style.left = midX + 'px'
-  l2.style.top = Math.min(y1, y2) + 'px'
-  l2.style.width = '1px'
-  l2.style.height = Math.abs(y2 - y1) + 'px'
-  DOM.timelineGrid.appendChild(l2)
-
-  // Horizontal 2
-  const l3 = document.createElement('div')
-  l3.className = 'dependency-line'
-  l3.style.left = midX + 'px'
-  l3.style.top = y2 + 'px'
-  l3.style.width = x2 - midX + 'px'
-  l3.style.height = '1px'
-  DOM.timelineGrid.appendChild(l3)
-
-  // Arrow
-  const arrow = document.createElement('div')
-  arrow.className = 'dependency-arrow'
-  arrow.style.left = x2 - 6 + 'px'
-  arrow.style.top = y2 - 4 + 'px'
-  DOM.timelineGrid.appendChild(arrow)
+  path.setAttribute('marker-end', 'url(#dep-arrow)')
+  svgLayer.appendChild(path)
 }
 
 // --- Interactions ---
@@ -637,17 +648,18 @@ window.addEventListener('mousemove', e => {
   if (DOM.tooltip.style.opacity === '1') moveTooltip(e)
 })
 
-DOM.timelineBody.addEventListener('scroll', () => {
-  DOM.timelineHeader.scrollLeft = DOM.timelineBody.scrollLeft
-  DOM.taskList.scrollTop = DOM.timelineBody.scrollTop
+DOM.timelineBody?.addEventListener('scroll', () => {
+  if (DOM.timelineHeader) DOM.timelineHeader.scrollLeft = DOM.timelineBody?.scrollLeft || 0
+  if (DOM.taskList) DOM.taskList.scrollTop = DOM.timelineBody?.scrollTop || 0
 })
-DOM.taskList.addEventListener('scroll', () => {
-  DOM.timelineBody.scrollTop = DOM.taskList.scrollTop
+DOM.taskList?.addEventListener('scroll', () => {
+  if (DOM.timelineBody) DOM.timelineBody.scrollTop = DOM.taskList?.scrollTop || 0
 })
 
 // Zoom & Fit
 function fitView () {
   if (state.totalDays <= 0) return
+  if (!DOM.timelinePanel) return
   const availWidth = DOM.timelinePanel.clientWidth
   state.zoomLevel = 1
   state.pxPerUnit = availWidth / state.totalDays
@@ -796,9 +808,15 @@ DOM.search.addEventListener('input', () => {
   renderTimeline()
 })
 
-DOM.btnToggleWeekend.addEventListener('click', () => {
+DOM.btnToggleWeekend?.addEventListener('click', () => {
   state.showWeekends = !state.showWeekends
-  DOM.btnToggleWeekend.classList.toggle('active', state.showWeekends)
+  updateToggleButtons()
+  renderTimeline()
+})
+
+DOM.btnToggleDeps?.addEventListener('click', () => {
+  state.showDependencies = !state.showDependencies
+  updateToggleButtons()
   renderTimeline()
 })
 
