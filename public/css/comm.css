@@ -1,0 +1,177 @@
+/* Communications Page Styles */
+
+.comm-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.comm-header h1 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 5px;
+}
+
+.comm-layout {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 30px;
+}
+
+.comm-sidebar .card {
+    padding: 15px;
+    position: sticky;
+    top: 20px;
+}
+
+.comm-filter {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 6px;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    font-weight: 500;
+}
+
+.comm-filter:hover {
+    background: #f8fafc;
+    color: var(--text-main);
+}
+
+.comm-filter.active {
+    background: #eff6ff;
+    color: var(--accent);
+    font-weight: 600;
+}
+
+.comm-filter i {
+    width: 20px;
+    text-align: center;
+}
+
+.comm-labels-title {
+    font-size: 0.8rem;
+    color: #94a3b8;
+    font-weight: 600;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.comm-label-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+.comm-label-item:hover {
+    background: #f8fafc;
+}
+
+.comm-feed {
+    display: grid;
+    gap: 20px;
+}
+
+.comm-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border-left-width: 4px;
+    border-left-style: solid;
+}
+
+.comm-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.comm-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
+.comm-author {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.comm-avatar {
+    width: 40px;
+    height: 40px;
+    background: #e2e8f0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #64748b;
+    font-weight: 600;
+}
+
+.comm-date {
+    font-size: 0.85rem;
+    color: #94a3b8;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.comm-badge {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.badge-internal {
+    background: #eff6ff;
+    color: #1d4ed8;
+}
+
+.badge-external {
+    background: #ecfdf5;
+    color: #047857;
+}
+
+.btn-compose {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+.btn-compose:hover {
+    background: var(--accent-hover);
+}
+
+@media (max-width: 768px) {
+    .comm-layout {
+        grid-template-columns: 1fr;
+    }
+    
+    .comm-sidebar {
+        display: none; /* Or make it a dropdown/horizontal scroll */
+    }
+}

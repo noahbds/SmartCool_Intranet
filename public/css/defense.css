@@ -1,0 +1,114 @@
+/* Defense Page Specific Styles */
+
+.defense-section {
+    margin-bottom: 60px;
+    scroll-margin-top: 20px;
+}
+
+.defense-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 10px;
+}
+
+.step-number {
+    background: var(--accent);
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.defense-header h2 {
+    margin: 0;
+    color: var(--text-main);
+    font-size: 1.5rem;
+}
+
+.defense-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.defense-card {
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border: 1px solid #f1f5f9;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.defense-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.defense-card h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.1rem;
+}
+
+.defense-card p {
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.highlight-box {
+    background: #f8fafc;
+    border-left: 4px solid var(--accent);
+    padding: 15px;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    color: #475569;
+    margin-top: 15px;
+    font-size: 0.95rem;
+}
+
+.metric-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.metric-row:last-child {
+    border-bottom: none;
+}
+
+.metric-row span {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.metric-row strong {
+    color: var(--text-main);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .defense-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .defense-header h2 {
+        font-size: 1.25rem;
+    }
+}

@@ -4,3 +4,5 @@ node_modules/
 *.log
 *.db
 /public/gantt/
+public/.DS_Store
+.DS_Store

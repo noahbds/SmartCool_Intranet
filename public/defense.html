@@ -11,6 +11,7 @@
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <title>Defense | SmartCool Pro</title>
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/defense.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
@@ -27,195 +28,124 @@
     </script>
     <script src="/_vercel/speed-insights/script.js"></script>
     <main class="main-content">
-      <header>
-        <h1>
-          <i
-            class="fas fa-graduation-cap"
-            style="color: var(--accent); margin-right: 10px"
-          ></i
-          >Delivery & Defense
+      <header style="text-align: center; margin-bottom: 50px;">
+        <h1 style="font-size: 2.5rem; margin-bottom: 10px;">
+          <i class="fas fa-graduation-cap" style="color: var(--accent);"></i> Project Defense
         </h1>
-        <p>Project validation, strategic justification, and lessons learned.</p>
+        <p style="font-size: 1.2rem; color: var(--text-muted);">SmartCool Pro Industrialization Strategy</p>
+        <div style="margin-top: 20px;">
+            <span style="background: #dbeafe; color: #1e40af; padding: 5px 15px; border-radius: 20px; font-size: 0.9rem; font-weight: 600;">T-CEN-500 Final Review</span>
+        </div>
       </header>
 
       <!-- 1. Technical Feasibility -->
-      <div class="card">
-        <h2>
-          <i class="fas fa-check-double"></i> 1. Technical Feasibility
-          Validation
-        </h2>
-        <p style="margin-bottom: 16px">
-          Our Proof of Concept (PoC) successfully demonstrated the core value
-          proposition:
-        </p>
-        <ul
-          style="margin-left: 20px; color: var(--text-main); list-style: none"
-        >
-          <li style="margin-bottom: 8px">
-            <i
-              class="fas fa-camera"
-              style="color: var(--accent); width: 20px"
-            ></i>
-            <strong>Sensor Integration:</strong> The Compute Module 5 (CM5) +
-            IMX219 setup successfully captured clear images inside a test fridge
-            environment (4°C).
-          </li>
-          <li style="margin-bottom: 8px">
-            <i
-              class="fas fa-brain"
-              style="color: var(--accent); width: 20px"
-            ></i>
-            <strong>AI Performance:</strong> The YOLOv8 model achieved an
-            <strong>88% mAP</strong> on our custom dataset. Edge inference on
-            RPi5 is stable at < 200ms latency.
-          </li>
-          <li>
-            <i
-              class="fas fa-wifi"
-              style="color: var(--accent); width: 20px"
-            ></i>
-            <strong>Connectivity:</strong> Real-time inventory updates were
-            pushed to the mobile app via MQTT.
-          </li>
-        </ul>
-      </div>
-
-      <!-- 2. Budget Strategy -->
-      <div class="card" style="margin-top: 24px">
-        <h2>
-          <i class="fas fa-chart-pie"></i> 2. Budget Strategy Justification
-        </h2>
-        <p style="margin-bottom: 16px">
-          We prioritized <strong>CAPEX on Tooling</strong> (€98.5k) early to
-          lock mold lead times for the enclosure. Soft-steel molds allow us to
-          produce ISO-standard units for certification.
-        </p>
-        <p>
-          <strong>OPEX Discipline:</strong> We adjusted our BOM estimates to
-          reflect 2025 supply chain realities (CM5 price increase to €65). We
-          balance this by keeping the core team lean (7 people) and using
-          targeted contractors for specific tasks like EMC Pre-scans.
-        </p>
-      </div>
-
-      <!-- 3. Market Risks (ADDED based on Rule 9) -->
-      <div
-        class="card"
-        style="margin-top: 24px; border-left: 4px solid #8b5cf6"
-      >
-        <h2>
-          <i class="fas fa-bullseye"></i> 3. Mitigating Market-Related Risks
-        </h2>
-        <p style="margin-bottom: 16px; color: var(--text-muted)">
-          Addressing adoption, pricing, and competition as per Project Delivery
-          requirements.
-        </p>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px">
-          <div>
-            <h4 style="color: #4b5563; margin-bottom: 8px">
-              Risk: High Entry Price
-            </h4>
-            <p class="text-sm">
-              Competitors like Samsung have economies of scale we lack. A $2,500
-              price point limits mass adoption.
-            </p>
-            <div
-              style="
-                margin-top: 8px;
-                padding: 10px;
-                background: #f5f3ff;
-                border-radius: 6px;
-                font-size: 0.9rem;
-              "
-            >
-              <strong><i class="fas fa-sync"></i> Strategy:</strong> Pivot to
-              "Hardware-as-a-Service". Sell hardware at near-cost ($2000) and
-              monetize via a $5/mo "Zero-Waste" app subscription that guarantees
-              food savings > cost.
-            </div>
-          </div>
-          <div>
-            <h4 style="color: #4b5563; margin-bottom: 8px">
-              Risk: User Churn (Novelty wears off)
-            </h4>
-            <p class="text-sm">Users stop checking the app after 2 months.</p>
-            <div
-              style="
-                margin-top: 8px;
-                padding: 10px;
-                background: #f5f3ff;
-                border-radius: 6px;
-                font-size: 0.9rem;
-              "
-            >
-              <strong><i class="fas fa-magic"></i> Strategy:</strong> "Push"
-              over "Pull". The fridge doesn't wait for you to check it; it
-              proactively adds expiring milk to your online grocery cart
-              (integration with Amazon Fresh/Carrefour).
-            </div>
-          </div>
+      <section class="defense-section" id="tech">
+        <div class="defense-header">
+            <div class="step-number">1</div>
+            <h2>Technical Feasibility Validation</h2>
         </div>
-      </div>
-
-      <!-- 4. Pitfalls -->
-      <div class="card" style="margin-top: 24px">
-        <h2>
-          <i class="fas fa-exclamation-triangle"></i> 4. Pitfalls & Unforeseen
-          Events
-        </h2>
-        <div
-          style="
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 24px;
-            margin-top: 16px;
-          "
-        >
-          <div
-            style="
-              background: #fef2f2;
-              padding: 20px;
-              border-radius: 8px;
-              border: 1px solid #fee2e2;
-            "
-          >
-            <h3 style="font-size: 1rem; color: #ef4444">
-              <i class="fas fa-bolt"></i> Pitfall: Sensor Fogging
-            </h3>
-            <p style="font-size: 0.9rem">
-              <strong>Issue:</strong> Condensation blinded the AI during
-              door-open events.
-            </p>
-            <p style="font-size: 0.9rem; margin-top: 8px">
-              <strong><i class="fas fa-wrench"></i> Resolution:</strong> Added
-              heating element ring (automotive grade) to lens assembly.
-            </p>
-          </div>
-          <div
-            style="
-              background: #fffbeb;
-              padding: 20px;
-              border-radius: 8px;
-              border: 1px solid #fef3c7;
-            "
-          >
-            <h3 style="font-size: 1rem; color: #f59e0b">
-              <i class="fas fa-shipping-fast"></i> Pitfall: CM5 Shortage
-            </h3>
-            <p style="font-size: 0.9rem">
-              <strong>Issue:</strong> Raspberry Pi CM5 modules faced 12-week
-              lead times.
-            </p>
-            <p style="font-size: 0.9rem; margin-top: 8px">
-              <strong
-                ><i class="fas fa-money-bill-wave"></i> Resolution:</strong
-              >
-              Activated contingency budget to source from secondary market at
-              +20% premium to maintain schedule.
-            </p>
-          </div>
+        <div class="defense-grid">
+            <div class="defense-card">
+                <h3><i class="fas fa-microchip" style="color: #6366f1;"></i> IoT & Sensors</h3>
+                <p>We validated the <strong>Raspberry Pi CM5</strong> as our core compute unit due to its high availability and support for dual CSI cameras.</p>
+                <div class="highlight-box">
+                    "The CM5 handles 3 simultaneous video streams with < 15% CPU load, leaving ample headroom for AI."
+                </div>
+                <ul style="padding-left: 20px; color: #475569;">
+                    <li><strong>Sensors:</strong> Sensirion SHT40 validated for -20°C operation.</li>
+                    <li><strong>Connectivity:</strong> Wi-Fi 6 module ensures stable video streaming.</li>
+                </ul>
+            </div>
+            <div class="defense-card">
+                <h3><i class="fas fa-brain" style="color: #ec4899;"></i> Embedded AI</h3>
+                <p>Our <strong>YOLOv8 Nano</strong> model achieves 92% accuracy on the validation set while running at 15 FPS on the NPU.</p>
+                <div class="metric-row">
+                    <span>Model Size</span>
+                    <strong>6.2 MB (Quantized)</strong>
+                </div>
+                <div class="metric-row">
+                    <span>Inference Time</span>
+                    <strong>45ms / frame</strong>
+                </div>
+                <div class="metric-row">
+                    <span>Accuracy (mAP)</span>
+                    <strong>92.4%</strong>
+                </div>
+            </div>
         </div>
-      </div>
+      </section>
+
+      <!-- 2. Budget Justification -->
+      <section class="defense-section" id="budget">
+        <div class="defense-header">
+            <div class="step-number">2</div>
+            <h2>Budget Strategy & ROI</h2>
+        </div>
+        <div class="defense-grid">
+            <div class="defense-card">
+                <h3><i class="fas fa-chart-pie" style="color: #10b981;"></i> CAPEX vs OPEX</h3>
+                <p>We prioritized a high initial CAPEX (€98.5k) to reduce long-term unit costs.</p>
+                <ul style="padding-left: 20px; color: #475569; margin-top: 15px;">
+                    <li><strong>Molds (€57k):</strong> Investing in steel molds guarantees 500k cycles, reducing casing cost by 60% vs soft tooling.</li>
+                    <li><strong>Test Bench (€8.5k):</strong> Automating camera calibration saves €15/unit in manual labor.</li>
+                </ul>
+            </div>
+            <div class="defense-card">
+                <h3><i class="fas fa-hand-holding-dollar" style="color: #f59e0b;"></i> Cost Structure</h3>
+                <p>Our BOM cost of <strong>€140</strong> allows for a retail price of €299 with a healthy margin, undercutting competitors by 30%.</p>
+                <div class="highlight-box">
+                    "Break-even point is reached at 2,500 units sold, expected within Month 4 of launch."
+                </div>
+            </div>
+        </div>
+      </section>
+
+      <!-- 3. Market Risks -->
+      <section class="defense-section" id="risks">
+        <div class="defense-header">
+            <div class="step-number">3</div>
+            <h2>Market Risk Mitigation</h2>
+        </div>
+        <div class="defense-card">
+            <h3><i class="fas fa-shield-alt" style="color: #ef4444;"></i> Addressing Adoption Barriers</h3>
+            <p>The "Smart Fridge" market suffers from a perception of high cost and low utility. Our strategy addresses this head-on:</p>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;">
+                <div style="background: #fff1f2; padding: 15px; border-radius: 8px;">
+                    <h4 style="color: #be123c; margin: 0 0 10px 0;">Risk: "It's too expensive"</h4>
+                    <p style="font-size: 0.9rem; margin: 0;"><strong>Solution:</strong> Hardware-as-a-Service model option. €49 upfront + €9.99/mo subscription including auto-replenishment.</p>
+                </div>
+                <div style="background: #fff1f2; padding: 15px; border-radius: 8px;">
+                    <h4 style="color: #be123c; margin: 0 0 10px 0;">Risk: "It's a gimmick"</h4>
+                    <p style="font-size: 0.9rem; margin: 0;"><strong>Solution:</strong> Focus on "Zero Waste" ROI. The app calculates money saved by not throwing away food, gamifying the experience.</p>
+                </div>
+            </div>
+        </div>
+      </section>
+
+      <!-- 4. Planning Adaptation -->
+      <section class="defense-section" id="planning">
+        <div class="defense-header">
+            <div class="step-number">4</div>
+            <h2>Agile Planning & Adaptation</h2>
+        </div>
+        <div class="defense-grid">
+            <div class="defense-card">
+                <h3><i class="fas fa-random" style="color: #8b5cf6;"></i> Pivot: Supply Chain Crisis</h3>
+                <p>When the STM32 shortage hit (Risk #2), we didn't just wait.</p>
+                <ul style="padding-left: 20px; color: #475569; margin-top: 10px;">
+                    <li><strong>Action:</strong> Redesigned PCB with dual-footprint for GigaDevice alternative.</li>
+                    <li><strong>Impact:</strong> 2 weeks delay in design (absorbed by slack), but secured production start.</li>
+                </ul>
+            </div>
+            <div class="defense-card">
+                <h3><i class="fas fa-sync-alt" style="color: #3b82f6;"></i> Iterative Quality</h3>
+                <p>We added a specific "Quality Assurance Plan" task and a dedicated risk for manufacturing defects after realizing our initial plan was too optimistic about yield.</p>
+                <div class="highlight-box">
+                    "Planning is living document. We updated the Gantt 4 times during the conception phase."
+                </div>
+            </div>
+        </div>
+      </section>
     </main>
   </body>
 </html>

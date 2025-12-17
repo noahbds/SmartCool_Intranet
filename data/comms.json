@@ -2,6 +2,7 @@
   {
     "id": 1,
     "type": "Internal",
+    "date": "2025-10-01",
     "sender": "Noah (Project Lead)",
     "recipient": "SmartCool Team",
     "subject": "Project Kickoff: SmartCool Pro",
@@ -11,15 +12,17 @@
   {
     "id": 2,
     "type": "External",
+    "date": "2025-11-15",
     "sender": "Noah (Project Manager)",
     "recipient": "Board of Directors",
     "subject": "Budget Approval Request",
-    "content": "<p>Dear Board Members,</p><p>Following the feasibility and risk reviews, I am submitting the formal budget request for the SmartCool Pro industrialization phase.</p><p><strong>Request Summary:</strong></p><ul><li><strong>Total Budget:</strong> €251,615</li><li><strong>CAPEX (€98,500):</strong> Tooling, certification, and test bench investments.</li><li><strong>OPEX (€153,115):</strong> Six-month run covering engineering, cloud, and the initial BOM for the pilot build.</li></ul><p>This envelope keeps us on track for a Q2 pilot and aligns with the updated Gantt, skills, and risk plans.</p><p>Sincerely,<br>Noah</p>",
+    "content": "<p>Dear Board Members,</p><p>Following the feasibility and risk reviews, I am submitting the formal budget request for the SmartCool Pro industrialization phase.</p><p><strong>Request Summary:</strong></p><ul><li><strong>Total Budget:</strong> €406,180</li><li><strong>CAPEX (€98,500):</strong> Tooling, certification, and test bench investments.</li><li><strong>OPEX (€153,115):</strong> Six-month run covering engineering, cloud, and the initial BOM for the pilot build.</li></ul><p>This envelope keeps us on track for a Q2 pilot and aligns with the updated Gantt, skills, and risk plans.</p><p>Sincerely,<br>Noah</p>",
     "icon": "fa-file-invoice-dollar"
   },
   {
     "id": 3,
     "type": "External",
+    "date": "2025-12-05",
     "sender": "Marc Moreau (Acheteur)",
     "recipient": "Raspberry Pi Ltd (Supplier)",
     "subject": "Order Inquiry: Compute Module 5",
