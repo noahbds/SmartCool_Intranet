@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test API</title>
+    <style>
+        body { font-family: Arial; margin: 20px; }
+        .test-box { border: 1px solid #ccc; padding: 15px; margin: 10px 0; }
+        .success { color: green; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <h1>🧪 API Test</h1>
+    
+    <div class="test-box">
+        <h2>1. Test du Fetch</h2>
+        <button onclick="testFetch()">Test Fetch /api/team</button>
+        <pre id="fetch-result"></pre>
+    </div>
+
+    <div class="test-box">
+        <h2>2. Categories Found</h2>
+        <pre id="categories"></pre>
+    </div>
+
+    <div class="test-box">
+        <h2>3. Filter Test</h2>
+        <button onclick="testFilter('all')">Show All</button>
+        <button onclick="testFilter('design')">Show Design</button>
+        <button onclick="testFilter('hardware')">Show Hardware</button>
+        <button onclick="testFilter('software')">Show Software</button>
+        <button onclick="testFilter('management')">Show Management</button>
+        <pre id="filter-result"></pre>
+    </div>
+
+    <script>
+        let allMembers = [];
+
+        function testFetch() {
+            document.getElementById('fetch-result').innerHTML = '⏳ Loading...';
+            fetch('/api/team')
+                .then(res => {
+                    console.log('Response status:', res.status);
+                    return res.json();
+                })
+                .then(data => {
+                    allMembers = data;
+                    console.log('Members:', data);
+                    document.getElementById('fetch-result').innerHTML = 
+                        `<span class="success">✓ Success! Loaded ${data.length} members</span>\n\n${JSON.stringify(data, null, 2)}`;
+                    
+                    // Show categories
+                    const cats = [...new Set(data.map(m => m.category))];
+                    document.getElementById('categories').innerHTML = 
+                        `<span class="success">✓ Categories: ${cats.join(', ')}</span>`;
+                })
+                .catch(err => {
+                    document.getElementById('fetch-result').innerHTML = 
+                        `<span class="error">✗ Error: ${err.message}</span>`;
+                    console.error('Error:', err);
+                });
+        }
+
+        function testFilter(category) {
+            const filtered = category === 'all' ? 
+                allMembers : 
+                allMembers.filter(m => m.category === category);
+            
+            document.getElementById('filter-result').innerHTML = 
+                `Filtered by "${category}": Found ${filtered.length} members\n\n` +
+                filtered.map(m => `• ${m.name} (${m.role}) - category: ${m.category}`).join('\n');
+        }
+
+        // Auto-test on load
+        window.onload = testFetch;
+    </script>
+</body>
+</html>
