@@ -3,7 +3,7 @@
     "name": "Jean Dupont",
     "role": "Chef de Projet",
     "category": "management",
-    "description": "Pilote le projet T-CEN-500, garant des délais et du budget.",
+    "description": "Pilote le projet SmartFridge, garant des délais et du budget.",
     "icon": "fa-tasks",
     "skills": [
       { "name": "Gestion Projet", "val": "100%" },
@@ -12,68 +12,101 @@
   },
   {
     "name": "Sophie Martin",
-    "role": "Hardware Lead",
-    "category": "hardware",
-    "description": "Conception de la carte mère et intégration des capteurs.",
-    "icon": "fa-microchip",
+    "role": "Design Lead Extérieur",
+    "category": "design",
+    "description": "Conception extérieure du frigo et design UX/UI.",
+    "icon": "fa-palette",
     "skills": [
-      { "name": "PCB Design", "val": "95%" },
-      { "name": "Electronique", "val": "90%" }
+      { "name": "Design 3D", "val": "95%" },
+      { "name": "Ergonomie", "val": "92%" }
     ]
   },
   {
     "name": "Lucas Bernard",
-    "role": "Cloud Architect",
-    "category": "software",
-    "description": "Architecture cloud et API pour l'application mobile.",
-    "icon": "fa-cloud",
+    "role": "Design Intérieur & Conception",
+    "category": "design",
+    "description": "Design intérieur du frigo et rédaction des caractéristiques techniques.",
+    "icon": "fa-cube",
     "skills": [
-      { "name": "AWS/Azure", "val": "90%" },
-      { "name": "Node.js", "val": "85%" }
+      { "name": "CAD/3D", "val": "93%" },
+      { "name": "Documentation", "val": "88%" }
     ]
   },
   {
     "name": "Emma Petit",
-    "role": "Data Scientist",
-    "category": "software",
-    "description": "Entraînement du modèle IA pour la reconnaissance d'images.",
-    "icon": "fa-brain",
+    "role": "Ingénieur Serrure Connectée",
+    "category": "hardware",
+    "description": "Mise en place de la serrure connectée et sécurité d'accès.",
+    "icon": "fa-lock",
     "skills": [
-      { "name": "Python", "val": "95%" },
-      { "name": "YOLOv8", "val": "98%" }
+      { "name": "IoT Security", "val": "94%" },
+      { "name": "Bluetooth/WiFi", "val": "90%" }
     ]
   },
   {
     "name": "Thomas Richard",
-    "role": "Embedded Dev",
+    "role": "Lead Thermostats Intelligents",
     "category": "hardware",
-    "description": "Développement du firmware et drivers capteurs.",
-    "icon": "fa-code",
+    "description": "Développement des thermostats intelligents et contrôle thermique.",
+    "icon": "fa-thermometer",
     "skills": [
-      { "name": "C/C++", "val": "90%" },
-      { "name": "RTOS", "val": "85%" }
+      { "name": "Firmware Embarqué", "val": "92%" },
+      { "name": "Capteurs Thermiques", "val": "89%" }
     ]
   },
   {
     "name": "Julie Dubois",
-    "role": "Mech Eng",
-    "category": "design",
-    "description": "Conception mécanique et intégration physique.",
-    "icon": "fa-cogs",
+    "role": "Ingénieur Éclairage Automatisé",
+    "category": "hardware",
+    "description": "Adoption et intégration de l'éclairage automatisé.",
+    "icon": "fa-lightbulb",
     "skills": [
-      { "name": "CAD", "val": "90%" },
-      { "name": "Thermique", "val": "80%" }
+      { "name": "Électronique LED", "val": "91%" },
+      { "name": "Automatisation", "val": "87%" }
     ]
   },
   {
     "name": "Marc Moreau",
-    "role": "Acheteur",
-    "category": "management",
-    "description": "Sourcing des composants et gestion des fournisseurs.",
-    "icon": "fa-shopping-cart",
+    "role": "Assistant Culinaire & IA",
+    "category": "software",
+    "description": "Mise en place du système d'assistance culinaire avec IA.",
+    "icon": "fa-brain",
     "skills": [
-      { "name": "Négociation", "val": "95%" },
-      { "name": "Supply Chain", "val": "85%" }
+      { "name": "Machine Learning", "val": "93%" },
+      { "name": "API Integration", "val": "89%" }
+    ]
+  },
+  {
+    "name": "Alice Rousseau",
+    "role": "Ingénieur Suivi Énergie",
+    "category": "software",
+    "description": "Système de suivi de consommation électricité en temps réel.",
+    "icon": "fa-plug",
+    "skills": [
+      { "name": "Analytics", "val": "92%" },
+      { "name": "Real-time Data", "val": "90%" }
+    ]
+  },
+  {
+    "name": "Baptiste Lefevre",
+    "role": "Ingénieur Traçabilité Produits",
+    "category": "software",
+    "description": "Système de suivi des produits et détection de péremption.",
+    "icon": "fa-barcode",
+    "skills": [
+      { "name": "Database Design", "val": "91%" },
+      { "name": "RFID/NFC", "val": "88%" }
+    ]
+  },
+  {
+    "name": "Camille Dubos",
+    "role": "Développeur Gantt et Dashboard",
+    "category": "software",
+    "description": "Amélioration du Gantt en ligne et dashboard de gestion.",
+    "icon": "fa-chart-gantt",
+    "skills": [
+      { "name": "Frontend (React/Vue)", "val": "94%" },
+      { "name": "Web Design", "val": "89%" }
     ]
   }
 ]
